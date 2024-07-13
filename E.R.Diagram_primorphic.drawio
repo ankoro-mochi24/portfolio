@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-07-12T07:44:21.454Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="B9fxDta186sBJyM0T2RA" version="24.6.5" type="device">
+<mxfile host="app.diagrams.net" modified="2024-07-12T07:45:17.092Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="FXTojbBOvTnusl03SVsE" version="24.6.5" type="device">
   <diagram name="ページ1" id="t_sM5TkmQe1F6TnTYv9p">
     <mxGraphModel dx="2327" dy="1915" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -933,7 +933,7 @@
         <mxCell id="AevpOHEP_DTaJLd7P59i-14" value="" style="group" vertex="1" connectable="0" parent="1">
           <mxGeometry x="-500" y="-40" width="490" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="AevpOHEP_DTaJLd7P59i-15" value="Coments（コメント）" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;" vertex="1" parent="AevpOHEP_DTaJLd7P59i-14">
+        <mxCell id="AevpOHEP_DTaJLd7P59i-15" value="Coｍment（コメント）" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;html=1;" vertex="1" parent="AevpOHEP_DTaJLd7P59i-14">
           <mxGeometry x="310" width="180" height="180" as="geometry" />
         </mxCell>
         <mxCell id="AevpOHEP_DTaJLd7P59i-16" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" vertex="1" parent="AevpOHEP_DTaJLd7P59i-15">
