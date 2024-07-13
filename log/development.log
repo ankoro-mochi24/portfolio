@@ -58,3 +58,65 @@ Processing by Rails::WelcomeController#index as HTML
 Completed 200 OK in 2ms (Views: 0.8ms | ActiveRecord: 0.0ms | Allocations: 208)
 
 
+Started GET "/" for 172.23.0.1 at 2024-07-13 17:56:12 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/bundle/gems/railties-7.0.8.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/gems/railties-7.0.8.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 8.3ms | Allocations: 488)
+Completed 200 OK in 131ms (Views: 30.0ms | ActiveRecord: 0.0ms | Allocations: 4181)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-13 18:18:52 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.1ms | Allocations: 295)
+  Rendered layout layouts/application.html.erb (Duration: 751.0ms | Allocations: 63915)
+Completed 200 OK in 808ms (Views: 764.5ms | ActiveRecord: 0.0ms | Allocations: 67806)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-13 18:21:43 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.3ms | Allocations: 295)
+  Rendered layout layouts/application.html.erb (Duration: 233.6ms | Allocations: 20598)
+Completed 500 Internal Server Error in 298ms (ActiveRecord: 0.0ms | Allocations: 24438)
+
+
+  
+ActionView::Template::Error (undefined method `javascript_pack_tag' for an instance of #<Class:0x00007f3ba31cfc88>):
+     5:   <%= csrf_meta_tags %>
+     6:   <%= csp_meta_tag %>
+     7:   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+     8:   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+     9: </head>
+    10: <body>
+    11:   <header>
+  
+app/views/layouts/application.html.erb:8
+Started GET "/" for 172.23.0.1 at 2024-07-13 18:25:26 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.1ms | Allocations: 295)
+  Rendered layouts/_header.html.erb (Duration: 11.4ms | Allocations: 1654)
+  Rendered layout layouts/application.html.erb (Duration: 201.4ms | Allocations: 20442)
+Completed 500 Internal Server Error in 260ms (ActiveRecord: 0.0ms | Allocations: 24282)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `about_path' for an instance of #<Class:0x00007fc25ba9fdd8>):
+    2:   <!-- ヘッダーのナビゲーションメニュー -->
+    3:   <ul>
+    4:     <li><%= link_to 'Home', root_path %></li>
+    5:     <li><%= link_to 'About', about_path %></li>
+    6:     <!-- 他のリンク -->
+    7:   </ul>
+    8: </nav>
+  
+app/views/layouts/_header.html.erb:5
+app/views/layouts/application.html.erb:15

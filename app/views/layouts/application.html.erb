@@ -10,6 +10,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <!-- ヘッダーの内容 -->
+      <%= render 'layouts/header' %>
+    </header>
+
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <footer>
+      <!-- フッターの内容 -->
+      <%= render 'layouts/footer' %>
+    </footer>
   </body>
 </html>
