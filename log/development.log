@@ -1,0 +1,12 @@
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE DATABASE `v3_advanced_rails_development` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE DATABASE `v3_advanced_rails_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+Started GET "/" for 172.23.0.1 at 2024-07-13 16:35:55 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/bundle/gems/railties-7.0.8.4/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/gems/railties-7.0.8.4/lib/rails/templates/rails/welcome/index.html.erb (Duration: 17.8ms | Allocations: 620)
+Completed 200 OK in 238ms (Views: 55.7ms | ActiveRecord: 0.0ms | Allocations: 7188)
+
+
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE `v3_advanced_rails_development` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE DATABASE `v3_advanced_rails_test` DEFAULT CHARACTER SET `utf8mb4`[0m
