@@ -16,7 +16,7 @@
 
   <h4> 名前： <%= current_user.name %> </h4>
   <h4> メールアドレス： <%= current_user.email %> </h4>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :get %> <!-- ログアウトをする -->
+  <%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
   <h2> 現在ログインしていません </h2>

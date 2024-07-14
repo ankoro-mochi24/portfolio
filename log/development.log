@@ -1246,3 +1246,285 @@ Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.2
   
 ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
   
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:18:42 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 47.0ms | Allocations: 9950)
+  Rendered layouts/_header.html.erb (Duration: 3.6ms | Allocations: 170)
+  Rendered layouts/_footer.html.erb (Duration: 3.7ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 536.3ms | Allocations: 29595)
+Completed 200 OK in 610ms (Views: 548.1ms | ActiveRecord: 2.2ms | Allocations: 34603)
+
+
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:18:44 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Update (0.5ms)[0m  [1m[33mUPDATE `users` SET `users`.`remember_created_at` = NULL, `users`.`updated_at` = '2024-07-14 06:18:44.729834' WHERE `users`.`id` = 2[0m
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 27ms (ActiveRecord: 5.8ms | Allocations: 7196)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:18:44 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 1.5ms | Allocations: 451)
+  Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 37)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 28.0ms | Allocations: 1609)
+Completed 200 OK in 30ms (Views: 28.7ms | ActiveRecord: 0.0ms | Allocations: 1861)
+
+
+Started GET "/users/sign_in" for 172.23.0.1 at 2024-07-14 15:18:46 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 7.2ms | Allocations: 702)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 65.7ms | Allocations: 3654)
+  Rendered layouts/_header.html.erb (Duration: 0.1ms | Allocations: 47)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 91.6ms | Allocations: 4873)
+Completed 200 OK in 102ms (Views: 100.5ms | ActiveRecord: 0.0ms | Allocations: 6060)
+
+
+Started POST "/users/sign_in" for 172.23.0.1 at 2024-07-14 15:18:55 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"test@test", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'test@test' ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 207ms (ActiveRecord: 0.3ms | Allocations: 3789)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:18:55 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 2.5ms | Allocations: 1074)
+  Rendered layouts/_header.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 20.8ms | Allocations: 2232)
+Completed 200 OK in 22ms (Views: 21.1ms | ActiveRecord: 0.3ms | Allocations: 2485)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:19:37 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 49.1ms | Allocations: 9930)
+  Rendered layouts/_header.html.erb (Duration: 4.7ms | Allocations: 170)
+  Rendered layouts/_footer.html.erb (Duration: 3.6ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 243.9ms | Allocations: 28579)
+Completed 200 OK in 319ms (Views: 255.1ms | ActiveRecord: 2.4ms | Allocations: 33587)
+
+
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:19:38 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:19:41 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:20:22 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 33.2ms | Allocations: 10151)
+  Rendered layouts/_header.html.erb (Duration: 3.1ms | Allocations: 179)
+  Rendered layouts/_footer.html.erb (Duration: 3.6ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 226.3ms | Allocations: 28775)
+Completed 200 OK in 305ms (Views: 237.9ms | ActiveRecord: 2.2ms | Allocations: 33784)
+
+
+Started DELETE "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:20:23 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 27ms (ActiveRecord: 0.4ms | Allocations: 3225)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:20:24 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 2.6ms | Allocations: 421)
+  Rendered layouts/_header.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 30.9ms | Allocations: 1583)
+Completed 200 OK in 33ms (Views: 31.6ms | ActiveRecord: 0.0ms | Allocations: 1837)
+
+
+Started GET "/users/sign_in" for 172.23.0.1 at 2024-07-14 15:20:54 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 5.1ms | Allocations: 707)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 40.9ms | Allocations: 4182)
+  Rendered layouts/_header.html.erb (Duration: 3.4ms | Allocations: 177)
+  Rendered layouts/_footer.html.erb (Duration: 3.1ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 210.8ms | Allocations: 22740)
+Completed 200 OK in 328ms (Views: 287.6ms | ActiveRecord: 2.1ms | Allocations: 34016)
+
+
+Started POST "/users/sign_in" for 172.23.0.1 at 2024-07-14 15:21:02 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"test@test", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'test@test' ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 214ms (ActiveRecord: 0.3ms | Allocations: 5518)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:21:02 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 12.7ms | Allocations: 1474)
+  Rendered layouts/_header.html.erb (Duration: 0.1ms | Allocations: 42)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 34.7ms | Allocations: 2711)
+Completed 200 OK in 42ms (Views: 37.3ms | ActiveRecord: 0.3ms | Allocations: 3436)
+
+
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:21:06 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:22:50 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 34.9ms | Allocations: 10009)
+  Rendered layouts/_header.html.erb (Duration: 4.6ms | Allocations: 173)
+  Rendered layouts/_footer.html.erb (Duration: 3.6ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 228.3ms | Allocations: 28662)
+Completed 200 OK in 304ms (Views: 240.1ms | ActiveRecord: 2.1ms | Allocations: 33672)
+
+
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:22:52 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:22:55 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:29:04 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 26.4ms | Allocations: 10012)
+  Rendered layouts/_header.html.erb (Duration: 3.6ms | Allocations: 173)
+  Rendered layouts/_footer.html.erb (Duration: 3.6ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 218.2ms | Allocations: 28664)
+Completed 200 OK in 293ms (Views: 229.7ms | ActiveRecord: 2.4ms | Allocations: 33674)
+
+
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:29:06 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:29:09 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:32:45 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/users/sign_in" for 172.23.0.1 at 2024-07-14 15:32:47 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Filter chain halted as :require_no_authentication rendered or redirected
+Completed 302 Found in 22ms (ActiveRecord: 3.9ms | Allocations: 9682)
+
+
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:32:49 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/users/sign_out"):
+  
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:33:07 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 28.2ms | Allocations: 9995)
+  Rendered layouts/_header.html.erb (Duration: 3.7ms | Allocations: 173)
+  Rendered layouts/_footer.html.erb (Duration: 3.0ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 226.2ms | Allocations: 28651)
+Completed 200 OK in 303ms (Views: 239.0ms | ActiveRecord: 2.2ms | Allocations: 33660)
+
+
+Started GET "/users/sign_out" for 172.23.0.1 at 2024-07-14 15:33:08 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 19ms (ActiveRecord: 0.3ms | Allocations: 3146)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 15:33:08 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 2.4ms | Allocations: 446)
+  Rendered layouts/_header.html.erb (Duration: 1.3ms | Allocations: 37)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 28.9ms | Allocations: 1608)
+Completed 200 OK in 31ms (Views: 29.5ms | ActiveRecord: 0.0ms | Allocations: 1860)
+
+
