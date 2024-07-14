@@ -1,6 +1,5 @@
 <% content_for(:title, "入口") %>
-<h1>Home#top</h1>
-<p>Find me in app/views/home/top.html.erb</p>
+<p>Home#top</p>
 
 <% content_for :left do %>
   <h1>左側のコンテンツ</h1>
@@ -15,8 +14,9 @@
 <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
   <!-- ユーザーがログインしていた時の処理 -->
 
+  <h4> 名前： <%= current_user.name %> </h4>
   <h4> メールアドレス： <%= current_user.email %> </h4>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
+  <%= link_to "ログアウト", destroy_user_session_path, method: :get %> <!-- ログアウトをする -->
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
   <h2> 現在ログインしていません </h2>
