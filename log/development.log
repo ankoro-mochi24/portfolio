@@ -1688,3 +1688,98 @@ Processing by HomeController#top as HTML
 Completed 200 OK in 23ms (Views: 21.6ms | ActiveRecord: 0.3ms | Allocations: 2468)
 
 
+Started GET "/" for 172.26.0.1 at 2024-07-14 19:12:16 +0900
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 11.3ms | Allocations: 1321)
+  Rendered layouts/_header.html.erb (Duration: 3.7ms | Allocations: 173)
+  Rendered layouts/_footer.html.erb (Duration: 4.0ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 213.1ms | Allocations: 19990)
+Completed 200 OK in 302ms (Views: 229.4ms | ActiveRecord: 0.0ms | Allocations: 25089)
+
+
+Started GET "/users/sign_in" for 172.26.0.1 at 2024-07-14 19:12:19 +0900
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 54.0ms | Allocations: 699)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 156.6ms | Allocations: 3758)
+  Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 47)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 181.6ms | Allocations: 4978)
+Completed 200 OK in 265ms (Views: 191.8ms | ActiveRecord: 3.7ms | Allocations: 12500)
+
+
+Started POST "/users/sign_in" for 172.26.0.1 at 2024-07-14 19:12:26 +0900
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"test@test", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'test@test' ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 270ms (ActiveRecord: 1.0ms | Allocations: 5498)
+
+
+Started GET "/" for 172.26.0.1 at 2024-07-14 19:12:27 +0900
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/home/top.html.erb:14
+  Rendered home/top.html.erb within layouts/application (Duration: 3.0ms | Allocations: 1120)
+  Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 37)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 26.5ms | Allocations: 2277)
+Completed 200 OK in 28ms (Views: 26.6ms | ActiveRecord: 0.7ms | Allocations: 2530)
+
+
+Started GET "/users/sign_out" for 172.26.0.1 at 2024-07-14 19:12:29 +0900
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 21ms (ActiveRecord: 0.4ms | Allocations: 2456)
+
+
+Started GET "/" for 172.26.0.1 at 2024-07-14 19:12:30 +0900
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.7ms | Allocations: 388)
+  Rendered layouts/_header.html.erb (Duration: 0.1ms | Allocations: 37)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 24.5ms | Allocations: 1539)
+Completed 200 OK in 27ms (Views: 25.3ms | ActiveRecord: 0.0ms | Allocations: 1789)
+
+
+Started GET "/" for 172.26.0.1 at 2024-07-14 19:13:42 +0900
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 13.0ms | Allocations: 464)
+  Rendered layouts/_header.html.erb (Duration: 21.1ms | Allocations: 677)
+  Rendered layouts/_footer.html.erb (Duration: 3.3ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 225.5ms | Allocations: 20014)
+Completed 200 OK in 312ms (Views: 239.0ms | ActiveRecord: 0.0ms | Allocations: 25123)
+
+
+Started GET "/" for 172.26.0.1 at 2024-07-14 19:13:59 +0900
+Cannot render console from 172.26.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.2ms | Allocations: 464)
+  Rendered layouts/_header.html.erb (Duration: 22.6ms | Allocations: 676)
+  Rendered layouts/_footer.html.erb (Duration: 3.1ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 218.3ms | Allocations: 20012)
+Completed 200 OK in 299ms (Views: 231.9ms | ActiveRecord: 0.0ms | Allocations: 25110)
+
+
