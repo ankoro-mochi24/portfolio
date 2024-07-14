@@ -120,3 +120,192 @@ ActionView::Template::Error (undefined local variable or method `about_path' for
   
 app/views/layouts/_header.html.erb:5
 app/views/layouts/application.html.erb:15
+Started GET "/" for 172.23.0.1 at 2024-07-13 18:26:04 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.5ms | Allocations: 295)
+  Rendered layouts/_header.html.erb (Duration: 8.0ms | Allocations: 244)
+  Rendered layouts/_footer.html.erb (Duration: 8.2ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 200.0ms | Allocations: 19295)
+Completed 200 OK in 261ms (Views: 214.2ms | ActiveRecord: 0.0ms | Allocations: 23182)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-13 18:26:06 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.1ms | Allocations: 7)
+  Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 24.3ms | Allocations: 1340)
+Completed 200 OK in 26ms (Views: 25.0ms | ActiveRecord: 0.0ms | Allocations: 1589)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-13 18:26:07 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 23.4ms | Allocations: 1343)
+Completed 200 OK in 25ms (Views: 24.1ms | ActiveRecord: 0.0ms | Allocations: 1591)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-13 18:26:08 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered layouts/_header.html.erb (Duration: 0.1ms | Allocations: 46)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 23.2ms | Allocations: 1322)
+Completed 200 OK in 25ms (Views: 23.9ms | ActiveRecord: 0.0ms | Allocations: 1570)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 10:44:43 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 18.4ms | Allocations: 442)
+  Rendered layout layouts/application.html.erb (Duration: 359.7ms | Allocations: 4284)
+Completed 500 Internal Server Error in 512ms (ActiveRecord: 0.0ms | Allocations: 8118)
+
+
+  
+LoadError (cannot load such file -- sassc):
+  
+app/views/layouts/application.html.erb:9
+Started GET "/" for 172.23.0.1 at 2024-07-14 10:47:03 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.4ms | Allocations: 442)
+  Rendered layouts/_header.html.erb (Duration: 8.1ms | Allocations: 246)
+  Rendered layouts/_footer.html.erb (Duration: 8.2ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 583.0ms | Allocations: 23885)
+Completed 200 OK in 641ms (Views: 595.9ms | ActiveRecord: 0.0ms | Allocations: 27768)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 10:47:09 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.1ms | Allocations: 22)
+  Rendered layouts/_header.html.erb (Duration: 0.1ms | Allocations: 46)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 23.3ms | Allocations: 1303)
+Completed 200 OK in 25ms (Views: 24.0ms | ActiveRecord: 0.0ms | Allocations: 1552)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 10:47:27 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.5ms | Allocations: 442)
+  Rendered layouts/_header.html.erb (Duration: 3.5ms | Allocations: 246)
+  Rendered layouts/_footer.html.erb (Duration: 3.2ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 206.5ms | Allocations: 19539)
+Completed 200 OK in 264ms (Views: 220.7ms | ActiveRecord: 0.0ms | Allocations: 23423)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 10:49:40 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 7.8ms | Allocations: 442)
+  Rendered layouts/_header.html.erb (Duration: 4.7ms | Allocations: 248)
+  Rendered layouts/_footer.html.erb (Duration: 3.2ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 655.2ms | Allocations: 24120)
+Completed 200 OK in 727ms (Views: 672.5ms | ActiveRecord: 0.0ms | Allocations: 28004)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 10:53:46 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.4ms | Allocations: 442)
+  Rendered layout layouts/application.html.erb (Duration: 28.4ms | Allocations: 2132)
+Completed 500 Internal Server Error in 86ms (ActiveRecord: 0.0ms | Allocations: 5970)
+
+
+  
+ActionView::Template::Error (undefined method `page_title' for an instance of #<Class:0x00007f9e02ae6b98>):
+    1: <!DOCTYPE html>
+    2: <html>
+    3:   <head>
+    4:     <title><%= page_title(yield(:title)) %></title>
+    5:     <meta name="viewport" content="width=device-width,initial-scale=1">
+    6:     <%= csrf_meta_tags %>
+    7:     <%= csp_meta_tag %>
+  
+app/views/layouts/application.html.erb:4
+Started GET "/" for 172.23.0.1 at 2024-07-14 10:54:24 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.7ms | Allocations: 442)
+  Rendered layout layouts/application.html.erb (Duration: 218.5ms | Allocations: 21313)
+Completed 500 Internal Server Error in 275ms (ActiveRecord: 0.0ms | Allocations: 25151)
+
+
+  
+ActionView::Template::Error (The asset "application.js" is not present in the asset pipeline.
+):
+     7:     <%= csp_meta_tag %>
+     8: 
+     9:     <%= stylesheet_link_tag "application" %>
+    10:     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    11:   </head>
+    12: 
+    13:   <body>
+  
+app/views/layouts/application.html.erb:10
+Started GET "/" for 172.23.0.1 at 2024-07-14 11:12:17 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 7.2ms | Allocations: 463)
+  Rendered layouts/_header.html.erb (Duration: 4.2ms | Allocations: 246)
+  Rendered layouts/_footer.html.erb (Duration: 3.9ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 223.7ms | Allocations: 19601)
+Completed 200 OK in 281ms (Views: 237.4ms | ActiveRecord: 0.0ms | Allocations: 23485)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 11:13:22 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 7.2ms | Allocations: 463)
+  Rendered layouts/_header.html.erb (Duration: 3.9ms | Allocations: 246)
+  Rendered layouts/_footer.html.erb (Duration: 3.4ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 211.1ms | Allocations: 19588)
+Completed 200 OK in 297ms (Views: 226.0ms | ActiveRecord: 0.0ms | Allocations: 23472)
+
+
+Started GET "/" for 172.23.0.1 at 2024-07-14 11:25:28 +0900
+Cannot render console from 172.23.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.2ms | Allocations: 26)
+  Rendered layouts/_header.html.erb (Duration: 0.2ms | Allocations: 46)
+  Rendered layouts/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 20.1ms | Allocations: 1346)
+Completed 200 OK in 22ms (Views: 20.8ms | ActiveRecord: 0.0ms | Allocations: 1595)
+
+

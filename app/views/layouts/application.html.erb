@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>V3AdvancedRails</title>
+    <title><%= page_title(yield(:title)) %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -18,7 +18,14 @@
     <div class="container">
       <%= yield %>
     </div>
-
+    <div class="container">
+      <div class="left-side">
+        <%= yield :left %>
+      </div>
+      <div class="right-side">
+        <%= yield :right %>
+      </div>
+    </div>
     <footer>
       <!-- フッターの内容 -->
       <%= render 'layouts/footer' %>

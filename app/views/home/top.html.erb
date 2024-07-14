@@ -1,2 +1,13 @@
+<% content_for(:title, "入口") %>
 <h1>Home#top</h1>
 <p>Find me in app/views/home/top.html.erb</p>
+
+<% content_for :left do %>
+  <h1>左側のコンテンツ</h1>
+  <p>ここに左側のコンテンツを配置します。</p>
+<% end %>
+
+<% content_for :right do %>
+  <h1>右側のコンテンツ</h1>
+  <p>ここに右側のコンテンツを配置します。</p>
+<% end %>
