@@ -2306,3 +2306,96 @@ Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.2
   
 ActionController::RoutingError (No route matches [POST] "/users/sign_out"):
   
+Started GET "/" for 172.31.0.1 at 2024-07-15 13:00:21 +0900
+Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 7.2ms | Allocations: 464)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:6
+  Rendered layouts/_header.html.erb (Duration: 39.4ms | Allocations: 9529)
+  Rendered layouts/_footer.html.erb (Duration: 3.3ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 246.5ms | Allocations: 28909)
+Completed 200 OK in 342ms (Views: 263.1ms | ActiveRecord: 2.0ms | Allocations: 34006)
+
+
+Started DELETE "/users/sign_out" for 172.31.0.1 at 2024-07-15 13:00:23 +0900
+Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 26ms (ActiveRecord: 0.3ms | Allocations: 3231)
+
+
+Started GET "/" for 172.31.0.1 at 2024-07-15 13:00:23 +0900
+Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.1ms | Allocations: 26)
+  Rendered layouts/_header.html.erb (Duration: 1.1ms | Allocations: 288)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 28.8ms | Allocations: 1596)
+Completed 200 OK in 31ms (Views: 29.6ms | ActiveRecord: 0.0ms | Allocations: 1850)
+
+
+Started GET "/users/sign_in" for 172.31.0.1 at 2024-07-15 15:20:22 +0900
+Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 46.3ms | Allocations: 699)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 178.7ms | Allocations: 11914)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 189)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 211.3ms | Allocations: 13260)
+Completed 200 OK in 222ms (Views: 219.3ms | ActiveRecord: 0.0ms | Allocations: 14440)
+
+
+Started POST "/users/sign_in" for 172.31.0.1 at 2024-07-15 15:20:29 +0900
+Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"test@test", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'test@test' ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 257ms (ActiveRecord: 0.9ms | Allocations: 3863)
+
+
+Started GET "/" for 172.31.0.1 at 2024-07-15 15:20:29 +0900
+Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.1ms | Allocations: 26)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:6
+  Rendered layouts/_header.html.erb (Duration: 2.6ms | Allocations: 1110)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 25.3ms | Allocations: 2421)
+Completed 200 OK in 27ms (Views: 25.8ms | ActiveRecord: 0.3ms | Allocations: 2672)
+
+
+Started DELETE "/users/sign_out" for 172.31.0.1 at 2024-07-15 15:20:33 +0900
+Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 5ms (ActiveRecord: 0.3ms | Allocations: 1731)
+
+
+Started GET "/" for 172.31.0.1 at 2024-07-15 15:20:34 +0900
+Cannot render console from 172.31.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.1ms | Allocations: 26)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 199)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 22.6ms | Allocations: 1499)
+Completed 200 OK in 24ms (Views: 23.3ms | ActiveRecord: 0.0ms | Allocations: 1749)
+
+
