@@ -15,17 +15,21 @@
       <%= render 'layouts/header' %>
     </header>
 
-    <div class="container">
-      <%= yield %>
-    </div>
-    <div class="container">
-      <div class="left-side">
-        <%= yield :left %>
+    <% if @use_split_layout %>
+      <div class="container">
+        <div class="left-side">
+          <%= yield :left %>
+        </div>
+        <div class="right-side">
+          <%= yield :right %>
+        </div>
       </div>
-      <div class="right-side">
-        <%= yield :right %>
+    <% else %>
+      <div class="container">
+        <%= yield %>
       </div>
-    </div>
+    <% end %>
+
     <footer>
       <!-- フッターの内容 -->
       <%= render 'layouts/footer' %>
