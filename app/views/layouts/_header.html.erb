@@ -1,18 +1,36 @@
-<nav>
-  <!-- ヘッダーのナビゲーションメニュー -->
-  <ul>
-    <li><%= link_to 'Home', root_path %></li>
-    <!-- 他のリンク -->
-    <% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
-      <!-- ユーザーがログインしていた時の処理 -->
-
-      <h4> 名前： <%= current_user.name %> </h4>
-      <h4> メールアドレス： <%= current_user.email %> </h4>
-      <%= button_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
-    <% else %>
-      <!-- ユーザーがログインしていなかった時の処理 -->
-      <%= link_to "ログイン", new_user_session_path, class: 'post' %> <!-- ログイン画面に移行する -->
-      <%= link_to "新規登録", new_user_registration_path, class: 'post' %> <!-- 新規登録画面に移行する -->
-    <% end %>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="<%= root_path %>">MyApp</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to 'Home', root_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to '米炊きチュートリアル', cookrice_path, class: 'nav-link' %>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <span class="navbar-text">名前： <%= current_user.name %></span>
+        </li>
+        <li class="nav-item">
+          <span class="navbar-text">メールアドレス： <%= current_user.email %></span>
+        </li>
+        <li class="nav-item">
+          <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger ml-2' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </nav>
