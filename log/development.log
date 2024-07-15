@@ -2840,3 +2840,32 @@ Processing by HomeController#cookrice as HTML
 Completed 200 OK in 795ms (Views: 725.7ms | ActiveRecord: 2.1ms | Allocations: 43845)
 
 
+Started GET "/" for 192.168.16.1 at 2024-07-15 17:12:14 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 8.1ms | Allocations: 494)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 22.2ms | Allocations: 9694)
+  Rendered layouts/_footer.html.erb (Duration: 3.4ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 449.0ms | Allocations: 32606)
+Completed 200 OK in 547ms (Views: 462.3ms | ActiveRecord: 2.3ms | Allocations: 37726)
+
+
+Started GET "/cookrice" for 192.168.16.1 at 2024-07-15 17:12:15 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#cookrice as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/cookrice.html.erb within layouts/application
+  Rendered home/cookrice.html.erb within layouts/application (Duration: 305.4ms | Allocations: 6532)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.7ms | Allocations: 1195)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 325.4ms | Allocations: 8926)
+Completed 200 OK in 330ms (Views: 325.7ms | ActiveRecord: 0.3ms | Allocations: 9239)
+
+
