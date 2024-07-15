@@ -2523,3 +2523,73 @@ Processing by HomeController#cookrice as HTML
 Completed 200 OK in 755ms (Views: 685.4ms | ActiveRecord: 0.0ms | Allocations: 34785)
 
 
+Started GET "/" for 192.168.16.1 at 2024-07-15 16:43:08 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 7.1ms | Allocations: 464)
+  Rendered layouts/_header.html.erb (Duration: 5.5ms | Allocations: 726)
+  Rendered layouts/_footer.html.erb (Duration: 3.7ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 1449.3ms | Allocations: 33252)
+Completed 200 OK in 1532ms (Views: 1464.2ms | ActiveRecord: 0.0ms | Allocations: 38372)
+
+
+Started GET "/cookrice" for 192.168.16.1 at 2024-07-15 16:43:11 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#cookrice as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/cookrice.html.erb within layouts/application
+  Rendered home/cookrice.html.erb within layouts/application (Duration: 194.2ms | Allocations: 6250)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 230)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 214.0ms | Allocations: 7643)
+Completed 200 OK in 220ms (Views: 214.9ms | ActiveRecord: 0.0ms | Allocations: 7956)
+
+
+Started GET "/cookrice" for 192.168.16.1 at 2024-07-15 17:01:13 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#cookrice as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/cookrice.html.erb within layouts/application
+  Rendered home/cookrice.html.erb within layouts/application (Duration: 1351.4ms | Allocations: 29056)
+  Rendered layout layouts/application.html.erb (Duration: 1352.0ms | Allocations: 29158)
+Completed 500 Internal Server Error in 1437ms (ActiveRecord: 0.0ms | Allocations: 34227)
+
+
+  
+ActionView::Template::Error (Error: File to import not found or unreadable: bootstrap.
+        on line 1:1 of app/assets/stylesheets/application.scss
+>> @import "bootstrap";
+
+   ^
+):
+  
+app/assets/stylesheets/application.scss:1
+Started GET "/cookrice" for 192.168.16.1 at 2024-07-15 17:02:14 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#cookrice as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/cookrice.html.erb within layouts/application
+  Rendered home/cookrice.html.erb within layouts/application (Duration: 1264.2ms | Allocations: 28511)
+  Rendered layouts/_header.html.erb (Duration: 5.8ms | Allocations: 725)
+  Rendered layouts/_footer.html.erb (Duration: 3.4ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 1321.9ms | Allocations: 31419)
+Completed 200 OK in 1411ms (Views: 1337.9ms | ActiveRecord: 0.0ms | Allocations: 36536)
+
+
+Started GET "/" for 192.168.16.1 at 2024-07-15 17:02:19 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 3.8ms | Allocations: 241)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 230)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 28.9ms | Allocations: 1770)
+Completed 200 OK in 34ms (Views: 29.7ms | ActiveRecord: 0.0ms | Allocations: 2088)
+
+
