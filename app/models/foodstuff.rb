@@ -1,6 +1,6 @@
 class Foodstuff < ApplicationRecord
   belongs_to :user
-  has_many :foodstuff_image, dependent: :destroy
+  mount_uploaders :image, FoodstuffImageUploader
 
   validates :name, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, only_integer: true}
