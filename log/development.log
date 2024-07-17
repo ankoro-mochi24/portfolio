@@ -3112,3 +3112,141 @@ Processing by HomeController#top as HTML
 Completed 200 OK in 36ms (Views: 31.6ms | ActiveRecord: 0.4ms | Allocations: 3689)
 
 
+Started GET "/" for 192.168.16.1 at 2024-07-15 19:06:07 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.5ms | Allocations: 494)
+  Rendered layouts/_header.html.erb (Duration: 28.4ms | Allocations: 803)
+  Rendered layouts/_footer.html.erb (Duration: 3.8ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 1539.1ms | Allocations: 32659)
+Completed 200 OK in 1628ms (Views: 1553.2ms | ActiveRecord: 0.0ms | Allocations: 37779)
+
+
+Started GET "/" for 192.168.16.1 at 2024-07-15 19:06:10 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.1ms | Allocations: 26)
+  Rendered layouts/_header.html.erb (Duration: 0.5ms | Allocations: 264)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 24.4ms | Allocations: 1619)
+Completed 200 OK in 26ms (Views: 25.2ms | ActiveRecord: 0.0ms | Allocations: 1875)
+
+
+Started GET "/" for 192.168.16.1 at 2024-07-15 19:06:10 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.1ms | Allocations: 26)
+  Rendered layouts/_header.html.erb (Duration: 0.5ms | Allocations: 264)
+  Rendered layouts/_footer.html.erb (Duration: 0.1ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 23.4ms | Allocations: 1631)
+Completed 200 OK in 25ms (Views: 24.1ms | ActiveRecord: 0.0ms | Allocations: 1886)
+
+
+Started GET "/" for 192.168.16.1 at 2024-07-15 19:08:26 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 6.9ms | Allocations: 494)
+  Rendered layouts/_header.html.erb (Duration: 6.8ms | Allocations: 808)
+  Rendered layouts/_footer.html.erb (Duration: 3.8ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 550.3ms | Allocations: 23955)
+Completed 200 OK in 644ms (Views: 566.2ms | ActiveRecord: 0.0ms | Allocations: 29076)
+
+
+Started GET "/" for 192.168.16.1 at 2024-07-15 19:08:29 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 0.3ms | Allocations: 26)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 264)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 19.7ms | Allocations: 1614)
+Completed 200 OK in 21ms (Views: 20.4ms | ActiveRecord: 0.0ms | Allocations: 1870)
+
+
+Started GET "/" for 192.168.16.1 at 2024-07-17 09:53:39 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 20.7ms | Allocations: 494)
+  Rendered layouts/_header.html.erb (Duration: 22.3ms | Allocations: 808)
+  Rendered layouts/_footer.html.erb (Duration: 8.9ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 689.0ms | Allocations: 23856)
+Completed 200 OK in 928ms (Views: 729.3ms | ActiveRecord: 0.0ms | Allocations: 28974)
+
+
+Started GET "/users/sign_in" for 192.168.16.1 at 2024-07-17 10:33:57 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 41.8ms | Allocations: 707)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 132.8ms | Allocations: 4134)
+  Rendered layouts/_header.html.erb (Duration: 19.2ms | Allocations: 642)
+  Rendered layouts/_footer.html.erb (Duration: 7.1ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 705.4ms | Allocations: 26966)
+Completed 200 OK in 920ms (Views: 860.5ms | ActiveRecord: 2.7ms | Allocations: 38307)
+
+
+Started GET "/users/sign_in" for 192.168.16.1 at 2024-07-17 10:34:04 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 136)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.4ms | Allocations: 1285)
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 234)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 24.2ms | Allocations: 2657)
+Completed 200 OK in 27ms (Views: 25.0ms | ActiveRecord: 0.0ms | Allocations: 3245)
+
+
+Started GET "/users/sign_in" for 192.168.16.1 at 2024-07-17 10:34:05 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 136)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1285)
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 234)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 22.9ms | Allocations: 2657)
+Completed 200 OK in 25ms (Views: 23.6ms | ActiveRecord: 0.0ms | Allocations: 3239)
+
+
+Started POST "/users/sign_in" for 192.168.16.1 at 2024-07-17 10:34:13 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"test@test", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'test@test' ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 251ms (ActiveRecord: 0.3ms | Allocations: 5482)
+
+
+Started GET "/" for 192.168.16.1 at 2024-07-17 10:34:14 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 8.7ms | Allocations: 261)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.8ms | Allocations: 1270)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 32.7ms | Allocations: 2959)
+Completed 200 OK in 40ms (Views: 35.4ms | ActiveRecord: 0.3ms | Allocations: 3709)
+
+
