@@ -1,5 +1,5 @@
 class FoodstuffsController < ApplicationController
-  before_action :set_foodstuff, only: %i[ show edit update destroy ]
+  before_action :set_foodstuff, only: %i[show edit update destroy]
 
   # 食品リストの表示
   def index
@@ -22,10 +22,11 @@ class FoodstuffsController < ApplicationController
   # 新しい食品を作成
   def create
     @foodstuff = Foodstuff.new(foodstuff_params)
+    @foodstuff.user = current_user # current_userを適切に設定する
 
     respond_to do |format|
       if @foodstuff.save
-        format.html { redirect_to foodstuff_url(@foodstuff), notice: "食品が正常に作成されました。" }
+        format.html { redirect_to @foodstuff, notice: "食品が正常に作成されました。" }
         format.json { render :show, status: :created, location: @foodstuff }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class FoodstuffsController < ApplicationController
   def update
     respond_to do |format|
       if @foodstuff.update(foodstuff_params)
-        format.html { redirect_to foodstuff_url(@foodstuff), notice: "食品が正常に更新されました。" }
+        format.html { redirect_to @foodstuff, notice: "食品が正常に更新されました。" }
         format.json { render :show, status: :ok, location: @foodstuff }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,7 +51,6 @@ class FoodstuffsController < ApplicationController
   # 特定の食品を削除
   def destroy
     @foodstuff.destroy
-
     respond_to do |format|
       format.html { redirect_to foodstuffs_url, notice: "食品が正常に削除されました。" }
       format.json { head :no_content }
@@ -58,13 +58,14 @@ class FoodstuffsController < ApplicationController
   end
 
   private
-    # 共通のセットアップまたは制約を共有するためのコールバック
-    def set_foodstuff
-      @foodstuff = Foodstuff.find(params[:id])
-    end
 
-    # 信頼できるパラメータのみを許可する
-    def foodstuff_params
-      params.require(:foodstuff).permit(:name, :price, :description, :link, :image)
-    end
+  # 共通のセットアップまたは制約を共有するためのコールバック
+  def set_foodstuff
+    @foodstuff = Foodstuff.find(params[:id])
+  end
+
+  # 信頼できるパラメータのみを許可する
+  def foodstuff_params
+    params.require(:foodstuff).permit(:name, :price, :description, :link, image: [])
+  end
 end

@@ -1,7 +1,6 @@
-<%= form_with(model: foodstuff, local: true) do |form| %>
+<%= form_with(model: foodstuff, local: true, html: { multipart: true }) do |form| %>
   <% if foodstuff.errors.any? %>
     <div id="error_explanation">
-
       <ul>
         <% foodstuff.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -32,7 +31,7 @@
 
   <div class="field">
     <%= form.label :image, t('activerecord.attributes.foodstuff.image') %>
-    <%= form.text_field :image %>
+    <%= form.file_field :image, multiple: true %>
   </div>
 
   <div class="actions">

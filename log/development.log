@@ -3960,3 +3960,371 @@ Processing by FoodstuffsController#create as HTML
 Completed 422 Unprocessable Entity in 29ms (Views: 26.1ms | ActiveRecord: 0.0ms | Allocations: 6314)
 
 
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 11:57:45 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"", "price"=>"", "description"=>"", "link"=>"", "image"=>""}, "commit"=>"作成"}
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 16.1ms | Allocations: 4674)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 95.4ms | Allocations: 6838)
+  Rendered layouts/_header.html.erb (Duration: 5.0ms | Allocations: 720)
+  Rendered layouts/_footer.html.erb (Duration: 3.4ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 522.7ms | Allocations: 29769)
+Completed 422 Unprocessable Entity in 607ms (Views: 548.1ms | ActiveRecord: 1.4ms | Allocations: 44956)
+
+
+Started GET "/foodstuffs" for 192.168.16.1 at 2024-07-19 11:57:56 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/index.html.erb within layouts/application
+  [1m[36mFoodstuff Load (0.3ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/foodstuffs/index.html.erb:6
+  Rendered foodstuffs/index.html.erb within layouts/application (Duration: 7.9ms | Allocations: 1085)
+  Rendered layouts/_header.html.erb (Duration: 5.7ms | Allocations: 590)
+  Rendered layouts/_footer.html.erb (Duration: 3.4ms | Allocations: 102)
+  Rendered layout layouts/application.html.erb (Duration: 52.2ms | Allocations: 3463)
+Completed 200 OK in 63ms (Views: 57.5ms | ActiveRecord: 0.3ms | Allocations: 4398)
+
+
+Started GET "/foodstuffs/new" for 192.168.16.1 at 2024-07-19 11:57:58 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 11.6ms | Allocations: 1778)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 19.3ms | Allocations: 2120)
+  Rendered layouts/_header.html.erb (Duration: 1.8ms | Allocations: 254)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 46.7ms | Allocations: 3535)
+Completed 200 OK in 53ms (Views: 48.4ms | ActiveRecord: 0.0ms | Allocations: 3872)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 11:58:00 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"", "price"=>"", "description"=>"", "link"=>"", "image"=>""}, "commit"=>"作成"}
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 4.3ms | Allocations: 3213)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 4.8ms | Allocations: 3336)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 254)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 27.4ms | Allocations: 4749)
+Completed 422 Unprocessable Entity in 31ms (Views: 28.2ms | ActiveRecord: 0.0ms | Allocations: 6366)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 11:58:04 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"", "price"=>"", "description"=>"", "link"=>"", "image"=>""}, "commit"=>"作成"}
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 3.5ms | Allocations: 3191)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 3.9ms | Allocations: 3314)
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 254)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 19.7ms | Allocations: 4723)
+Completed 422 Unprocessable Entity in 23ms (Views: 20.4ms | ActiveRecord: 0.0ms | Allocations: 6312)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 11:58:13 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"", "price"=>"", "description"=>"", "link"=>"", "image"=>""}, "commit"=>"作成"}
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 3.6ms | Allocations: 3191)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 4.2ms | Allocations: 3314)
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 254)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 24.1ms | Allocations: 4721)
+Completed 422 Unprocessable Entity in 27ms (Views: 24.8ms | ActiveRecord: 0.0ms | Allocations: 6285)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 11:58:14 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"", "price"=>"", "description"=>"", "link"=>"", "image"=>""}, "commit"=>"作成"}
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 3.4ms | Allocations: 3191)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 3314)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 254)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 27.1ms | Allocations: 4720)
+Completed 422 Unprocessable Entity in 30ms (Views: 27.8ms | ActiveRecord: 0.0ms | Allocations: 6291)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:02:01 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"", "price"=>"", "description"=>"", "link"=>"", "image"=>""}, "commit"=>"作成"}
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 51.5ms | Allocations: 4861)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 108.3ms | Allocations: 6729)
+  Rendered layouts/_header.html.erb (Duration: 7.1ms | Allocations: 722)
+  Rendered layouts/_footer.html.erb (Duration: 4.6ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 518.6ms | Allocations: 29668)
+Completed 422 Unprocessable Entity in 606ms (Views: 545.6ms | ActiveRecord: 3.3ms | Allocations: 44850)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:02:16 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"あ", "price"=>"100", "description"=>"aaa", "link"=>"http://localhost:3000/foodstuffs", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007ff7636186b0 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-lykydc.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-19 115403.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-19 115403.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 828)
+
+
+  
+NoMethodError (undefined method `map' for an instance of ActionDispatch::Http::UploadedFile):
+  
+app/controllers/foodstuffs_controller.rb:24:in `create'
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:04:58 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"あ", "price"=>"100", "description"=>"aaa", "link"=>"http://localhost:3000/foodstuffs", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fef653f60e0 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-ku4q8u.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-19 115403.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-19 115403.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+Completed 500 Internal Server Error in 54ms (ActiveRecord: 1.6ms | Allocations: 10904)
+
+
+  
+NoMethodError (undefined method `map' for an instance of ActionDispatch::Http::UploadedFile):
+  
+app/controllers/foodstuffs_controller.rb:24:in `create'
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:09:06 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"あ", "price"=>"100", "description"=>"aaa", "link"=>"http://localhost:3000/foodstuffs", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007f35291f5eb8 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-hhz1b8.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-19 115403.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-19 115403.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 1.6ms | Allocations: 10908)
+
+
+  
+NoMethodError (undefined method `map' for an instance of ActionDispatch::Http::UploadedFile):
+  
+app/controllers/foodstuffs_controller.rb:24:in `create'
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:13:45 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"あ", "price"=>"100", "description"=>"aaa", "link"=>"http://localhost:3000/foodstuffs"}, "commit"=>"作成"}
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 16.7ms | Allocations: 2830)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 66.9ms | Allocations: 4699)
+  Rendered layouts/_header.html.erb (Duration: 9.6ms | Allocations: 570)
+  Rendered layouts/_footer.html.erb (Duration: 4.7ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 501.8ms | Allocations: 27487)
+Completed 422 Unprocessable Entity in 605ms (Views: 529.2ms | ActiveRecord: 1.7ms | Allocations: 42358)
+
+
+Started GET "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:14:07 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/index.html.erb within layouts/application
+  [1m[36mFoodstuff Load (0.3ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/foodstuffs/index.html.erb:6
+  Rendered foodstuffs/index.html.erb within layouts/application (Duration: 5.3ms | Allocations: 1091)
+  Rendered layouts/_header.html.erb (Duration: 3.8ms | Allocations: 590)
+  Rendered layouts/_footer.html.erb (Duration: 3.0ms | Allocations: 102)
+  Rendered layout layouts/application.html.erb (Duration: 40.8ms | Allocations: 3475)
+Completed 200 OK in 53ms (Views: 46.5ms | ActiveRecord: 0.3ms | Allocations: 4411)
+
+
+Started GET "/users/sign_in" for 192.168.16.1 at 2024-07-19 12:14:25 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (Duration: 4.7ms | Allocations: 698)
+  Rendered devise/sessions/new.html.erb within layouts/application (Duration: 29.7ms | Allocations: 3250)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 258)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 50.8ms | Allocations: 4723)
+Completed 200 OK in 71ms (Views: 57.8ms | ActiveRecord: 2.0ms | Allocations: 10247)
+
+
+Started POST "/users/sign_in" for 192.168.16.1 at 2024-07-19 12:14:32 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"email"=>"test@test", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'test@test' ORDER BY `users`.`id` ASC LIMIT 1[0m
+Redirected to http://localhost:3000/
+Completed 303 See Other in 211ms (ActiveRecord: 0.4ms | Allocations: 5409)
+
+
+Started GET "/" for 192.168.16.1 at 2024-07-19 12:14:33 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  Rendered home/top.html.erb within layouts/application (Duration: 3.3ms | Allocations: 258)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.9ms | Allocations: 1261)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 27.6ms | Allocations: 2952)
+Completed 200 OK in 34ms (Views: 29.9ms | ActiveRecord: 0.4ms | Allocations: 3688)
+
+
+Started GET "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:14:37 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/index.html.erb within layouts/application
+  [1m[36mFoodstuff Load (0.3ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/foodstuffs/index.html.erb:6
+  Rendered foodstuffs/index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 778)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.5ms | Allocations: 1184)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 24.1ms | Allocations: 3114)
+Completed 200 OK in 26ms (Views: 24.2ms | ActiveRecord: 0.6ms | Allocations: 3379)
+
+
+Started GET "/foodstuffs/new" for 192.168.16.1 at 2024-07-19 12:14:39 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 5.1ms | Allocations: 1803)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 12.0ms | Allocations: 2145)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.8ms | Allocations: 1172)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 35.2ms | Allocations: 4477)
+Completed 200 OK in 40ms (Views: 35.5ms | ActiveRecord: 0.4ms | Allocations: 4806)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:14:52 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"a", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007f7be70635c8 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-tmrjqa.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-19 113757.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-19 113757.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+[31mUnpermitted parameter: :image. Context: { controller: FoodstuffsController, action: create, request: #<ActionDispatch::Request:0x00007f7be70719c0>, params: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"a", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007f7be70635c8 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-tmrjqa.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-19 113757.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-19 113757.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成", "controller"=>"foodstuffs", "action"=>"create"} }[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:25:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 2.2ms | Allocations: 1689)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1812)
+  Rendered layouts/_header.html.erb (Duration: 0.5ms | Allocations: 366)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 24.2ms | Allocations: 3331)
+Completed 422 Unprocessable Entity in 66ms (Views: 25.0ms | ActiveRecord: 0.4ms | Allocations: 8265)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:14:55 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"100", "description"=>"a", "link"=>"a"}, "commit"=>"作成"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:25:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/foodstuffs_controller.rb:28:in `block in create'
+  [1m[36mFoodstuff Create (1.3ms)[0m  [1m[32mINSERT INTO `foodstuffs` (`name`, `price`, `description`, `link`, `user_id`, `created_at`, `updated_at`, `image`) VALUES ('a', 100, 'a', 'a', 2, '2024-07-19 03:14:55.895389', '2024-07-19 03:14:55.895389', NULL)[0m
+  ↳ app/controllers/foodstuffs_controller.rb:28:in `block in create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/foodstuffs_controller.rb:28:in `block in create'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 2.0ms | Allocations: 5108)
+
+
+  
+ActiveRecord::NotNullViolation (Mysql2::Error: Column 'image' cannot be null):
+  
+app/controllers/foodstuffs_controller.rb:28:in `block in create'
+app/controllers/foodstuffs_controller.rb:27:in `create'
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:16:42 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"a", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fdfbd0bc710 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-py50e2.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-19 113757.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-19 113757.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+[31mUnpermitted parameter: :image. Context: { controller: FoodstuffsController, action: create, request: #<ActionDispatch::Request:0x00007fdfbc9fc308>, params: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"a", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fdfbd0bc710 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-py50e2.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-19 113757.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-19 113757.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成", "controller"=>"foodstuffs", "action"=>"create"} }[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:25:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 16.6ms | Allocations: 3597)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 67.7ms | Allocations: 5462)
+  Rendered layouts/_header.html.erb (Duration: 4.1ms | Allocations: 738)
+  Rendered layouts/_footer.html.erb (Duration: 3.0ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 478.4ms | Allocations: 28435)
+Completed 422 Unprocessable Entity in 608ms (Views: 505.3ms | ActiveRecord: 3.0ms | Allocations: 51003)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:16:49 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"110", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fdfb74e9b68 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-sl775e.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-15 161123.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-15 161123.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+[31mUnpermitted parameter: :image. Context: { controller: FoodstuffsController, action: create, request: #<ActionDispatch::Request:0x00007fdfb74ccd10>, params: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"110", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fdfb74e9b68 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-sl775e.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-15 161123.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-15 161123.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成", "controller"=>"foodstuffs", "action"=>"create"} }[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:25:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 11.8ms | Allocations: 2129)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 19.9ms | Allocations: 2484)
+  Rendered layouts/_header.html.erb (Duration: 8.1ms | Allocations: 704)
+  Rendered layouts/_footer.html.erb (Duration: 3.0ms | Allocations: 102)
+  Rendered layout layouts/application.html.erb (Duration: 69.7ms | Allocations: 4974)
+Completed 422 Unprocessable Entity in 89ms (Views: 80.5ms | ActiveRecord: 0.3ms | Allocations: 7529)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:16:56 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"110", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fdfbc99c458 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-2sedpc.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-15 161144.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-15 161144.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+[31mUnpermitted parameter: :image. Context: { controller: FoodstuffsController, action: create, request: #<ActionDispatch::Request:0x00007fdfb752b0e0>, params: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"110", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fdfbc99c458 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-2sedpc.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-15 161144.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-15 161144.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成", "controller"=>"foodstuffs", "action"=>"create"} }[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:25:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 2.5ms | Allocations: 1650)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 2.9ms | Allocations: 1773)
+  Rendered layouts/_header.html.erb (Duration: 0.5ms | Allocations: 366)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 24.3ms | Allocations: 3299)
+Completed 422 Unprocessable Entity in 30ms (Views: 25.0ms | ActiveRecord: 0.4ms | Allocations: 5276)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:20:40 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"110", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fb7ddd9cdc0 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-y3cgv1.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-15 172545.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-15 172545.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+[31mUnpermitted parameter: :image. Context: { controller: FoodstuffsController, action: create, request: #<ActionDispatch::Request:0x00007fb7ddccf6e0>, params: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"110", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fb7ddd9cdc0 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-y3cgv1.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-15 172545.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-15 172545.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成", "controller"=>"foodstuffs", "action"=>"create"} }[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:25:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 15.5ms | Allocations: 3092)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 67.2ms | Allocations: 4959)
+  Rendered layouts/_header.html.erb (Duration: 7.3ms | Allocations: 740)
+  Rendered layouts/_footer.html.erb (Duration: 4.1ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 469.7ms | Allocations: 27921)
+Completed 422 Unprocessable Entity in 575ms (Views: 493.5ms | ActiveRecord: 3.5ms | Allocations: 50060)
+
+
+Started POST "/foodstuffs" for 192.168.16.1 at 2024-07-19 12:20:45 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"110", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fb7dc909250 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-igamm7.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-15 172545.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-15 172545.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成"}
+[31mUnpermitted parameter: :image. Context: { controller: FoodstuffsController, action: create, request: #<ActionDispatch::Request:0x00007fb7dc9824e8>, params: {"authenticity_token"=>"[FILTERED]", "foodstuff"=>{"name"=>"a", "price"=>"110", "description"=>"a", "link"=>"a", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fb7dc909250 @tempfile=#<Tempfile:/tmp/RackMultipart20240719-1-igamm7.png>, @content_type="image/png", @original_filename="スクリーンショット 2024-07-15 172545.png", @headers="Content-Disposition: form-data; name=\"foodstuff[image]\"; filename=\"スクリーンショット 2024-07-15 172545.png\"\r\nContent-Type: image/png\r\n">}, "commit"=>"作成", "controller"=>"foodstuffs", "action"=>"create"} }[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:25:in `create'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 5.2ms | Allocations: 2129)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 11.1ms | Allocations: 2487)
+  Rendered layouts/_header.html.erb (Duration: 3.6ms | Allocations: 704)
+  Rendered layouts/_footer.html.erb (Duration: 3.2ms | Allocations: 102)
+  Rendered layout layouts/application.html.erb (Duration: 48.2ms | Allocations: 4986)
+Completed 422 Unprocessable Entity in 71ms (Views: 58.2ms | ActiveRecord: 0.4ms | Allocations: 7547)
+
+
