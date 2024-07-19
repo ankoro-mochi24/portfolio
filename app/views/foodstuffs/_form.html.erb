@@ -1,42 +1,41 @@
-<%= form_with(model: foodstuff) do |form| %>
+<%= form_with(model: foodstuff, local: true) do |form| %>
   <% if foodstuff.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(foodstuff.errors.count, "error") %> prohibited this foodstuff from being saved:</h2>
+    <div id="error_explanation">
 
       <ul>
-        <% foodstuff.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% foodstuff.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
+  <div class="field">
+    <%= form.label :name, t('activerecord.attributes.foodstuff.name') %>
     <%= form.text_field :name %>
   </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
+  <div class="field">
+    <%= form.label :price, t('activerecord.attributes.foodstuff.price') %>
     <%= form.text_field :price %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
+  <div class="field">
+    <%= form.label :description, t('activerecord.attributes.foodstuff.description') %>
     <%= form.text_area :description %>
   </div>
 
-  <div>
-    <%= form.label :link, style: "display: block" %>
+  <div class="field">
+    <%= form.label :link, t('activerecord.attributes.foodstuff.link') %>
     <%= form.text_field :link %>
   </div>
 
-  <div>
-    <%= form.label :image, style: "display: block" %>
+  <div class="field">
+    <%= form.label :image, t('activerecord.attributes.foodstuff.image') %>
     <%= form.text_field :image %>
   </div>
 
-  <div>
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>

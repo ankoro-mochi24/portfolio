@@ -1,31 +1,31 @@
 class FoodstuffsController < ApplicationController
   before_action :set_foodstuff, only: %i[ show edit update destroy ]
 
-  # GET /foodstuffs or /foodstuffs.json
+  # 食品リストの表示
   def index
     @foodstuffs = Foodstuff.all
   end
 
-  # GET /foodstuffs/1 or /foodstuffs/1.json
+  # 特定の食品の詳細表示
   def show
   end
 
-  # GET /foodstuffs/new
+  # 新しい食品の作成フォームを表示
   def new
     @foodstuff = Foodstuff.new
   end
 
-  # GET /foodstuffs/1/edit
+  # 特定の食品の編集フォームを表示
   def edit
   end
 
-  # POST /foodstuffs or /foodstuffs.json
+  # 新しい食品を作成
   def create
     @foodstuff = Foodstuff.new(foodstuff_params)
 
     respond_to do |format|
       if @foodstuff.save
-        format.html { redirect_to foodstuff_url(@foodstuff), notice: "Foodstuff was successfully created." }
+        format.html { redirect_to foodstuff_url(@foodstuff), notice: "食品が正常に作成されました。" }
         format.json { render :show, status: :created, location: @foodstuff }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,11 +34,11 @@ class FoodstuffsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /foodstuffs/1 or /foodstuffs/1.json
+  # 特定の食品を更新
   def update
     respond_to do |format|
       if @foodstuff.update(foodstuff_params)
-        format.html { redirect_to foodstuff_url(@foodstuff), notice: "Foodstuff was successfully updated." }
+        format.html { redirect_to foodstuff_url(@foodstuff), notice: "食品が正常に更新されました。" }
         format.json { render :show, status: :ok, location: @foodstuff }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,23 +47,23 @@ class FoodstuffsController < ApplicationController
     end
   end
 
-  # DELETE /foodstuffs/1 or /foodstuffs/1.json
+  # 特定の食品を削除
   def destroy
     @foodstuff.destroy
 
     respond_to do |format|
-      format.html { redirect_to foodstuffs_url, notice: "Foodstuff was successfully destroyed." }
+      format.html { redirect_to foodstuffs_url, notice: "食品が正常に削除されました。" }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # 共通のセットアップまたは制約を共有するためのコールバック
     def set_foodstuff
       @foodstuff = Foodstuff.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # 信頼できるパラメータのみを許可する
     def foodstuff_params
       params.require(:foodstuff).permit(:name, :price, :description, :link, :image)
     end

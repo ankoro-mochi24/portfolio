@@ -1,0 +1,40 @@
+ja:
+  helpers:
+    submit:
+      create: "作成"
+      update: "更新"
+      submit: "保存"
+  foodstuffs:
+    new:
+      title: "新しい食品"
+    back_to_list: "食品リストに戻る"
+  activerecord:
+    attributes:
+      foodstuff:
+        name: "名前"
+        price: "価格"
+        description: "説明"
+        link: "リンク"
+        image: "画像"
+        user: "ユーザー"
+    errors:
+      models:
+        foodstuff:
+          attributes:
+            name:
+              blank: "名前を入力してください"
+            price:
+              blank: "価格を入力してください"
+              not_a_number: "価格は数値で入力してください"
+            link:
+              blank: "リンクを入力してください"
+            image:
+              blank: "画像をアップロードしてください"
+            user:
+              required: "ユーザーが必要です"
+  errors:
+    messages:
+      blank: "を入力してください"
+      not_a_number: "は数値で入力してください"
+      required: "が必要です"
+

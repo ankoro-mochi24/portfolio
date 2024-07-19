@@ -253,6 +253,7 @@ DEPENDENCIES
   carrierwave
   debug
   devise
+  i18n
   importmap-rails
   jbuilder
   mysql2 (~> 0.5)
