@@ -1,27 +1,32 @@
 <div id="<%= dom_id foodstuff %>">
   <p>
-    <strong>Name:</strong>
+    <strong><%= t('activerecord.attributes.foodstuff.name') %>:</strong>
     <%= foodstuff.name %>
   </p>
 
   <p>
-    <strong>Price:</strong>
+    <strong><%= t('activerecord.attributes.foodstuff.price') %>:</strong>
     <%= foodstuff.price %>
   </p>
 
   <p>
-    <strong>Description:</strong>
+    <strong><%= t('activerecord.attributes.foodstuff.description') %>:</strong>
     <%= foodstuff.description %>
   </p>
 
   <p>
-    <strong>Link:</strong>
+    <strong><%= t('activerecord.attributes.foodstuff.link') %>:</strong>
     <%= foodstuff.link %>
   </p>
 
   <p>
-    <strong>Image:</strong>
-    <%= foodstuff.image %>
+    <strong><%= t('activerecord.attributes.foodstuff.image') %>:</strong>
+    <% foodstuff.image.each do |image| %>
+      <%= image_tag(image.url) %>
+    <% end %>
   </p>
 
+  <p>
+    <%= link_to t('foodstuffs.index.show_foodstuff'), foodstuff %>
+  </p>
 </div>

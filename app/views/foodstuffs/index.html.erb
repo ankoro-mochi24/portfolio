@@ -1,14 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Foodstuffs</h1>
+<h1><%= t('foodstuffs.index.title') %></h1>
 
 <div id="foodstuffs">
   <% @foodstuffs.each do |foodstuff| %>
     <%= render foodstuff %>
-    <p>
-      <%= link_to "Show this foodstuff", foodstuff %>
-    </p>
   <% end %>
 </div>
 
-<%= link_to "New foodstuff", new_foodstuff_path %>
+<%= link_to t('foodstuffs.index.new_foodstuff'), new_foodstuff_path %>

@@ -66,6 +66,6 @@ class FoodstuffsController < ApplicationController
 
   # 信頼できるパラメータのみを許可する
   def foodstuff_params
-    params.require(:foodstuff).permit(:name, :price, :description, :link, image: [])
+    params.require(:foodstuff).permit(:name, :price, :description, :link, {image: []})
   end
 end
