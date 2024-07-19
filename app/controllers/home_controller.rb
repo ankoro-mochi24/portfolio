@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_action :set_layout, only: [:top]
 
   def top
+    @foodstuffs = Foodstuff.all
   end
 
   def cookrice

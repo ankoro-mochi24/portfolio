@@ -73,3 +73,5 @@ end
 
 gem 'sassc'
 gem 'devise'
+gem 'carrierwave'
+gem 'i18n'
