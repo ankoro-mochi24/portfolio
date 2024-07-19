@@ -8266,3 +8266,57 @@ Processing by HomeController#top as HTML
 Completed 200 OK in 640ms (Views: 578.3ms | ActiveRecord: 6.8ms | Allocations: 46355)
 
 
+Started GET "/" for 192.168.16.1 at 2024-07-19 17:09:28 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mFoodstuff Load (1.0ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/home/top.html.erb:18
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 5.2ms | Allocations: 1067)
+  Rendered home/top.html.erb within layouts/application (Duration: 100.4ms | Allocations: 9775)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 18.9ms | Allocations: 7822)
+  Rendered layouts/_footer.html.erb (Duration: 2.8ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 510.0ms | Allocations: 40252)
+Completed 200 OK in 581ms (Views: 516.7ms | ActiveRecord: 6.0ms | Allocations: 46822)
+
+
+Started GET "/foodstuffs/6" for 192.168.16.1 at 2024-07-19 17:09:31 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mFoodstuff Load (0.3ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs` WHERE `foodstuffs`.`id` = 6 LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:64:in `set_foodstuff'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/show.html.erb within layouts/application
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.6ms | Allocations: 322)
+  Rendered foodstuffs/show.html.erb within layouts/application (Duration: 5.2ms | Allocations: 1196)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.7ms | Allocations: 1234)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 28.9ms | Allocations: 3633)
+Completed 200 OK in 39ms (Views: 31.5ms | ActiveRecord: 0.7ms | Allocations: 5656)
+
+
+Started GET "/foodstuffs/6" for 192.168.16.1 at 2024-07-19 17:09:39 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mFoodstuff Load (0.3ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs` WHERE `foodstuffs`.`id` = 6 LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:64:in `set_foodstuff'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/show.html.erb within layouts/application
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.6ms | Allocations: 273)
+  Rendered foodstuffs/show.html.erb within layouts/application (Duration: 2.0ms | Allocations: 898)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 6.3ms | Allocations: 1216)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 25.5ms | Allocations: 3259)
+Completed 200 OK in 29ms (Views: 25.8ms | ActiveRecord: 0.7ms | Allocations: 4021)
+
+
