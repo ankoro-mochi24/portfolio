@@ -1,0 +1,23 @@
+<h1>レシピ一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>レシピ名</th>
+      <th>完成写真</th>
+      <th>詳細</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.title %></td>
+        <td><%= image_tag(recipe.dish_image, size: "100x100") if recipe.dish_image.present? %></td>
+        <td><%= link_to '詳細', recipe_path(recipe) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新しいレシピを投稿する', new_recipe_path %>

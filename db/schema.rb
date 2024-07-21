@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_17_080241) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_21_011504) do
   create_table "foodstuffs", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.decimal "price", precision: 10, null: false
@@ -21,6 +21,54 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_17_080241) do
     t.datetime "updated_at", null: false
     t.string "image", null: false
     t.index ["user_id"], name: "index_foodstuffs_on_user_id"
+  end
+
+  create_table "ingredients", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "kitchen_tools", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "recipe_ingredients", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
+    t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
+  end
+
+  create_table "recipe_kitchen_tools", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "kitchen_tool_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kitchen_tool_id"], name: "index_recipe_kitchen_tools_on_kitchen_tool_id"
+    t.index ["recipe_id"], name: "index_recipe_kitchen_tools_on_recipe_id"
+  end
+
+  create_table "recipe_steps", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.text "text", null: false
+    t.string "step_image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipe_steps_on_recipe_id"
+  end
+
+  create_table "recipes", charset: "utf8mb4", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "dish_image", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -37,4 +85,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_17_080241) do
   end
 
   add_foreign_key "foodstuffs", "users"
+  add_foreign_key "recipe_ingredients", "ingredients"
+  add_foreign_key "recipe_ingredients", "recipes"
+  add_foreign_key "recipe_kitchen_tools", "kitchen_tools"
+  add_foreign_key "recipe_kitchen_tools", "recipes"
+  add_foreign_key "recipe_steps", "recipes"
+  add_foreign_key "recipes", "users"
 end

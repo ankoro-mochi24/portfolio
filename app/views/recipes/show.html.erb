@@ -1,0 +1,36 @@
+<p>
+  <strong>レシピ名:</strong>
+  <%= @recipe.title %>
+</p>
+
+<p>
+  <strong>完成写真:</strong>
+  <%= image_tag @recipe.dish_image %>
+</p>
+
+<h3>調理工程</h3>
+<% @recipe.recipe_steps.each do |step| %>
+  <p>
+    <strong>工程:</strong>
+    <%= step.text %>
+  </p>
+  <% if step.step_image.present? %>
+    <p>
+      <%= image_tag step.step_image %>
+    </p>
+  <% end %>
+<% end %>
+
+<h3>必要な調理器具</h3>
+<ul>
+  <% @recipe.kitchen_tools.each do |tool| %>
+    <li><%= tool.name %></li>
+  <% end %>
+</ul>
+
+<h3>用意する材料+調味料</h3>
+<ul>
+  <% @recipe.ingredients.each do |ingredient| %>
+    <li><%= ingredient.name %></li>
+  <% end %>
+</ul>

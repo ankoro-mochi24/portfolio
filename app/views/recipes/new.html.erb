@@ -1,0 +1,56 @@
+<%= form_with(model: @recipe, local: true) do |form| %>
+  <% if @recipe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title, "レシピ名" %>
+    <%= form.text_field :title, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dish_image, "完成写真" %>
+    <%= form.file_field :dish_image, required: true %>
+  </div>
+
+  <h3>調理工程</h3>
+  <%= form.fields_for :recipe_steps do |step_form| %>
+    <div class="field">
+      <%= step_form.label :text, "工程" %>
+      <%= step_form.text_area :text %>
+    </div>
+
+    <div class="field">
+      <%= step_form.label :step_image, "工程写真" %>
+      <%= step_form.file_field :step_image %>
+    </div>
+  <% end %>
+
+  <h3>必要な調理器具</h3>
+  <%= form.fields_for :recipe_kitchen_tools do |tool_form| %>
+    <div class="field">
+      <%= tool_form.label :kitchen_tool_id, "調理器具" %>
+      <%= tool_form.collection_select :kitchen_tool_id, @kitchen_tools, :id, :name, prompt: true %>
+    </div>
+  <% end %>
+
+  <h3>用意する材料+調味料</h3>
+  <%= form.fields_for :recipe_ingredients do |ingredient_form| %>
+    <div class="field">
+      <%= ingredient_form.label :ingredient_id, "材料" %>
+      <%= ingredient_form.collection_select :ingredient_id, @ingredients, :id, :name, prompt: true %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit "投稿する" %>
+  </div>
+<% end %>

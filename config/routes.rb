@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :recipes
   resources :foodstuffs
   devise_for :users
   root to: 'home#top'
