@@ -13,7 +13,7 @@
     <% @recipes.each do |recipe| %>
       <tr>
         <td><%= recipe.title %></td>
-        <td><%= image_tag(recipe.dish_image, size: "100x100") if recipe.dish_image.present? %></td>
+        <td><%= image_tag(recipe.dish_image.url, size: "100x100") if recipe.dish_image.present? %></td>
         <td><%= link_to '詳細', recipe_path(recipe) %></td>
       </tr>
     <% end %>

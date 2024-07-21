@@ -5,7 +5,7 @@
 
 <p>
   <strong>完成写真:</strong>
-  <%= image_tag @recipe.dish_image %>
+  <%= image_tag @recipe.dish_image.url if @recipe.dish_image.present? %>
 </p>
 
 <h3>調理工程</h3>
@@ -16,7 +16,7 @@
   </p>
   <% if step.step_image.present? %>
     <p>
-      <%= image_tag step.step_image %>
+      <%= image_tag step.step_image.url %>
     </p>
   <% end %>
 <% end %>
@@ -34,3 +34,5 @@
     <li><%= ingredient.name %></li>
   <% end %>
 </ul>
+
+<%= link_to 'レシピを編集する', edit_recipe_path(@recipe) %>
