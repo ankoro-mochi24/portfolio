@@ -35,12 +35,27 @@
   <% end %>
 
   <h3>必要な調理器具</h3>
-  <%= form.fields_for :recipe_kitchen_tools do |tool_form| %>
-    <div class="field">
-      <%= tool_form.label :kitchen_tool_name, "調理器具" %>
-      <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name %>
+  <div data-controller="kitchen-tools">
+    <div data-kitchen-tools-target="container">
+      <%= form.fields_for :recipe_kitchen_tools do |tool_form| %>
+        <div class="nested-fields">
+          <%= tool_form.label :kitchen_tool_name, "調理器具" %>
+          <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name %>
+          <a href="#" data-action="click->kitchen-tools#removeField">-</a>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+    <a href="#" data-action="click->kitchen-tools#addField">+</a>
+    <template data-kitchen-tools-target="template">
+      <div class="nested-fields">
+        <%= form.fields_for :recipe_kitchen_tools, RecipeKitchenTool.new, child_index: "TEMPLATE_RECORD" do |tool_form| %>
+          <%= tool_form.label :kitchen_tool_name, "調理器具" %>
+          <%= tool_form.text_field :kitchen_tool_name %>
+          <a href="#" data-action="click->kitchen-tools#removeField">-</a>
+        <% end %>
+      </div>
+    </template>
+  </div>
 
   <h3>用意する材料+調味料</h3>
   <%= form.fields_for :recipe_ingredients do |ingredient_form| %>
@@ -51,6 +66,6 @@
   <% end %>
 
   <div class="actions">
-    <%= form.submit "保存" %>
+    <%= form.submit recipe.new_record? ? "投稿する" : "保存" %>
   </div>
 <% end %>
