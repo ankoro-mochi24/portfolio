@@ -21,10 +21,17 @@ class Recipe < ApplicationRecord
 
   attr_accessor :remove_dish_image
   before_save :check_remove_dish_image
+  after_initialize :ensure_rice_present
 
   private
 
   def check_remove_dish_image
     self.dish_image = nil if remove_dish_image == 'true'
+  end
+
+  def ensure_rice_present
+    if self.new_record? && self.recipe_ingredients.none? { |ri| ri.ingredient_name == '白米' }
+      self.recipe_ingredients.build(ingredient_name: '白米')
+    end
   end
 end

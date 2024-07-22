@@ -13,7 +13,9 @@ export default class extends Controller {
   removeField(event) {
     event.preventDefault()
     const field = event.target.closest(".nested-fields")
-    if (this.containerTarget.childElementCount > 1) {
+    const ingredientName = field.querySelector("input[name*='ingredient_name']").value
+
+    if (this.containerTarget.childElementCount > 1 && ingredientName !== '白米') {
       if (field.dataset.newRecord == "true") {
         field.remove()
       } else {

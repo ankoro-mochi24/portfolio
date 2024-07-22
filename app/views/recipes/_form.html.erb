@@ -43,7 +43,9 @@
           <% end %>
           <%= step_form.file_field :step_image %>
           <%= step_form.hidden_field :remove_step_image, value: false %>
-          <a href="#" data-action="click->recipe-steps#removeField">削除</a>
+          <% if step_form.index > 0 %>
+            <a href="#" data-action="click->recipe-steps#removeField">削除</a>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -71,7 +73,9 @@
           <%= tool_form.hidden_field :kitchen_tool_id %>
           <%= tool_form.label :kitchen_tool_name, "調理器具" %>
           <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name %>
-          <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
+          <% if tool_form.index > 0 %>
+            <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
+          <% end %>
         </div>
       <% end %>
     </div>
@@ -98,7 +102,9 @@
           <%= ingredient_form.hidden_field :ingredient_id %>
           <%= ingredient_form.label :ingredient_name, "材料" %>
           <%= ingredient_form.text_field :ingredient_name, value: ingredient_form.object.ingredient_name %>
-          <a href="#" data-action="click->recipe-ingredients#removeField">削除</a>
+          <% unless ingredient_form.object.ingredient_name == "白米" %>
+            <a href="#" data-action="click->recipe-ingredients#removeField">削除</a>
+          <% end %>
         </div>
       <% end %>
     </div>

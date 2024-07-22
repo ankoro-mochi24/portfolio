@@ -16744,3 +16744,256 @@ Processing by RecipesController#edit as HTML
 Completed 200 OK in 160ms (Views: 114.7ms | ActiveRecord: 4.4ms | Allocations: 28014)
 
 
+Started GET "/recipes/2" for 192.168.16.1 at 2024-07-22 17:28:39 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes` WHERE `recipes`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:70:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  [1m[36mRecipeStep Load (0.3ms)[0m  [1m[34mSELECT `recipe_steps`.* FROM `recipe_steps` WHERE `recipe_steps`.`recipe_id` = 2[0m
+  ↳ app/views/recipes/show.html.erb:16
+  [1m[36mKitchenTool Load (0.3ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` INNER JOIN `recipe_kitchen_tools` ON `kitchen_tools`.`id` = `recipe_kitchen_tools`.`kitchen_tool_id` WHERE `recipe_kitchen_tools`.`recipe_id` = 2[0m
+  ↳ app/views/recipes/show.html.erb:34
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` INNER JOIN `recipe_ingredients` ON `ingredients`.`id` = `recipe_ingredients`.`ingredient_id` WHERE `recipe_ingredients`.`recipe_id` = 2[0m
+  ↳ app/views/recipes/show.html.erb:43
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/recipes/show.html.erb:51
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/recipes/show.html.erb:51
+  Rendered recipes/show.html.erb within layouts/application (Duration: 185.3ms | Allocations: 37084)
+  Rendered layouts/_header.html.erb (Duration: 49.5ms | Allocations: 2307)
+  Rendered layouts/_footer.html.erb (Duration: 3.5ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 2314.5ms | Allocations: 96362)
+Completed 200 OK in 2425ms (Views: 2323.4ms | ActiveRecord: 9.0ms | Allocations: 111551)
+
+
+Started GET "/recipes/2/edit" for 192.168.16.1 at 2024-07-22 17:28:46 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#edit as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes` WHERE `recipes`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:70:in `set_recipe'
+  [1m[36mRecipeIngredient Load (0.3ms)[0m  [1m[34mSELECT `recipe_ingredients`.* FROM `recipe_ingredients` WHERE `recipe_ingredients`.`recipe_id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:31:in `edit'
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` WHERE `ingredients`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:32:in `block in edit'
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` WHERE `ingredients`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:32:in `block in edit'
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` WHERE `ingredients`.`id` = 5 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:32:in `block in edit'
+  [1m[36mRecipeKitchenTool Load (0.2ms)[0m  [1m[34mSELECT `recipe_kitchen_tools`.* FROM `recipe_kitchen_tools` WHERE `recipe_kitchen_tools`.`recipe_id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:34:in `edit'
+  [1m[36mKitchenTool Load (0.2ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` WHERE `kitchen_tools`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:35:in `block in edit'
+  [1m[36mKitchenTool Load (0.2ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` WHERE `kitchen_tools`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:35:in `block in edit'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/edit.html.erb within layouts/application
+  [1m[36mRecipeStep Load (0.4ms)[0m  [1m[34mSELECT `recipe_steps`.* FROM `recipe_steps` WHERE `recipe_steps`.`recipe_id` = 2[0m
+  ↳ app/views/recipes/_form.html.erb:32
+  Rendered recipes/_form.html.erb (Duration: 39.6ms | Allocations: 10086)
+  Rendered recipes/edit.html.erb within layouts/application (Duration: 45.4ms | Allocations: 10392)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.7ms | Allocations: 1341)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 67.0ms | Allocations: 13283)
+Completed 200 OK in 102ms (Views: 67.1ms | ActiveRecord: 3.4ms | Allocations: 26365)
+
+
+Started DELETE "/recipes/2" for 192.168.16.1 at 2024-07-22 17:28:56 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"2"}
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes` WHERE `recipes`.`id` = 2 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:70:in `set_recipe'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeIngredient Load (0.3ms)[0m  [1m[34mSELECT `recipe_ingredients`.* FROM `recipe_ingredients` WHERE `recipe_ingredients`.`recipe_id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeIngredient Destroy (0.3ms)[0m  [1m[31mDELETE FROM `recipe_ingredients` WHERE `recipe_ingredients`.`id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM `recipe_ingredients` WHERE `recipe_ingredients`.`id` = 3[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM `recipe_ingredients` WHERE `recipe_ingredients`.`id` = 4[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeStep Load (0.4ms)[0m  [1m[34mSELECT `recipe_steps`.* FROM `recipe_steps` WHERE `recipe_steps`.`recipe_id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeStep Destroy (0.3ms)[0m  [1m[31mDELETE FROM `recipe_steps` WHERE `recipe_steps`.`id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeStep Destroy (0.3ms)[0m  [1m[31mDELETE FROM `recipe_steps` WHERE `recipe_steps`.`id` = 3[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeKitchenTool Load (0.3ms)[0m  [1m[34mSELECT `recipe_kitchen_tools`.* FROM `recipe_kitchen_tools` WHERE `recipe_kitchen_tools`.`recipe_id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeKitchenTool Destroy (0.2ms)[0m  [1m[31mDELETE FROM `recipe_kitchen_tools` WHERE `recipe_kitchen_tools`.`id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipeKitchenTool Destroy (0.2ms)[0m  [1m[31mDELETE FROM `recipe_kitchen_tools` WHERE `recipe_kitchen_tools`.`id` = 3[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mRecipe Destroy (0.3ms)[0m  [1m[31mDELETE FROM `recipes` WHERE `recipes`.`id` = 2[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/recipes_controller.rb:63:in `destroy'
+Redirected to http://localhost:3000/recipes
+Completed 302 Found in 72ms (ActiveRecord: 6.9ms | Allocations: 11441)
+
+
+Started GET "/recipes" for 192.168.16.1 at 2024-07-22 17:28:57 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes`[0m
+  ↳ app/views/recipes/index.html.erb:14
+  Rendered recipes/index.html.erb within layouts/application (Duration: 6.4ms | Allocations: 913)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.8ms | Allocations: 1342)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 29.8ms | Allocations: 4010)
+Completed 200 OK in 46ms (Views: 29.9ms | ActiveRecord: 0.7ms | Allocations: 4353)
+
+
+Started GET "/recipes/new" for 192.168.16.1 at 2024-07-22 17:28:58 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/new.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 3.6ms | Allocations: 3482)
+  Rendered recipes/new.html.erb within layouts/application (Duration: 7.4ms | Allocations: 3711)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.8ms | Allocations: 1345)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 32.2ms | Allocations: 6623)
+Completed 200 OK in 52ms (Views: 32.5ms | ActiveRecord: 0.4ms | Allocations: 7852)
+
+
+Started POST "/recipes" for 192.168.16.1 at 2024-07-22 17:29:25 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "recipe"=>{"title"=>"１", "dish_image"=>#<ActionDispatch::Http::UploadedFile:0x00007f4870f182a8 @tempfile=#<Tempfile:/tmp/RackMultipart20240722-1-hah3v8.jpg>, @content_type="image/jpeg", @original_filename="rice-cooker-step7.jpg", @headers="Content-Disposition: form-data; name=\"recipe[dish_image]\"; filename=\"rice-cooker-step7.jpg\"\r\nContent-Type: image/jpeg\r\n">, "remove_dish_image"=>"false", "recipe_steps_attributes"=>{"0"=>{"_destroy"=>"false", "text"=>"２", "step_image"=>#<ActionDispatch::Http::UploadedFile:0x00007f4870f18208 @tempfile=#<Tempfile:/tmp/RackMultipart20240722-1-ef80jd.jpg>, @content_type="image/jpeg", @original_filename="microwave-step1.jpg", @headers="Content-Disposition: form-data; name=\"recipe[recipe_steps_attributes][0][step_image]\"; filename=\"microwave-step1.jpg\"\r\nContent-Type: image/jpeg\r\n">, "remove_step_image"=>"false"}}, "recipe_kitchen_tools_attributes"=>{"0"=>{"_destroy"=>"false", "kitchen_tool_id"=>"", "kitchen_tool_name"=>"炊飯器"}, "1721636951204"=>{"_destroy"=>"false", "kitchen_tool_id"=>"", "kitchen_tool_name"=>"ケトル"}}, "recipe_ingredients_attributes"=>{"0"=>{"_destroy"=>"false", "ingredient_id"=>"", "ingredient_name"=>"白米"}}}, "commit"=>"投稿"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:17:in `create'
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` WHERE `ingredients`.`name` = '白米' LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:91:in `block in save_ingredients'
+  [1m[36mKitchenTool Load (0.3ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` WHERE `kitchen_tools`.`name` = '炊飯器' LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:100:in `block in save_kitchen_tools'
+  [1m[36mKitchenTool Load (0.2ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` WHERE `kitchen_tools`.`name` = 'ケトル' LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:100:in `block in save_kitchen_tools'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/recipes_controller.rb:19:in `create'
+  [1m[36mRecipe Create (0.3ms)[0m  [1m[32mINSERT INTO `recipes` (`title`, `dish_image`, `user_id`, `created_at`, `updated_at`) VALUES ('１', '4ff314da-0adc-47a6-a0cf-7e0242692f0d.jpg', 2, '2024-07-22 08:29:25.834765', '2024-07-22 08:29:25.834765')[0m
+  ↳ app/controllers/recipes_controller.rb:19:in `create'
+  [1m[36mRecipeIngredient Create (5.6ms)[0m  [1m[32mINSERT INTO `recipe_ingredients` (`recipe_id`, `ingredient_id`, `created_at`, `updated_at`) VALUES (3, 1, '2024-07-22 08:29:25.838686', '2024-07-22 08:29:25.838686')[0m
+  ↳ app/controllers/recipes_controller.rb:19:in `create'
+  [1m[36mRecipeStep Create (3.3ms)[0m  [1m[32mINSERT INTO `recipe_steps` (`recipe_id`, `text`, `step_image`, `created_at`, `updated_at`) VALUES (3, '２', '93640142-eb9f-404d-93ca-011693a4b2b3.jpg', '2024-07-22 08:29:25.846462', '2024-07-22 08:29:25.846462')[0m
+  ↳ app/controllers/recipes_controller.rb:19:in `create'
+  [1m[36mRecipeKitchenTool Create (0.4ms)[0m  [1m[32mINSERT INTO `recipe_kitchen_tools` (`recipe_id`, `kitchen_tool_id`, `created_at`, `updated_at`) VALUES (3, 1, '2024-07-22 08:29:25.882174', '2024-07-22 08:29:25.882174')[0m
+  ↳ app/controllers/recipes_controller.rb:19:in `create'
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO `recipe_kitchen_tools` (`recipe_id`, `kitchen_tool_id`, `created_at`, `updated_at`) VALUES (3, 5, '2024-07-22 08:29:25.884449', '2024-07-22 08:29:25.884449')[0m
+  ↳ app/controllers/recipes_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/recipes_controller.rb:19:in `create'
+Redirected to http://localhost:3000/recipes/3
+Completed 302 Found in 239ms (ActiveRecord: 15.1ms | Allocations: 15363)
+
+
+Started GET "/recipes/3" for 192.168.16.1 at 2024-07-22 17:29:26 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes` WHERE `recipes`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:70:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  [1m[36mRecipeStep Load (0.3ms)[0m  [1m[34mSELECT `recipe_steps`.* FROM `recipe_steps` WHERE `recipe_steps`.`recipe_id` = 3[0m
+  ↳ app/views/recipes/show.html.erb:16
+  [1m[36mKitchenTool Load (0.4ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` INNER JOIN `recipe_kitchen_tools` ON `kitchen_tools`.`id` = `recipe_kitchen_tools`.`kitchen_tool_id` WHERE `recipe_kitchen_tools`.`recipe_id` = 3[0m
+  ↳ app/views/recipes/show.html.erb:34
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` INNER JOIN `recipe_ingredients` ON `ingredients`.`id` = `recipe_ingredients`.`ingredient_id` WHERE `recipe_ingredients`.`recipe_id` = 3[0m
+  ↳ app/views/recipes/show.html.erb:43
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/recipes/show.html.erb:51
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/recipes/show.html.erb:51
+  Rendered recipes/show.html.erb within layouts/application (Duration: 23.9ms | Allocations: 4810)
+  Rendered layouts/_header.html.erb (Duration: 0.8ms | Allocations: 537)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 46.6ms | Allocations: 6911)
+Completed 200 OK in 61ms (Views: 45.8ms | ActiveRecord: 1.8ms | Allocations: 7680)
+
+
+Started GET "/recipes/3" for 192.168.16.1 at 2024-07-22 17:46:35 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes` WHERE `recipes`.`id` = 3 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:70:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  [1m[36mRecipeStep Load (0.4ms)[0m  [1m[34mSELECT `recipe_steps`.* FROM `recipe_steps` WHERE `recipe_steps`.`recipe_id` = 3[0m
+  ↳ app/views/recipes/show.html.erb:16
+  [1m[36mKitchenTool Load (0.5ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` INNER JOIN `recipe_kitchen_tools` ON `kitchen_tools`.`id` = `recipe_kitchen_tools`.`kitchen_tool_id` WHERE `recipe_kitchen_tools`.`recipe_id` = 3[0m
+  ↳ app/views/recipes/show.html.erb:34
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` INNER JOIN `recipe_ingredients` ON `ingredients`.`id` = `recipe_ingredients`.`ingredient_id` WHERE `recipe_ingredients`.`recipe_id` = 3[0m
+  ↳ app/views/recipes/show.html.erb:43
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/recipes/show.html.erb:51
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/recipes/show.html.erb:51
+  Rendered recipes/show.html.erb within layouts/application (Duration: 205.3ms | Allocations: 36919)
+  Rendered layouts/_header.html.erb (Duration: 46.4ms | Allocations: 2307)
+  Rendered layouts/_footer.html.erb (Duration: 3.3ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 2216.9ms | Allocations: 95605)
+Completed 200 OK in 2337ms (Views: 2220.8ms | ActiveRecord: 12.9ms | Allocations: 110967)
+
+
+Started GET "/recipes/new" for 192.168.16.1 at 2024-07-22 17:46:39 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/new.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 118.7ms | Allocations: 6715)
+  Rendered recipes/new.html.erb within layouts/application (Duration: 125.2ms | Allocations: 7010)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 13.7ms | Allocations: 1342)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 161.7ms | Allocations: 9909)
+Completed 200 OK in 190ms (Views: 162.0ms | ActiveRecord: 1.3ms | Allocations: 16232)
+
+
+Started GET "/recipes/new" for 192.168.16.1 at 2024-07-22 17:46:56 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/new.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 3.5ms | Allocations: 3875)
+  Rendered recipes/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 3968)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.7ms | Allocations: 1345)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 28.6ms | Allocations: 6877)
+Completed 200 OK in 46ms (Views: 29.4ms | ActiveRecord: 0.4ms | Allocations: 7904)
+
+
+Started GET "/recipes/new" for 192.168.16.1 at 2024-07-22 17:47:01 +0900
+Cannot render console from 192.168.16.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/new.html.erb within layouts/application
+  Rendered recipes/_form.html.erb (Duration: 4.2ms | Allocations: 3869)
+  Rendered recipes/new.html.erb within layouts/application (Duration: 4.8ms | Allocations: 3962)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 2.8ms | Allocations: 1345)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 36.8ms | Allocations: 6864)
+Completed 200 OK in 58ms (Views: 37.2ms | ActiveRecord: 0.4ms | Allocations: 7886)
+
+
