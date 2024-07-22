@@ -1,38 +1,55 @@
-<p>
-  <strong>レシピ名:</strong>
-  <%= @recipe.title %>
-</p>
-
-<p>
-  <strong>完成写真:</strong>
-  <%= image_tag @recipe.dish_image.url if @recipe.dish_image.present? %>
-</p>
-
-<h3>調理工程</h3>
-<% @recipe.recipe_steps.each do |step| %>
-  <p>
-    <strong>工程:</strong>
-    <%= step.text %>
-  </p>
-  <% if step.step_image.present? %>
+<div class="recipe-show">
+  <div class="recipe-header">
     <p>
-      <%= image_tag step.step_image.url %>
+      <strong>レシピ名:</strong>
+      <%= @recipe.title %>
     </p>
-  <% end %>
-<% end %>
 
-<h3>必要な調理器具</h3>
-<ul>
-  <% @recipe.kitchen_tools.each do |tool| %>
-    <li><%= tool.name %></li>
-  <% end %>
-</ul>
+    <p>
+      <strong>完成写真:</strong>
+      <%= image_tag @recipe.dish_image.url, size: "100x100" if @recipe.dish_image.present? %>
+    </p>
+  </div>
 
-<h3>用意する材料+調味料</h3>
-<ul>
-  <% @recipe.ingredients.each do |ingredient| %>
-    <li><%= ingredient.name %></li>
-  <% end %>
-</ul>
+  <div class="recipe-section">
+    <h3>調理工程</h3>
+    <% @recipe.recipe_steps.each do |step| %>
+      <div class="recipe-step">
+        <p>
+          <strong>工程:</strong>
+          <%= step.text %>
+        </p>
+        <% if step.step_image.present? %>
+          <p>
+            <%= image_tag step.step_image.url, size: "100x100" %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
-<%= link_to 'レシピを編集する', edit_recipe_path(@recipe) %>
+  <div class="recipe-section">
+    <h3>必要な調理器具</h3>
+    <ul>
+      <% @recipe.kitchen_tools.each do |tool| %>
+        <li><%= tool.name %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="recipe-section">
+    <h3>用意する材料+調味料</h3>
+    <ul>
+      <% @recipe.ingredients.each do |ingredient| %>
+        <li><%= ingredient.name %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="recipe-actions">
+    <%= link_to 'レシピを編集する', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+    <% if @recipe.user == current_user %>
+      <%= button_to 'レシピを削除する', recipe_path(@recipe), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+</div>

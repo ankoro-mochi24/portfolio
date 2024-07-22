@@ -59,7 +59,6 @@ class RecipesController < ApplicationController
     end
   end
   
-
   def destroy
     @recipe.destroy
     redirect_to recipes_url, notice: 'レシピが削除されました。'

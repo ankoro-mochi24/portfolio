@@ -6,6 +6,7 @@
       <th>レシピ名</th>
       <th>完成写真</th>
       <th>詳細</th>
+      <th>操作</th>
     </tr>
   </thead>
 
@@ -13,8 +14,11 @@
     <% @recipes.each do |recipe| %>
       <tr>
         <td><%= recipe.title %></td>
-        <td><%= image_tag(recipe.dish_image.url, size: "100x100") if recipe.dish_image.present? %></td>
+        <td><%= image_tag recipe.dish_image.url, size: "100x100" if recipe.dish_image.present? %></td>
         <td><%= link_to '詳細', recipe_path(recipe) %></td>
+        <% if recipe.user == current_user %>
+          <td><%= button_to '削除', recipe_path(recipe), method: :delete, form: { data: { turbo_confirm: '本当に削除しますか？' } } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
