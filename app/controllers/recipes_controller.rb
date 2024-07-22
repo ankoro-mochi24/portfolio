@@ -37,12 +37,15 @@ class RecipesController < ApplicationController
   end
 
   def update
-    if save_ingredients_and_kitchen_tools(@recipe) && @recipe.update(recipe_params)
+    @recipe.assign_attributes(recipe_params) # 先にパラメータを割り当てる
+  
+    if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save # ここでsaveを呼び出す
       redirect_to @recipe, notice: 'レシピが更新されました。'
     else
       render :edit
     end
   end
+  
 
   def destroy
     @recipe.destroy

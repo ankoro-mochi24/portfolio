@@ -12,8 +12,14 @@ export default class extends Controller {
 
   removeField(event) {
     event.preventDefault()
+    const field = event.target.closest(".nested-fields")
     if (this.containerTarget.childElementCount > 1) {
-      event.target.closest(".nested-fields").remove()
+      if (field.dataset.newRecord == "true") {
+        field.remove()
+      } else {
+        field.querySelector("input[name*='_destroy']").value = 1
+        field.style.display = "none"
+      }
     }
   }
 }
