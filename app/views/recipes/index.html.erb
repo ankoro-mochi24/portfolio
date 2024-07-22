@@ -1,0 +1,28 @@
+<h1>レシピ一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>レシピ名</th>
+      <th>完成写真</th>
+      <th>詳細</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.title %></td>
+        <td><%= image_tag recipe.dish_image.url, size: "100x100" if recipe.dish_image.present? %></td>
+        <td><%= link_to '詳細', recipe_path(recipe) %></td>
+        <% if recipe.user == current_user %>
+          <td><%= button_to '削除', recipe_path(recipe), method: :delete, form: { data: { turbo_confirm: '本当に削除しますか？' } } %></td>
+          <!--[turbo_confirm: '本当に削除しますか？]が反応していないので修正用-->
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新しいレシピを投稿する', new_recipe_path %>
