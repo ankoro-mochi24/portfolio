@@ -21,17 +21,33 @@
   </div>
 
   <h3>調理工程</h3>
-  <%= form.fields_for :recipe_steps do |step_form| %>
-    <div class="field">
-      <%= step_form.label :text, "工程" %>
-      <%= step_form.text_area :text %>
+  <div data-controller="recipe-steps">
+    <div data-recipe-steps-target="container">
+      <%= form.fields_for :recipe_steps do |step_form| %>
+        <div class="nested-fields" data-new-record="false">
+          <%= step_form.hidden_field :_destroy %>
+          <%= step_form.label :text, "工程" %>
+          <%= step_form.text_area :text %>
+          <%= step_form.label :step_image, "工程写真" %>
+          <%= step_form.file_field :step_image %>
+          <a href="#" data-action="click->recipe-steps#removeField">削除</a>
+        </div>
+      <% end %>
     </div>
-
-    <div class="field">
-      <%= step_form.label :step_image, "工程写真" %>
-      <%= step_form.file_field :step_image %>
-    </div>
-  <% end %>
+    <a href="#" data-action="click->recipe-steps#addField">追加</a>
+    <template data-recipe-steps-target="template">
+      <div class="nested-fields" data-new-record="true">
+        <%= form.fields_for :recipe_steps, RecipeStep.new, child_index: "TEMPLATE_RECORD" do |step_form| %>
+          <%= step_form.hidden_field :_destroy %>
+          <%= step_form.label :text, "工程" %>
+          <%= step_form.text_area :text %>
+          <%= step_form.label :step_image, "工程写真" %>
+          <%= step_form.file_field :step_image %>
+          <a href="#" data-action="click->recipe-steps#removeField">削除</a>
+        <% end %>
+      </div>
+    </template>
+  </div>
 
   <h3>必要な調理器具</h3>
   <div data-controller="kitchen-tools">
