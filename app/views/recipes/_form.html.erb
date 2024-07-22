@@ -17,7 +17,13 @@
 
   <div class="field">
     <%= form.label :dish_image, "完成写真" %>
-    <%= form.file_field :dish_image, required: true %>
+    <% if recipe.dish_image.present? %>
+      <div>
+        <%= image_tag recipe.dish_image.url, alt: "Dish Image", style: "max-width: 300px; max-height: 300px;" %>
+      </div>
+    <% end %>
+    <%= form.file_field :dish_image %>
+    <%= form.hidden_field :remove_dish_image, value: false %>
   </div>
 
   <h3>調理工程</h3>
@@ -28,8 +34,15 @@
           <%= step_form.hidden_field :_destroy %>
           <%= step_form.label :text, "工程" %>
           <%= step_form.text_area :text %>
+
           <%= step_form.label :step_image, "工程写真" %>
+          <% if step_form.object.step_image.present? %>
+            <div>
+              <%= image_tag step_form.object.step_image.url, alt: "Step Image", style: "max-width: 300px; max-height: 300px;" %>
+            </div>
+          <% end %>
           <%= step_form.file_field :step_image %>
+          <%= step_form.hidden_field :remove_step_image, value: false %>
           <a href="#" data-action="click->recipe-steps#removeField">削除</a>
         </div>
       <% end %>

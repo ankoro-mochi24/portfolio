@@ -37,9 +37,22 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe.assign_attributes(recipe_params) # 先にパラメータを割り当てる
+    @recipe.assign_attributes(recipe_params)
   
-    if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save # ここでsaveを呼び出す
+    # 削除されたステップやツールを削除する処理を追加
+    @recipe.recipe_steps.each do |step|
+      step.mark_for_destruction if step._destroy == "1"
+    end
+  
+    @recipe.recipe_kitchen_tools.each do |tool|
+      tool.mark_for_destruction if tool._destroy == "1"
+    end
+  
+    @recipe.recipe_ingredients.each do |ingredient|
+      ingredient.mark_for_destruction if ingredient._destroy == "1"
+    end
+    
+    if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save
       redirect_to @recipe, notice: 'レシピが更新されました。'
     else
       render :edit
@@ -62,7 +75,8 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(
       :title,
       :dish_image,
-      recipe_steps_attributes: [:id, :text, :step_image, :_destroy],
+      :remove_dish_image,
+      recipe_steps_attributes: [:id, :text, :step_image, :remove_step_image, :_destroy],
       recipe_ingredients_attributes: [:id, :ingredient_id, :_destroy, :ingredient_name],
       recipe_kitchen_tools_attributes: [:id, :kitchen_tool_id, :_destroy, :kitchen_tool_name]
     )

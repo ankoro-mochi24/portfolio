@@ -18,4 +18,13 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :recipe_kitchen_tools, allow_destroy: true
 
   validates :title, presence: true
+
+  attr_accessor :remove_dish_image
+  before_save :check_remove_dish_image
+
+  private
+
+  def check_remove_dish_image
+    self.dish_image = nil if remove_dish_image == 'true'
+  end
 end
