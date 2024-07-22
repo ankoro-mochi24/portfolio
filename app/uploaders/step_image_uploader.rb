@@ -11,7 +11,7 @@ class StepImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  #ファイルサイズ制限による不正アップロードの防止
+  # ファイルサイズ制限による不正アップロードの防止
   def size_range
     1..5.megabytes
   end
@@ -24,7 +24,7 @@ class StepImageUploader < CarrierWave::Uploader::Base
   # ファイルの衝突回避
   # 一意のファイル名を生成する
   def filename
-    "#{secure_token}.#{file.extension}"
+    "#{secure_token}.#{file.extension}" if original_filename.present?
   end
 
   # ファイルが空のディレクトリを自動削除
@@ -40,5 +40,9 @@ class StepImageUploader < CarrierWave::Uploader::Base
   # 一意のトークンを生成するメソッド
   def secure_token
     model.instance_variable_get("@#{mounted_as}_secure_token") || model.instance_variable_set("@#{mounted_as}_secure_token", SecureRandom.uuid)
+  end
+
+  def cache_stored_file!
+    super if !cached?
   end
 end

@@ -1,4 +1,4 @@
-<%= form_with(model: recipe, local: true) do |form| %>
+<%= form_with(model: recipe, local: true, html: { multipart: true }) do |form| %>
   <% if recipe.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
@@ -20,6 +20,7 @@
     <% if recipe.dish_image.present? %>
       <div>
         <%= image_tag recipe.dish_image.url, alt: "Dish Image", style: "max-width: 300px; max-height: 300px;" %>
+        <%= form.hidden_field :dish_image_cache, value: recipe.dish_image_cache %>
       </div>
     <% end %>
     <%= form.file_field :dish_image %>
@@ -34,11 +35,11 @@
           <%= step_form.hidden_field :_destroy %>
           <%= step_form.label :text, "工程" %>
           <%= step_form.text_area :text %>
-
           <%= step_form.label :step_image, "工程写真" %>
           <% if step_form.object.step_image.present? %>
             <div>
               <%= image_tag step_form.object.step_image.url, alt: "Step Image", style: "max-width: 300px; max-height: 300px;" %>
+              <%= step_form.hidden_field :step_image_cache, value: step_form.object.step_image_cache %>
             </div>
           <% end %>
           <%= step_form.file_field :step_image %>
@@ -77,6 +78,16 @@
             <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
           <% end %>
         </div>
+      <% end %>
+      <% if recipe.recipe_kitchen_tools.empty? %>
+        <%= form.fields_for :recipe_kitchen_tools, RecipeKitchenTool.new do |tool_form| %>
+          <div class="nested-fields" data-new-record="true">
+            <%= tool_form.hidden_field :_destroy %>
+            <%= tool_form.hidden_field :kitchen_tool_id %>
+            <%= tool_form.label :kitchen_tool_name, "調理器具" %>
+            <%= tool_form.text_field :kitchen_tool_name %>
+          </div>
+        <% end %>
       <% end %>
     </div>
     <a href="#" data-action="click->kitchen-tools#addField">追加</a>
