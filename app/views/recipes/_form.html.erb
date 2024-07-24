@@ -23,7 +23,7 @@
         <%= form.hidden_field :dish_image_cache, value: recipe.dish_image_cache %>
       </div>
     <% end %>
-    <%= form.file_field :dish_image %>
+    <%= form.file_field :dish_image, required: true %>
     <%= form.hidden_field :remove_dish_image, value: false %>
   </div>
 
@@ -34,7 +34,7 @@
         <div class="nested-fields" data-new-record="false">
           <%= step_form.hidden_field :_destroy %>
           <%= step_form.label :text, "工程" %>
-          <%= step_form.text_area :text %>
+          <%= step_form.text_area :text, required: true %>
           <%= step_form.label :step_image, "工程写真" %>
           <% if step_form.object.step_image.present? %>
             <div>
@@ -42,7 +42,7 @@
               <%= step_form.hidden_field :step_image_cache, value: step_form.object.step_image_cache %>
             </div>
           <% end %>
-          <%= step_form.file_field :step_image %>
+          <%= step_form.file_field :step_image, required: true %>
           <%= step_form.hidden_field :remove_step_image, value: false %>
           <% if step_form.index > 0 %>
             <a href="#" data-action="click->recipe-steps#removeField">削除</a>
@@ -56,9 +56,9 @@
         <%= form.fields_for :recipe_steps, RecipeStep.new, child_index: "TEMPLATE_RECORD" do |step_form| %>
           <%= step_form.hidden_field :_destroy %>
           <%= step_form.label :text, "工程" %>
-          <%= step_form.text_area :text %>
+          <%= step_form.text_area :text, required: true %>
           <%= step_form.label :step_image, "工程写真" %>
-          <%= step_form.file_field :step_image %>
+          <%= step_form.file_field :step_image, required: true %>
           <a href="#" data-action="click->recipe-steps#removeField">削除</a>
         <% end %>
       </div>
@@ -73,7 +73,7 @@
           <%= tool_form.hidden_field :_destroy %>
           <%= tool_form.hidden_field :kitchen_tool_id %>
           <%= tool_form.label :kitchen_tool_name, "調理器具" %>
-          <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name %>
+          <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name, required: true %>
           <% if tool_form.index > 0 %>
             <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
           <% end %>
@@ -85,7 +85,7 @@
             <%= tool_form.hidden_field :_destroy %>
             <%= tool_form.hidden_field :kitchen_tool_id %>
             <%= tool_form.label :kitchen_tool_name, "調理器具" %>
-            <%= tool_form.text_field :kitchen_tool_name %>
+            <%= tool_form.text_field :kitchen_tool_name, required: true %>
           </div>
         <% end %>
       <% end %>
@@ -97,7 +97,7 @@
           <%= tool_form.hidden_field :_destroy %>
           <%= tool_form.hidden_field :kitchen_tool_id %>
           <%= tool_form.label :kitchen_tool_name, "調理器具" %>
-          <%= tool_form.text_field :kitchen_tool_name %>
+          <%= tool_form.text_field :kitchen_tool_name, required: true %>
           <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
         <% end %>
       </div>
