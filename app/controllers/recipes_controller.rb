@@ -1,11 +1,11 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
-  def index
+  def index # /recipes.json用
     @recipes = Recipe.all
 
     respond_to do |format|
-      format.json { render 'recipes/index' } # index.json.jbuilder を使用
+      format.json { render 'recipes/index' }
     end
   end
 
@@ -20,11 +20,15 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
 
-    if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save
-      redirect_to @recipe, notice: 'レシピが投稿されました。'
-    else
-      @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save
+        format.html { redirect_to @recipe, notice: 'レシピが投稿されました。' }
+        format.json { render :show, status: :created, location: @recipe }
+      else
+        @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -56,17 +60,24 @@ class RecipesController < ApplicationController
       ingredient.mark_for_destruction if ingredient._destroy == "1"
     end
 
-    if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save
-      redirect_to @recipe, notice: 'レシピが更新されました。'
-    else
-      @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
-      render :edit, status: :unprocessable_entity
+    respond_to do |format|
+      if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save
+        format.html { redirect_to @recipe, notice: 'レシピが更新されました。' }
+        format.json { render :show, status: :ok, location: @recipe }
+      else
+        @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @recipe.destroy
-    redirect_to recipes_url, notice: 'レシピが削除されました。'
+    respond_to do |format|
+      format.html { redirect_to recipes_url, notice: 'レシピが削除されました。' }
+      format.json { head :no_content }
+    end
   end
 
   private

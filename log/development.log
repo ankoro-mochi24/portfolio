@@ -21640,3 +21640,19 @@ Processing by RecipesController#show as HTML
 Completed 200 OK in 90ms (Views: 72.5ms | ActiveRecord: 2.0ms | Allocations: 8180)
 
 
+Started GET "/foodstuffs/new" for 172.18.0.1 at 2024-07-27 13:20:31 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by FoodstuffsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/new.html.erb within layouts/application
+  Rendered foodstuffs/_form.html.erb (Duration: 2071.3ms | Allocations: 41362)
+  Rendered foodstuffs/new.html.erb within layouts/application (Duration: 2121.1ms | Allocations: 43254)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  ↳ app/views/layouts/_header.html.erb:16
+  Rendered layouts/_header.html.erb (Duration: 20.5ms | Allocations: 8072)
+  Rendered layouts/_footer.html.erb (Duration: 3.2ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 2343.2ms | Allocations: 72038)
+Completed 200 OK in 2439ms (Views: 2354.4ms | ActiveRecord: 5.6ms | Allocations: 84009)
+
+
