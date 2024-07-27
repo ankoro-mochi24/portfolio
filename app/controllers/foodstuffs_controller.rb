@@ -4,6 +4,10 @@ class FoodstuffsController < ApplicationController
   # 食品リストの表示
   def index
     @foodstuffs = Foodstuff.all
+
+    respond_to do |format|
+      format.json { render 'foodstuffs/index' } # index.json.jbuilder を使用
+    end
   end
 
   # 特定の食品の詳細表示

@@ -3,6 +3,10 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+
+    respond_to do |format|
+      format.json { render 'recipes/index' } # index.json.jbuilder を使用
+    end
   end
 
   def new
