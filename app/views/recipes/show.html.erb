@@ -74,9 +74,12 @@
       <% if comment.user.present? %>
         <div class="comment">
           <p>
-            <strong><%= comment.user.email %>:</strong>
+            <strong><%= comment.user.name %>:</strong>
             <%= comment.body %>
           </p>
+          <% if user_signed_in? && comment.user == current_user %>
+            <%= button_to '×', [@recipe, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
