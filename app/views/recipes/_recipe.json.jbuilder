@@ -1,7 +1,7 @@
 json.extract! recipe, :id, :title, :dish_image, :user_id, :created_at, :updated_at
 json.url recipe_url(recipe, format: :json)
 
-# 関連するステップを追加
+# 関連する調理工程を追加
 json.steps recipe.recipe_steps do |step|
   json.extract! step, :id, :text, :step_image, :created_at, :updated_at
 end

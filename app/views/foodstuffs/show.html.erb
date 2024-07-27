@@ -4,7 +4,7 @@
 
 <div>
   <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff) %> |
-  <%= link_to t('foodstuffs.back_to_list'), foodstuffs_path %>
+  <%= link_to t('foodstuffs.back_to_list'), root_path %>
 
   <% if current_user == @foodstuff.user %>
     <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete %>
