@@ -1,7 +1,7 @@
 <div id="<%= dom_id foodstuff %>">
   <p>
     <strong><%= t('activerecord.attributes.foodstuff.name') %>:</strong>
-    <%= foodstuff.name %>
+    <%= link_to foodstuff.name, foodstuff %>
   </p>
 
   <p>
@@ -21,12 +21,9 @@
 
   <p>
     <strong><%= t('activerecord.attributes.foodstuff.image') %>:</strong>
-    <% foodstuff.image.each do |image| %>
-      <%= image_tag(image.url) %>
+    <% if foodstuff.image.present? %>
+      <%= link_to image_tag(foodstuff.image.first.url, size: "250x250"), foodstuff %>
     <% end %>
   </p>
 
-  <p>
-    <%= link_to t('foodstuffs.index.show_foodstuff'), foodstuff %>
-  </p>
 </div>

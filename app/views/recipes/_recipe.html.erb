@@ -1,0 +1,12 @@
+<div id="<%= dom_id recipe %>">
+  <p>
+    <strong><%= t('activerecord.attributes.recipe.title') %>:</strong>
+    <%= link_to recipe.title, recipe %>
+  </p>
+
+  <p>
+    <strong><%= t('activerecord.attributes.recipe.dish_image') %>:</strong>
+    <%= link_to (image_tag(recipe.dish_image.url, size: "250x250") if recipe.dish_image.present?), recipe %>
+  </p>
+
+</div>

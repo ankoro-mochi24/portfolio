@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
   def top
     @foodstuffs = Foodstuff.all
+    @recipes = Recipe.all
   end
 
   def cookrice

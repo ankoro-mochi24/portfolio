@@ -6,8 +6,13 @@
   <div class="row">
     <div class="col-md-6">
       <% content_for :left do %>
-        <h1>左側のコンテンツ</h1>
-        <p>ここに左側のコンテンツを配置します。</p>
+        <h1><%= t('recipes.index.title') %></h1>
+
+        <div id="recipes">
+          <% @recipes.each do |recipe| %>
+            <%= render recipe %>
+          <% end %>
+        </div>
       <% end %>
     </div>
     <div class="col-md-6">
