@@ -47,8 +47,9 @@
   </div>
 
   <div class="recipe-actions">
-    <%= link_to 'レシピを編集する', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+    <%= link_to t('foodstuffs.back_to_list'), root_path %>
     <% if @recipe.user == current_user %>
+      <%= link_to 'レシピを編集する', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
       <%= button_to 'レシピを削除する', recipe_path(@recipe), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
       <!--[turbo_confirm: '本当に削除しますか？]が反応していないので修正用-->
     <% end %>

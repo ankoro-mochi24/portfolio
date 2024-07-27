@@ -1,3 +1,4 @@
+// new/editで画像が選択されるたびに即座にブラウザに反映
 document.addEventListener('DOMContentLoaded', function() {
   function previewDishImage(event) {
     var output = document.getElementById('dish_image_preview');
