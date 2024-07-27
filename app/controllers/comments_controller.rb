@@ -1,26 +1,29 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
-  before_action :set_commentable, only: [:create, :destroy]
-  before_action :set_comment, only: [:destroy]
+  before_action :authenticate_user!
+  before_action :set_commentable
+  before_action :set_comment, only: [:edit, :update, :destroy]
 
   def create
-    @comment = @commentable.comments.new(comment_params)
+    @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
-
     if @comment.save
-      redirect_to @commentable, notice: 'Comment was successfully created.'
+      redirect_back fallback_location: root_path, notice: 'コメントが追加されました。'
     else
-      redirect_to @commentable, alert: 'Failed to create comment.'
+      redirect_back fallback_location: root_path, alert: 'コメントの追加に失敗しました。'
+    end
+  end
+
+  def update
+    if @comment.update(comment_params)
+      redirect_back fallback_location: root_path, notice: 'コメントが更新されました。'
+    else
+      redirect_back fallback_location: root_path, alert: 'コメントの更新に失敗しました。'
     end
   end
 
   def destroy
-    if @comment.user == current_user
-      @comment.destroy
-      redirect_to @commentable, notice: 'Comment was successfully deleted.'
-    else
-      redirect_to @commentable, alert: 'You can only delete your own comments.'
-    end
+    @comment.destroy
+    redirect_back fallback_location: root_path, notice: 'コメントが削除されました。'
   end
 
   private
@@ -28,13 +31,13 @@ class CommentsController < ApplicationController
   def set_commentable
     @commentable = if params[:recipe_id]
                      Recipe.find(params[:recipe_id])
-                   elsif params[:food_id]
-                     Food.find(params[:food_id])
+                   elsif params[:foodstuff_id]
+                     Foodstuff.find(params[:foodstuff_id])
                    end
   end
 
   def set_comment
-    @comment = @commentable.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
   end
 
   def comment_params

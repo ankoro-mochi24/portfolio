@@ -55,33 +55,7 @@
     <% end %>
   </div>
 
-  <h2>Comments</h2>
-
-  <% if user_signed_in? %>
-    <%= form_with(model: [ @recipe, @recipe.comments.build ], local: true, class: "new-comment-form" ) do |form| %>
-      <div class="field">
-        <%= form.label :body %>
-        <%= form.text_area :body %>
-      </div>
-      <div class="actions">
-        <%= form.submit "Add Comment", class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  <% end %>
-
-  <div class="comments">
-    <% @recipe.comments.each do |comment| %>
-      <% if comment.user.present? %>
-        <div class="comment">
-          <p>
-            <strong><%= comment.user.name %>:</strong>
-            <%= comment.body %>
-          </p>
-          <% if user_signed_in? && comment.user == current_user %>
-            <%= button_to '×', [@recipe, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
+  <h2>コメント</h2>
+  <%= render @recipe.comments %>
+  <%= render 'comments/form', commentable: @recipe %>
 </div>

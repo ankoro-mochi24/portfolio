@@ -33,6 +33,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @commentable = @recipe
   end
 
   def edit
