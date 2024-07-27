@@ -31,10 +31,19 @@
 
   <div class="field">
     <%= form.label :image, t('activerecord.attributes.foodstuff.image') %>
-    <%= form.file_field :image, multiple: true %>
+    <div id="foodstuff_image_preview">
+      <% if foodstuff.image.present? %>
+        <% foodstuff.image.each do |img| %>
+          <%= image_tag img.url, style: "max-width: 300px; max-height: 300px;" %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= form.file_field :image, multiple: true, onchange: "previewFoodstuffImages(event)" %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<%= javascript_include_tag 'foodstuffs' %>

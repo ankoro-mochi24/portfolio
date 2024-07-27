@@ -18,12 +18,14 @@
   <div class="field">
     <%= form.label :dish_image, "完成写真" %>
     <% if recipe.dish_image.present? %>
-      <div>
+      <div id="dish_image_preview">
         <%= image_tag recipe.dish_image.url, alt: "Dish Image", style: "max-width: 300px; max-height: 300px;" %>
-        <%= form.hidden_field :dish_image_cache, value: recipe.dish_image_cache %>
       </div>
+      <%= form.hidden_field :dish_image_cache, value: recipe.dish_image_cache %>
+    <% else %>
+      <div id="dish_image_preview"></div>
     <% end %>
-    <%= form.file_field :dish_image, required: true %>
+    <%= form.file_field :dish_image, required: recipe.dish_image.blank? %>
     <%= form.hidden_field :remove_dish_image, value: false %>
   </div>
 
@@ -37,12 +39,14 @@
           <%= step_form.text_area :text, required: true %>
           <%= step_form.label :step_image, "工程写真" %>
           <% if step_form.object.step_image.present? %>
-            <div>
+            <div class="step_image_preview">
               <%= image_tag step_form.object.step_image.url, alt: "Step Image", style: "max-width: 300px; max-height: 300px;" %>
               <%= step_form.hidden_field :step_image_cache, value: step_form.object.step_image_cache %>
             </div>
+          <% else %>
+            <div class="step_image_preview"></div>
           <% end %>
-          <%= step_form.file_field :step_image, required: true %>
+          <%= step_form.file_field :step_image, required: step_form.object.step_image.blank? %>
           <%= step_form.hidden_field :remove_step_image, value: false %>
           <% if step_form.index > 0 %>
             <a href="#" data-action="click->recipe-steps#removeField">削除</a>
@@ -137,3 +141,5 @@
     <%= form.submit recipe.new_record? ? "投稿" : "保存" %>
   </div>
 <% end %>
+
+<%= javascript_include_tag 'recipes' %>
