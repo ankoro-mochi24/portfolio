@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
     previewContainer.appendChild(img);
   }
 
-  // Attach event listeners
   document.querySelectorAll('input[type="file"][id$="_dish_image"]').forEach(function(input) {
     input.addEventListener('change', previewDishImage);
   });
