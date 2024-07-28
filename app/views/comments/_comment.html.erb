@@ -11,7 +11,7 @@
       <%= form_with(model: [@commentable, comment], remote: true, data: { action: 'ajax:success->comment#handleAjaxResponse' }) do |form| %>
         <div class="field">
           <%= form.label :body, "コメント" %>
-          <%= form.text_area :body, value: comment.body %>
+          <%= form.text_area :body, value: comment.body, required: true  %>
         </div>
         <div class="actions">
           <%= form.submit "更新する" %>

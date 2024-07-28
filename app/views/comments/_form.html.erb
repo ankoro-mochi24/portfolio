@@ -1,7 +1,7 @@
-<%= form_with(model: [commentable, commentable.comments.build], remote: true, data: { turbo_frame: dom_id(commentable) }) do |form| %>
+<%= form_with(model: [commentable, comment], remote: true, id: 'new_comment') do |form| %>
   <div class="field">
     <%= form.label :body, "コメント" %>
-    <%= form.text_area :body %>
+    <%= form.text_area :body, required: true  %>
   </div>
   <div class="actions">
     <%= form.submit "コメントを追加" %>

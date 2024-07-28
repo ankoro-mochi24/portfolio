@@ -61,15 +61,7 @@
   </div>
 
   <%= turbo_frame_tag "new_comment" do %>
-    <%= form_with(model: [ @recipe, Comment.new ], remote: true, id: 'new_comment') do |form| %>
-      <div class="field">
-        <%= form.label :body, "コメント" %>
-        <%= form.text_area :body %>
-      </div>
-      <div class="actions">
-        <%= form.submit "コメント追加" %>
-      </div>
-    <% end %>
+    <%= render "comments/form", commentable: @recipe, comment: Comment.new %>
   <% end %>
 
 </div>

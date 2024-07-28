@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_back fallback_location: root_path, alert: 'コメントの追加に失敗しました。' }
-        format.turbo_stream { render :error }
+        #format.turbo_stream { render :error }
       end
     end
   end
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_back fallback_location: root_path, alert: 'コメントの更新に失敗しました。' }
-        format.turbo_stream { render :error }
+        #format.turbo_stream { render :error }
       end
     end
   end
