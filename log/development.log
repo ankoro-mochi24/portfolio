@@ -32163,3 +32163,349 @@ Processing by RecipesController#show as HTML
 Completed 200 OK in 104ms (Views: 84.9ms | ActiveRecord: 2.0ms | Allocations: 14360)
 
 
+Started GET "/cookrice" for 172.18.0.1 at 2024-07-28 12:22:14 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/" for 172.18.0.1 at 2024-07-28 12:22:15 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#cookrice as HTML
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/cookrice.html.erb within layouts/application
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mRecipe Load (5.9ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes`[0m
+  ↳ app/views/home/top.html.erb:11
+  Rendered recipes/_recipe.html.erb (Duration: 18.9ms | Allocations: 1160)
+  Rendered recipes/_recipe.html.erb (Duration: 11.1ms | Allocations: 310)
+  Rendered recipes/_recipe.html.erb (Duration: 10.7ms | Allocations: 389)
+  [1m[36mFoodstuff Load (1.5ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/home/top.html.erb:21
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 4.7ms | Allocations: 560)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.6ms | Allocations: 237)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.6ms | Allocations: 327)
+  Rendered home/top.html.erb within layouts/application (Duration: 295.1ms | Allocations: 33052)
+Started GET "/recipes/1" for 172.18.0.1 at 2024-07-28 12:22:15 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (4.9ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes` WHERE `recipes`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:87:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  [1m[36mRecipeStep Load (3.8ms)[0m  [1m[34mSELECT `recipe_steps`.* FROM `recipe_steps` WHERE `recipe_steps`.`recipe_id` = 1[0m
+  ↳ app/views/recipes/show.html.erb:16
+  [1m[36mKitchenTool Load (4.0ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` INNER JOIN `recipe_kitchen_tools` ON `kitchen_tools`.`id` = `recipe_kitchen_tools`.`kitchen_tool_id` WHERE `recipe_kitchen_tools`.`recipe_id` = 1[0m
+  ↳ app/views/recipes/show.html.erb:34
+  [1m[36mIngredient Load (3.9ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` INNER JOIN `recipe_ingredients` ON `ingredients`.`id` = `recipe_ingredients`.`ingredient_id` WHERE `recipe_ingredients`.`recipe_id` = 1[0m
+  ↳ app/views/recipes/show.html.erb:43
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/recipes/show.html.erb:51
+  [1m[36mComment Load (2.5ms)[0m  [1m[34mSELECT `comments`.* FROM `comments` WHERE `comments`.`commentable_id` = 1 AND `comments`.`commentable_type` = 'Recipe'[0m
+  ↳ app/views/recipes/show.html.erb:60
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/comments/_comment.html.erb:4
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/comments/_comment.html.erb:4
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/comments/_comment.html.erb:4
+  Rendered collection of comments/_comment.html.erb [3 times] (Duration: 30.8ms | Allocations: 6558)
+  Rendered comments/_form.html.erb (Duration: 5.5ms | Allocations: 293)
+  Rendered recipes/show.html.erb within layouts/application (Duration: 702.1ms | Allocations: 49139)
+  Rendered home/cookrice.html.erb within layouts/application (Duration: 2735.7ms | Allocations: 163318)
+  Rendered layouts/_header.html.erb (Duration: 33.0ms | Allocations: 3669)
+  Rendered layouts/_footer.html.erb (Duration: 3.9ms | Allocations: 419)
+  Rendered layout layouts/application.html.erb (Duration: 2808.1ms | Allocations: 182397)
+Completed 200 OK in 2943ms (Views: 2767.5ms | ActiveRecord: 41.7ms | Allocations: 194711)
+
+
+  Rendered layouts/_header.html.erb (Duration: 0.5ms | Allocations: 223)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 2936.4ms | Allocations: 198818)
+Completed 200 OK in 3032ms (Views: 2973.3ms | ActiveRecord: 0.0ms | Allocations: 203614)
+
+
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 180)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 2140.0ms | Allocations: 140156)
+Completed 200 OK in 2225ms (Views: 2087.5ms | ActiveRecord: 79.8ms | Allocations: 143525)
+
+
+Started GET "/" for 172.18.0.1 at 2024-07-28 12:22:18 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes`[0m
+  ↳ app/views/home/top.html.erb:11
+  Rendered recipes/_recipe.html.erb (Duration: 6.6ms | Allocations: 258)
+  Rendered recipes/_recipe.html.erb (Duration: 6.8ms | Allocations: 244)
+  Rendered recipes/_recipe.html.erb (Duration: 6.2ms | Allocations: 244)
+  [1m[36mFoodstuff Load (0.4ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/home/top.html.erb:21
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.4ms | Allocations: 239)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.3ms | Allocations: 237)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.3ms | Allocations: 327)
+  Rendered home/top.html.erb within layouts/application (Duration: 26.3ms | Allocations: 3246)
+  Rendered layouts/_header.html.erb (Duration: 0.4ms | Allocations: 213)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 86.5ms | Allocations: 7838)
+Completed 200 OK in 102ms (Views: 86.6ms | ActiveRecord: 0.7ms | Allocations: 8183)
+
+
+Started GET "/" for 172.18.0.1 at 2024-07-28 12:22:18 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes`[0m
+  ↳ app/views/home/top.html.erb:11
+  Rendered recipes/_recipe.html.erb (Duration: 8.2ms | Allocations: 257)
+  Rendered recipes/_recipe.html.erb (Duration: 7.7ms | Allocations: 244)
+  Rendered recipes/_recipe.html.erb (Duration: 7.7ms | Allocations: 244)
+  [1m[36mFoodstuff Load (0.4ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/home/top.html.erb:21
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.4ms | Allocations: 239)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.3ms | Allocations: 237)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.4ms | Allocations: 327)
+  Rendered home/top.html.erb within layouts/application (Duration: 30.3ms | Allocations: 3239)
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 213)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 84.9ms | Allocations: 7792)
+Completed 200 OK in 103ms (Views: 85.2ms | ActiveRecord: 0.7ms | Allocations: 8097)
+
+
+Started GET "/foodstuffs/6" for 172.18.0.1 at 2024-07-28 12:22:20 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mFoodstuff Load (0.4ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs` WHERE `foodstuffs`.`id` = 6 LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:62:in `set_foodstuff'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/show.html.erb within layouts/application
+  Rendered foodstuffs/show.html.erb within layouts/application (Duration: 29.3ms | Allocations: 1823)
+  Rendered layout layouts/application.html.erb (Duration: 29.8ms | Allocations: 1911)
+Completed 500 Internal Server Error in 53ms (ActiveRecord: 0.4ms | Allocations: 3886)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `foodstuff' for an instance of #<Class:0x00007f446c85e9d8>):
+    3: <div class="foodstuff-header">
+    4:   <p>
+    5:     <strong>食品名:</strong>
+    6:     <%= foodstuff.name %>
+    7:   </p>
+    8: 
+    9:   <p>
+  
+app/views/foodstuffs/show.html.erb:6
+Started GET "/" for 172.18.0.1 at 2024-07-28 12:25:03 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mRecipe Load (1.8ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes`[0m
+  ↳ app/views/home/top.html.erb:11
+  Rendered recipes/_recipe.html.erb (Duration: 20.8ms | Allocations: 840)
+  Rendered recipes/_recipe.html.erb (Duration: 6.9ms | Allocations: 249)
+  Rendered recipes/_recipe.html.erb (Duration: 6.9ms | Allocations: 244)
+  [1m[36mFoodstuff Load (1.7ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/home/top.html.erb:21
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 16.0ms | Allocations: 541)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.4ms | Allocations: 237)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.4ms | Allocations: 327)
+  Rendered home/top.html.erb within layouts/application (Duration: 247.6ms | Allocations: 15082)
+  Rendered layouts/_header.html.erb (Duration: 24.6ms | Allocations: 707)
+  Rendered layouts/_footer.html.erb (Duration: 7.8ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 1671.2ms | Allocations: 66798)
+Completed 200 OK in 1911ms (Views: 1697.7ms | ActiveRecord: 5.1ms | Allocations: 78835)
+
+
+Started GET "/recipes/1" for 172.18.0.1 at 2024-07-28 12:25:06 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes` WHERE `recipes`.`id` = 1 LIMIT 1[0m
+  ↳ app/controllers/recipes_controller.rb:87:in `set_recipe'
+  Rendering layout layouts/application.html.erb
+  Rendering recipes/show.html.erb within layouts/application
+  [1m[36mRecipeStep Load (0.8ms)[0m  [1m[34mSELECT `recipe_steps`.* FROM `recipe_steps` WHERE `recipe_steps`.`recipe_id` = 1[0m
+  ↳ app/views/recipes/show.html.erb:16
+  [1m[36mKitchenTool Load (0.5ms)[0m  [1m[34mSELECT `kitchen_tools`.* FROM `kitchen_tools` INNER JOIN `recipe_kitchen_tools` ON `kitchen_tools`.`id` = `recipe_kitchen_tools`.`kitchen_tool_id` WHERE `recipe_kitchen_tools`.`recipe_id` = 1[0m
+  ↳ app/views/recipes/show.html.erb:34
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT `ingredients`.* FROM `ingredients` INNER JOIN `recipe_ingredients` ON `ingredients`.`id` = `recipe_ingredients`.`ingredient_id` WHERE `recipe_ingredients`.`recipe_id` = 1[0m
+  ↳ app/views/recipes/show.html.erb:43
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/recipes/show.html.erb:51
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT `comments`.* FROM `comments` WHERE `comments`.`commentable_id` = 1 AND `comments`.`commentable_type` = 'Recipe'[0m
+  ↳ app/views/recipes/show.html.erb:60
+Started GET "/foodstuffs/6" for 172.18.0.1 at 2024-07-28 12:25:07 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/comments/_comment.html.erb:4
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/comments/_comment.html.erb:4
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/comments/_comment.html.erb:4
+  Rendered collection of comments/_comment.html.erb [3 times] (Duration: 69.0ms | Allocations: 7510)
+  Rendered comments/_form.html.erb (Duration: 23.0ms | Allocations: 473)
+  Rendered recipes/show.html.erb within layouts/application (Duration: 434.4ms | Allocations: 49880)
+Processing by FoodstuffsController#show as HTML
+  Parameters: {"id"=>"6"}
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 180)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  [1m[36mFoodstuff Load (0.4ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs` WHERE `foodstuffs`.`id` = 6 LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:62:in `set_foodstuff'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/show.html.erb within layouts/application
+  Rendered layout layouts/application.html.erb (Duration: 518.6ms | Allocations: 57387)
+Completed 200 OK in 552ms (Views: 508.7ms | ActiveRecord: 13.4ms | Allocations: 60539)
+
+
+  Rendered foodstuffs/show.html.erb within layouts/application (Duration: 34.6ms | Allocations: 2660)
+  Rendered layout layouts/application.html.erb (Duration: 35.3ms | Allocations: 2749)
+Completed 500 Internal Server Error in 77ms (ActiveRecord: 0.6ms | Allocations: 8382)
+
+
+  
+ActionView::Template::Error (undefined method `url' for an instance of Array):
+    23: 
+    24:   <p>
+    25:     <strong>完成写真:</strong>
+    26:     <%= image_tag @foodstuff.image.url, size: "100x100" if @foodstuff.image.present? %>
+    27:   </p>
+    28: </div>
+    29: 
+  
+app/views/foodstuffs/show.html.erb:26
+Started GET "/" for 172.18.0.1 at 2024-07-28 12:26:40 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mRecipe Load (1.2ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes`[0m
+  ↳ app/views/home/top.html.erb:11
+  Rendered recipes/_recipe.html.erb (Duration: 13.7ms | Allocations: 840)
+  Rendered recipes/_recipe.html.erb (Duration: 9.3ms | Allocations: 244)
+  Rendered recipes/_recipe.html.erb (Duration: 8.4ms | Allocations: 244)
+  [1m[36mFoodstuff Load (1.0ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/home/top.html.erb:21
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 4.1ms | Allocations: 541)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.4ms | Allocations: 237)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.5ms | Allocations: 327)
+  Rendered home/top.html.erb within layouts/application (Duration: 139.9ms | Allocations: 15074)
+  Rendered layouts/_header.html.erb (Duration: 5.5ms | Allocations: 707)
+  Rendered layouts/_footer.html.erb (Duration: 3.3ms | Allocations: 104)
+  Rendered layout layouts/application.html.erb (Duration: 1140.0ms | Allocations: 66769)
+Completed 200 OK in 1260ms (Views: 1150.9ms | ActiveRecord: 4.2ms | Allocations: 78809)
+
+
+Started GET "/foodstuffs/6" for 172.18.0.1 at 2024-07-28 12:26:42 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mFoodstuff Load (0.4ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs` WHERE `foodstuffs`.`id` = 6 LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:62:in `set_foodstuff'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/show.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/foodstuffs/show.html.erb:36
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT `comments`.* FROM `comments` WHERE `comments`.`commentable_id` = 6 AND `comments`.`commentable_type` = 'Foodstuff'[0m
+  ↳ app/views/foodstuffs/show.html.erb:43
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 32)
+  Rendered comments/_form.html.erb (Duration: 3.0ms | Allocations: 275)
+  Rendered foodstuffs/show.html.erb within layouts/application (Duration: 82.0ms | Allocations: 16621)
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 180)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 9)
+  Rendered layout layouts/application.html.erb (Duration: 128.2ms | Allocations: 21047)
+Completed 200 OK in 155ms (Views: 127.1ms | ActiveRecord: 4.8ms | Allocations: 24201)
+
+
+Started GET "/foodstuffs/6" for 172.18.0.1 at 2024-07-28 12:26:46 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mFoodstuff Load (0.4ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs` WHERE `foodstuffs`.`id` = 6 LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:62:in `set_foodstuff'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/show.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/foodstuffs/show.html.erb:36
+  [1m[36mComment Load (0.4ms)[0m  [1m[34mSELECT `comments`.* FROM `comments` WHERE `comments`.`commentable_id` = 6 AND `comments`.`commentable_type` = 'Foodstuff'[0m
+  ↳ app/views/foodstuffs/show.html.erb:43
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 13)
+  Rendered comments/_form.html.erb (Duration: 0.1ms | Allocations: 31)
+  Rendered foodstuffs/show.html.erb within layouts/application (Duration: 5.3ms | Allocations: 2151)
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 170)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 70.4ms | Allocations: 6975)
+Completed 200 OK in 91ms (Views: 70.5ms | ActiveRecord: 1.1ms | Allocations: 7772)
+
+
+Started GET "/foodstuffs/8" for 172.18.0.1 at 2024-07-28 12:26:46 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by FoodstuffsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mFoodstuff Load (0.3ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs` WHERE `foodstuffs`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:62:in `set_foodstuff'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/show.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/foodstuffs/show.html.erb:36
+  [1m[36mComment Load (0.3ms)[0m  [1m[34mSELECT `comments`.* FROM `comments` WHERE `comments`.`commentable_id` = 8 AND `comments`.`commentable_type` = 'Foodstuff'[0m
+  ↳ app/views/foodstuffs/show.html.erb:43
+  Rendered collection of templates [0 times] (Duration: 0.0ms | Allocations: 13)
+  Rendered comments/_form.html.erb (Duration: 0.1ms | Allocations: 31)
+  Rendered foodstuffs/show.html.erb within layouts/application (Duration: 4.9ms | Allocations: 2472)
+  Rendered layouts/_header.html.erb (Duration: 0.3ms | Allocations: 170)
+  Rendered layouts/_footer.html.erb (Duration: 0.0ms | Allocations: 8)
+  Rendered layout layouts/application.html.erb (Duration: 53.1ms | Allocations: 6812)
+Completed 200 OK in 70ms (Views: 53.3ms | ActiveRecord: 0.9ms | Allocations: 7606)
+
+
+Started GET "/" for 172.18.0.1 at 2024-07-28 12:27:04 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by HomeController#top as HTML
+Started GET "/foodstuffs/8" for 172.18.0.1 at 2024-07-28 12:27:05 +0900
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  Rendering layout layouts/application.html.erb
+  Rendering home/top.html.erb within layouts/application
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT `recipes`.* FROM `recipes`[0m
+  ↳ app/views/home/top.html.erb:11
+  Rendered recipes/_recipe.html.erb (Duration: 13.9ms | Allocations: 1003)
+  Rendered recipes/_recipe.html.erb (Duration: 9.8ms | Allocations: 260)
+Processing by FoodstuffsController#show as HTML
+  Parameters: {"id"=>"8"}
+  Rendered recipes/_recipe.html.erb (Duration: 16.9ms | Allocations: 1303)
+  [1m[36mFoodstuff Load (0.9ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs`[0m
+  ↳ app/views/home/top.html.erb:21
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 5.5ms | Allocations: 742)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.4ms | Allocations: 237)
+  Rendered foodstuffs/_foodstuff.html.erb (Duration: 0.5ms | Allocations: 327)
+  Rendered home/top.html.erb within layouts/application (Duration: 156.6ms | Allocations: 16915)
+  [1m[36mFoodstuff Load (0.4ms)[0m  [1m[34mSELECT `foodstuffs`.* FROM `foodstuffs` WHERE `foodstuffs`.`id` = 8 LIMIT 1[0m
+  ↳ app/controllers/foodstuffs_controller.rb:62:in `set_foodstuff'
+  Rendering layout layouts/application.html.erb
+  Rendering foodstuffs/show.html.erb within layouts/application
+  [1m[36mUser Load (20.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 2 LIMIT 1[0m
+  ↳ app/views/foodstuffs/show.html.erb:36
+  [1m[36mComment Load (2.8ms)[0m  [1m[34mSELECT `comments`.* FROM `comments` WHERE `comments`.`commentable_id` = 8 AND `comments`.`commentable_type` = 'Foodstuff'[0m
+  ↳ app/views/foodstuffs/show.html.erb:43
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 32)
+  Rendered comments/_form.html.erb (Duration: 6.6ms | Allocations: 1029)
+  Rendered foodstuffs/show.html.erb within layouts/application (Duration: 214.3ms | Allocations: 34834)
+  Rendered layouts/_header.html.erb (Duration: 5.1ms | Allocations: 614)
+  Rendered layouts/_header.html.erb (Duration: 5.3ms | Allocations: 789)
+  Rendered layouts/_footer.html.erb (Duration: 3.9ms | Allocations: 121)
+  Rendered layouts/_footer.html.erb (Duration: 3.9ms | Allocations: 125)
+  Rendered layout layouts/application.html.erb (Duration: 838.8ms | Allocations: 133258)
+Completed 200 OK in 974ms (Views: 851.0ms | ActiveRecord: 3.7ms | Allocations: 146324)
+
+
+  Rendered layout layouts/application.html.erb (Duration: 670.9ms | Allocations: 112637)
+Completed 200 OK in 710ms (Views: 645.9ms | ActiveRecord: 31.1ms | Allocations: 124618)
+
+
