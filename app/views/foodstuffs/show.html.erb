@@ -9,3 +9,11 @@
     <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, class: 'btn btn-danger' %>
   <% end %>
 </div>
+<h2>コメント</h2>
+<div id="comments">
+  <%= render @foodstuff.comments %>
+</div>
+
+<%= turbo_frame_tag "new_comment" do %>
+  <%= render "comments/form", commentable: @foodstuff, comment: Comment.new %>
+<% end %>

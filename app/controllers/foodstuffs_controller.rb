@@ -10,6 +10,7 @@ class FoodstuffsController < ApplicationController
   end
 
   def show
+    @commentable = @foodstuff
   end
 
   def new
