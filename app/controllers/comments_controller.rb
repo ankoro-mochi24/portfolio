@@ -7,23 +7,38 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_back fallback_location: root_path, notice: 'コメントが追加されました。'
+      respond_to do |format|
+        format.html { redirect_back fallback_location: root_path, notice: 'コメントが追加されました。' }
+        format.turbo_stream
+      end
     else
-      redirect_back fallback_location: root_path, alert: 'コメントの追加に失敗しました。'
+      respond_to do |format|
+        format.html { redirect_back fallback_location: root_path, alert: 'コメントの追加に失敗しました。' }
+        format.turbo_stream { render :error }
+      end
     end
   end
 
   def update
     if @comment.update(comment_params)
-      redirect_back fallback_location: root_path, notice: 'コメントが更新されました。'
+      respond_to do |format|
+        format.html { redirect_back fallback_location: root_path, notice: 'コメントが更新されました。' }
+        format.turbo_stream
+      end
     else
-      redirect_back fallback_location: root_path, alert: 'コメントの更新に失敗しました。'
+      respond_to do |format|
+        format.html { redirect_back fallback_location: root_path, alert: 'コメントの更新に失敗しました。' }
+        format.turbo_stream { render :error }
+      end
     end
   end
 
   def destroy
     @comment.destroy
-    redirect_back fallback_location: root_path, notice: 'コメントが削除されました。'
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path, notice: 'コメントが削除されました。' }
+      format.turbo_stream
+    end
   end
 
   private

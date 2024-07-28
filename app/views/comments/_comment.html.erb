@@ -1,21 +1,23 @@
-<div data-controller="comment">
-  <p data-comment-target="body">
-    <strong><%= comment.user.name %>:</strong>
-    <%= comment.body %>
-    <%= link_to '編集', '#', data: { action: 'comment#edit' } if comment.user == current_user %> |
-    <%= button_to '削除', [@commentable, comment], method: :delete, data: { confirm: '本当に削除しますか？' } if comment.user == current_user %>
-  </p>
+<%= turbo_frame_tag dom_id(comment) do %>
+  <div id="comment-<%= comment.id %>" data-controller="comment">
+    <p data-comment-target="body">
+      <strong><%= comment.user.name %>:</strong>
+      <%= comment.body %>
+      <%= link_to '編集', '#', data: { action: 'comment#edit' } if comment.user == current_user %> |
+      <%= button_to '削除', [@commentable, comment], method: :delete, data: { confirm: '本当に削除しますか？', remote: true } if comment.user == current_user %>
+    </p>
 
-  <div data-comment-target="form" class="d-none">
-    <%= form_with(model: [@commentable, comment], local: true) do |form| %>
-      <div class="field">
-        <%= form.label :body, "コメント" %>
-        <%= form.text_area :body, value: comment.body %>
-      </div>
-      <div class="actions">
-        <%= form.submit "更新する" %>
-        <%= link_to 'キャンセル', '#', data: { action: 'comment#cancel' } %>
-      </div>
-    <% end %>
+    <div data-comment-target="form" class="d-none">
+      <%= form_with(model: [@commentable, comment], remote: true, data: { action: 'ajax:success->comment#handleAjaxResponse' }) do |form| %>
+        <div class="field">
+          <%= form.label :body, "コメント" %>
+          <%= form.text_area :body, value: comment.body %>
+        </div>
+        <div class="actions">
+          <%= form.submit "更新する" %>
+          <%= link_to 'キャンセル', '#', data: { action: 'comment#cancel' } %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
