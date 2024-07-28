@@ -1,28 +1,28 @@
 class FoodstuffsController < ApplicationController
   before_action :set_foodstuff, only: %i[show edit update destroy]
 
-  # 食品リストの表示
-  def index
+  def index # /foodstuffs.json用
     @foodstuffs = Foodstuff.all
+
+    respond_to do |format|
+      format.json { render 'foodstuffs/index' }
+    end
   end
 
-  # 特定の食品の詳細表示
   def show
+    @commentable = @foodstuff
   end
 
-  # 新しい食品の作成フォームを表示
   def new
     @foodstuff = Foodstuff.new
   end
 
-  # 特定の食品の編集フォームを表示
   def edit
   end
 
-  # 新しい食品を作成
   def create
     @foodstuff = Foodstuff.new(foodstuff_params)
-    @foodstuff.user = current_user # current_userを適切に設定する
+    @foodstuff.user = current_user
 
     respond_to do |format|
       if @foodstuff.save
@@ -35,7 +35,6 @@ class FoodstuffsController < ApplicationController
     end
   end
 
-  # 特定の食品を更新
   def update
     respond_to do |format|
       if @foodstuff.update(foodstuff_params)
@@ -48,7 +47,6 @@ class FoodstuffsController < ApplicationController
     end
   end
 
-  # 特定の食品を削除
   def destroy
     @foodstuff.destroy
     respond_to do |format|
@@ -64,7 +62,7 @@ class FoodstuffsController < ApplicationController
     @foodstuff = Foodstuff.find(params[:id])
   end
 
-  # 信頼できるパラメータのみを許可する
+  # ストロングパラメーター
   def foodstuff_params
     params.require(:foodstuff).permit(:name, :price, :description, :link, {image: []})
   end

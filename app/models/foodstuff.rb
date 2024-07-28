@@ -1,5 +1,7 @@
 class Foodstuff < ApplicationRecord
   belongs_to :user
+  has_many :comments, as: :commentable, dependent: :destroy
+  
   mount_uploaders :image, FoodstuffImageUploader
   serialize :image, JSON
 
@@ -7,4 +9,5 @@ class Foodstuff < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0, only_integer: true}
   validates :link, presence: true
   validates :image, presence: true
+  
 end

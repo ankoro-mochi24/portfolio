@@ -6,7 +6,7 @@ ja:
       submit: "保存"
   foodstuffs:
     new:
-      title: "新しい食品"
+      title: "食品を投稿"
     back_to_list: "食品リストに戻る"
     index:
       title: "食品一覧"
@@ -16,6 +16,11 @@ ja:
       title: "食品の編集"
     edit_foodstuff: "この食品を編集"
     destroy_foodstuff: "この食品を削除"
+  recipes:
+    new:
+      title: "レシピを投稿"
+    index:
+      title: "レシピ一覧"
   activerecord:
     attributes:
       foodstuff:
@@ -24,6 +29,10 @@ ja:
         description: "説明"
         link: "リンク"
         image: "画像"
+        user: "ユーザー"
+      recipe:
+        title: "タイトル"
+        dish_image: "料理の画像"
         user: "ユーザー"
     errors:
       models:

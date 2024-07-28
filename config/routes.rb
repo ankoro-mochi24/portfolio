@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
-  resources :recipes
-  resources :foodstuffs
   devise_for :users
   root to: 'home#top'
   get 'cookrice'  => 'home#cookrice'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :recipes, except: :index do
+    resources :comments, only: [:create, :edit, :update, :destroy]
+    collection do
+      get '', to: 'recipes#index', constraints: ->(req) { req.format == :json }
+    end
+  end
+
+  resources :foodstuffs, except: :index do
+    resources :comments, only: [:create, :edit, :update, :destroy]
+    collection do
+      get '', to: 'foodstuffs#index', constraints: ->(req) { req.format == :json }
+    end
+  end
 end

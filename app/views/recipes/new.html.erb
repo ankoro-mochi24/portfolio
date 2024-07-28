@@ -1,5 +1,7 @@
-<h1>新しいレシピを作成する</h1>
+<h1><%= t('recipes.new.title') %></h1>
 
 <%= render 'form', recipe: @recipe %>
 
-<%= link_to 'キャンセル', recipes_path %>
+<div>
+  <%= link_to 'キャンセル', root_path %>
+</div>

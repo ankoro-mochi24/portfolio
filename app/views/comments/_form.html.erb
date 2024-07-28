@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <%= form_with(model: [commentable, comment], remote: true, id: 'new_comment') do |form| %>
+    <div class="field">
+      <%= form.label :body, "コメント" %>
+      <%= form.text_area :body, required: true %>
+    </div>
+    <div class="actions">
+      <%= form.submit "コメントを追加" %>
+    </div>
+  <% end %>
+<% end %>
