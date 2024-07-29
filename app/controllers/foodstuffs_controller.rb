@@ -50,7 +50,7 @@ class FoodstuffsController < ApplicationController
   def destroy
     @foodstuff.destroy
     respond_to do |format|
-      format.html { redirect_to foodstuffs_url, notice: "食品が正常に削除されました。" }
+      format.html { redirect_to root_path, notice: "食品が正常に削除されました。" }
       format.json { head :no_content }
     end
   end

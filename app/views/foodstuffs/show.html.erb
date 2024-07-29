@@ -1,19 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @foodstuff %>
+<%= render @foodstuff %> <!-- /foodstuffs/_foodstuff.html.erb -->
 
 <div>
   <%= link_to t('foodstuffs.back_to_list'), root_path, class: 'btn btn-secondary' %>
   <% if current_user == @foodstuff.user %>
     <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary' %>
-    <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, class: 'btn btn-danger' %>
+    <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
   <% end %>
 </div>
+
 <h2>コメント</h2>
 <div id="comments">
-  <%= render @foodstuff.comments %>
+  <%= render @foodstuff.comments %> <!-- /comments/_comment.html.erb -->
 </div>
 
 <%= turbo_frame_tag "new_comment" do %>
-  <%= render "comments/form", commentable: @foodstuff, comment: Comment.new %>
+  <%= render "comments/form", commentable: @foodstuff, comment: Comment.new %> <!-- /comments/_form.html.erb -->
 <% end %>
