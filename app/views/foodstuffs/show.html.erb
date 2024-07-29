@@ -1,6 +1,35 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @foodstuff %> <!-- /foodstuffs/_foodstuff.html.erb -->
+<div class="foodstuff-header">
+  <p>
+    <strong>食品名:</strong>
+    <%= @foodstuff.name %>
+  </p>
+
+  <p>
+    <strong>価格:</strong>
+    <%= @foodstuff.price %>
+  </p>
+
+  <p>
+    <strong>説明:</strong>
+    <%= @foodstuff.description %>
+  </p>
+
+  <p>
+    <strong>リンク:</strong>
+    <%= @foodstuff.link %>
+  </p>
+
+  <p>
+    <strong>写真:</strong>
+    <% if @foodstuff.image.present? %>
+      <% @foodstuff.image.each do |img| %>
+        <%= image_tag img.url, size: "100x100" %>
+      <% end %>
+    <% end %>
+  </p>
+</div>
 
 <div>
   <%= link_to t('foodstuffs.back_to_list'), root_path, class: 'btn btn-secondary' %>
