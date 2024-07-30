@@ -44,11 +44,7 @@ class CommentsController < ApplicationController
   private
 
   def set_commentable
-    @commentable = if params[:recipe_id]
-                     Recipe.find(params[:recipe_id])
-                   elsif params[:foodstuff_id]
-                     Foodstuff.find(params[:foodstuff_id])
-                   end
+    @commentable = params[:commentable_type].constantize.find(params[:commentable_id])
   end
 
   def set_comment

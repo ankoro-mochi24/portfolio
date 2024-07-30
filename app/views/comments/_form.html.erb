@@ -1,6 +1,8 @@
 <!-- コメントの投稿機能 -->
 <% if user_signed_in? %>
   <%= form_with(model: [commentable, comment], remote: true, id: 'new_comment') do |form| %>
+    <%= hidden_field_tag :commentable_type, commentable.class.name %>
+    <%= hidden_field_tag :commentable_id, commentable.id %>
     <div class="field">
       <%= form.label :body, "コメント" %>
       <%= form.text_area :body, required: true %>
