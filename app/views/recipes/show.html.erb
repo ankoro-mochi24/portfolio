@@ -51,17 +51,16 @@
     <% if @recipe.user == current_user %>
       <%= link_to 'レシピを編集する', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
       <%= button_to 'レシピを削除する', recipe_path(@recipe), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-      <!--[turbo_confirm: '本当に削除しますか？]が反応していないので修正用-->
     <% end %>
   </div>
 
   <h2>コメント</h2>
   <div id="comments">
-    <%= render @recipe.comments %>
+    <%= render @recipe.comments %> <!-- /comments/_comment.html.erb -->
   </div>
 
   <%= turbo_frame_tag "new_comment" do %>
-    <%= render "comments/form", commentable: @recipe, comment: Comment.new %>
+    <%= render "comments/form", commentable: @recipe, comment: Comment.new %>  <!-- /comments/_form.html.erb -->
   <% end %>
 
 </div>

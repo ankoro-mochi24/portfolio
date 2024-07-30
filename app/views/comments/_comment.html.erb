@@ -1,3 +1,4 @@
+<!-- 投稿されたコメントの表示、編集、削除機能 -->
 <%= turbo_frame_tag dom_id(comment) do %>
   <div id="comment-<%= comment.id %>" data-controller="comment">
     <p data-comment-target="body">

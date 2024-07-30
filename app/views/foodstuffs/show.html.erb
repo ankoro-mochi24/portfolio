@@ -41,9 +41,9 @@
 
 <h2>コメント</h2>
 <div id="comments">
-  <%= render @foodstuff.comments %> <!-- /comments/_comment.html.erb -->
+  <%= render @foodstuff.comments %> <!-- /comments/_comment.html.erb コメントの一覧表示、編集、削除機能 -->
 </div>
 
 <%= turbo_frame_tag "new_comment" do %>
-  <%= render "comments/form", commentable: @foodstuff, comment: Comment.new %> <!-- /comments/_form.html.erb -->
+  <%= render "comments/form", commentable: @foodstuff, comment: Comment.new %> <!-- /comments/_form.html.erb コメントの投稿 -->
 <% end %>
