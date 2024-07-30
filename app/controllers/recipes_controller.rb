@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @recipe.recipe_steps.build
     @recipe.recipe_ingredients.build
-    @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
+    @recipe.recipe_kitchen_tools.build
   end
 
   def create
