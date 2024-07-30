@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_commentable
-  before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action :set_commentable, only: [:create]
+  before_action :set_comment, only: [:update, :destroy]
 
   def create
     @comment = @commentable.comments.build(comment_params)
@@ -52,6 +52,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :commentable_type, :commentable_id)
   end
 end
