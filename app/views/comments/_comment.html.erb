@@ -6,12 +6,12 @@
       <%= comment.body %>
       <% if comment.user == current_user %>
         <%= link_to '編集', '#', data: { action: 'comment#edit' } %> |
-        <%= button_to '削除', [@commentable, comment], method: :delete, data: { confirm: '本当に削除しますか？', remote: true } %>
+        <%= button_to '削除', polymorphic_path([comment.commentable, comment]), method: :delete, data: {turbo_confirm: '本当に削除しますか？'} %>
       <% end %>
     </p>
 
     <div data-comment-target="form" class="d-none">
-      <%= form_with(model: [@commentable, comment], remote: true, data: { action: 'ajax:success->comment#handleAjaxResponse' }) do |form| %>
+      <%= form_with(model: [comment.commentable, comment], remote: true, data: { action: 'ajax:success->comment#handleAjaxResponse' }) do |form| %>
         <div class="field">
           <%= form.label :body, "コメント" %>
           <%= form.text_area :body, value: comment.body, required: true %>
