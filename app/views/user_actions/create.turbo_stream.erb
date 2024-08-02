@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{dom_id(@action.actionable)}_#{@action.action_type}" do %>
+  <%= render 'user_actions/action', action_type: @action.action_type, actionable: @action.actionable, action: @action %>
+<% end %>

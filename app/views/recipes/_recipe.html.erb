@@ -1,4 +1,4 @@
-<div id="<%= dom_id recipe %>">
+<div id="<%= dom_id recipe %>" data-controller="actions">
   <p>
     <strong><%= t('activerecord.attributes.recipe.title') %>:</strong>
     <%= link_to recipe.title, recipe %>
@@ -8,4 +8,23 @@
     <%= link_to (image_tag(recipe.dish_image.url, size: "250x250") if recipe.dish_image.present?), recipe %>
   </p>
 
+  <div>
+    <% %w[bookmark good bat].each do |action_type| %>
+      <%= turbo_frame_tag "recipe_#{recipe.id}_#{action_type}" do %>
+        <% action = current_user.user_actions.find_by(action_type: action_type, actionable: recipe) %>
+        <% if action %>
+          <%= button_to "Un#{action_type.capitalize}（#{action_type == 'bookmark' ? 'ブックマーク済み' : action_type == 'good' ? 'Good済み' : 'Bat済み'}）",
+            recipe_user_action_path(recipe, action),
+            method: :delete, data: { turbo_frame: "recipe_#{recipe.id}_#{action_type}" }, class: "action-button" %>
+        <% else %>
+          <%= form_with url: recipe_user_actions_path(recipe), method: :post, data: { turbo_frame: "recipe_#{recipe.id}_#{action_type}" } do |f| %>
+            <%= f.hidden_field :action_type, value: action_type, name: 'user_action_data[action_type]' %>
+            <%= f.hidden_field :actionable_type, value: 'Recipe', name: 'user_action_data[actionable_type]' %>
+            <%= f.hidden_field :actionable_id, value: recipe.id, name: 'user_action_data[actionable_id]' %>
+            <%= f.submit "#{action_type.capitalize}（未）", class: 'action-button' %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

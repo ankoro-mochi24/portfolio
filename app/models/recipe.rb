@@ -9,7 +9,7 @@ class Recipe < ApplicationRecord
   has_many :kitchen_tools, through: :recipe_kitchen_tools
   
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :actions, as: :actionable, dependent: :destroy
+  has_many :user_actions, as: :actionable, dependent: :destroy, class_name: 'UserAction'
   
   # レシピの調理工程をネストされた属性として受け入れる
   accepts_nested_attributes_for :recipe_steps, allow_destroy: true
