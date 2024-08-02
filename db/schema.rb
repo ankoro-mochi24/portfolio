@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_07_27_062307) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_02_060059) do
+  create_table "actions", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "action_type", null: false
+    t.string "actionable_type", null: false
+    t.bigint "actionable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actionable_type", "actionable_id"], name: "index_actions_on_actionable"
+    t.index ["user_id"], name: "index_actions_on_user_id"
+  end
+
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "body", null: false
@@ -95,6 +106,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_07_27_062307) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "actions", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "foodstuffs", "users"
   add_foreign_key "recipe_ingredients", "ingredients"

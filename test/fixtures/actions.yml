@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  action_type: MyString
+  actionable: one
+  actionable_type: Actionable
+
+two:
+  user: two
+  action_type: MyString
+  actionable: two
+  actionable_type: Actionable

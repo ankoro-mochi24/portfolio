@@ -40370,3 +40370,16 @@ Processing by RecipesController#edit as HTML
 Completed 200 OK in 291ms (Views: 252.8ms | ActiveRecord: 2.9ms | Allocations: 24810)
 
 
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT GET_LOCK('4774236522951210525', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateActions (20240802060059)
+  [1m[35m (39.1ms)[0m  [1m[35mCREATE TABLE `actions` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `user_id` bigint NOT NULL, `action_type` varchar(255) NOT NULL, `actionable_type` varchar(255) NOT NULL, `actionable_id` bigint NOT NULL, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_actions_on_user_id` (`user_id`), INDEX `index_actions_on_actionable` (`actionable_type`, `actionable_id`), CONSTRAINT `fk_rails_8c6b5c12eb`
+FOREIGN KEY (`user_id`)
+  REFERENCES `users` (`id`)
+)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20240802060059')[0m
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('4774236522951210525')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
