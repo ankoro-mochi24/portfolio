@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_02_074719) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_03_050818) do
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "body", null: false
@@ -90,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_02_074719) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["actionable_type", "actionable_id"], name: "index_actions_on_actionable"
+    t.index ["user_id", "actionable_type", "actionable_id", "action_type"], name: "index_user_actions_on_user_and_actionable_and_action_type", unique: true
     t.index ["user_id"], name: "index_user_actions_on_user_id"
   end
 
