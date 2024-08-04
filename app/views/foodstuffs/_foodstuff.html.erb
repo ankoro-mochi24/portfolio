@@ -1,13 +1,14 @@
-<div id="<%= dom_id foodstuff %>" data-controller="actions">
+<div id="<%= dom_id(foodstuff) %>" data-controller="actions">
   <p>
     <strong><%= t('activerecord.attributes.foodstuff.name') %>:</strong>
     <%= link_to foodstuff.name, foodstuff %>
   </p>
 
   <p>
-    <% if foodstuff.image.present? %>
-      <%= link_to image_tag(foodstuff.image.first.url, size: "250x250"), foodstuff %>
-    <% end %>
+    <%= link_to image_tag(foodstuff.image.first.url, size: "250x250"), foodstuff %>
   </p>
 
+  <%= render partial: 'shared/user_action', locals: { actionable: foodstuff, action_type: 'bookmark' } %>
+  <%= render partial: 'shared/user_action', locals: { actionable: foodstuff, action_type: 'good' } %>
+  <%= render partial: 'shared/user_action', locals: { actionable: foodstuff, action_type: 'bat' } %>
 </div>
