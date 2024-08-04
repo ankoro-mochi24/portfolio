@@ -31,7 +31,11 @@
   </p>
 </div>
 
-<div>
+<div class="foodstuff-actions">
+  <%= render partial: 'shared/user_action', locals: { actionable: @foodstuff, action_type: 'bookmark' } %>
+  <%= render partial: 'shared/user_action', locals: { actionable: @foodstuff, action_type: 'good' } %>
+  <%= render partial: 'shared/user_action', locals: { actionable: @foodstuff, action_type: 'bat' } %>
+
   <%= link_to t('foodstuffs.back_to_list'), root_path, class: 'btn btn-secondary' %>
   <% if current_user == @foodstuff.user %>
     <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary' %>

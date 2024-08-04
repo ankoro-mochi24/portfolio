@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{dom_id(@user_action.actionable)}_#{@user_action.action_type}_actions" do %>
+  <%= render partial: 'shared/user_action', locals: { actionable: @user_action.actionable, action_type: @user_action.action_type } %>
+<% end %>

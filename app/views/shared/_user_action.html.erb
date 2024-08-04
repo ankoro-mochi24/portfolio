@@ -1,0 +1,31 @@
+<%#
+action_type: bookmark/good/bat
+actionable_type: recipe/foodstuff
+actionable_id: recipe.id/foodstuff.id
+%>
+<div id="<%= dom_id(actionable) %>_<%= action_type %>_actions">
+  <% action = current_user.user_actions.find_by(actionable: actionable, action_type: action_type) %>
+
+  <% if action.present? %>
+    <%= button_to polymorphic_path([actionable, action]), method: :delete, remote: true, class: "btn btn-link" do %>
+      <% if action_type == 'bookmark' %>
+        <i class="bi bi-bookmark-star-fill"></i>
+      <% elsif action_type == 'good' %>
+        <i class="bi bi-emoji-heart-eyes-fill"></i>
+      <% elsif action_type == 'bat' %>
+        <i class="bi bi-emoji-expressionless-fill"></i>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= button_to polymorphic_path([actionable, :user_actions]), method: :post, params: { user_action: { action_type: action_type, actionable_type: actionable.class.name, actionable_id: actionable.id } }, remote: true, class: "btn btn-link" do %>
+      <% if action_type == 'bookmark' %>
+        <i class="bi bi-bookmark-star"></i>
+      <% elsif action_type == 'good' %>
+        <i class="bi bi-emoji-heart-eyes"></i>
+      <% elsif action_type == 'bat' %>
+        <i class="bi bi-emoji-expressionless"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+

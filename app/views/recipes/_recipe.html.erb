@@ -1,4 +1,4 @@
-<div id="<%= dom_id recipe %>">
+<div id="<%= dom_id(recipe) %>" data-controller="actions">
   <p>
     <strong><%= t('activerecord.attributes.recipe.title') %>:</strong>
     <%= link_to recipe.title, recipe %>
@@ -8,4 +8,7 @@
     <%= link_to (image_tag(recipe.dish_image.url, size: "250x250") if recipe.dish_image.present?), recipe %>
   </p>
 
+  <%= render partial: 'shared/user_action', locals: { actionable: recipe, action_type: 'bookmark' } %>
+  <%= render partial: 'shared/user_action', locals: { actionable: recipe, action_type: 'good' } %>
+  <%= render partial: 'shared/user_action', locals: { actionable: recipe, action_type: 'bat' } %>
 </div>
