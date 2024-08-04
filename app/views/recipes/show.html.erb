@@ -47,6 +47,10 @@
   </div>
 
   <div class="recipe-actions">
+    <%= render partial: 'shared/user_action', locals: { actionable: @recipe, action_type: 'bookmark' } %>
+    <%= render partial: 'shared/user_action', locals: { actionable: @recipe, action_type: 'good' } %>
+    <%= render partial: 'shared/user_action', locals: { actionable: @recipe, action_type: 'bat' } %>
+
     <%= link_to t('foodstuffs.back_to_list'), root_path, class: 'btn btn-secondary' %>
     <% if @recipe.user == current_user %>
       <%= link_to 'レシピを編集する', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
@@ -62,5 +66,4 @@
   <%= turbo_frame_tag "new_comment" do %>
     <%= render "comments/form", commentable: @recipe, comment: Comment.new %>  <!-- /comments/_form.html.erb -->
   <% end %>
-
 </div>
