@@ -8,7 +8,7 @@
     <%= link_to image_tag(foodstuff.image.first.url, size: "250x250"), foodstuff %>
   </p>
 
-  <%= render partial: 'shared/user_action', locals: { actionable: foodstuff, action_type: 'bookmark' } %>
-  <%= render partial: 'shared/user_action', locals: { actionable: foodstuff, action_type: 'good' } %>
-  <%= render partial: 'shared/user_action', locals: { actionable: foodstuff, action_type: 'bat' } %>
+  <%= render partial: 'user_actions/user_action', locals: { actionable: foodstuff, action_type: 'bookmark' } %>
+  <%= render partial: 'user_actions/user_action', locals: { actionable: foodstuff, action_type: 'good' } %>
+  <%= render partial: 'user_actions/user_action', locals: { actionable: foodstuff, action_type: 'bat' } %>
 </div>
