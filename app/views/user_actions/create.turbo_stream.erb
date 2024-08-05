@@ -1,5 +1,5 @@
 <%#
-action_type: bookmark/good/bat
+action_type: bookmark/good/bad
 actionable_type: recipe/foodstuff
 actionable_id: recipe.id/foodstuff.id
 %>
@@ -8,10 +8,10 @@ actionable_id: recipe.id/foodstuff.id
 <% end %>
 
 <% if @user_action.action_type == 'good' %>
-  <%= turbo_stream.replace "#{dom_id(@user_action.actionable)}_bat_actions" do %>
-    <%= render partial: 'user_actions/user_action', locals: { actionable: @user_action.actionable, action_type: 'bat' } %>
+  <%= turbo_stream.replace "#{dom_id(@user_action.actionable)}_bad_actions" do %>
+    <%= render partial: 'user_actions/user_action', locals: { actionable: @user_action.actionable, action_type: 'bad' } %>
   <% end %>
-<% elsif @user_action.action_type == 'bat' %>
+<% elsif @user_action.action_type == 'bad' %>
   <%= turbo_stream.replace "#{dom_id(@user_action.actionable)}_good_actions" do %>
     <%= render partial: 'user_actions/user_action', locals: { actionable: @user_action.actionable, action_type: 'good' } %>
   <% end %>
