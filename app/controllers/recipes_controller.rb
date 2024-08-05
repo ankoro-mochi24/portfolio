@@ -87,20 +87,27 @@ class RecipesController < ApplicationController
   end
 
   def add_topping
-    @topping = @recipe.toppings.build(topping_params)
-    @topping.user = current_user
-
-    if @topping.save
-      redirect_to @recipe, notice: 'トッピングが追加されました。'
-    else
-      redirect_to @recipe, alert: 'トッピングの追加に失敗しました。'
+    @topping = @recipe.toppings.find_or_initialize_by(name: topping_params[:name])
+    @topping.user ||= current_user # userがnilの場合のみcurrent_userを設定
+  
+    respond_to do |format|
+      if @topping.persisted? || @topping.save
+        format.turbo_stream
+        format.html { redirect_to @recipe, notice: 'トッピングが追加されました。' }
+      else
+        format.html { redirect_to @recipe, alert: 'トッピングの追加に失敗しました。' }
+      end
     end
   end
 
   def remove_topping
     @topping = @recipe.toppings.find(params[:topping_id])
     @topping.destroy
-    redirect_to @recipe, notice: 'トッピングが削除されました。'
+    
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @recipe, notice: 'トッピングが削除されました。' }
+    end
   end
 
   private

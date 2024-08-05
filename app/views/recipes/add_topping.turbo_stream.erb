@@ -1,0 +1,10 @@
+<%= turbo_stream.append "toppings" do %>
+  <li id="topping_<%= @topping.id %>" class="d-flex align-items-center">
+    <div class="mr-2"><%= @topping.name %></div>
+    <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: @topping, action_type: 'good', parent: @recipe } %></div>
+    <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: @topping, action_type: 'bad', parent: @recipe } %></div>
+    <% if @topping.user == current_user %>
+      <div><%= button_to "削除", remove_topping_recipe_path(@recipe, topping_id: @topping.id), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, remote: true, class: "btn btn-danger" %></div>
+    <% end %>
+  </li>
+<% end %>
