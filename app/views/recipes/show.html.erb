@@ -11,27 +11,29 @@
     </p>
   </div>
 
-  <h3>トッピング</h3>
-  <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
-    <div class="form-group">
-      <%= form.label :name, "味変/トッピング" %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
-    <%= form.submit "追加", class: "btn btn-primary" %>
-  <% end %>
-
-  <ul id="toppings">
-    <% @recipe.toppings.each do |topping| %>
-      <li id="topping_<%= topping.id %>" class="d-flex align-items-center">
-        <div class="mr-2"><%= topping.name %></div>
-        <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %></div>
-        <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %></div>
-        <% if topping.user == current_user %>
-          <div><%= button_to "削除", remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, remote: true, class: "btn btn-danger" %></div>
-        <% end %>
-      </li>
+  <% if user_signed_in? %>
+    <h3>トッピング</h3>
+    <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
+      <div class="form-group">
+        <%= form.label :name, "味変/トッピング" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+      <%= form.submit "追加", class: "btn btn-primary" %>
     <% end %>
-  </ul>
+
+    <ul id="toppings">
+      <% @recipe.toppings.each do |topping| %>
+        <li id="topping_<%= topping.id %>" class="d-flex align-items-center">
+          <div class="mr-2"><%= topping.name %></div>
+          <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %></div>
+          <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %></div>
+          <% if topping.user == current_user %>
+            <div><%= button_to "削除", remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, remote: true, class: "btn btn-danger" %></div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 
   <div class="recipe-section">
     <h3>調理工程</h3>
