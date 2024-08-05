@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_topping, :remove_topping]
 
   def index # /recipes.json用
     @recipes = Recipe.all
@@ -86,6 +86,23 @@ class RecipesController < ApplicationController
     end
   end
 
+  def add_topping
+    @topping = @recipe.toppings.build(topping_params)
+    @topping.user = current_user
+
+    if @topping.save
+      redirect_to @recipe, notice: 'トッピングが追加されました。'
+    else
+      redirect_to @recipe, alert: 'トッピングの追加に失敗しました。'
+    end
+  end
+
+  def remove_topping
+    @topping = @recipe.toppings.find(params[:topping_id])
+    @topping.destroy
+    redirect_to @recipe, notice: 'トッピングが削除されました。'
+  end
+
   private
 
   def set_recipe
@@ -126,5 +143,9 @@ class RecipesController < ApplicationController
         rkt.kitchen_tool = kitchen_tool
       end
     end
+  end
+
+  def topping_params
+    params.require(:topping).permit(:name)
   end
 end

@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   end
 
   resources :recipes, except: :index, concerns: [:commentable, :actionable] do
+    member do
+      post 'add_topping'
+      delete 'remove_topping'
+    end
     collection do
       get '', to: 'recipes#index', constraints: ->(req) { req.format == :json }
     end
@@ -21,5 +25,9 @@ Rails.application.routes.draw do
     collection do
       get '', to: 'foodstuffs#index', constraints: ->(req) { req.format == :json }
     end
+  end
+
+  resources :toppings, only: [] do
+    concerns :actionable
   end
 end
