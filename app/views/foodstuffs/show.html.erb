@@ -31,6 +31,8 @@
   </p>
 </div>
 
+<%= link_to 'この食品を使ったレシピを投稿', new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
+
 <div class="d-flex align-items-center user-actions-container">
   <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bookmark' } %>
   <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'good' } %>
