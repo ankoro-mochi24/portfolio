@@ -36,7 +36,7 @@ class UserActionsController < ApplicationController
   end
 
   def remove_opposite_action(user_action)
-    opposite_action_type = user_action.action_type == 'good' ? 'bat' : 'good'
+    opposite_action_type = user_action.action_type == 'good' ? 'bad' : 'good'
     opposite_action = current_user.user_actions.find_by(actionable: user_action.actionable, action_type: opposite_action_type)
     opposite_action&.destroy
   end

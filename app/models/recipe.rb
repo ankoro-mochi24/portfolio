@@ -7,6 +7,7 @@ class Recipe < ApplicationRecord
   has_many :recipe_steps, dependent: :destroy
   has_many :recipe_kitchen_tools, dependent: :destroy
   has_many :kitchen_tools, through: :recipe_kitchen_tools
+  has_many :toppings, dependent: :destroy
   
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :user_actions, as: :actionable, dependent: :destroy, class_name: 'UserAction'

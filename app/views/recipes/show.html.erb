@@ -49,7 +49,7 @@
   <div class="d-flex align-items-center user-actions-container">
     <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'bookmark' } %>
     <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'good' } %>
-    <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'bat' } %>
+    <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'bad' } %>
 
     <%= link_to t('foodstuffs.back_to_list'), root_path, class: 'btn btn-secondary' %>
     <% if @recipe.user == current_user %>
