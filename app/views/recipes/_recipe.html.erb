@@ -7,8 +7,9 @@
   <p>
     <%= link_to (image_tag(recipe.dish_image.url, size: "250x250") if recipe.dish_image.present?), recipe %>
   </p>
-
-  <%= render partial: 'user_actions/user_action', locals: { actionable: recipe, action_type: 'bookmark' } %> <!-- レシピのブックマークアクションを表示 -->
-  <%= render partial: 'user_actions/user_action', locals: { actionable: recipe, action_type: 'good' } %> <!-- レシピのgoodアクションを表示 -->
-  <%= render partial: 'user_actions/user_action', locals: { actionable: recipe, action_type: 'bat' } %> <!-- レシピのbatアクションを表示 -->
+  <div class="d-flex align-items-center user-actions-container">
+    <%= render partial: 'user_actions/user_action', locals: { actionable: recipe, action_type: 'bookmark' } %> <!-- レシピのブックマークアクションを表示 -->
+    <%= render partial: 'user_actions/user_action', locals: { actionable: recipe, action_type: 'good' } %> <!-- レシピのgoodアクションを表示 -->
+    <%= render partial: 'user_actions/user_action', locals: { actionable: recipe, action_type: 'bat' } %> <!-- レシピのbatアクションを表示 -->
+  </div>
 </div>

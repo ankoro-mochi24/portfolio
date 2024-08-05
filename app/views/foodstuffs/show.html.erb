@@ -31,7 +31,7 @@
   </p>
 </div>
 
-<div class="foodstuff-actions">
+<div class="d-flex align-items-center user-actions-container">
   <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bookmark' } %>
   <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'good' } %>
   <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bat' } %>
