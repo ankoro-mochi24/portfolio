@@ -4,5 +4,5 @@ actionable_type: recipe/foodstuff
 actionable_id: recipe.id/foodstuff.id
 %>
 <%= turbo_stream.replace "#{dom_id(@actionable)}_#{@action_type}_actions" do %>
-  <%= render partial: 'shared/user_action', locals: { actionable: @actionable, action_type: @action_type } %>
+  <%= render partial: 'user_actions/user_action', locals: { actionable: @actionable, action_type: @action_type } %>
 <% end %>
