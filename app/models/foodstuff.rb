@@ -1,10 +1,11 @@
 class Foodstuff < ApplicationRecord
+  searchkick
+  mount_uploaders :image, FoodstuffImageUploader
   belongs_to :user
   
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :user_actions, as: :actionable, dependent: :destroy, class_name: 'UserAction'
   
-  mount_uploaders :image, FoodstuffImageUploader
   serialize :image, JSON
 
   validates :name, presence: true

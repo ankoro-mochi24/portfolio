@@ -2,8 +2,14 @@ class HomeController < ApplicationController
   before_action :set_layout, only: [:top]
 
   def top
-    @foodstuffs = Foodstuff.all
-    @recipes = Recipe.all
+    if params[:query].present?
+      query = params[:query]
+      @recipes = Recipe.search(query)
+      @foodstuffs = Foodstuff.search(query)
+    else
+      @recipes = Recipe.all
+      @foodstuffs = Foodstuff.all
+    end
   end
 
   def cookrice

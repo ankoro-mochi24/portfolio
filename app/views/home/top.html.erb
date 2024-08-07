@@ -8,8 +8,12 @@
       <% content_for :left do %>
         <h1><%= t('recipes.index.title') %></h1>
         <div id="recipes">
-          <% @recipes.each do |recipe| %>
-            <%= render recipe %>
+          <% if @recipes.present? %>
+            <% @recipes.each do |recipe| %>
+              <%= render recipe %>
+            <% end %>
+          <% else %>
+            <p>該当するレシピが見つかりませんでした。</p>
           <% end %>
         </div>
       <% end %>
@@ -18,8 +22,12 @@
       <% content_for :right do %>
         <h1><%= t('foodstuffs.index.title') %></h1>
         <div id="foodstuffs">
-          <% @foodstuffs.each do |foodstuff| %>
-            <%= render foodstuff %>
+          <% if @foodstuffs.present? %>
+            <% @foodstuffs.each do |foodstuff| %>
+              <%= render foodstuff %>
+            <% end %>
+          <% else %>
+            <p>該当する食品が見つかりませんでした。</p>
           <% end %>
         </div>
       <% end %>

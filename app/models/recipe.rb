@@ -1,4 +1,5 @@
 class Recipe < ApplicationRecord
+  searchkick
   mount_uploader :dish_image, DishImageUploader
   
   belongs_to :user
