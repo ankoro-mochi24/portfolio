@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_05_053327) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_08_074332) do
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "body", null: false
@@ -104,6 +104,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_053327) do
     t.index ["user_id"], name: "index_user_actions_on_user_id"
   end
 
+  create_table "user_kitchen_tools", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "kitchen_tool_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kitchen_tool_id"], name: "index_user_kitchen_tools_on_kitchen_tool_id"
+    t.index ["user_id", "kitchen_tool_id"], name: "index_user_kitchen_tools_on_user_id_and_kitchen_tool_id", unique: true
+    t.index ["user_id"], name: "index_user_kitchen_tools_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -128,4 +138,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_05_053327) do
   add_foreign_key "toppings", "recipes"
   add_foreign_key "toppings", "users"
   add_foreign_key "user_actions", "users"
+  add_foreign_key "user_kitchen_tools", "kitchen_tools"
+  add_foreign_key "user_kitchen_tools", "users"
 end
