@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: 'home#top'
   get 'cookrice' => 'home#cookrice'
 
+  resources :users, only: [:show]
+
   concern :commentable do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
