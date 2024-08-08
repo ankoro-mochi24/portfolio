@@ -32,13 +32,13 @@
         </li>
       <% end %>
     </ul>
-    <form class="form-inline my-2 my-lg-0 ml-auto" action="<%= root_path %>" method="get">
+    <%= form_with url: root_path, method: :get, local: true, class: "form-inline my-2 my-lg-0 ml-auto" do |form| %>
       <div class="input-group">
-        <input class="form-control" type="search" name="query" placeholder="検索" aria-label="検索">
+        <%= form.search_field :query, class: "form-control", placeholder: "検索", aria: { label: "検索" } %>
         <div class="input-group-append">
-          <button class="btn btn-outline-success" type="submit">検索</button>
+          <%= form.submit "検索", class: "btn btn-outline-success" %>
         </div>
       </div>
-    </form>
+    <% end %>
   </div>
 </nav>
