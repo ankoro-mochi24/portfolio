@@ -39,11 +39,11 @@ class Recipe < ApplicationRecord
     if self.new_record? && self.recipe_ingredients.none? { |ri| ri.ingredient&.name == '白米' }
       rice = Ingredient.find_by(name: '白米')
       if rice
-        self.recipe_ingredients.build(ingredient_id: rice.id)
+        ri = self.recipe_ingredients.build(ingredient_id: rice.id)
+        ri.ingredient_name = rice.name
       end
     end
   end
-  
 
   def must_have_at_least_one_kitchen_tool
     if recipe_kitchen_tools.reject { |rkt| rkt.marked_for_destruction? || rkt.kitchen_tool_name.blank? }.empty?

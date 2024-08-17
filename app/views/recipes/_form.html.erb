@@ -108,31 +108,31 @@
     </template>
   </div>
 
-  <h3>用意する材料+調味料</h3>
-  <div data-controller="recipe-ingredients">
-    <div data-recipe-ingredients-target="container">
-      <%= form.fields_for :recipe_ingredients do |ingredient_form| %>
-        <div class="nested-fields" data-new-record="false">
-          <%= ingredient_form.hidden_field :_destroy %>
-          <%= ingredient_form.hidden_field :ingredient_id %>
-          <%= ingredient_form.label :ingredient_name, "材料" %>
-          <%= ingredient_form.text_field :ingredient_name, value: "白米", readonly: true %>
-        </div>
+<h3>用意する材料+調味料</h3>
+<div data-controller="recipe-ingredients">
+  <div data-recipe-ingredients-target="container">
+    <%= form.fields_for :recipe_ingredients do |ingredient_form| %>
+      <div class="nested-fields" data-new-record="false">
+        <%= ingredient_form.hidden_field :_destroy %>
+        <%= ingredient_form.hidden_field :ingredient_id %>
+        <%= ingredient_form.label :ingredient_name, "材料" %>
+        <%= ingredient_form.text_field :ingredient_name, readonly: true %>
+      </div>
+    <% end %>
+  </div>
+  <a href="#" data-action="click->recipe-ingredients#addField">追加</a>
+  <template data-recipe-ingredients-target="template">
+    <div class="nested-fields" data-new-record="true">
+      <%= form.fields_for :recipe_ingredients, RecipeIngredient.new, child_index: "TEMPLATE_RECORD" do |ingredient_form| %>
+        <%= ingredient_form.hidden_field :_destroy %>
+        <%= ingredient_form.hidden_field :ingredient_id %>
+        <%= ingredient_form.label :ingredient_name, "材料" %>
+        <%= ingredient_form.text_field :ingredient_name %>
+        <a href="#" data-action="click->recipe-ingredients#removeField">削除</a>
       <% end %>
     </div>
-    <a href="#" data-action="click->recipe-ingredients#addField">追加</a>
-    <template data-recipe-ingredients-target="template">
-      <div class="nested-fields" data-new-record="true">
-        <%= form.fields_for :recipe_ingredients, RecipeIngredient.new, child_index: "TEMPLATE_RECORD" do |ingredient_form| %>
-          <%= ingredient_form.hidden_field :_destroy %>
-          <%= ingredient_form.hidden_field :ingredient_id %>
-          <%= ingredient_form.label :ingredient_name, "材料" %>
-          <%= ingredient_form.text_field :ingredient_name %>
-          <a href="#" data-action="click->recipe-ingredients#removeField">削除</a>
-        <% end %>
-      </div>
-    </template>
-  </div>
+  </template>
+</div>
 
   <div class="actions">
     <%= form.submit recipe.new_record? ? "投稿" : "保存" %>
