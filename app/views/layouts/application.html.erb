@@ -18,7 +18,19 @@
     </header>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <% if @use_split_layout %>
+
+    <% if @use_sidebar %>
+      <div class="sidebar">
+        <%= yield :sidebar %>
+      </div>
+      <div class="container" style="margin-left: 250px;">
+        <div class="main-content">
+          <div class="content">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    <% elsif @use_split_layout %>
       <div class="container">
         <div class="left-side">
           <%= yield :left %>

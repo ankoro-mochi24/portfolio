@@ -34,3 +34,25 @@
   display: inline-block;
   margin-right: 10px;
 }
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  flex: 1; /* メインコンテンツは残りのスペースを占める */
+  padding: 20px; /* コンテンツ全体に余白を確保 */
+}
+
+.sidebar {
+  width: 250px; /* サイドバーの幅を設定 */
+  background-color: #f8f9fa; /* サイドバーの背景色 */
+  padding: 20px;
+  border-right: 1px solid #dee2e6; /* サイドバーとメインコンテンツの区切り線 */
+  position: fixed; /* サイドバーを画面左端に固定 */
+  left: 0; /* サイドバーを画面左端に寄せる */
+  top: 60px; /* サイドバーの上端をヘッダーの高さに合わせて調整 */
+  height: calc(100vh - 60px); /* サイドバーの高さを画面全体の高さからヘッダーの高さを引いたものに設定 */
+  box-sizing: border-box; /* パディングを含めて幅・高さを計算 */
+}

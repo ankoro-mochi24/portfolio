@@ -6,5 +6,6 @@ class UsersController < ApplicationController
     @kitchen_tools = @user.kitchen_tools
     @recipes = @user.recipes
     @foodstuffs = @user.foodstuffs
+    @use_sidebar = true # ここでサイドバー用のフラグを設定
   end
 end
