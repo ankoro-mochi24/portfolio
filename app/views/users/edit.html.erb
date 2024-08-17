@@ -18,21 +18,32 @@
       <h3>持っている調理器具</h3>
       <div data-controller="kitchen-tools">
         <div data-kitchen-tools-target="container">
-          <%= f.fields_for :user_kitchen_tools do |ff| %>
-            <div class="nested-fields">
-              <%= ff.collection_select :kitchen_tool_id, @kitchen_tools, :id, :name, {}, { class: "form-select" } %>
-              <%= ff.hidden_field :_destroy %>
-              <button class="btn btn-danger" data-action="click->kitchen-tools#removeField">削除</button>
+          <%= f.fields_for :user_kitchen_tools do |tool_form| %>
+            <div class="nested-fields" data-new-record="false">
+              <%= tool_form.hidden_field :_destroy %>
+              <%= tool_form.hidden_field :kitchen_tool_id %>
+              <%= tool_form.label :kitchen_tool_name, "調理器具" %>
+              <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name, required: true %>
+              <% if tool_form.index > 0 %>
+                <a href="#" data-action="click->kitchen-tools#removeField" class="btn btn-danger">削除</a>
+              <% end %>
             </div>
           <% end %>
         </div>
-        <button class="btn btn-success mt-2" data-action="click->kitchen-tools#addField">調理器具を追加</button>
+        <a href="#" data-action="click->kitchen-tools#addField" class="btn btn-success mt-2">調理器具を追加</a>
+        <template data-kitchen-tools-target="template">
+          <div class="nested-fields" data-new-record="true">
+            <%= hidden_field_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][_destroy]', false %>
+            <%= hidden_field_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][kitchen_tool_id]' %>
+            <%= label_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][kitchen_tool_name]', "調理器具" %>
+            <%= text_field_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][kitchen_tool_name]', nil, required: true %>
+            <a href="#" data-action="click->kitchen-tools#removeField" class="btn btn-danger">削除</a>
+          </div>
+        </template>
       </div>
 
       <%= f.submit "更新する", class: "btn btn-primary mt-3" %>
     <% end %>
-
-    <%= render "kitchen_tools_template" %>
 
     <%= link_to "キャンセル", user_path(@user), class: "btn btn-secondary mt-3" %>
   </div>

@@ -1,7 +1,0 @@
-<template id="kitchen-tools-template">
-  <div class="nested-fields">
-    <%= collection_select('user[user_kitchen_tools_attributes][TEMPLATE_RECORD]', :kitchen_tool_id, @kitchen_tools, :id, :name, {}, { class: "form-select" }) %>
-    <input type="hidden" name="user[user_kitchen_tools_attributes][TEMPLATE_RECORD][_destroy]" id="user_user_kitchen_tools_attributes_TEMPLATE_RECORD__destroy">
-    <button class="btn btn-danger" data-action="click->kitchen-tools#removeField">削除</button>
-  </div>
-</template>

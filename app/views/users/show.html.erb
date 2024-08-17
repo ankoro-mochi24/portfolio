@@ -11,11 +11,15 @@
     <p><%= @user.email %></p>
 
     <h2>持っている調理器具</h2>
-    <ul>
-      <% @kitchen_tools.each do |tool| %>
-        <li><%= tool.name %></li>
-      <% end %>
-    </ul>
+    <% if @kitchen_tools.present? %>
+      <ul>
+        <% @kitchen_tools.each do |tool| %>
+          <li><%= tool.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>調理器具はまだ登録されていません。</p>
+    <% end %>
 
     <%= link_to "編集", edit_user_path(@user), class: 'btn btn-primary mt-3' %>
   </div>
