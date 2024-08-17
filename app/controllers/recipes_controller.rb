@@ -12,13 +12,6 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @recipe.recipe_steps.build
-    @recipe.recipe_kitchen_tools.build
-    if params[:foodstuff_name].present?
-      ingredient = @recipe.recipe_ingredients.build
-      ingredient.ingredient_name = params[:foodstuff_name]
-    else
-      @recipe.recipe_ingredients.build
-    end
   end
   
   def create

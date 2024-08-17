@@ -36,13 +36,12 @@
 }
 
 .main-content {
-  display: flex;
-  flex-direction: row;
+  margin-left: 270px; /* サイドバーの幅を考慮 */
+  padding: 20px;
 }
 
 .content {
   flex: 1; /* メインコンテンツは残りのスペースを占める */
-  padding: 20px; /* コンテンツ全体に余白を確保 */
 }
 
 .sidebar {

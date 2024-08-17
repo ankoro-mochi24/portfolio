@@ -22,8 +22,7 @@
             <div class="nested-fields" data-new-record="false">
               <%= tool_form.hidden_field :_destroy %>
               <%= tool_form.hidden_field :kitchen_tool_id %>
-              <%= tool_form.label :kitchen_tool_name, "調理器具" %>
-              <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name, required: true %>
+              <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool&.name, required: true, class: "form-control" %>
               <% if tool_form.index > 0 %>
                 <a href="#" data-action="click->kitchen-tools#removeField" class="btn btn-danger">削除</a>
               <% end %>
@@ -35,8 +34,7 @@
           <div class="nested-fields" data-new-record="true">
             <%= hidden_field_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][_destroy]', false %>
             <%= hidden_field_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][kitchen_tool_id]' %>
-            <%= label_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][kitchen_tool_name]', "調理器具" %>
-            <%= text_field_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][kitchen_tool_name]', nil, required: true %>
+            <%= text_field_tag 'user[user_kitchen_tools_attributes][TEMPLATE_RECORD][kitchen_tool_name]', nil, required: true, class: "form-control" %>
             <a href="#" data-action="click->kitchen-tools#removeField" class="btn btn-danger">削除</a>
           </div>
         </template>

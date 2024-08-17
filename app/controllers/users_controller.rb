@@ -4,26 +4,20 @@ class UsersController < ApplicationController
   before_action :set_layout, only: [:show, :edit]
 
   def show
-    @user = User.find(params[:id])
     @kitchen_tools = @user.kitchen_tools
   end
 
   def edit
-    @user.user_kitchen_tools.each do |ukt|
-      ukt.kitchen_tool_name = ukt.kitchen_tool.name if ukt.kitchen_tool.present?
-    end
     @user.user_kitchen_tools.build if @user.user_kitchen_tools.empty?
   end
 
   def update
-    @user.assign_attributes(user_params)
-
-    @user.user_kitchen_tools.each do |tool|
-      tool.mark_for_destruction if tool._destroy == "1"
-    end
-
-    if @user.save
-      redirect_to user_path(@user), notice: 'プロフィールが更新されました。'
+    if update_user_kitchen_tools(@user, user_params)
+      if @user.update(user_params)
+        redirect_to user_path(@user), notice: 'プロフィールが更新されました。'
+      else
+        render :edit, status: :unprocessable_entity
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,5 +35,19 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, user_kitchen_tools_attributes: [:id, :kitchen_tool_id, :kitchen_tool_name, :_destroy])
+  end
+
+  def update_user_kitchen_tools(user, user_params)
+    user.user_kitchen_tools.each do |user_kitchen_tool|
+      kitchen_tool_name = user_kitchen_tool.kitchen_tool_name
+      if kitchen_tool_name.present?
+        kitchen_tool = KitchenTool.find_or_create_by(name: kitchen_tool_name)
+        user_kitchen_tool.kitchen_tool = kitchen_tool
+      end
+    end
+    true
+  rescue StandardError => e
+    Rails.logger.error "Error updating kitchen tools: #{e.message}"
+    false
   end
 end
