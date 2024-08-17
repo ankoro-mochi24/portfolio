@@ -1,33 +1,25 @@
 <div class="sidebar">
   <!-- サイドバーの内容をここに追加します -->
   <h2>メニュー</h2>
-    <ul>
+  <ul>
     <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger ml-2' %></li>
   </ul>
 </div>
 
-<h1><%= @user.name %>さんのマイページ</h1>
+<h1>マイページ</h1>
 
 <div class="main-content">
   <div class="content">
+    <h2>ユーザー名</h2>
+    <p><%= @user.name %></p>
+
+    <h2>メールアドレス</h2>
+    <p><%= @user.email %></p>
+
     <h2>持っている調理器具</h2>
     <ul>
       <% @kitchen_tools.each do |tool| %>
         <li><%= tool.name %></li>
-      <% end %>
-    </ul>
-
-    <h2>投稿したレシピ</h2>
-    <ul>
-      <% @recipes.each do |recipe| %>
-        <li><%= link_to recipe.title, recipe_path(recipe) %></li>
-      <% end %>
-    </ul>
-
-    <h2>投稿した食品</h2>
-    <ul>
-      <% @foodstuffs.each do |foodstuff| %>
-        <li><%= link_to foodstuff.name, foodstuff_path(foodstuff) %></li>
       <% end %>
     </ul>
   </div>
