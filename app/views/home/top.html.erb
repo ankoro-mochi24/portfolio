@@ -1,36 +1,51 @@
 <% content_for(:title, "入口") %>
 
 <div class="container">
-  <p>Home#top</p>
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+      <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= home_view_path(view: 'both') %>">両方</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= home_view_path(view: 'recipes') %>">レシピ</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= home_view_path(view: 'foodstuffs') %>">食品</a>
+    </li>
+  </ul>
 
   <div class="row">
-    <div class="col-md-6">
-      <% content_for :left do %>
-        <h1><%= t('recipes.index.title') %></h1>
-        <div id="recipes">
-          <% if @recipes.present? %>
-            <% @recipes.each do |recipe| %>
-              <%= render recipe %>
+    <% if @view == 'both' || @view == 'recipes' %>
+      <div class="col-md-6">
+        <% content_for :left do %>
+          <h1>レシピ一覧</h1>
+          <div id="recipes">
+            <% if @recipes.present? %>
+              <% @recipes.each do |recipe| %>
+                <%= render recipe %>
+              <% end %>
+            <% else %>
+              <p>該当するレシピが見つかりませんでした。</p>
             <% end %>
-          <% else %>
-            <p>該当するレシピが見つかりませんでした。</p>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-md-6">
-      <% content_for :right do %>
-        <h1><%= t('foodstuffs.index.title') %></h1>
-        <div id="foodstuffs">
-          <% if @foodstuffs.present? %>
-            <% @foodstuffs.each do |foodstuff| %>
-              <%= render foodstuff %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @view == 'both' || @view == 'foodstuffs' %>
+      <div class="col-md-6">
+        <% content_for :right do %>
+          <h1>食品一覧</h1>
+          <div id="foodstuffs">
+            <% if @foodstuffs.present? %>
+              <% @foodstuffs.each do |foodstuff| %>
+                <%= render foodstuff %>
+              <% end %>
+            <% else %>
+              <p>該当する食品が見つかりませんでした。</p>
             <% end %>
-          <% else %>
-            <p>該当する食品が見つかりませんでした。</p>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

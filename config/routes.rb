@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'home#top'
+  get 'home/top/:view', to: 'home#top', as: 'home_view'
+
   get 'cookrice' => 'home#cookrice'
 
   resources :users, only: [:show, :edit, :update]
