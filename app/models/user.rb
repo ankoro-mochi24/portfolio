@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :toppings, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :user_actions, dependent: :destroy, class_name: 'UserAction', foreign_key: 'user_id'
-  has_many :user_kitchen_tools
+  has_many :user_kitchen_tools, dependent: :destroy
   has_many :kitchen_tools, through: :user_kitchen_tools
 
   accepts_nested_attributes_for :user_kitchen_tools, allow_destroy: true
