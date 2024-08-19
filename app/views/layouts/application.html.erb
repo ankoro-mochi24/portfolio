@@ -21,13 +21,13 @@
     <div class="container mt-5 pt-4">
       <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-          <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= home_view_path(view: 'both') %>">両方</a>
+          <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= root_path %>">両方</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= home_view_path(view: 'recipes') %>">レシピ</a>
+          <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= recipes_view_path %>">レシピ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= home_view_path(view: 'foodstuffs') %>">食品</a>
+          <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= foodstuffs_view_path %>">食品</a>
         </li>
       </ul>
     </div>
