@@ -1,22 +1,24 @@
-<h1><%= @user.name %>さんのマイページ</h1>
+<h1>マイページ</h1>
 
-<h2>持っている調理器具</h2>
-<ul>
-  <% @kitchen_tools.each do |tool| %>
-    <li><%= tool.name %></li>
-  <% end %>
-</ul>
+<div class="main-content">
+  <div class="content">
+    <h2>ユーザー名</h2>
+    <p><%= @user.name %></p>
 
-<h2>投稿したレシピ</h2>
-<ul>
-  <% @recipes.each do |recipe| %>
-    <li><%= link_to recipe.title, recipe_path(recipe) %></li>
-  <% end %>
-</ul>
+    <h2>メールアドレス</h2>
+    <p><%= @user.email %></p>
 
-<h2>投稿した食品</h2>
-<ul>
-  <% @foodstuffs.each do |foodstuff| %>
-    <li><%= link_to foodstuff.name, foodstuff_path(foodstuff) %></li>
-  <% end %>
-</ul>
+    <h2>持っている調理器具</h2>
+    <% if @kitchen_tools.present? %>
+      <ul>
+        <% @kitchen_tools.each do |tool| %>
+          <li><%= tool.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>調理器具はまだ登録されていません。</p>
+    <% end %>
+
+    <%= link_to "編集", edit_user_path(@user), class: 'btn btn-primary mt-3' %>
+  </div>
+</div>

@@ -116,8 +116,12 @@
           <%= ingredient_form.hidden_field :_destroy %>
           <%= ingredient_form.hidden_field :ingredient_id %>
           <%= ingredient_form.label :ingredient_name, "材料" %>
-          <%= ingredient_form.text_field :ingredient_name, value: ingredient_form.object.ingredient_name %>
-          <% unless ingredient_form.object.ingredient_name == "白米" %>
+          <% if ingredient_form.index == 0 %>
+            <!-- 1つ目の材料フォーム（白米） -->
+            <%= ingredient_form.text_field :ingredient_name, readonly: true %>
+          <% else %>
+            <!-- それ以外の材料フォーム -->
+            <%= ingredient_form.text_field :ingredient_name %>
             <a href="#" data-action="click->recipe-ingredients#removeField">削除</a>
           <% end %>
         </div>
