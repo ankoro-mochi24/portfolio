@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  padding-top: 60px; /* ヘッダーの高さを考慮して、コンテンツの位置を調整 */
 }
 
 .left-side {
@@ -38,6 +39,7 @@
 .main-content {
   margin-left: 270px; /* サイドバーの幅を考慮 */
   padding: 20px;
+  flex: 1; /* メインコンテンツは残りのスペースを占める */
 }
 
 .content {
@@ -54,4 +56,15 @@
   top: 60px; /* サイドバーの上端をヘッダーの高さに合わせて調整 */
   height: calc(100vh - 60px); /* サイドバーの高さを画面全体の高さからヘッダーの高さを引いたものに設定 */
   box-sizing: border-box; /* パディングを含めて幅・高さを計算 */
+  overflow-y: auto; /* 内容が多い場合にスクロール可能にする */
+}
+
+header.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1030; /* 他のコンテンツの上に表示されるようにする */
+  background-color: #fff; /* ヘッダーの背景色を設定 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ヘッダーに影を追加 */
 }

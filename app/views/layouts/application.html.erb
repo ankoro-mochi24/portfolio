@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <header>
+    <header class="fixed-top bg-white shadow-sm">
       <%= render 'layouts/header' %>
     </header>
     <p class="notice"><%= notice %></p>
@@ -25,9 +25,7 @@
       </div>
       <div class="container" style="margin-left: 250px;">
         <div class="main-content">
-          <div class="content">
-            <%= yield %>
-          </div>
+          <%= yield %>
         </div>
       </div>
     <% elsif @use_split_layout %>
