@@ -13,13 +13,14 @@ export default class extends Controller {
   removeField(event) {
     event.preventDefault()
     const field = event.target.closest(".nested-fields")
-    if (this.containerTarget.childElementCount > 1) {
-      if (field.dataset.newRecord == "true") {
-        field.remove()
-      } else {
-        field.querySelector("input[name*='_destroy']").value = 1
-        field.style.display = "none"
-      }
+    if (field.dataset.newRecord == "true") {
+      field.remove()
+    } else {
+      field.querySelector("input[name*='_destroy']").value = 1
+      field.querySelectorAll('input, textarea, select').forEach((input) => {
+        input.removeAttribute('required')
+      })
+      field.style.display = "none"
     }
   }
 }
