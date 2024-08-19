@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_layout, only: [:show, :edit]
 
   def show
     @kitchen_tools = @user.kitchen_tools
@@ -9,6 +10,10 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user.user_kitchen_tools.each do |user_kitchen_tool|
+      user_kitchen_tool.kitchen_tool_name = user_kitchen_tool.kitchen_tool.name if user_kitchen_tool.kitchen_tool.present?
+    end
+
     @user.user_kitchen_tools.build if @user.user_kitchen_tools.empty?
   end
 
@@ -33,5 +38,9 @@ class UsersController < ApplicationController
       :email,
       user_kitchen_tools_attributes: [:id, :kitchen_tool_id, :_destroy, :kitchen_tool_name]
     )
+  end
+
+  def set_layout
+    @use_sidebar = true
   end
 end
