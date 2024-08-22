@@ -23,6 +23,7 @@
               <% @recipes.each do |recipe| %>
                 <%= render recipe %>
               <% end %>
+              <%= paginate @recipes %>
             <% else %>
               <p>該当するレシピが見つかりませんでした。</p>
             <% end %>
@@ -40,6 +41,7 @@
               <% @foodstuffs.each do |foodstuff| %>
                 <%= render foodstuff %>
               <% end %>
+              <%= paginate @foodstuffs %>
             <% else %>
               <p>該当する食品が見つかりませんでした。</p>
             <% end %>
