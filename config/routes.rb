@@ -7,7 +7,16 @@ Rails.application.routes.draw do
 
   get 'cookrice' => 'home#cookrice'
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      get 'bookmarked_recipes', to: 'users#bookmarked_recipes'
+      get 'bookmarked_foodstuffs', to: 'users#bookmarked_foodstuffs'
+      get 'good_recipes', to: 'users#good_recipes'
+      get 'bad_recipes', to: 'users#bad_recipes'
+      get 'good_foodstuffs', to: 'users#good_foodstuffs'
+      get 'bad_foodstuffs', to: 'users#bad_foodstuffs'
+    end
+  end
 
   concern :commentable do
     resources :comments, only: [:create, :edit, :update, :destroy]

@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update]
-  before_action :set_layout, only: [:show, :edit]
+  before_action :set_user, only: [:show, :edit, :update, :bookmarked_recipes, :bookmarked_foodstuffs, :good_recipes, :bad_recipes, :good_foodstuffs, :bad_foodstuffs]
+  before_action :set_layout, only: [:show, :edit, :bookmarked_recipes, :bookmarked_foodstuffs, :good_recipes, :bad_recipes, :good_foodstuffs, :bad_foodstuffs]
+  before_action :set_sidebar_counts, only: [:show, :edit, :bookmarked_recipes, :bookmarked_foodstuffs, :good_recipes, :bad_recipes, :good_foodstuffs, :bad_foodstuffs]
 
   def show
     @kitchen_tools = @user.kitchen_tools
@@ -26,6 +27,30 @@ class UsersController < ApplicationController
     end
   end
 
+  def bookmarked_recipes
+    @bookmarked_recipes = @user.user_actions.where(action_type: 'bookmark', actionable_type: 'Recipe').map(&:actionable)
+  end
+
+  def bookmarked_foodstuffs
+    @bookmarked_foodstuffs = @user.user_actions.where(action_type: 'bookmark', actionable_type: 'Foodstuff').map(&:actionable)
+  end
+
+  def good_recipes
+    @good_recipes = @user.user_actions.where(action_type: 'good', actionable_type: 'Recipe').map(&:actionable)
+  end
+
+  def bad_recipes
+    @bad_recipes = @user.user_actions.where(action_type: 'bad', actionable_type: 'Recipe').map(&:actionable)
+  end
+
+  def good_foodstuffs
+    @good_foodstuffs = @user.user_actions.where(action_type: 'good', actionable_type: 'Foodstuff').map(&:actionable)
+  end
+
+  def bad_foodstuffs
+    @bad_foodstuffs = @user.user_actions.where(action_type: 'bad', actionable_type: 'Foodstuff').map(&:actionable)
+  end
+
   private
 
   def set_user
@@ -42,5 +67,14 @@ class UsersController < ApplicationController
 
   def set_layout
     @use_sidebar = true
+  end
+
+  def set_sidebar_counts
+    @bookmark_recipes_count = @user.user_actions.where(action_type: 'bookmark', actionable_type: 'Recipe').count
+    @bookmark_foodstuffs_count = @user.user_actions.where(action_type: 'bookmark', actionable_type: 'Foodstuff').count
+    @good_recipes_count = @user.user_actions.where(action_type: 'good', actionable_type: 'Recipe').count
+    @bad_recipes_count = @user.user_actions.where(action_type: 'bad', actionable_type: 'Recipe').count
+    @good_foodstuffs_count = @user.user_actions.where(action_type: 'good', actionable_type: 'Foodstuff').count
+    @bad_foodstuffs_count = @user.user_actions.where(action_type: 'bad', actionable_type: 'Foodstuff').count
   end
 end
