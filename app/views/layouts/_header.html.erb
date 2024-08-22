@@ -35,6 +35,7 @@
       <% end %>
     </ul>
     <%= form_with url: root_path, method: :get, local: true, class: "form-inline my-2 my-lg-0 ml-auto" do |form| %>
+      <%= hidden_field_tag :view, @view %>
       <div class="input-group">
         <%= form.search_field :query, class: "form-control", placeholder: "検索", aria: { label: "検索" } %>
         <div class="input-group-append">
