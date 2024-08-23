@@ -3,17 +3,17 @@ header.fixed-top {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1030;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1030; /* 他のコンテンツの上に表示されるようにする */
+  background-color: #fff; /* ヘッダーの背景色を設定 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ヘッダーに影を追加 */
 }
 
 .navbar {
-  background-color: #fff;
-  margin: 0;
-  padding: 0 15px;
-  border-bottom: 1px solid #dee2e6;
-  box-shadow: none;
+  background-color: #fff; /* ナビゲーションバーの背景色を白に設定 */
+  margin: 0; /* ナビゲーションバー周りの余白を取り除く */
+  padding: 0 15px; /* 必要に応じてパディングを調整 */
+  border-bottom: 1px solid #dee2e6; /* 下部に薄い区切り線を追加 */
+  box-shadow: none; /* 影を取り除く */
 }
 
 .navbar-brand {
@@ -33,31 +33,33 @@ header.fixed-top {
   align-items: center;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-top: 60px; /* ヘッダーの高さに合わせる */
+.sidebar {
+  position: fixed;
+  top: 60px; /* ヘッダーの高さに合わせて調整 */
+  left: 0;
+  width: 250px;
+  background-color: #f8f9fa; /* サイドバーの背景色 */
+  padding: 20px;
+  border-right: 1px solid #dee2e6; /* サイドバーとメインコンテンツの区切り線 */
+  height: calc(100vh - 60px); /* サイドバーの高さを画面全体の高さからヘッダーの高さを引いたものに設定 */
+  overflow-y: auto; /* 内容が多い場合にスクロール可能にする */
+  box-sizing: border-box; /* パディングを含めて幅・高さを計算 */
 }
 
 .main-content {
-  flex: 1;
-  margin-left: 270px;
+  flex: 1; /* メインコンテンツが残りのスペースを占める */
+  margin-left: 270px; /* サイドバーの幅を考慮 */
   padding: 20px;
-  background-color: #e6f7ff;
+  padding-top: 80px; /* ナビゲーションタブとの余白を確保 */
+  background-color: #e6f7ff; /* メインコンテンツの背景色を設定 */
 }
 
-.sidebar {
-  position: fixed;
-  top: 60px;
-  left: 0;
-  width: 250px;
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-right: 1px solid #dee2e6;
-  height: calc(100vh - 60px);
-  overflow-y: auto;
-  box-sizing: border-box;
+ul.nav.nav-tabs {
+  margin-left: 270px; /* サイドバーの幅を考慮 */
+  margin-top: 20px; /* サイドバーとの余白を確保 */
+  z-index: 1020; /* 他のコンテンツより上に表示されるように調整 */
+  background-color: #fff; /* 背景色を白にして、下のコンテンツと区別 */
+  border-bottom: 1px solid #dee2e6; /* 下部に区切り線を追加 */
 }
 
 footer {
@@ -65,5 +67,4 @@ footer {
   padding: 10px;
   background-color: #f1f1f1;
   text-align: center;
-  width: calc(100% - 270px); /* サイドバーの幅を差し引く */
 }

@@ -13,35 +13,47 @@
 </ul>
 
 <div class="row">
-  <% if @view == 'both' || @view == 'recipes' %>
-    <div class="col-md-6">
-      <h1>レシピ一覧</h1>
-      <div id="recipes">
-        <% if @recipes.present? %>
-          <% @recipes.each do |recipe| %>
-            <%= render recipe %>
-          <% end %>
-          <%= paginate @recipes %>
-        <% else %>
-          <p>該当するレシピが見つかりませんでした。</p>
-        <% end %>
-      </div>
+  <% if user_signed_in? %>
+    <div class="col-md-3">
+      <%= render 'home/sidebar' %>
     </div>
+    <div class="col-md-9">
+  <% else %>
+    <div class="col-md-12">
   <% end %>
 
-  <% if @view == 'both' || @view == 'foodstuffs' %>
-    <div class="col-md-6">
-      <h1>食品一覧</h1>
-      <div id="foodstuffs">
-        <% if @foodstuffs.present? %>
-          <% @foodstuffs.each do |foodstuff| %>
-            <%= render foodstuff %>
-          <% end %>
-          <%= paginate @foodstuffs %>
-        <% else %>
-          <p>該当する食品が見つかりませんでした。</p>
-        <% end %>
-      </div>
+    <div class="row">
+      <% if @view == 'both' || @view == 'recipes' %>
+        <div class="col-md-6">
+          <h1>レシピ一覧</h1>
+          <div id="recipes">
+            <% if @recipes.present? %>
+              <% @recipes.each do |recipe| %>
+                <%= render recipe %>
+              <% end %>
+              <%= paginate @recipes %>
+            <% else %>
+              <p>該当するレシピが見つかりませんでした。</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @view == 'both' || @view == 'foodstuffs' %>
+        <div class="col-md-6">
+          <h1>食品一覧</h1>
+          <div id="foodstuffs">
+            <% if @foodstuffs.present? %>
+              <% @foodstuffs.each do |foodstuff| %>
+                <%= render foodstuff %>
+              <% end %>
+              <%= paginate @foodstuffs %>
+            <% else %>
+              <p>該当する食品が見つかりませんでした。</p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
