@@ -4,17 +4,14 @@ class HomeController < ApplicationController
   def top
     if params[:query].present?
       query = params[:query]
-      @recipes = Recipe.search(query)
-      @foodstuffs = Foodstuff.search(query)
+      @recipes = Recipe.search(query, page: params[:page], per_page: 10)
+      @foodstuffs = Foodstuff.search(query, page: params[:page], per_page: 10)
     else
-      @recipes = Recipe.all
-      @foodstuffs = Foodstuff.all
+      @recipes = Recipe.page(params[:page]).per(10)
+      @foodstuffs = Foodstuff.page(params[:page]).per(10)
     end
   
     filter_content if user_signed_in? && params[:filter].present?
-
-    @recipes = @recipes.page(params[:page]).per(10) if @recipes.present?
-    @foodstuffs = @foodstuffs.page(params[:page]).per(10) if @foodstuffs.present?
 
     case @view
     when 'recipes'
