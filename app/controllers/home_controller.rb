@@ -4,13 +4,13 @@ class HomeController < ApplicationController
   def top
     if params[:query].present?
       query = params[:query]
-      @recipes = Recipe.search(query, page: params[:page], per_page: 10)
-      @foodstuffs = Foodstuff.search(query, page: params[:page], per_page: 10)
+      @recipes = Recipe.search(query).page(params[:page]).per(10)
+      @foodstuffs = Foodstuff.search(query).page(params[:page]).per(10)
     else
       @recipes = Recipe.page(params[:page]).per(10)
       @foodstuffs = Foodstuff.page(params[:page]).per(10)
     end
-  
+
     filter_content if user_signed_in? && params[:filter].present?
 
     case @view
@@ -38,6 +38,10 @@ class HomeController < ApplicationController
     when 'bad'
       @recipes = @recipes.joins(:user_actions).where(user_actions: { user_id: current_user.id, action_type: 'bad', actionable_type: 'Recipe' })
       @foodstuffs = @foodstuffs.joins(:user_actions).where(user_actions: { user_id: current_user.id, action_type: 'bad', actionable_type: 'Foodstuff' })
+    when 'kitchen_tools'
+      # 持っている調理器具で作れるレシピに絞り込み
+      @recipes = @recipes.joins(:kitchen_tools).where(kitchen_tools: { id: current_user.kitchen_tools.pluck(:id) })
+      @foodstuffs = nil # 食品は関連しないのでnilに設定
     end
   end
 end
