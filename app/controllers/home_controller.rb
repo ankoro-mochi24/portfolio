@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
-  before_action :set_layout, only: [:top]
   before_action :set_view, only: [:top]
-  before_action :show_tabs, only: [:top]
 
   def top
     if params[:query].present?
@@ -23,15 +21,7 @@ class HomeController < ApplicationController
 
   private
 
-  def set_layout
-    @use_split_layout = true
-  end
-
   def set_view
     @view = params[:view] || 'both'
-  end
-
-  def show_tabs
-    @show_tabs = true
   end
 end

@@ -1,64 +1,3 @@
-.container {
-  display: flex;
-  padding-top: 60px; /* ヘッダーの高さを考慮して、コンテンツの位置を調整 */
-}
-
-.left-side {
-  width: 50%;
-  padding: 10px;
-}
-
-.right-side {
-  width: 50%;
-  padding: 10px;
-}
-
-.recipe-show {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.recipe-header, .recipe-section, .recipe-actions {
-  margin-bottom: 20px;
-}
-
-.recipe-step {
-  margin-bottom: 10px;
-}
-
-.recipe-step img {
-  display: block;
-  margin-top: 5px;
-}
-
-.btn {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.main-content {
-  margin-left: 270px; /* サイドバーの幅を考慮 */
-  padding: 20px;
-  flex: 1; /* メインコンテンツは残りのスペースを占める */
-}
-
-.content {
-  flex: 1; /* メインコンテンツは残りのスペースを占める */
-}
-
-.sidebar {
-  width: 250px; /* サイドバーの幅を設定 */
-  background-color: #f8f9fa; /* サイドバーの背景色 */
-  padding: 20px;
-  border-right: 1px solid #dee2e6; /* サイドバーとメインコンテンツの区切り線 */
-  position: fixed; /* サイドバーを画面左端に固定 */
-  left: 0; /* サイドバーを画面左端に寄せる */
-  top: 60px; /* サイドバーの上端をヘッダーの高さに合わせて調整 */
-  height: calc(100vh - 60px); /* サイドバーの高さを画面全体の高さからヘッダーの高さを引いたものに設定 */
-  box-sizing: border-box; /* パディングを含めて幅・高さを計算 */
-  overflow-y: auto; /* 内容が多い場合にスクロール可能にする */
-}
-
 header.fixed-top {
   position: fixed;
   top: 0;
@@ -67,4 +6,48 @@ header.fixed-top {
   z-index: 1030; /* 他のコンテンツの上に表示されるようにする */
   background-color: #fff; /* ヘッダーの背景色を設定 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ヘッダーに影を追加 */
+}
+
+.navbar {
+  background-color: #fff; /* ナビゲーションバーの背景色を白に設定 */
+  margin: 0; /* ナビゲーションバー周りの余白を取り除く */
+  padding: 0 15px; /* 必要に応じてパディングを調整 */
+  border-bottom: 1px solid #dee2e6; /* 下部に薄い区切り線を追加 */
+  box-shadow: none; /* 影を取り除く */
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.navbar-nav .nav-link {
+  padding: 10px 15px;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1; /* メインコンテンツがフッターの上に表示されるように調整 */
+  margin-left: 270px; /* サイドバーの幅を考慮 */
+  padding: 20px;
+}
+
+footer {
+  padding: 10px;
+  background-color: #f1f1f1;
+  text-align: center;
+  width: 100%;
 }
