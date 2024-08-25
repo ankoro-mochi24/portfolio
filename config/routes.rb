@@ -9,12 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update] do
     member do
-      get 'bookmarked_recipes', to: 'users#bookmarked_recipes'
-      get 'bookmarked_foodstuffs', to: 'users#bookmarked_foodstuffs'
-      get 'good_recipes', to: 'users#good_recipes'
-      get 'bad_recipes', to: 'users#bad_recipes'
-      get 'good_foodstuffs', to: 'users#good_foodstuffs'
-      get 'bad_foodstuffs', to: 'users#bad_foodstuffs'
+      get 'posts', to: 'users#posts', as: 'posts'
     end
   end
 

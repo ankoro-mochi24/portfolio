@@ -1,13 +1,8 @@
 <div class="sidebar">
   <h2>メニュー</h2>
-  <ul>
-    <li><%= link_to "ユーザー情報", user_path(current_user) %></li>
-    <li><%= link_to "ブックマークしたレシピ (#{@bookmark_recipes_count})", bookmarked_recipes_user_path(current_user) %></li>
-    <li><%= link_to "Goodしたレシピ (#{@good_recipes_count})", good_recipes_user_path(current_user) %></li>
-    <li><%= link_to "Badしたレシピ (#{@bad_recipes_count})", bad_recipes_user_path(current_user) %></li>
-    <li><%= link_to "ブックマークした食品 (#{@bookmark_foodstuffs_count})", bookmarked_foodstuffs_user_path(current_user) %></li>
-    <li><%= link_to "Goodした食品 (#{@good_foodstuffs_count})", good_foodstuffs_user_path(current_user) %></li>
-    <li><%= link_to "Badした食品 (#{@bad_foodstuffs_count})", bad_foodstuffs_user_path(current_user) %></li>
-    <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger ml-2' %></li>
+  <ul class="list-group">
+    <li class="list-group-item"><%= link_to "ユーザー情報", user_path(current_user) %></li>
+    <li class="list-group-item"><%= link_to "投稿したレシピ/投稿した食品", posts_user_path(current_user) %></li>
+    <li class="list-group-item"><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %></li>
   </ul>
 </div>
