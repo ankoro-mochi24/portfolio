@@ -1,0 +1,47 @@
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= posts_user_path(@user, view: 'both') %>">両方</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= posts_user_path(@user, view: 'recipes') %>">レシピ</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= posts_user_path(@user, view: 'foodstuffs') %>">食品</a>
+  </li>
+</ul>
+
+<h1>投稿したレシピ/投稿した食品</h1>
+
+<div class="row">
+  <% if @view == 'both' || @view == 'recipes' %>
+    <div class="col-md-6">
+      <h2>投稿したレシピ</h2>
+      <div id="user-recipes">
+        <% if @recipes.present? %>
+          <% @recipes.each do |recipe| %>
+            <%= render partial: 'recipes/recipe', locals: { recipe: recipe } %>
+          <% end %>
+          <%= paginate @recipes %>
+        <% else %>
+          <p>投稿したレシピはありません。</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @view == 'both' || @view == 'foodstuffs' %>
+    <div class="col-md-6">
+      <h2>投稿した食品</h2>
+      <div id="user-foodstuffs">
+        <% if @foodstuffs.present? %>
+          <% @foodstuffs.each do |foodstuff| %>
+            <%= render partial: 'foodstuffs/foodstuff', locals: { foodstuff: foodstuff } %>
+          <% end %>
+          <%= paginate @foodstuffs %>
+        <% else %>
+          <p>投稿した食品はありません。</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
