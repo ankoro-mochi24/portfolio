@@ -1,0 +1,20 @@
+<div class="sidebar">
+  <h2>絞り込み</h2>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a href="<%= root_path %>?filter=bookmarks">ブックマーク(<%= @bookmark_count[:recipes] + @bookmark_count[:foodstuffs] %>)</a>
+    </li>
+    <li class="list-group-item">
+      <a href="<%= root_path %>?filter=good">Good(<%= @good_count[:recipes] + @good_count[:foodstuffs] %>)</a>
+    </li>
+    <li class="list-group-item">
+      <a href="<%= root_path %>?filter=bad">Bad(<%= @bad_count[:recipes] + @bad_count[:foodstuffs] %>)</a>
+    </li>
+    <li class="list-group-item">
+      <a href="<%= root_path %>?filter=kitchen_tools">持っている調理器具で作れる(<%= @kitchen_tools_count %>)</a>
+    </li>
+    <li class="list-group-item">
+      <a href="<%= root_path %>">絞り込み解除</a>
+    </li>
+  </ul>
+</div>

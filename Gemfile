@@ -35,4 +35,4 @@ gem 'devise-i18n'              # deviceの国際化対応
 gem 'searchkick'               # 検索
 gem 'elasticsearch', '~> 7.0'  # Elasticsearchとの連携
 gem 'faker'                    # 疑似データ
-gem 'kaminari'
+gem 'kaminari'                 # ページネーション

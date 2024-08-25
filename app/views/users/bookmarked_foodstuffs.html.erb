@@ -1,0 +1,11 @@
+<h1>ブックマークした食品</h1>
+
+<% if @bookmarked_foodstuffs.any? %>
+  <ul>
+    <% @bookmarked_foodstuffs.each do |foodstuff| %>
+      <li><%= link_to foodstuff.name, foodstuff_path(foodstuff) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>ブックマークした食品はありません。</p>
+<% end %>

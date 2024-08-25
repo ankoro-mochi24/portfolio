@@ -1,22 +1,30 @@
 <% content_for(:title, "入口") %>
 
-<div class="container">
-  <ul class="nav nav-tabs mb-3">
-    <li class="nav-item">
-      <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= root_path %>">両方</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= recipes_view_path %>">レシピ</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= foodstuffs_view_path %>">食品</a>
-    </li>
-  </ul>
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= root_path %>">両方</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= recipes_view_path %>">レシピ</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= foodstuffs_view_path %>">食品</a>
+  </li>
+</ul>
 
-  <div class="row">
-    <% if @view == 'both' || @view == 'recipes' %>
-      <div class="col-md-6">
-        <% content_for :left do %>
+<div class="row">
+  <% if user_signed_in? %>
+    <div class="col-md-3">
+      <%= render 'home/sidebar' %>
+    </div>
+    <div class="col-md-9">
+  <% else %>
+    <div class="col-md-12">
+  <% end %>
+
+    <div class="row">
+      <% if @view == 'both' || @view == 'recipes' %>
+        <div class="col-md-6">
           <h1>レシピ一覧</h1>
           <div id="recipes">
             <% if @recipes.present? %>
@@ -28,13 +36,11 @@
               <p>該当するレシピが見つかりませんでした。</p>
             <% end %>
           </div>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
 
-    <% if @view == 'both' || @view == 'foodstuffs' %>
-      <div class="col-md-6">
-        <% content_for :right do %>
+      <% if @view == 'both' || @view == 'foodstuffs' %>
+        <div class="col-md-6">
           <h1>食品一覧</h1>
           <div id="foodstuffs">
             <% if @foodstuffs.present? %>
@@ -46,8 +52,8 @@
               <p>該当する食品が見つかりませんでした。</p>
             <% end %>
           </div>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

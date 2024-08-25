@@ -1,0 +1,11 @@
+<h1>Badした食品</h1>
+
+<% if @bad_foodstuffs.any? %>
+  <ul>
+    <% @bad_foodstuffs.each do |foodstuff| %>
+      <li><%= link_to foodstuff.name, foodstuff_path(foodstuff) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Badした食品はありません。</p>
+<% end %>
