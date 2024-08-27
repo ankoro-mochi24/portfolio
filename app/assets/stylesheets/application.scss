@@ -66,3 +66,8 @@ footer {
   padding: 10px;
   text-align: center;
 }
+
+.sidebar .list-group-item.active {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}

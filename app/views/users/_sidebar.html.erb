@@ -1,8 +1,14 @@
 <div class="sidebar">
   <h2>メニュー</h2>
   <ul class="list-group">
-    <li class="list-group-item"><%= link_to "ユーザー情報", user_path(current_user) %></li>
-    <li class="list-group-item"><%= link_to "投稿したレシピ/投稿した食品", posts_user_path(current_user) %></li>
-    <li class="list-group-item"><%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %></li>
+    <li class="list-group-item <%= 'active' if current_page?(user_path(current_user)) %>">
+      <%= link_to "ユーザー情報", user_path(current_user) %>
+    </li>
+    <li class="list-group-item <%= 'active' if current_page?(posts_user_path(current_user)) %>">
+      <%= link_to "投稿したレシピ/投稿した食品", posts_user_path(current_user) %>
+    </li>
+    <li class="list-group-item">
+      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %>
+    </li>
   </ul>
 </div>

@@ -4,16 +4,16 @@ class HomeController < ApplicationController
   def top
     if params[:query].present?
       query = params[:query]
-      @recipes = Recipe.search(query, page: params[:page], per_page: 10)
-      @foodstuffs = Foodstuff.search(query, page: params[:page], per_page: 10)
+      @recipes = Recipe.includes(:user_actions).search(query, page: params[:page], per_page: 10)
+      @foodstuffs = Foodstuff.includes(:user_actions).search(query, page: params[:page], per_page: 10)
     else
-      @recipes = Recipe.page(params[:page]).per(10)
-      @foodstuffs = Foodstuff.page(params[:page]).per(10)
+      @recipes = Recipe.includes(:user_actions).page(params[:page]).per(10)
+      @foodstuffs = Foodstuff.includes(:user_actions).page(params[:page]).per(10)
     end
-
+  
     filter_content if user_signed_in? && params[:filter].present?
     set_filter_counts if user_signed_in?
-
+  
     case @view
     when 'recipes'
       @foodstuffs = nil
@@ -21,7 +21,7 @@ class HomeController < ApplicationController
       @recipes = nil
     end
   end
-
+  
   private
 
   def set_view
