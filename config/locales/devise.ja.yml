@@ -18,6 +18,10 @@ ja:
       confirmation_instructions:
         subject: "確認の指示"
       reset_password_instructions:
+        greeting: "%{name}様"
+        body: "パスワードをリセットするためのリンクをリクエストしました。このリンクを使用してパスワードをリセットしてください。"
+        link_text: "パスワードをリセットする"
+        notice: "もしこのリクエストに心当たりがない場合は、このメールを無視してください。パスワードは、上記のリンクにアクセスし新しいものを設定するまで変更されません。"
         subject: "パスワードリセットの指示"
       unlock_instructions:
         subject: "アカウントロック解除の指示"
