@@ -11,12 +11,12 @@
     <% if @minimum_password_length %>
       <em>(<%= @minimum_password_length %> <%= t('devise.passwords.edit.password_minimum_length') %>)</em><br />
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation, t('devise.passwords.edit.confirm_new_password_label') %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
   </div>
 
   <div class="actions">

@@ -7,10 +7,9 @@ Rails.application.routes.draw do
 
   get 'cookrice' => 'home#cookrice'
 
-  resources :users, only: [:show, :edit, :update] do
-    member do
-      get 'posts', to: 'users#posts', as: 'posts'
-    end
+  # カレントユーザー用のルート
+  resource :profile, only: [:show, :edit, :update] do
+    get 'posts', to: 'profiles#posts', as: 'posts'
   end
 
   concern :commentable do

@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :password, t('devise.sessions.new.password_label') %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
