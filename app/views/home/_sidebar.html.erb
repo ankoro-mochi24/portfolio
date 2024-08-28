@@ -1,20 +1,22 @@
 <div class="sidebar">
   <h2>絞り込み</h2>
-  <ul class="list-group">
-    <li class="list-group-item <%= 'active' if params[:filter] == 'bookmarks' %>">
-      <%= link_to "ブックマーク(#{@bookmark_count[:recipes] + @bookmark_count[:foodstuffs]})", root_path(filter: 'bookmarks') %>
-    </li>
-    <li class="list-group-item <%= 'active' if params[:filter] == 'good' %>">
-      <%= link_to "Good(#{@good_count[:recipes] + @good_count[:foodstuffs]})", root_path(filter: 'good') %>
-    </li>
-    <li class="list-group-item <%= 'active' if params[:filter] == 'bad' %>">
-      <%= link_to "Bad(#{@bad_count[:recipes] + @bad_count[:foodstuffs]})", root_path(filter: 'bad') %>
-    </li>
-    <li class="list-group-item <%= 'active' if params[:filter] == 'kitchen_tools' %>">
-      <%= link_to "持っている調理器具で作れる(#{@kitchen_tools_count})", root_path(filter: 'kitchen_tools') %>
-    </li>
-    <li class="list-group-item">
-      <%= link_to "絞り込み解除", root_path %>
-    </li>
-  </ul>
+  <turbo-frame id="filter_counts">
+    <ul class="list-group">
+      <li class="list-group-item <%= 'active' if params[:filter] == 'bookmarks' %>">
+        <%= link_to raw("ブックマーク(<span id='bookmark_count'>#{@bookmark_count[:recipes] + @bookmark_count[:foodstuffs]}</span>)"), root_path(filter: 'bookmarks') %>
+      </li>
+      <li class="list-group-item <%= 'active' if params[:filter] == 'good' %>">
+        <%= link_to raw("Good(<span id='good_count'>#{@good_count[:recipes] + @good_count[:foodstuffs]}</span>)"), root_path(filter: 'good') %>
+      </li>
+      <li class="list-group-item <%= 'active' if params[:filter] == 'bad' %>">
+        <%= link_to raw("Bad(<span id='bad_count'>#{@bad_count[:recipes] + @bad_count[:foodstuffs]}</span>)"), root_path(filter: 'bad') %>
+      </li>
+      <li class="list-group-item <%= 'active' if params[:filter] == 'kitchen_tools' %>">
+        <%= link_to raw("持っている調理器具で作れる(<span id='kitchen_tools_count'>#{@kitchen_tools_count}</span>)"), root_path(filter: 'kitchen_tools') %>
+      </li>
+      <li class="list-group-item">
+        <%= link_to "絞り込み解除", root_path %>
+      </li>
+    </ul>
+  </turbo-frame>
 </div>
