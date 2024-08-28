@@ -90,6 +90,15 @@ ja:
     attributes:
       user:
         name: "ユーザー名"
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "は%{count}文字以上で入力してください"
+              too_long: "は%{count}文字以下で入力してください"
+            password_confirmation:
+              confirmation: "パスワード確認と一致しません"
   errors:
     messages:
       already_confirmed: "すでに確認されています。サインインを試みてください。"
@@ -100,3 +109,6 @@ ja:
       not_saved:
         one: "この%{resource}を保存する際に1つのエラーが発生しました:"
         other: "この%{resource}を保存する際に%{count}のエラーが発生しました:"
+      confirmation: "確認が一致しません"
+      too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以下で入力してください"
