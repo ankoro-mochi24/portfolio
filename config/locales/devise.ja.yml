@@ -59,6 +59,7 @@ ja:
       updated_but_not_signed_in: "アカウント情報が正常に更新されましたが、パスワードが変更されたため再度ログインする必要があります。"
       new:
         title: "サインアップ"
+        name: "ユーザー名"
         email: "メールアドレス"
         password: "パスワード"
         password_confirmation: "パスワード（確認）"
@@ -90,19 +91,23 @@ ja:
     attributes:
       user:
         name: "ユーザー名"
+        email: "メールアドレス"
     errors:
       models:
         user:
           attributes:
+            name:
+              blank: "ユーザー名を入力してください"
             email:
+              taken: "このメールアドレスはすでに使用されています"
               blank: "メールアドレスを入力してください"
               invalid: "メールアドレスは不正な値です"
-              taken: "このメールアドレスはすでに使用されています"
             password:
-              too_short: "は%{count}文字以上で入力してください"
-              too_long: "は%{count}文字以下で入力してください"
+              too_short: "パスワードは%{count}文字以上で入力してください"
+              too_long: "パスワードは%{count}文字以下で入力してください"
               blank: "パスワードを入力してください"
-              confirmation: "パスワード確認と一致しません"
+            password_confirmation:
+              confirmation: "パスワードとパスワード（確認）が一致しません"
             current_password:
               blank: "現在のパスワードを入力してください"
   errors:
@@ -118,3 +123,5 @@ ja:
       confirmation: "確認が一致しません"
       too_short: "は%{count}文字以上で入力してください"
       too_long: "は%{count}文字以下で入力してください"
+    messages:
+      taken: "はすでに存在します"
