@@ -96,11 +96,17 @@ en:
       models:
         user:
           attributes:
+            email:
+              blank: "Email can't be blank"
+              invalid: "Email is invalid"
+              taken: "This email is already taken"
             password:
               too_short: "is too short (minimum is %{count} characters)"
               too_long: "is too long (maximum is %{count} characters)"
-            password_confirmation:
-              confirmation: "doesn't match Password"
+              blank: "Password can't be blank"
+              confirmation: "Password confirmation doesn't match Password"
+            current_password:
+              blank: "Current password can't be blank"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"

@@ -94,11 +94,17 @@ ja:
       models:
         user:
           attributes:
+            email:
+              blank: "メールアドレスを入力してください"
+              invalid: "メールアドレスは不正な値です"
+              taken: "このメールアドレスはすでに使用されています"
             password:
               too_short: "は%{count}文字以上で入力してください"
               too_long: "は%{count}文字以下で入力してください"
-            password_confirmation:
+              blank: "パスワードを入力してください"
               confirmation: "パスワード確認と一致しません"
+            current_password:
+              blank: "現在のパスワードを入力してください"
   errors:
     messages:
       already_confirmed: "すでに確認されています。サインインを試みてください。"
