@@ -42,6 +42,12 @@ ja:
         title: "パスワードをお忘れですか？"
         email_label: "メールアドレス"
         submit: "パスワードリセットメールを送信"
+      edit:
+        title: "パスワードを変更する"
+        new_password_label: "新しいパスワード"
+        password_minimum_length: "文字以上"
+        confirm_new_password_label: "新しいパスワードの確認"
+        submit: "パスワードを変更する"
     registrations:
       destroyed: "さようなら！アカウントのキャンセルが正常に完了しました。またお会いできることを願っています。"
       signed_up: "ようこそ！サインアップに成功しました。"

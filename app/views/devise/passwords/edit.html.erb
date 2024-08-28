@@ -1,24 +1,26 @@
-<h2>Change your password</h2>
+<!-- URL: http://localhost:3000/users/password/edit?reset_password_token=【パスワードリセットメールの文面で送信されるトークン】 -->
+
+<h2><%= t('devise.passwords.edit.title') %></h2>
 
 <%= form_with model: resource, url: password_path(resource_name), method: :put, local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   <%= f.hidden_field :reset_password_token %>
 
   <div class="field">
-    <%= f.label :password, "New password" %><br />
+    <%= f.label :password, t('devise.passwords.edit.new_password_label') %><br />
     <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <em>(<%= @minimum_password_length %> <%= t('devise.passwords.edit.password_minimum_length') %>)</em><br />
     <% end %>
     <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
+    <%= f.label :password_confirmation, t('devise.passwords.edit.confirm_new_password_label') %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Change my password" %>
+    <%= f.submit t('devise.passwords.edit.submit') %>
   </div>
 <% end %>
 
