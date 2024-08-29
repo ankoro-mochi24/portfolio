@@ -1,33 +1,74 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  helpers:
+    submit:
+      create: "Create"
+      update: "Update"
+      submit: "Save"
+  foodstuffs:
+    new:
+      title: "Post a Foodstuff"
+    back_to_list: "Back to Foodstuff List"
+    index:
+      title: "Foodstuff List"
+      new_foodstuff: "Add New Foodstuff"
+      show_foodstuff: "Show this Foodstuff"
+    edit:
+      title: "Edit Foodstuff"
+    edit_foodstuff: "Edit this Foodstuff"
+    destroy_foodstuff: "Delete this Foodstuff"
+  recipes:
+    new:
+      title: "Post a Recipe"
+    index:
+      title: "Recipe List"
+  activerecord:
+    attributes:
+      foodstuff:
+        name: "Name"
+        price: "Price"
+        description: "Description"
+        link: "Link"
+        image: "Image"
+        user: "User"
+      recipe:
+        title: "Title"
+        dish_image: "Dish Image"
+        user: "User"
+    errors:
+      models:
+        foodstuff:
+          attributes:
+            name:
+              blank: "Please enter a name"
+            price:
+              blank: "Please enter a price"
+              not_a_number: "Please enter a valid number for price"
+            link:
+              blank: "Please enter a link"
+            image:
+              blank: "Please upload an image"
+            user:
+              required: "User is required"
+  errors:
+    messages:
+      blank: "can't be blank"
+      not_a_number: "is not a number"
+      required: "is required"
+  notices:
+    foodstuff_created: "Foodstuff was successfully created."
+  kaminari:
+    next: "Next"
+    prev: "Previous"
+    first: "First"
+    last: "Last"
+    truncate: "..."
+    page_gap: "..."
+    page_entries_info:
+      single_page:
+        zero: "No entries found"
+        one: "Showing 1 entry"
+        other: "Showing all %{count} entries"
+      multiple_pages:
+        zero: "No entries found"
+        one: "Showing 1 entry"
+        other: "Displaying %{from} - %{to} of %{total} entries"

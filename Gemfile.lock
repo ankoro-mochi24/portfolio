@@ -158,6 +158,9 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    kaminari-i18n (0.5.0)
+      kaminari
+      rails
     logger (1.6.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -330,6 +333,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kaminari
+  kaminari-i18n
   mailcatcher
   mysql2 (~> 0.5)
   puma (~> 5.0)

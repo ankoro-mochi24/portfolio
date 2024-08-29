@@ -37,3 +37,4 @@ gem 'searchkick'               # 検索
 gem 'elasticsearch', '~> 7.0'  # Elasticsearchとの連携
 gem 'faker'                    # 疑似データ
 gem 'kaminari'                 # ページネーション
+gem 'kaminari-i18n'            # ページネーションの国際化対応

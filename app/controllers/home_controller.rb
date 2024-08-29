@@ -59,5 +59,4 @@ class HomeController < ApplicationController
       @foodstuffs = nil # 食品には調理器具が関係しない場合、結果を空にする
     end
   end
-  
 end

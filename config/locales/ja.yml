@@ -56,3 +56,19 @@ ja:
       required: "が必要です"
   notices:
     foodstuff_created: "食品が正常に作成されました。"
+  kaminari:
+    next: "次"
+    prev: "前"
+    first: "最初"
+    last: "最後"
+    truncate: "..."
+    page_gap: "..."
+    page_entries_info:
+      single_page:
+        zero: "エントリーはありません"
+        one: "全1件"
+        other: "全%{count}件"
+      multiple_pages:
+        zero: "エントリーはありません"
+        one: "全1件"
+        other: "%{total}件中%{from}〜%{to}件目を表示"
