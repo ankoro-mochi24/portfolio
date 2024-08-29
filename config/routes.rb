@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: [:edit, :update], controllers: {
+  devise_for :users, skip: :registrations, controllers: {
     registrations: 'devise/registrations'
   }
+  
+  as :user do
+    get 'users/sign_up' => 'devise/registrations#new', as: :new_user_registration
+    post 'users' => 'devise/registrations#create', as: :user_registration
+    delete 'users' => 'devise/registrations#destroy'
+    # editを除外するため、ここでは追加しません
+  end
 
   root to: 'home#top'
 
