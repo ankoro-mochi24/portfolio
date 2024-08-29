@@ -68,7 +68,6 @@
         <%= form.fields_for :user_kitchen_tools, UserKitchenTool.new, child_index: "TEMPLATE_RECORD" do |tool_form| %>
           <%= tool_form.hidden_field :_destroy %>
           <%= tool_form.hidden_field :kitchen_tool_id %>
-          <%= tool_form.label :kitchen_tool_name, "調理器具" %>
           <%= tool_form.text_field :kitchen_tool_name, required: true %>
           <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
         <% end %>

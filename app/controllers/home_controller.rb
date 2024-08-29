@@ -4,11 +4,11 @@ class HomeController < ApplicationController
   def top
     if params[:query].present?
       query = params[:query]
-      @recipes = Recipe.includes(:user_actions).search(query, page: params[:page], per_page: 10)
-      @foodstuffs = Foodstuff.includes(:user_actions).search(query, page: params[:page], per_page: 10)
+      @recipes = Recipe.search(query, page: params[:page], per_page: 10).includes(:user_actions)
+      @foodstuffs = Foodstuff.search(query, page: params[:page], per_page: 10).includes(:user_actions)
     else
-      @recipes = Recipe.includes(:user_actions).page(params[:page]).per(10)
-      @foodstuffs = Foodstuff.includes(:user_actions).page(params[:page]).per(10)
+      @recipes = Recipe.page(params[:page]).per(10).includes(:user_actions)
+      @foodstuffs = Foodstuff.page(params[:page]).per(10).includes(:user_actions)
     end
 
     filter_content if user_signed_in? && params[:filter].present?
@@ -31,17 +31,33 @@ class HomeController < ApplicationController
   def filter_content
     case params[:filter]
     when 'bookmarks'
-      @recipes = @recipes.joins(:user_actions).where(user_actions: { user_id: current_user.id, action_type: 'bookmark', actionable_type: 'Recipe' })
-      @foodstuffs = @foodstuffs.joins(:user_actions).where(user_actions: { user_id: current_user.id, action_type: 'bookmark', actionable_type: 'Foodstuff' })
+      @recipes = Recipe.joins(:user_actions)
+                       .where(user_actions: { user_id: current_user.id, action_type: 'bookmark', actionable_type: 'Recipe' })
+                       .page(params[:page]).per(10)
+      @foodstuffs = Foodstuff.joins(:user_actions)
+                             .where(user_actions: { user_id: current_user.id, action_type: 'bookmark', actionable_type: 'Foodstuff' })
+                             .page(params[:page]).per(10)
     when 'good'
-      @recipes = @recipes.joins(:user_actions).where(user_actions: { user_id: current_user.id, action_type: 'good', actionable_type: 'Recipe' })
-      @foodstuffs = @foodstuffs.joins(:user_actions).where(user_actions: { user_id: current_user.id, action_type: 'good', actionable_type: 'Foodstuff' })
+      @recipes = Recipe.joins(:user_actions)
+                       .where(user_actions: { user_id: current_user.id, action_type: 'good', actionable_type: 'Recipe' })
+                       .page(params[:page]).per(10)
+      @foodstuffs = Foodstuff.joins(:user_actions)
+                             .where(user_actions: { user_id: current_user.id, action_type: 'good', actionable_type: 'Foodstuff' })
+                             .page(params[:page]).per(10)
     when 'bad'
-      @recipes = @recipes.joins(:user_actions).where(user_actions: { user_id: current_user.id, action_type: 'bad', actionable_type: 'Recipe' })
-      @foodstuffs = @foodstuffs.joins(:user_actions).where(user_actions: { user_id: current_user.id, action_type: 'bad', actionable_type: 'Foodstuff' })
+      @recipes = Recipe.joins(:user_actions)
+                       .where(user_actions: { user_id: current_user.id, action_type: 'bad', actionable_type: 'Recipe' })
+                       .page(params[:page]).per(10)
+      @foodstuffs = Foodstuff.joins(:user_actions)
+                             .where(user_actions: { user_id: current_user.id, action_type: 'bad', actionable_type: 'Foodstuff' })
+                             .page(params[:page]).per(10)
     when 'kitchen_tools'
-      @recipes = @recipes.joins(:kitchen_tools).where(kitchen_tools: { id: current_user.kitchen_tools.pluck(:id) })
-      @foodstuffs = nil
+      kitchen_tool_ids = current_user.kitchen_tools.pluck(:id)
+      @recipes = Recipe.joins(:kitchen_tools)
+                       .where(kitchen_tools: { id: kitchen_tool_ids })
+                       .page(params[:page]).per(10)
+      @foodstuffs = nil # 食品には調理器具が関係しない場合、結果を空にする
     end
   end
+  
 end
