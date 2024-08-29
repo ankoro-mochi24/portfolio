@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, skip: [:edit, :update], controllers: {
+    registrations: 'devise/registrations'
+  }
+
   root to: 'home#top'
 
   get 'recipes', to: 'home#top', defaults: { view: 'recipes' }, as: 'recipes_view'
@@ -8,7 +11,7 @@ Rails.application.routes.draw do
   get 'cookrice' => 'home#cookrice'
 
   # カレントユーザー用のルート
-  resource :profile, only: [:show, :edit, :update] do
+  resource :profile, only: [:show, :edit, :update, :destroy] do
     get 'posts', to: 'profiles#posts', as: 'posts'
   end
 

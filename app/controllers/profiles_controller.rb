@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :posts]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :posts]
   before_action :set_layout, only: [:show, :edit, :posts]
   before_action :set_view, only: [:posts]
 
@@ -14,7 +14,6 @@ class ProfilesController < ApplicationController
     @user.user_kitchen_tools.each do |user_kitchen_tool|
       user_kitchen_tool.kitchen_tool_name = user_kitchen_tool.kitchen_tool.name if user_kitchen_tool.kitchen_tool.present?
     end
-
     @user.user_kitchen_tools.build if @user.user_kitchen_tools.empty?
   end
 
@@ -25,6 +24,11 @@ class ProfilesController < ApplicationController
       @user.user_kitchen_tools.build if @user.user_kitchen_tools.empty?
       render :edit, status: :unprocessable_entity
     end
+  end
+  
+  def destroy
+    @user.destroy
+    redirect_to root_path, notice: 'アカウントが削除されました。'
   end
 
   def posts
