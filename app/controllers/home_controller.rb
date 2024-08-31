@@ -11,6 +11,7 @@ class HomeController < ApplicationController
       @foodstuffs = Foodstuff.page(params[:page]).per(10).includes(:user_actions)
     end
 
+    sort_content if params[:sort_by].present?
     filter_content if user_signed_in? && params[:filter].present?
     set_filter_counts if user_signed_in?
 
@@ -23,6 +24,41 @@ class HomeController < ApplicationController
   end
 
   private
+
+  def sort_content
+    case params[:sort_by]
+    when 'few_ingredients'
+      @recipes = @recipes.joins(:recipe_ingredients)
+                         .group('recipes.id')
+                         .order('COUNT(recipe_ingredients.id) ASC')
+    when 'easy_cooking'
+      @recipes = @recipes.joins(:recipe_steps)
+                         .group('recipes.id')
+                         .order('COUNT(recipe_steps.id) ASC')
+    when 'newest'
+      @recipes = @recipes.order(created_at: :desc)
+      @foodstuffs = @foodstuffs.order(created_at: :desc)
+    when 'oldest'
+      @recipes = @recipes.order(created_at: :asc)
+      @foodstuffs = @foodstuffs.order(created_at: :asc)
+    when 'most_good'
+      @recipes = @recipes.left_outer_joins(:user_actions)
+                         .group('recipes.id, recipes.title, recipes.dish_image, recipes.created_at')
+                         .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "good" AND user_actions.actionable_type = "Recipe" THEN 1 ELSE NULL END) DESC'))
+      
+      @foodstuffs = @foodstuffs.left_outer_joins(:user_actions)
+                        .group('foodstuffs.id, foodstuffs.name, foodstuffs.price, foodstuffs.created_at')
+                        .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "good" AND user_actions.actionable_type = "Foodstuff" THEN 1 ELSE NULL END) DESC'))
+    when 'most_bookmarks'
+      @recipes = @recipes.left_outer_joins(:user_actions)
+                          .group('recipes.id, recipes.title, recipes.dish_image, recipes.created_at')
+                          .order(Arel.sql("COUNT(CASE WHEN user_actions.action_type = 'bookmark' AND user_actions.actionable_type = 'Recipe' THEN 1 ELSE NULL END) DESC"))
+
+      @foodstuffs = @foodstuffs.left_outer_joins(:user_actions)
+                          .group('foodstuffs.id, foodstuffs.name, foodstuffs.price, foodstuffs.created_at')
+                          .order(Arel.sql("COUNT(CASE WHEN user_actions.action_type = 'bookmark' AND user_actions.actionable_type = 'Foodstuff' THEN 1 ELSE NULL END) DESC"))
+    end
+  end
 
   def set_view
     @view = params[:view] || 'both'
