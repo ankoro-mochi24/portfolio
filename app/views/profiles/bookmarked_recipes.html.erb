@@ -1,0 +1,13 @@
+<!--
+<h1>ブックマークしたレシピ</h1>
+
+<% if @bookmarked_recipes.any? %>
+  <ul>
+    <% @bookmarked_recipes.each do |recipe| %>
+      <li><%= link_to recipe.title, recipe_path(recipe) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>ブックマークしたレシピはありません。</p>
+<% end %>
+-->

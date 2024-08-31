@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, skip: :registrations, controllers: {
+    registrations: 'devise/registrations'
+  }
+  
+  as :user do
+    get 'users/sign_up' => 'devise/registrations#new', as: :new_user_registration
+    post 'users' => 'devise/registrations#create', as: :user_registration
+    delete 'users' => 'devise/registrations#destroy'
+    # editを除外するため、ここでは追加しません
+  end
+
   root to: 'home#top'
 
   get 'recipes', to: 'home#top', defaults: { view: 'recipes' }, as: 'recipes_view'
@@ -7,10 +17,9 @@ Rails.application.routes.draw do
 
   get 'cookrice' => 'home#cookrice'
 
-  resources :users, only: [:show, :edit, :update] do
-    member do
-      get 'posts', to: 'users#posts', as: 'posts'
-    end
+  # カレントユーザー用のルート
+  resource :profile, only: [:show, :edit, :update, :destroy] do
+    get 'posts', to: 'profiles#posts', as: 'posts'
   end
 
   concern :commentable do

@@ -1,0 +1,86 @@
+<h1>ユーザー情報を編集する</h1>
+
+<%= form_with(model: @user, url: profile_path, local: true) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, "名前" %><br>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email, "メールアドレス" %><br>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, "新しいパスワード" %> (変更しない場合は空白のままにしてください)<br>
+    <%= form.password_field :password, autocomplete: "new-password", onpaste: "return false;" %>
+    <% if @minimum_password_length %>
+      <em>(最小<%= @minimum_password_length %>文字)</em>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password_confirmation, "パスワード確認" %><br>
+    <%= form.password_field :password_confirmation, autocomplete: "new-password", onpaste: "return false;" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_password, "現在のパスワード" %> (変更内容を保存するには必須です)<br>
+    <%= form.password_field :current_password, autocomplete: "current-password", onpaste: "return false;" %>
+  </div>
+
+  <h3>持っている調理器具</h3>
+  <div data-controller="kitchen-tools">
+    <div data-kitchen-tools-target="container">
+      <%= form.fields_for :user_kitchen_tools do |tool_form| %>
+        <div class="nested-fields" data-new-record="false">
+          <%= tool_form.hidden_field :_destroy %>
+          <%= tool_form.hidden_field :kitchen_tool_id %>
+          <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name, required: true %>
+          <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
+        </div>
+      <% end %>
+      <% if @user.user_kitchen_tools.empty? %>
+        <%= form.fields_for :user_kitchen_tools, UserKitchenTool.new do |tool_form| %>
+          <div class="nested-fields" data-new-record="true">
+            <%= tool_form.hidden_field :_destroy %>
+            <%= tool_form.hidden_field :kitchen_tool_id %>
+            <%= tool_form.text_field :kitchen_tool_name, required: true %>
+            <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <a href="#" data-action="click->kitchen-tools#addField">追加</a>
+    <template data-kitchen-tools-target="template">
+      <div class="nested-fields" data-new-record="true">
+        <%= form.fields_for :user_kitchen_tools, UserKitchenTool.new, child_index: "TEMPLATE_RECORD" do |tool_form| %>
+          <%= tool_form.hidden_field :_destroy %>
+          <%= tool_form.hidden_field :kitchen_tool_id %>
+          <%= tool_form.text_field :kitchen_tool_name, required: true %>
+          <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
+        <% end %>
+      </div>
+    </template>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "保存" %>
+  </div>
+<% end %>
+
+<%= link_to 'キャンセル', profile_path  %>
+
+<h3>アカウント削除</h3>
+<%= button_to "アカウントを削除する", profile_path, method: :delete, data: { turbo_confirm: "本当にアカウントを削除しますか？この操作は元に戻せません。" }, class: "btn btn-danger" %>

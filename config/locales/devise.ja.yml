@@ -38,6 +38,16 @@ ja:
       send_paranoid_instructions: "もしあなたのメールアドレスがデータベースに存在する場合、数分以内にパスワード回復リンクが記載されたメールが届きます。"
       updated: "パスワードが正常に変更されました。現在ログインしています。"
       updated_not_active: "パスワードが正常に変更されました。"
+      new:
+        title: "パスワードをお忘れですか？"
+        email_label: "メールアドレス"
+        submit: "パスワードリセットメールを送信"
+      edit:
+        title: "パスワードを変更する"
+        new_password_label: "新しいパスワード"
+        password_minimum_length: "文字以上"
+        confirm_new_password_label: "新しいパスワードの確認"
+        submit: "パスワードを変更する"
     registrations:
       destroyed: "さようなら！アカウントのキャンセルが正常に完了しました。またお会いできることを願っています。"
       signed_up: "ようこそ！サインアップに成功しました。"
@@ -47,14 +57,75 @@ ja:
       update_needs_confirmation: "アカウント情報が正常に更新されましたが、新しいメールアドレスを確認する必要があります。メールを確認して、確認リンクに従って新しいメールアドレスを確認してください。"
       updated: "アカウント情報が正常に更新されました。"
       updated_but_not_signed_in: "アカウント情報が正常に更新されましたが、パスワードが変更されたため再度ログインする必要があります。"
+      new:
+        title: "サインアップ"
+        name: "ユーザー名"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認）"
+        minimum_password_length: "最低 %{count} 文字"
+        submit: "サインアップ"
+      edit:
+        title: "%{resource}を編集"
+        email: "メールアドレス"
+        pending_reconfirmation: "現在確認待ち: %{email}"
+        password: "パスワード"
+        leave_blank: "変更しない場合は空白のままにしてください"
+        minimum_password_length: "最低%{count}文字"
+        password_confirmation: "パスワード（確認）"
+        current_password: "現在のパスワード"
+        current_password_instructions: "変更を確認するために現在のパスワードが必要です"
+        submit: "更新"
+        cancel_account: "アカウントをキャンセル"
+        unhappy: "ご不満ですか？"
+        cancel_account_button: "アカウントをキャンセル"
+        cancel_account_confirmation: "本当にキャンセルしますか？"
+        back: "戻る"
     sessions:
       signed_in: "ログインに成功しました。"
       signed_out: "ログアウトに成功しました。"
       already_signed_out: "すでにログアウトしています。"
+      new:
+        title: "ログイン"
+        email_label: "メールアドレス"
+        password_label: "パスワード"
+        remember_me: "ログイン情報を保存する"
+        submit: "ログイン"
     unlocks:
       send_instructions: "数分以内にアカウントをロック解除するための指示が記載されたメールが届きます。"
       send_paranoid_instructions: "もしアカウントが存在する場合、数分以内にアカウントをロック解除するための指示が記載されたメールが届きます。"
       unlocked: "アカウントのロック解除に成功しました。続行するにはログインしてください。"
+    shared:
+      links:
+        login: "ログイン"
+        signup: "サインアップ"
+        forgot_password: "パスワードをお忘れですか？"
+        confirmation: "確認メールが届きませんでしたか？"
+        unlock_instructions: "アカウントのロック解除メールが届きませんでしたか？"
+        sign_in_with: "%{provider}でサインイン"
+  activerecord:
+    attributes:
+      user:
+        name: "ユーザー名"
+        email: "メールアドレス"
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "ユーザー名を入力してください"
+            email:
+              taken: "このメールアドレスはすでに使用されています"
+              blank: "メールアドレスを入力してください"
+              invalid: "メールアドレスは不正な値です"
+            password:
+              too_short: "パスワードは%{count}文字以上で入力してください"
+              too_long: "パスワードは%{count}文字以下で入力してください"
+              blank: "パスワードを入力してください"
+            password_confirmation:
+              confirmation: "パスワードとパスワード（確認）が一致しません"
+            current_password:
+              blank: "現在のパスワードを入力してください"
   errors:
     messages:
       already_confirmed: "すでに確認されています。サインインを試みてください。"
@@ -65,3 +136,8 @@ ja:
       not_saved:
         one: "この%{resource}を保存する際に1つのエラーが発生しました:"
         other: "この%{resource}を保存する際に%{count}のエラーが発生しました:"
+      confirmation: "確認が一致しません"
+      too_short: "は%{count}文字以上で入力してください"
+      too_long: "は%{count}文字以下で入力してください"
+    messages:
+      taken: "はすでに存在します"

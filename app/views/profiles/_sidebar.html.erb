@@ -1,0 +1,14 @@
+<div class="sidebar">
+  <h2>メニュー</h2>
+  <ul class="list-group">
+    <li class="list-group-item <%= 'active' if current_page?(profile_path) %>">
+      <%= link_to "ユーザー情報", profile_path %>
+    </li>
+    <li class="list-group-item <%= 'active' if current_page?(posts_profile_path) %>">
+      <%= link_to "投稿したレシピ/投稿した食品", posts_profile_path %>
+    </li>
+    <li class="list-group-item">
+      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %>
+    </li>
+  </ul>
+</div>

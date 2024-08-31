@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
 
   has_many :foodstuffs, dependent: :destroy
   has_many :recipes, dependent: :destroy

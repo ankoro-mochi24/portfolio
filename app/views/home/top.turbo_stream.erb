@@ -1,0 +1,11 @@
+<turbo-stream target="recipes">
+  <template>
+    <%= render partial: 'recipes/recipe', collection: @recipes %>
+  </template>
+</turbo-stream>
+
+<turbo-stream target="foodstuffs">
+  <template>
+    <%= render partial: 'foodstuffs/foodstuff', collection: @foodstuffs %>
+  </template>
+</turbo-stream>

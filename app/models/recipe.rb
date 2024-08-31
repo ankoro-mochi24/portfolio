@@ -27,22 +27,20 @@ class Recipe < ApplicationRecord
 
   attr_accessor :remove_dish_image
   before_save :check_remove_dish_image
-  after_initialize :ensure_rice_present
+  after_initialize :initialize_with_rice, if: :new_record?
 
   private
 
+  def initialize_with_rice
+    # 「白米」という材料をデータベースから探し、なければ作成
+    rice = Ingredient.find_or_create_by(name: '白米')
+  
+    # 「白米」をレシピの材料として追加
+    self.recipe_ingredients.build(ingredient_id: rice.id, ingredient_name: rice.name)
+  end
+  
   def check_remove_dish_image
     self.dish_image = nil if remove_dish_image == 'true'
-  end
-
-  def ensure_rice_present
-    if self.new_record? && self.recipe_ingredients.none? { |ri| ri.ingredient&.name == '白米' }
-      rice = Ingredient.find_by(name: '白米')
-      if rice
-        ri = self.recipe_ingredients.build(ingredient_id: rice.id)
-        ri.ingredient_name = rice.name
-      end
-    end
   end
 
   def must_have_at_least_one_kitchen_tool
