@@ -2,19 +2,27 @@ class HomeController < ApplicationController
   before_action :set_view, only: [:top]
 
   def top
+    @recipes = Recipe.includes(:user_actions)
+    @foodstuffs = Foodstuff.includes(:user_actions)
+  
     if params[:query].present?
       query = params[:query]
-      @recipes = Recipe.search(query, page: params[:page], per_page: 10).includes(:user_actions)
-      @foodstuffs = Foodstuff.search(query, page: params[:page], per_page: 10).includes(:user_actions)
-    else
-      @recipes = Recipe.page(params[:page]).per(10).includes(:user_actions)
-      @foodstuffs = Foodstuff.page(params[:page]).per(10).includes(:user_actions)
+      @recipes = Recipe.search(query).records
+      @foodstuffs = Foodstuff.search(query).records
     end
-
+  
     sort_content if params[:sort_by].present?
     filter_content if user_signed_in? && params[:filter].present?
     set_filter_counts if user_signed_in?
-
+  
+    # @recipes または @foodstuffs が nil の場合、空配列に置き換える
+    @recipes = @recipes.to_a if @recipes.nil?
+    @foodstuffs = @foodstuffs.to_a if @foodstuffs.nil?
+  
+    # ページネーションを最後に適用
+    @recipes = Kaminari.paginate_array(@recipes).page(params[:page]).per(10)
+    @foodstuffs = Kaminari.paginate_array(@foodstuffs).page(params[:page]).per(10)
+  
     case @view
     when 'recipes'
       @foodstuffs = nil
@@ -22,8 +30,13 @@ class HomeController < ApplicationController
       @recipes = nil
     end
   end
+  
 
   private
+
+  def set_view
+    @view = params[:view] || 'both'
+  end
 
   def sort_content
     case params[:sort_by]
@@ -47,21 +60,17 @@ class HomeController < ApplicationController
                          .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "good" AND user_actions.actionable_type = "Recipe" THEN 1 ELSE NULL END) DESC'))
       
       @foodstuffs = @foodstuffs.left_outer_joins(:user_actions)
-                        .group('foodstuffs.id, foodstuffs.name, foodstuffs.price, foodstuffs.created_at')
-                        .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "good" AND user_actions.actionable_type = "Foodstuff" THEN 1 ELSE NULL END) DESC'))
+                                .group('foodstuffs.id, foodstuffs.name, foodstuffs.price, foodstuffs.created_at')
+                                .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "good" AND user_actions.actionable_type = "Foodstuff" THEN 1 ELSE NULL END) DESC'))
     when 'most_bookmarks'
       @recipes = @recipes.left_outer_joins(:user_actions)
-                          .group('recipes.id, recipes.title, recipes.dish_image, recipes.created_at')
-                          .order(Arel.sql("COUNT(CASE WHEN user_actions.action_type = 'bookmark' AND user_actions.actionable_type = 'Recipe' THEN 1 ELSE NULL END) DESC"))
-
+                         .group('recipes.id, recipes.title, recipes.dish_image, recipes.created_at')
+                         .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "bookmark" AND user_actions.actionable_type = "Recipe" THEN 1 ELSE NULL END) DESC'))
+      
       @foodstuffs = @foodstuffs.left_outer_joins(:user_actions)
-                          .group('foodstuffs.id, foodstuffs.name, foodstuffs.price, foodstuffs.created_at')
-                          .order(Arel.sql("COUNT(CASE WHEN user_actions.action_type = 'bookmark' AND user_actions.actionable_type = 'Foodstuff' THEN 1 ELSE NULL END) DESC"))
+                                .group('foodstuffs.id, foodstuffs.name, foodstuffs.price, foodstuffs.created_at')
+                                .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "bookmark" AND user_actions.actionable_type = "Foodstuff" THEN 1 ELSE NULL END) DESC'))
     end
-  end
-
-  def set_view
-    @view = params[:view] || 'both'
   end
 
   def filter_content
