@@ -45,6 +45,8 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     environment:
       - discovery.type=single-node
+    volumes:
+      - es_data:/usr/share/elasticsearch/data  # Elasticsearchのデータを永続化
     ports:
       - "9200:9200"
 
@@ -60,3 +62,4 @@ volumes:
   mysql_data:
   bundle_data:
   node_modules:
+  es_data:  # 追加されたElasticsearch用のボリューム

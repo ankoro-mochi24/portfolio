@@ -4,25 +4,21 @@ class HomeController < ApplicationController
   def top
     @recipes = Recipe.includes(:user_actions)
     @foodstuffs = Foodstuff.includes(:user_actions)
-  
+
     if params[:query].present?
       query = params[:query]
-      @recipes = Recipe.search(query).records
-      @foodstuffs = Foodstuff.search(query).records
+      @recipes = Recipe.search(query).to_a
+      @foodstuffs = Foodstuff.search(query).to_a
     end
-  
+
     sort_content if params[:sort_by].present?
     filter_content if user_signed_in? && params[:filter].present?
     set_filter_counts if user_signed_in?
-  
-    # @recipes または @foodstuffs が nil の場合、空配列に置き換える
-    @recipes = @recipes.to_a if @recipes.nil?
-    @foodstuffs = @foodstuffs.to_a if @foodstuffs.nil?
-  
+
     # ページネーションを最後に適用
     @recipes = Kaminari.paginate_array(@recipes).page(params[:page]).per(10)
     @foodstuffs = Kaminari.paginate_array(@foodstuffs).page(params[:page]).per(10)
-  
+
     case @view
     when 'recipes'
       @foodstuffs = nil
@@ -30,7 +26,6 @@ class HomeController < ApplicationController
       @recipes = nil
     end
   end
-  
 
   private
 
