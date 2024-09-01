@@ -48,10 +48,10 @@
       <%= hidden_field_tag :view, @view %>
       <%= hidden_field_tag :query, params[:query] %>
       <%= select_tag :sort_by, options_for_select([
-          ['材料の少ない順', 'few_ingredients'],
-          ['調理が簡単順', 'easy_cooking'],
           ['投稿が新しい順', 'newest'],
           ['投稿が古い順', 'oldest'],
+          ['材料の少ない順', 'few_ingredients'],
+          ['調理が簡単順', 'easy_cooking'],
           ['Goodが多い順', 'most_good'],
           ['ブックマークが多い順', 'most_bookmarks']
         ], params[:sort_by]), { class: "form-control", onchange: 'this.form.submit();' } %>

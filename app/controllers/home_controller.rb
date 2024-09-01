@@ -11,6 +11,10 @@ class HomeController < ApplicationController
       @foodstuffs = Foodstuff.search(query).to_a
     end
 
+    # デフォルトの並び順を「最新順」に設定
+    @recipes = @recipes.order(created_at: :desc) unless params[:sort_by].present?
+    @foodstuffs = @foodstuffs.order(created_at: :desc) unless params[:sort_by].present?
+
     sort_content if params[:sort_by].present?
     filter_content if user_signed_in? && params[:filter].present?
     set_filter_counts if user_signed_in?
@@ -35,6 +39,12 @@ class HomeController < ApplicationController
 
   def sort_content
     case params[:sort_by]
+    when 'newest'
+      @recipes = @recipes.order(created_at: :desc)
+      @foodstuffs = @foodstuffs.order(created_at: :desc)
+    when 'oldest'
+      @recipes = @recipes.order(created_at: :asc)
+      @foodstuffs = @foodstuffs.order(created_at: :asc)
     when 'few_ingredients'
       @recipes = @recipes.joins(:recipe_ingredients)
                          .group('recipes.id')
@@ -43,12 +53,6 @@ class HomeController < ApplicationController
       @recipes = @recipes.joins(:recipe_steps)
                          .group('recipes.id')
                          .order('COUNT(recipe_steps.id) ASC')
-    when 'newest'
-      @recipes = @recipes.order(created_at: :desc)
-      @foodstuffs = @foodstuffs.order(created_at: :desc)
-    when 'oldest'
-      @recipes = @recipes.order(created_at: :asc)
-      @foodstuffs = @foodstuffs.order(created_at: :asc)
     when 'most_good'
       @recipes = @recipes.left_outer_joins(:user_actions)
                          .group('recipes.id, recipes.title, recipes.dish_image, recipes.created_at')
