@@ -6,6 +6,7 @@ actionable_id: recipe.id/foodstuff.id
 <div id="<%= dom_id(actionable) %>_<%= action_type %>_actions"> <!-- アクションのDOM要素IDを設定 -->
   <% if current_user.present? %>
     <% action = current_user.user_actions.find_by(actionable: actionable, action_type: action_type) %> <!-- 現在のユーザーのアクションを検索 -->
+    <% action_count = actionable.user_actions.where(action_type: action_type).count %> <!-- アクションの総数を取得 -->
 
     <% if action.present? %> <!-- アクションが存在する場合 -->
       <%= button_to polymorphic_path([actionable, action]), method: :delete, remote: true, class: "btn btn-link" do %> <!-- アクションを削除するボタン -->
@@ -16,6 +17,7 @@ actionable_id: recipe.id/foodstuff.id
         <% elsif action_type == 'bad' %>
           <i class="bi bi-emoji-expressionless-fill"></i> <!-- badアイコン（オン） -->
         <% end %>
+        <%= action_count %> <!-- アクション総数を表示 -->
       <% end %>
     <% else %> <!-- アクションが存在しない場合 -->
       <%= button_to polymorphic_path([actionable, :user_actions]), method: :post, params: { user_action: { action_type: action_type, actionable_type: actionable.class.name, actionable_id: actionable.id } }, remote: true, class: "btn btn-link" do %> <!-- アクションを作成するボタン -->
@@ -26,6 +28,7 @@ actionable_id: recipe.id/foodstuff.id
         <% elsif action_type == 'bad' %>
           <i class="bi bi-emoji-expressionless"></i> <!-- badアイコン（オフ） -->
         <% end %>
+        <%= action_count %> <!-- アクション総数を表示 -->
       <% end %>
     <% end %>
   <% end %>

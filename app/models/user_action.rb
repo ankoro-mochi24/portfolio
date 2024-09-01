@@ -1,3 +1,8 @@
+=begin
+action_type: bookmark/good/bad
+actionable_type: recipe/foodstuff
+actionable_id: recipe.id/foodstuff.id
+=end
 class UserAction < ApplicationRecord
   belongs_to :user
   belongs_to :actionable, polymorphic: true
