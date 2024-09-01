@@ -3,14 +3,10 @@ action_type: bookmark/good/bad
 actionable_type: recipe/foodstuff
 actionable_id: recipe.id/foodstuff.id
 %>
-<%= turbo_stream.replace "#{dom_id(@actionable)}_#{@action_type}_actions" do %>
-  <%= render partial: 'user_actions/user_action', locals: { actionable: @actionable, action_type: @action_type } %>
+<%= turbo_stream.replace "#{dom_id(@user_action.actionable)}_#{@user_action.action_type}_actions" do %>
+  <%= render partial: 'user_actions/user_action', locals: { actionable: @user_action.actionable, action_type: @user_action.action_type, action_count: @action_count } %>
 <% end %>
 
 <%= turbo_stream.replace "filter_counts" do %>
   <%= render partial: 'home/sidebar' %>
-<% end %>
-
-<%= turbo_stream.replace "#{dom_id(@actionable)}_#{@action_type}_actions" do %>
-  <%= render partial: 'user_actions/user_action', locals: { actionable: @actionable, action_type: @action_type } %>
 <% end %>

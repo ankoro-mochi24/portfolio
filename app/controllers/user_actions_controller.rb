@@ -6,6 +6,7 @@ class UserActionsController < ApplicationController
     @user_action = current_user.user_actions.new(user_action_params)
     remove_opposite_action(@user_action)
     if @user_action.save
+      @action_count = @user_action.actionable.user_actions.where(action_type: @user_action.action_type).count
       set_filter_counts
       respond_to do |format|
         format.turbo_stream
@@ -18,17 +19,18 @@ class UserActionsController < ApplicationController
       end
     end
   end
-
+  
   def destroy
     @user_action = current_user.user_actions.find(params[:id])
     @actionable = @user_action.actionable
     @action_type = @user_action.action_type
     @user_action.destroy
+    @action_count = @actionable.user_actions.where(action_type: @action_type).count
     set_filter_counts
     respond_to do |format|
       format.turbo_stream
       format.html { redirect_to @actionable, notice: "#{@action_type} removed." }
-      end
+    end
   end
 
   private

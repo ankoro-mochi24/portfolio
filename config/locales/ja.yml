@@ -10,7 +10,6 @@ ja:
     back_to_list: "食品リストに戻る"
     index:
       title: "食品一覧"
-      new_foodstuff: "新しい食品を追加"
       show_foodstuff: "この食品を表示"
     edit:
       title: "食品の編集"
