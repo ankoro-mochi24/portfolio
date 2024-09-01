@@ -10,7 +10,3 @@ actionable_id: recipe.id/foodstuff.id
 <%= turbo_stream.replace "filter_counts" do %>
   <%= render partial: 'home/sidebar' %>
 <% end %>
-
-<%= turbo_stream.replace "#{dom_id(@actionable)}_#{@action_type}_actions" do %>
-  <%= render partial: 'user_actions/user_action', locals: { actionable: @actionable, action_type: @action_type } %>
-<% end %>
