@@ -58,7 +58,7 @@ class UserActionsController < ApplicationController
 
   def send_line_notification(user_action)
     # 通知を送る対象が現在のユーザーの投稿であるかを確認
-    if user_action.actionable.user == user_action.user
+    if user_action.actionable.user != user_action.user
       # LINEに通知するメッセージを作成
       message = case user_action.action_type
                 when 'good'
@@ -76,7 +76,7 @@ class UserActionsController < ApplicationController
                 else
                   nil
                 end
-  
+    
       # メッセージが存在する場合のみ通知を送信
       LineNotifyService.new.send_notification(message) if message.present?
     end
