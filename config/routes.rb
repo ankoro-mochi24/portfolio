@@ -49,4 +49,6 @@ Rails.application.routes.draw do
   resources :toppings, only: [] do
     concerns :actionable
   end
+
+  get 'notifications/test_notify', to: 'notifications#test_notify'
 end
