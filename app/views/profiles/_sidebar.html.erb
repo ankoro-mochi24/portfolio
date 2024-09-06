@@ -8,7 +8,7 @@
       <%= link_to "投稿したレシピ/投稿した食品", posts_profile_path %>
     </li>
     <li class="list-group-item">
-      <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %>
+      <%= button_to "ログアウト", destroy_user_session_path, class: 'btn btn-outline-danger', data: { turbo_method: "delete" } %>
     </li>
   </ul>
 </div>
