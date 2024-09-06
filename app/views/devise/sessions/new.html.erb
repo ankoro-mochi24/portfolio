@@ -9,7 +9,7 @@
   <p class="notice"><%= flash[:notice] %></p>
 <% end %>
 
-<%= form_with model: @user, url: session_path(resource_name), local: true do |f| %>
+<%= form_with model: @user, url: session_path(resource_name), local: true, data: { turbo: false } do |f| %>
   <div class="field">
     <%= f.label :email, t('devise.sessions.new.email_label') %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
