@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'home#top'
+
   devise_for :users, skip: :registrations, controllers: {
     registrations: 'devise/registrations'
   }
@@ -10,7 +12,8 @@ Rails.application.routes.draw do
     # editを除外するため、ここでは追加しません
   end
 
-  root to: 'home#top'
+  get 'line_notify/authorize', to: 'line_notify#authorize'
+  get 'line_notify/callback', to: 'line_notify#callback'
 
   get 'recipes', to: 'home#top', defaults: { view: 'recipes' }, as: 'recipes_view'
   get 'foodstuffs', to: 'home#top', defaults: { view: 'foodstuffs' }, as: 'foodstuffs_view'
@@ -49,6 +52,4 @@ Rails.application.routes.draw do
   resources :toppings, only: [] do
     concerns :actionable
   end
-
-  get 'notifications/test_notify', to: 'notifications#test_notify'
 end

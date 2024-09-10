@@ -57,28 +57,19 @@ class UserActionsController < ApplicationController
   end
 
   def send_line_notification(user_action)
-    # 通知を送る対象が現在のユーザーの投稿であるかを確認
-    if user_action.actionable.user != user_action.user
-      # LINEに通知するメッセージを作成
-      message = case user_action.action_type
-                when 'good'
-                  if user_action.actionable.is_a?(Recipe)
-                    "あなたのレシピ『#{user_action.actionable.title}』が#{current_user.name}さんにいいねされました！"
-                  elsif user_action.actionable.is_a?(Foodstuff)
-                    "あなたのおすすめ食品『#{user_action.actionable.name}』が#{current_user.name}さんにいいねされました！"
-                  end
-                when 'bookmark'
-                  if user_action.actionable.is_a?(Recipe)
-                    "あなたのレシピ『#{user_action.actionable.title}』が#{current_user.name}さんにブックマークされました！"
-                  elsif user_action.actionable.is_a?(Foodstuff)
-                    "あなたのおすすめ食品『#{user_action.actionable.name}』が#{current_user.name}さんにブックマークされました！"
-                  end
-                else
-                  nil
+    token = user_action.actionable.user.line_notify_token
+    if token.present?
+      # メッセージを生成
+      message = if user_action.action_type == 'good'
+                  "あなたの投稿にいいねされました！"
+                elsif user_action.action_type == 'bookmark'
+                  "あなたの投稿がブックマークされました！"
                 end
-    
-      # メッセージが存在する場合のみ通知を送信
-      LineNotifyService.new.send_notification(message) if message.present?
+      # メッセージが存在する場合にのみ通知を送信
+      LineNotifyService.new(token).send_notification(message) if message.present?
+    else
+      Rails.logger.error "LINE Notify token is missing for user #{user_action.actionable.user.id}"
     end
   end
+  
 end
