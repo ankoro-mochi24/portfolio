@@ -19,11 +19,10 @@
       <p>調理器具はまだ登録されていません。</p>
     <% end %>
 
+    <h2>LINE通知</h2>
     <% if current_user.line_notify_token.present? %>
-      <p>LINE Notifyと連携済み</p>
       <%= link_to "LINEで通知を解除", line_notify_unlink_path, data: { turbo_method: :delete }, class: "btn btn-danger" %><br>
     <% else %>
-      <p>LINE Notifyと未連携</p>
       <%= link_to "LINEで通知を受け取る", line_notify_authorize_path, class: "btn btn-primary" %><br>
     <% end %>
 
