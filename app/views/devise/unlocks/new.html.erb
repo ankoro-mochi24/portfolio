@@ -1,6 +1,6 @@
 <h2>Resend unlock instructions</h2>
 
-<%= form_with model: resource, url: unlock_path(resource_name), method: :post, local: true do |f| %>
+<%= form_with model: resource, url: unlock_path(resource_name), method: :post, local: true, data: { turbo: false } do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">

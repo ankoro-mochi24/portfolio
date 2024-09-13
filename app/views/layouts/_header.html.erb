@@ -34,9 +34,9 @@
 
     <!-- 検索フォーム -->
     <%= form_with url: root_path, method: :get, local: true, class: "form-inline my-2 my-lg-0 ml-auto" do |form| %>
-      <%= hidden_field_tag :view, @view %>
+      <%= hidden_field_tag :view, @view, id: "unique_view_for_search" %>
       <div class="input-group">
-        <%= form.search_field :query, class: "form-control", placeholder: "検索", aria: { label: "検索" } %>
+        <%= form.search_field :query, class: "form-control", placeholder: "検索", aria: { label: "検索" }, id: "unique_query_for_search" %>
         <div class="input-group-append">
           <%= form.submit "検索", class: "btn btn-outline-success" %>
         </div>
@@ -45,8 +45,8 @@
 
     <!-- ソートフォーム -->
     <%= form_with url: root_path, method: :get, local: true, class: "form-inline ml-2" do %>
-      <%= hidden_field_tag :view, @view %>
-      <%= hidden_field_tag :query, params[:query] %>
+      <%= hidden_field_tag :view, @view, id: "unique_view_for_sort" %>
+      <%= hidden_field_tag :query, params[:query], id: "unique_query_for_sort" %>
       <%= select_tag :sort_by, options_for_select([
           ['投稿が新しい順', 'newest'],
           ['投稿が古い順', 'oldest'],

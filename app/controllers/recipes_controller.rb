@@ -127,12 +127,18 @@ class RecipesController < ApplicationController
 
   def save_ingredients(recipe)
     recipe.recipe_ingredients = recipe.recipe_ingredients.reject { |ri| ri.ingredient_name.blank? }
+    
     recipe.recipe_ingredients.each do |ri|
       if ri.ingredient_name.present?
         ingredient = Ingredient.find_or_create_by(name: ri.ingredient_name)
-        ri.ingredient = ingredient
+        unless recipe.recipe_ingredients.any? { |existing_ri| existing_ri.ingredient_id == ingredient.id }
+          ri.ingredient = ingredient
+        end
       end
     end
+  
+    # ここで再度重複するものを除外する
+    recipe.recipe_ingredients = recipe.recipe_ingredients.uniq { |ri| ri.ingredient_id }
   end
 
   def save_kitchen_tools(recipe)

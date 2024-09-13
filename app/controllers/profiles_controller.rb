@@ -62,6 +62,6 @@ class ProfilesController < ApplicationController
   end
 
   def set_layout
-    @use_sidebar = true
+    @profile_layout = true
   end
 end
