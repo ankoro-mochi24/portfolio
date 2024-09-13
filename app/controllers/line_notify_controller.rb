@@ -32,4 +32,9 @@ class LineNotifyController < ApplicationController
       redirect_to profile_path, alert: "LINE Notifyとの連携に失敗しました。"
     end
   end
+  
+  def unlink
+    current_user.update(line_notify_token: nil)
+    redirect_to profile_path, notice: "LINE Notifyの連携を解除しました。"
+  end
 end

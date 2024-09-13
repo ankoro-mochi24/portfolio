@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get 'line_notify/authorize', to: 'line_notify#authorize'  # LINE Notify認証
   get 'line_notify/callback', to: 'line_notify#callback'  # LINE Notifyコールバック
+  delete 'line_notify/unlink', to: 'line_notify#unlink', as: 'line_notify_unlink'  # LINE Notifyとの連係解除
 
   get 'recipes', to: 'home#top', defaults: { view: 'recipes' }, as: 'recipes_view'  # レシピ一覧表示
   get 'foodstuffs', to: 'home#top', defaults: { view: 'foodstuffs' }, as: 'foodstuffs_view'  # 食品一覧表示
