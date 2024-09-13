@@ -1,3 +1,4 @@
+# Line Notifyの通知
 require 'httparty'
 
 class LineNotifyService
@@ -11,7 +12,7 @@ class LineNotifyService
   def send_notification(message)
     options = {
       headers: { 
-        'Authorization' => "Bearer #{@token}",  # トークンを使って認証ヘッダーを設定
+        'Authorization' => "Bearer #{@token}",
         'Content-Type' => 'application/x-www-form-urlencoded'
       },
       body: { message: message }

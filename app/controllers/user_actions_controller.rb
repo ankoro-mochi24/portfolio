@@ -57,6 +57,7 @@ class UserActionsController < ApplicationController
   end
 
   def send_line_notification(user_action)
+    # アクションを受けたレシピ/食品の投稿者のline_notify_tokenをtokenに格納
     token = user_action.actionable.user.line_notify_token
     if token.present?
       # メッセージを生成
@@ -71,5 +72,4 @@ class UserActionsController < ApplicationController
       Rails.logger.error "LINE Notify token is missing for user #{user_action.actionable.user.id}"
     end
   end
-  
 end

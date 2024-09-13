@@ -15,18 +15,18 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 group :development, :test do
-  gem 'dotenv-rails'
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'dotenv-rails'                 # 環境変数を設定するためのGem
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]  # デバッグツール
 end
 
 group :development do
-  gem "web-console"
-  gem "mailcatcher"
+  gem "web-console"                  # Railsの開発環境で使用するインタラクティブコンソール
+  gem "mailcatcher"                  # 開発環境でのメール送信テスト用ツール
 end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem "capybara"                     # 統合テスト用のDSL
+  gem "selenium-webdriver"           # ブラウザを操作するためのWebDriver
 end
 
 gem 'sassc'                    # scss
@@ -39,4 +39,4 @@ gem 'elasticsearch', '~> 7.0'  # Elasticsearchとの連携
 gem 'faker'                    # 疑似データ
 gem 'kaminari'                 # ページネーション
 gem 'kaminari-i18n'            # ページネーションの国際化対応
-gem 'httparty'
+gem 'httparty'                 # HTTPリクエスト
