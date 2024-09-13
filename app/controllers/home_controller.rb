@@ -11,7 +11,14 @@ class HomeController < ApplicationController
       @foodstuffs = Foodstuff.search(query).to_a
     end
 
-    sort_content if params[:sort_by].present?
+    if params[:sort_by].present?
+      sort_content
+    else
+      # ソートの指定がない場合は新しい順に並べる
+      @recipes = @recipes.order(created_at: :desc)
+      @foodstuffs = @foodstuffs.order(created_at: :desc)
+    end
+
     filter_content if user_signed_in? && params[:filter].present?
     set_filter_counts if user_signed_in?
 
