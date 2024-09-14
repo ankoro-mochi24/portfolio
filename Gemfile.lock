@@ -378,7 +378,7 @@ DEPENDENCIES
   devise
   devise-i18n
   dotenv-rails
-  elasticsearch (~> 7.0)
+  elasticsearch (~> 7.10)
   faker
   httparty
   i18n
