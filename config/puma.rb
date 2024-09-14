@@ -11,7 +11,7 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 before_fork do
-  pid_file = Rails.root.join('tmp', 'pids', 'server.pid')
+  pid_file = File.join(Dir.pwd, 'tmp', 'pids', 'server.pid')
   if File.exist?(pid_file)
     File.delete(pid_file)
     puts "server.pid ファイルを削除しました"
