@@ -294,8 +294,9 @@ GEM
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
-    searchkick (5.3.1)
-      activemodel (>= 6.1)
+    searchkick (4.5.2)
+      activemodel (>= 5)
+      elasticsearch (>= 6)
       hashie
     selenium-webdriver (4.24.0)
       base64 (~> 0.2)
@@ -391,7 +392,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.4)
   sassc
-  searchkick (< 7.14)
+  searchkick (~> 4.4)
   selenium-webdriver
   sprockets-rails
   stimulus-rails
