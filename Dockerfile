@@ -1,7 +1,7 @@
 FROM ruby:3.3.0
 
 ENV LANG C.UTF-8
-ENV TZ Asia/Tokyo
+ENV TZ=Asia/Tokyo
 
 # 必要なパッケージをインストール
 RUN apt-get update -qq \
