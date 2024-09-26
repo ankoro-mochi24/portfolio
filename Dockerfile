@@ -21,6 +21,11 @@ WORKDIR /v3_advanced_rails
 
 RUN gem install bundler:2.3.17
 
+RUN gem install bcrypt --platform ruby
+RUN gem install ffi --platform ruby
+RUN gem install msgpack --platform ruby
+RUN gem install nio4r --platform ruby
+
 COPY Gemfile /v3_advanced_rails/Gemfile
 COPY Gemfile.lock /v3_advanced_rails/Gemfile.lock
 #COPY yarn.lock /v3_advanced_rails/yarn.lock

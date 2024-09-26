@@ -1,0 +1,112 @@
+Retrieving logs...
+============= i-0f676757a8c121887 ==============
+----------------------------------------
+/var/log/eb-engine.log
+----------------------------------------
+#5 [web internal] load build context
+#5 transferring context: 1.44MB 1.3s done
+#5 DONE 1.4s
+
+#6 [web  7/11] COPY Gemfile /v3_advanced_rails/Gemfile
+#6 CACHED
+
+#7 [web  2/11] RUN apt-get update -qq   && apt-get install -y ca-certificates curl gnupg   && mkdir -p /etc/apt/keyrings   && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg   && NODE_MAJOR=18   && wget --quiet -O - /tmp/pubkey.gpg https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list   && apt-get update -qq   && apt-get install -y build-essential libpq-dev libssl-dev nodejs yarn python3 cron graphviz
+#7 CACHED
+
+#8 [web  3/11] RUN service cron start
+#8 CACHED
+
+#9 [web  4/11] RUN mkdir /v3_advanced_rails
+#9 CACHED
+
+#10 [web  5/11] WORKDIR /v3_advanced_rails
+#10 CACHED
+
+#11 [web  6/11] RUN gem install bundler:2.3.17
+#11 CACHED
+
+#12 [web  8/11] COPY Gemfile.lock /v3_advanced_rails/Gemfile.lock
+#12 CACHED
+
+#13 [web  9/11] RUN bundle install
+#13 2.626 Fetching gem metadata from https://rubygems.org/........
+#13 6.288 Fetching rake 13.2.1
+#13 6.424 Installing rake 13.2.1
+#13 6.451 Fetching concurrent-ruby 1.3.4
+#13 6.452 Fetching minitest 5.25.1
+#13 6.496 Installing minitest 5.25.1
+#13 6.529 Installing concurrent-ruby 1.3.4
+#13 6.562 Fetching builder 3.3.0
+#13 6.578 Installing builder 3.3.0
+#13 6.601 Fetching erubi 1.13.0
+#13 6.610 Installing erubi 1.13.0
+#13 6.619 Fetching racc 1.8.1
+#13 6.637 Installing racc 1.8.1 with native extensions
+#13 6.740 Fetching crass 1.0.6
+#13 6.753 Installing crass 1.0.6
+#13 6.780 Fetching rack 2.2.9
+#13 6.804 Installing rack 2.2.9
+#13 6.847 Fetching nio4r 2.7.3
+#13 6.872 Installing nio4r 2.7.3 with native extensions
+#13 8.338 Fetching websocket-extensions 0.1.5
+#13 8.351 Installing websocket-extensions 0.1.5
+#13 8.357 Fetching marcel 1.0.4
+#13 8.372 Installing marcel 1.0.4
+#13 8.383 Fetching mini_mime 1.1.5
+#13 8.394 Installing mini_mime 1.1.5
+#13 8.408 Fetching public_suffix 6.0.1
+#13 8.428 Installing public_suffix 6.0.1
+#13 8.463 Fetching bcrypt 3.1.20
+#13 8.474 Installing bcrypt 3.1.20 with native extensions
+#13 10.78 Fetching bigdecimal 3.1.8
+#13 10.80 Installing bigdecimal 3.1.8 with native extensions
+#13 15.17 Fetching bindex 0.8.1
+#13 15.19 Installing bindex 0.8.1 with native extensions
+#13 15.87 Fetching msgpack 1.7.2
+#13 15.89 Installing msgpack 1.7.2 with native extensions
+#13 27.02 Fetching regexp_parser 2.9.2
+#13 27.09 Installing regexp_parser 2.9.2
+#13 27.16 Fetching mini_magick 4.13.2
+#13 27.19 Installing mini_magick 4.13.2
+#13 27.23 Fetching ffi 1.17.0 (x86_64-linux-gnu)
+#13 27.31 Installing ffi 1.17.0 (x86_64-linux-gnu)
+#13 27.61 Fetching ssrf_filter 1.1.2
+#13 27.62 Installing ssrf_filter 1.1.2
+#13 27.63 Fetching csv 3.3.0
+#13 27.64 Installing csv 3.3.0
+#13 27.67 Fetching daemons 1.4.1
+#13 27.69 Installing daemons 1.4.1
+#13 27.71 Fetching stringio 3.1.1
+#13 27.72 Installing stringio 3.1.1 with native extensions
+
+2024/09/18 07:11:12.818005 [INFO] canceled
+
+2024/09/18 07:11:12.849408 [ERROR] An error occurred during execution of command [app-deploy] - [Docker Specific Build Application]. Stop running the command. Error: failed to build docker images: Command docker compose build failed with error Command timed out after 300 seconds. Stderr:canceled
+ 
+
+2024/09/18 07:11:12.849577 [INFO] Executing cleanup logic
+2024/09/18 07:11:12.964093 [INFO] CommandService Response: {"status":"FAILURE","api_version":"1.0","results":[{"status":"FAILURE","msg":"Engine execution has encountered an error.","returncode":1,"events":[{"msg":"Instance deployment failed to build the Docker image. The deployment failed.","timestamp":1726643472838,"severity":"ERROR"},{"msg":"Instance deployment failed. For details, see 'eb-engine.log'.","timestamp":1726643472863,"severity":"ERROR"}]}]}
+
+2024/09/18 07:11:13.014771 [INFO] Platform Engine finished execution on command: app-deploy
+
+2024/09/19 00:09:03.426491 [INFO] Starting...
+2024/09/19 00:09:03.426836 [INFO] Starting EBPlatform-PlatformEngine
+2024/09/19 00:09:03.426886 [INFO] reading event message file
+2024/09/19 00:09:03.427569 [INFO] Engine received EB command cfn-hup-exec
+
+2024/09/19 00:09:03.600022 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:ap-northeast-1:851725638698:stack/awseb-e-mcduafwm4b-stack/399b92c0-755d-11ef-8e67-0e9d9af3eb0b -r AWSEBAutoScalingGroup --region ap-northeast-1
+2024/09/19 00:09:04.370979 [INFO] Running command: /opt/aws/bin/cfn-get-metadata -s arn:aws:cloudformation:ap-northeast-1:851725638698:stack/awseb-e-mcduafwm4b-stack/399b92c0-755d-11ef-8e67-0e9d9af3eb0b -r AWSEBBeanstalkMetadata --region ap-northeast-1
+2024/09/19 00:09:04.868402 [INFO] checking whether command tail-log is applicable to this instance...
+2024/09/19 00:09:04.868415 [INFO] this command is applicable to the instance, thus instance should execute command
+2024/09/19 00:09:04.868418 [INFO] Engine command: (tail-log)
+
+2024/09/19 00:09:04.869151 [INFO] Executing instruction: GetTailLogs
+2024/09/19 00:09:04.869157 [INFO] Tail Logs...
+2024/09/19 00:09:04.870400 [INFO] Running command: tail -n 100 /var/log/eb-engine.log
+
+
+----------------------------------------
+/var/log/eb-hooks.log
+----------------------------------------
+
+
