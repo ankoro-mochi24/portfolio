@@ -18,7 +18,5 @@ test:
   host: db
 
 production:
-  adapter: mysql2
-  encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  <<: *default
   url: <%= ENV['JAWSDB_URL'] %>
