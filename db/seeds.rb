@@ -1,19 +1,7 @@
-# db/seeds.rb
-
 require 'faker'
 
-# ユーザーのサンプルデータを作成（ユーザーがいない場合のため）
-5.times do
-  User.create(
-    email: Faker::Internet.email,
-    password: 'password',
-    password_confirmation: 'password',
-    name: Faker::Name.name
-  )
-end
-=begin
 # レシピのサンプルデータを作成
-10.times do
+30.times do
   recipe = Recipe.new(
     title: Faker::Food.dish,
     user_id: User.pluck(:id).sample
@@ -47,6 +35,17 @@ end
 end
 =end
 # 食品のサンプルデータを作成
+=begin
+# ユーザーのサンプルデータを作成（ユーザーがいない場合のため）
+5.times do
+  User.create(
+    email: Faker::Internet.email,
+    password: 'password',
+    password_confirmation: 'password',
+    name: Faker::Name.name
+  )
+end
+
 30.times do
   foodstuff = Foodstuff.new(
     name: Faker::Food.ingredient,
@@ -64,3 +63,4 @@ end
 end
 
 puts "サンプルデータの作成が完了しました！"
+=end

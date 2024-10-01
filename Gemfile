@@ -32,6 +32,7 @@ end
 gem 'sassc'                    # scss
 gem 'devise'                   # ユーザー認証
 gem 'carrierwave'              # 画像保存
+gem 'fog-aws'                  # S3との連携
 gem 'i18n'                     # 国際化対応全般
 gem 'devise-i18n'              # deviceの国際化対応
 gem 'searchkick', '~> 4.4'     # 検索
