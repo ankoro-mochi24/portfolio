@@ -1,8 +1,6 @@
 require 'faker'
 
 # ユーザーのサンプルデータを作成（ユーザーがいない場合のため）
-# 以下の部分はコメントアウトのままにします。
-=begin
 5.times do
   User.create(
     email: Faker::Internet.email,
@@ -11,20 +9,16 @@ require 'faker'
     name: Faker::Name.name
   )
 end
-=end
-
-# レシピの作成
-# S3にアップロードしたsample.jpgのURL
-# S3にアップロードしたsample.jpgのURL
-sample_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
 
 # レシピのサンプルデータを作成
-30.times do
+10.times do
   recipe = Recipe.new(
     title: Faker::Food.dish,
     user_id: User.pluck(:id).sample
   )
-  recipe.remote_dish_image_url = sample_image_url  # S3のURLを使用
+  
+  # 画像をS3から取得する
+  recipe.remote_dish_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
 
   # 材料を追加
   3.times do
@@ -44,7 +38,8 @@ sample_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/
       step = recipe.recipe_steps.build(
         text: Faker::Food.description
       )
-      step.remote_step_image_url = sample_image_url  # S3のURLを使用
+      # ステップ画像もS3から取得
+      step.remote_step_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
       step.save
     end
   else
@@ -56,11 +51,12 @@ end
 30.times do
   foodstuff = Foodstuff.new(
     name: Faker::Food.ingredient,
-    price: Faker::Commerce.price(range: 1..100.0).to_i,
+    price: Faker::Commerce.price(range: 1..100.0).to_i, # 価格を整数に変換
     description: Faker::Food.description,
     link: Faker::Internet.url,
     user_id: User.pluck(:id).sample,
-    remote_image_url: sample_image_url  # S3のURLを使用
+    # S3の画像URLを使用
+    remote_image_url: 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
   )
 
   if foodstuff.save
