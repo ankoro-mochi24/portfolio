@@ -1,7 +1,10 @@
-puts "Elasticsearch URL: #{ENV['ELASTICSEARCH_URL'] || 'Not set'}"
+# ログに表示するためのElasticsearchのURLを確認
+elasticsearch_url = ENV['BONSAI_URL'] || ENV['ELASTICSEARCH_URL'] || 'http://elasticsearch:9200'
+puts "Elasticsearch URL: #{elasticsearch_url}"
 
+# Searchkickクライアントの設定
 Searchkick.client = Elasticsearch::Client.new(
-  url: ENV['ELASTICSEARCH_URL'] || 'http://elasticsearch:9200',
+  url: elasticsearch_url,
   retry_on_failure: true,
   transport_options: { request: { timeout: 250 } }
 )
