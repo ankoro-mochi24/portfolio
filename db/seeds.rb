@@ -13,7 +13,7 @@ require 'faker'
 end
 =end
 
-# レシピのサンプルデータを作成
+# レシピの作成
 30.times do
   recipe = Recipe.new(
     title: Faker::Food.dish,
@@ -21,7 +21,7 @@ end
   )
   recipe.dish_image = File.open(Rails.root.join('app/assets/images/sample.jpg'))
 
-  # 材料を追加
+  # レシピ材料を追加
   3.times do
     ingredient = Ingredient.find_or_create_by(name: Faker::Food.ingredient)
     recipe.recipe_ingredients.build(ingredient: ingredient)
@@ -43,25 +43,24 @@ end
       step.save
     end
   else
-    puts "Recipe creation failed: #{recipe.errors.full_messages.join(", ")}"
+    puts "Recipe creation failed: #{recipe.errors.full_messages.join(', ')}"
   end
 end
 
-# 食品のサンプルデータを作成
+# 食品データの作成
 30.times do
   foodstuff = Foodstuff.new(
     name: Faker::Food.ingredient,
-    price: Faker::Commerce.price(range: 1..100.0).to_i, # 価格を整数に変換
+    price: Faker::Commerce.price(range: 1..100.0).to_i, # 整数価格
     description: Faker::Food.description,
     link: Faker::Internet.url,
     user_id: User.pluck(:id).sample,
-    image: [File.open(Rails.root.join('app/assets/images/sample.jpg'))] # ファイルオブジェクトとして設定
+    image: File.open(Rails.root.join('app/assets/images/sample.jpg')) # 画像ファイル設定
   )
 
   if foodstuff.save
-    # 正常に保存された場合の処理（必要ならここに記述）
   else
-    puts "Foodstuff creation failed: #{foodstuff.errors.full_messages.join(", ")}"
+    puts "Foodstuff creation failed: #{foodstuff.errors.full_messages.join(', ')}"
   end
 end
 
