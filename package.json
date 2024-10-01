@@ -10,6 +10,9 @@
     "@hotwired/stimulus": "^3.0.1"
   },
   "devDependencies": {},
+  "engines": {
+    "node": "20.9.0"
+  },
   "author": "",
   "license": "ISC"
 }
