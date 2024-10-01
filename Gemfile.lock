@@ -228,7 +228,6 @@ GEM
     multipart-post (2.4.1)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
-    mysql2 (0.5.6)
     net-imap (0.4.16)
       date
       net-protocol
@@ -252,6 +251,7 @@ GEM
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pg (1.5.8)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
@@ -400,7 +400,7 @@ DEPENDENCIES
   kaminari
   kaminari-i18n
   mailcatcher
-  mysql2 (~> 0.5.3)
+  pg
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.4)
   sassc

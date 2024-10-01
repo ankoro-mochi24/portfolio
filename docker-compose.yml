@@ -1,19 +1,20 @@
 services:
   db:
-    image: mysql:8.0
-    platform: linux/amd64
+    image: postgres:13
     environment:
+      POSTGRES_USER: postgres  # 'root' から 'postgres' に変更
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: v3_advanced_rails_development
       TZ: Asia/Tokyo
-      MYSQL_ROOT_PASSWORD: password
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
     ports:
-      - 3308:3306
+      - 5432:5432
 
   web:
     build:
       context: .
-      shm_size: '1gb' 
+      shm_size: '1gb'
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     tty: true
     stdin_open: true
@@ -55,12 +56,10 @@ services:
     image: schickling/mailcatcher
     ports:
       - "1080:1080"  # Webインターフェース
-      - "1025:1025"  # SMTPサーバー（ローカルホスト上では1025を使用）
-    networks:
-      - default
+      - "1025:1025"  # SMTPサーバー
 
 volumes:
-  mysql_data:
+  postgres_data:  # PostgreSQL用のボリュームに変更
   bundle_data:
   node_modules:
-  es_data:  # 追加されたElasticsearch用のボリューム
+  es_data:  # Elasticsearch用のボリューム
