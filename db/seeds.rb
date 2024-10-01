@@ -14,14 +14,18 @@ end
 =end
 
 # レシピの作成
+# S3にアップロードしたsample.jpgのURL
+sample_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
+
+# レシピのサンプルデータを作成
 30.times do
   recipe = Recipe.new(
     title: Faker::Food.dish,
     user_id: User.pluck(:id).sample
   )
-  recipe.dish_image = File.open(Rails.root.join('app/assets/images/sample.jpg'))
+  recipe.dish_image = sample_image_url  # S3のURLを使用
 
-  # レシピ材料を追加
+  # 材料を追加
   3.times do
     ingredient = Ingredient.find_or_create_by(name: Faker::Food.ingredient)
     recipe.recipe_ingredients.build(ingredient: ingredient)
@@ -39,28 +43,28 @@ end
       step = recipe.recipe_steps.build(
         text: Faker::Food.description
       )
-      step.step_image = File.open(Rails.root.join('app/assets/images/sample.jpg'))
+      step.step_image = sample_image_url  # S3のURLを使用
       step.save
     end
   else
-    puts "Recipe creation failed: #{recipe.errors.full_messages.join(', ')}"
+    puts "Recipe creation failed: #{recipe.errors.full_messages.join(", ")}"
   end
 end
 
-# 食品データの作成
+# 食品のサンプルデータを作成
 30.times do
   foodstuff = Foodstuff.new(
     name: Faker::Food.ingredient,
-    price: Faker::Commerce.price(range: 1..100.0).to_i, # 整数価格
+    price: Faker::Commerce.price(range: 1..100.0).to_i,
     description: Faker::Food.description,
     link: Faker::Internet.url,
     user_id: User.pluck(:id).sample,
-    image: File.open(Rails.root.join('app/assets/images/sample.jpg')) # 画像ファイル設定
+    image: sample_image_url  # S3のURLを使用
   )
 
   if foodstuff.save
   else
-    puts "Foodstuff creation failed: #{foodstuff.errors.full_messages.join(', ')}"
+    puts "Foodstuff creation failed: #{foodstuff.errors.full_messages.join(", ")}"
   end
 end
 
