@@ -1,5 +1,18 @@
 require 'faker'
 
+# ユーザーのサンプルデータを作成（ユーザーがいない場合のため）
+# 以下の部分はコメントアウトのままにします。
+=begin
+5.times do
+  User.create(
+    email: Faker::Internet.email,
+    password: 'password',
+    password_confirmation: 'password',
+    name: Faker::Name.name
+  )
+end
+=end
+
 # レシピのサンプルデータを作成
 30.times do
   recipe = Recipe.new(
@@ -33,19 +46,8 @@ require 'faker'
     puts "Recipe creation failed: #{recipe.errors.full_messages.join(", ")}"
   end
 end
-=end
-# 食品のサンプルデータを作成
-=begin
-# ユーザーのサンプルデータを作成（ユーザーがいない場合のため）
-5.times do
-  User.create(
-    email: Faker::Internet.email,
-    password: 'password',
-    password_confirmation: 'password',
-    name: Faker::Name.name
-  )
-end
 
+# 食品のサンプルデータを作成
 30.times do
   foodstuff = Foodstuff.new(
     name: Faker::Food.ingredient,
@@ -57,10 +59,10 @@ end
   )
 
   if foodstuff.save
+    # 正常に保存された場合の処理（必要ならここに記述）
   else
     puts "Foodstuff creation failed: #{foodstuff.errors.full_messages.join(", ")}"
   end
 end
 
 puts "サンプルデータの作成が完了しました！"
-=end
