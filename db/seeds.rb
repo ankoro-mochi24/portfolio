@@ -16,9 +16,8 @@ end
     title: Faker::Food.dish,
     user_id: User.pluck(:id).sample
   )
-  
-  # 画像をS3から取得する
-  recipe.remote_dish_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
+  # S3の画像URLを指定
+  recipe.dish_image = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
 
   # 材料を追加
   3.times do
@@ -38,8 +37,8 @@ end
       step = recipe.recipe_steps.build(
         text: Faker::Food.description
       )
-      # ステップ画像もS3から取得
-      step.remote_step_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
+      # S3の画像URLを指定
+      step.step_image = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
       step.save
     end
   else
@@ -51,11 +50,12 @@ end
 30.times do
   foodstuff = Foodstuff.new(
     name: Faker::Food.ingredient,
-    price: Faker::Commerce.price(range: 1..100.0).to_i,
+    price: Faker::Commerce.price(range: 1..100.0).to_i, # 価格を整数に変換
     description: Faker::Food.description,
     link: Faker::Internet.url,
     user_id: User.pluck(:id).sample,
-    image: image_url
+    # S3の画像URLを指定
+    image: 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
   )
 
   if foodstuff.save
