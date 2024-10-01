@@ -15,6 +15,7 @@ end
 
 # レシピの作成
 # S3にアップロードしたsample.jpgのURL
+# S3にアップロードしたsample.jpgのURL
 sample_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
 
 # レシピのサンプルデータを作成
@@ -23,7 +24,7 @@ sample_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/
     title: Faker::Food.dish,
     user_id: User.pluck(:id).sample
   )
-  recipe.dish_image = sample_image_url  # S3のURLを使用
+  recipe.remote_dish_image_url = sample_image_url  # S3のURLを使用
 
   # 材料を追加
   3.times do
@@ -43,7 +44,7 @@ sample_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/
       step = recipe.recipe_steps.build(
         text: Faker::Food.description
       )
-      step.step_image = sample_image_url  # S3のURLを使用
+      step.remote_step_image_url = sample_image_url  # S3のURLを使用
       step.save
     end
   else
@@ -59,7 +60,7 @@ end
     description: Faker::Food.description,
     link: Faker::Internet.url,
     user_id: User.pluck(:id).sample,
-    image: sample_image_url  # S3のURLを使用
+    remote_image_url: sample_image_url  # S3のURLを使用
   )
 
   if foodstuff.save
