@@ -51,12 +51,11 @@ end
 30.times do
   foodstuff = Foodstuff.new(
     name: Faker::Food.ingredient,
-    price: Faker::Commerce.price(range: 1..100.0).to_i, # 価格を整数に変換
+    price: Faker::Commerce.price(range: 1..100.0).to_i,
     description: Faker::Food.description,
     link: Faker::Internet.url,
     user_id: User.pluck(:id).sample,
-    # S3の画像URLを使用
-    remote_image_url: 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
+    image: image_url
   )
 
   if foodstuff.save
