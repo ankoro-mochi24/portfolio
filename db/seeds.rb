@@ -1,18 +1,17 @@
 require 'faker'
 
-users = User.all # ユーザーを取得
+sample_image_url = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
 
-s3_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
-
-users.each do |user| # 各ユーザーに対してFoodstuffを作成
+# データをシード
+User.find_each do |user|
   5.times do
     Foodstuff.create!(
-      name: Faker::Food.ingredient, # ランダムな食品名を生成
-      price: Faker::Commerce.price(range: 1.0..100.0), # ランダムな価格を生成
-      description: Faker::Food.description, # ランダムな説明文を生成
-      link: Faker::Internet.url, # ランダムなURLを生成
-      user: user, # 作成したユーザーを割り当てる
-      image: s3_image_url # S3の画像URLを使用
+      name: Faker::Food.ingredient,
+      price: Faker::Commerce.price(range: 100..1000),
+      description: Faker::Food.description,
+      link: Faker::Internet.url,
+      image: sample_image_url,  # 配列として渡す
+      user: user
     )
   end
 end
