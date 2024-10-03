@@ -151,6 +151,7 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
       user: user
     )
 
+    # 画像を設定（本番環境とローカル環境で処理を分ける）
     if Rails.env.production?
       recipe.remote_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
     else
@@ -178,6 +179,7 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
         text: "ステップ #{step_number + 1}: #{Faker::Food.description}"
       )
 
+      # ステップ画像を設定（本番環境とローカル環境で処理を分ける）
       if Rails.env.production?
         recipe_step.remote_step_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
       else
