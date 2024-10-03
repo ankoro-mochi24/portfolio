@@ -53,18 +53,12 @@ def create_user_actions(actionable, users)
 end
 
 # レシピにトッピングを追加する関数
-def create_toppings
-  Recipe.find_each do |recipe|
-    user = User.order("RANDOM()").first
+def create_toppings(recipe, users)
+  users.sample(MAX_TOPPINGS).each do |user|
     topping_name = Faker::Food.ingredient
 
     unless Topping.exists?(name: topping_name, recipe: recipe)
-      topping = Topping.new(recipe: recipe, user: user, name: topping_name)
-      if topping.save
-        puts "レシピ #{recipe.id} にトッピング '#{topping_name}' を作成しました。"
-      else
-        puts "レシピ #{recipe.id} のトッピング作成に失敗しました: #{topping.errors.full_messages.join(', ')}"
-      end
+      Topping.create!(recipe: recipe, user: user, name: topping_name)
     else
       puts "レシピ #{recipe.id} に既にトッピング '#{topping_name}' が存在します。"
     end
@@ -78,7 +72,7 @@ users = User.all
 Recipe.find_each do |recipe|
   create_comments(recipe, users)
   create_user_actions(recipe, users)
-  create_toppings
+  create_toppings(recipe, users)
 end
 
 # 食品に対してコメントとユーザアクションを追加
@@ -166,6 +160,7 @@ check_and_create_records(Recipe, RECIPE_COUNT) do |needed|
     end
 
     recipe.save!
+    puts "レシピ '#{recipe.title}' を作成しました。"
   end
 end
 
