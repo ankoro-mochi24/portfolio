@@ -27,15 +27,20 @@ end
 
 # ユーザアクションを生成する関数
 def create_user_actions(actionable, users)
+  total_created = 0
+  total_skipped_good = 0
+  total_skipped_bad = 0
+  total_failures = 0
+
   users.sample(MAX_ACTIONS).each do |user|
     ACTION_TYPES.sample(2).each do |action_type|
       next if UserAction.exists?(user: user, actionable: actionable, action_type: action_type)
 
       if action_type == 'good' && user.user_actions.exists?(actionable: actionable, action_type: 'bad')
-        puts "ユーザー #{user.id} に対して、#{actionable.class.name} #{actionable.id} の 'bad' アクションが既に存在するため 'good' アクションをスキップしました。"
+        total_skipped_good += 1
         next
       elsif action_type == 'bad' && user.user_actions.exists?(actionable: actionable, action_type: 'good')
-        puts "ユーザー #{user.id} に対して、#{actionable.class.name} #{actionable.id} の 'good' アクションが既に存在するため 'bad' アクションをスキップしました。"
+        total_skipped_bad += 1
         next
       end
 
@@ -45,11 +50,19 @@ def create_user_actions(actionable, users)
           actionable: actionable,
           action_type: action_type
         )
+        total_created += 1
       rescue ActiveRecord::RecordInvalid => e
+        total_failures += 1
         puts "ユーザー #{user.id} の #{actionable.class.name} #{actionable.id} に対するアクションの作成に失敗しました: #{e.message}"
       end
     end
   end
+
+  # 実行結果のまとめを出力
+  puts "#{total_created} 件のユーザアクションが追加されました。"
+  puts "#{total_skipped_good} 件の 'good' アクションは既存の 'bad' アクションのためスキップされました。"
+  puts "#{total_skipped_bad} 件の 'bad' アクションは既存の 'good' アクションのためスキップされました。"
+  puts "#{total_failures} 件のアクションの作成に失敗しました。"
 end
 
 # レシピにトッピングを追加する関数
@@ -131,7 +144,7 @@ check_and_create_records(Recipe, RECIPE_COUNT) do |needed|
 
   needed.times do
     user = User.order("RANDOM()").first
-    recipe = Recipe.create!(
+    recipe = Recipe.new(
       title: Faker::Food.dish,
       remote_dish_image_url: sample_dish_image_url, # レシピ画像を設定
       user: user
@@ -159,8 +172,11 @@ check_and_create_records(Recipe, RECIPE_COUNT) do |needed|
       )
     end
 
-    recipe.save!
-    puts "レシピ '#{recipe.title}' を作成しました。"
+    if recipe.save
+      puts "レシピ '#{recipe.title}' を作成しました。"
+    else
+      puts "レシピの作成に失敗しました: #{recipe.errors.full_messages.join(', ')}"
+    end
   end
 end
 
@@ -184,6 +200,10 @@ check_and_create_records(Foodstuff, USER_COUNT) do |needed|
       foodstuff.image = [File.open(sample_image_path)]
     end
 
-    foodstuff.save!
+    if foodstuff.save
+      puts "食品 '#{foodstuff.name}' を作成しました。"
+    else
+      puts "食品の作成に失敗しました: #{foodstuff.errors.full_messages.join(', ')}"
+    end
   end
 end
