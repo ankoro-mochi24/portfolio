@@ -1,4 +1,7 @@
 require 'faker'
+
+# コメント、トッピング、ユーザーアクションを生成
+
 User.find_each do |user|
   Recipe.find_each do |recipe|
     # コメントを生成
@@ -6,7 +9,7 @@ User.find_each do |user|
       Comment.create!(
         user: user,
         commentable: recipe,
-        body: Faker::Food.review
+        body: Faker::Lorem.sentence # Faker::Food.review ではなく Faker::Lorem.sentence を使用
       )
     end
 
@@ -28,8 +31,20 @@ User.find_each do |user|
         action_type: action_type
       )
     end
+
+    # 他の関連するデータ型にもアクションを生成（例: 食材）
+    Foodstuff.find_each do |foodstuff|
+      action_types.sample(2).each do |action_type|
+        UserAction.create!(
+          user: user,
+          actionable: foodstuff,
+          action_type: action_type
+        )
+      end
+    end
   end
 end
+
 =begin
 # サンプル画像のURL
 sample_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
