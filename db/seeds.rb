@@ -1,14 +1,18 @@
 require 'faker'
 
-30.times do
-  Foodstuff.create!(
-    name: Faker::Food.ingredient, # ランダムな食品名を生成
-    price: Faker::Commerce.price(range: 1.0..100.0), # ランダムな価格を生成
-    description: Faker::Food.description, # ランダムな説明文を生成
-    link: Faker::Internet.url, # ランダムなURLを生成
-    user: user, # 作成したユーザーをランダムに割り当てる
-    image: Rails.root.join("app/assets/images/sample_food.jpg").open # サンプル画像を利用（Heroku環境に画像をアップロード済みと仮定）
-  )
+users = User.all # ユーザーを取得
+
+users.each do |user| # 各ユーザーに対してFoodstuffを作成
+  5.times do
+    Foodstuff.create!(
+      name: Faker::Food.ingredient, # ランダムな食品名を生成
+      price: Faker::Commerce.price(range: 1.0..100.0), # ランダムな価格を生成
+      description: Faker::Food.description, # ランダムな説明文を生成
+      link: Faker::Internet.url, # ランダムなURLを生成
+      user: user, # 作成したユーザーを割り当てる
+      image: Rails.root.join("app/assets/images/sample_food.jpg").open # サンプル画像を指定（事前にアップロード済みのもの）
+    )
+  end
 end
 
 =begin
