@@ -25,13 +25,27 @@ end
 def create_user_actions(actionable, users)
   users.sample(MAX_ACTIONS).each do |user|
     ACTION_TYPES.sample(2).each do |action_type|
+      # 既にこのユーザーが同じアイテムに対して同じアクションをしている場合はスキップ
       next if UserAction.exists?(user: user, actionable: actionable, action_type: action_type)
 
-      UserAction.create!(
-        user: user,
-        actionable: actionable,
-        action_type: action_type
-      )
+      # `good`アクションの場合、既に`bad`がある場合はスキップし、逆も同様
+      if action_type == 'good' && user.user_actions.exists?(actionable: actionable, action_type: 'bad')
+        puts "Skipping 'good' action as 'bad' action already exists for user #{user.id} on #{actionable.class.name} #{actionable.id}"
+        next
+      elsif action_type == 'bad' && user.user_actions.exists?(actionable: actionable, action_type: 'good')
+        puts "Skipping 'bad' action as 'good' action already exists for user #{user.id} on #{actionable.class.name} #{actionable.id}"
+        next
+      end
+
+      begin
+        UserAction.create!(
+          user: user,
+          actionable: actionable,
+          action_type: action_type
+        )
+      rescue ActiveRecord::RecordInvalid => e
+        puts "Failed to create user action for user #{user.id} on #{actionable.class.name} #{actionable.id}: #{e.message}"
+      end
     end
   end
 end
@@ -41,11 +55,15 @@ def create_toppings(recipe, users)
   users.sample(MAX_TOPPINGS).each do |user|
     next if Topping.exists?(user: user, recipe: recipe)
 
-    Topping.create!(
-      user: user,
-      recipe: recipe,
-      name: Faker::Food.ingredient
-    )
+    begin
+      Topping.create!(
+        user: user,
+        recipe: recipe,
+        name: Faker::Food.ingredient
+      )
+    rescue ActiveRecord::RecordInvalid => e
+      puts "Failed to create topping for recipe #{recipe.id}: #{e.message}"
+    end
   end
 end
 
@@ -64,9 +82,6 @@ Foodstuff.find_each do |foodstuff|
   create_comments(foodstuff, users)
   create_user_actions(foodstuff, users)
 end
-
-puts "Seeding completed successfully."
-
 =begin
 # サンプル画像のURL
 sample_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
