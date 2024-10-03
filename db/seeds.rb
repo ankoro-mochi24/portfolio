@@ -25,12 +25,12 @@ def create_comments(commentable, users)
   end
 end
 
+total_created = 0
+total_skipped_good = 0
+total_skipped_bad = 0
+total_failures = 0
 # ユーザアクションを生成する関数
 def create_user_actions(actionable, users)
-  total_created = 0
-  total_skipped_good = 0
-  total_skipped_bad = 0
-  total_failures = 0
 
   users.sample(MAX_ACTIONS).each do |user|
     ACTION_TYPES.sample(2).each do |action_type|
@@ -57,13 +57,12 @@ def create_user_actions(actionable, users)
       end
     end
   end
-
-  # 実行結果のまとめを出力
-  puts "#{total_created} 件のユーザアクションが追加されました。"
-  puts "#{total_skipped_good} 件の 'good' アクションは既存の 'bad' アクションのためスキップされました。"
-  puts "#{total_skipped_bad} 件の 'bad' アクションは既存の 'good' アクションのためスキップされました。"
-  puts "#{total_failures} 件のアクションの作成に失敗しました。"
 end
+# 実行結果のまとめを出力
+puts "#{total_created} 件のユーザアクションが追加されました。"
+puts "#{total_skipped_good} 件の 'good' アクションは既存の 'bad' アクションのためスキップされました。"
+puts "#{total_skipped_bad} 件の 'bad' アクションは既存の 'good' アクションのためスキップされました。"
+puts "#{total_failures} 件のアクションの作成に失敗しました。"
 
 # レシピにトッピングを追加する関数
 def create_toppings(recipe, users)
