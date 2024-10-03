@@ -1,24 +1,38 @@
 require 'faker'
 
-sample_image_url = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
+# 画像のパスを環境によって変更
+if Rails.env.production?
+  sample_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
+else
+  sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")  # ローカル環境用
+end
 
 # データをシード
 User.find_each do |user|
   5.times do
     begin
-      Foodstuff.create!(
+      foodstuff = Foodstuff.new(
         name: Faker::Food.ingredient,
         price: Faker::Commerce.price(range: 100..1000).to_i,  # 小数を整数に変換
         description: Faker::Food.description,
         link: Faker::Internet.url,
-        image: sample_image_url,  # 画像を配列ではなく単一のURLとして渡す
         user: user
       )
+      
+      # 画像の設定
+      if Rails.env.production?
+        foodstuff.remote_image_url = sample_image_url  # プロダクションではS3のURLを使用
+      else
+        foodstuff.image = File.open(sample_image_path)  # ローカル環境ではローカルのファイルを使用
+      end
+      
+      foodstuff.save!
     rescue ActiveRecord::RecordInvalid => e
       puts "Error creating foodstuff: #{e.record.errors.full_messages}"
     end
   end
 end
+
 
 =begin
 10.times do
