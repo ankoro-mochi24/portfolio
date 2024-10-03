@@ -2,7 +2,7 @@ require 'faker'
 
 # 画像のパスを環境によって変更
 if Rails.env.production?
-  sample_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
+  sample_image_url = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
 else
   sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")  # ローカル環境用
 end
@@ -21,9 +21,9 @@ User.find_each do |user|
       
       # 画像の設定
       if Rails.env.production?
-        foodstuff.remote_image_url = sample_image_url  # プロダクションではS3のURLを使用
+        foodstuff.remote_image_urls = sample_image_url  # プロダクションではS3のURLを使用（複数扱いなので配列）
       else
-        foodstuff.image = File.open(sample_image_path)  # ローカル環境ではローカルのファイルを使用
+        foodstuff.image = [File.open(sample_image_path)]  # ローカル環境では配列でファイルを渡す
       end
       
       foodstuff.save!
@@ -32,7 +32,6 @@ User.find_each do |user|
     end
   end
 end
-
 
 =begin
 10.times do
