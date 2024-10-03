@@ -51,21 +51,25 @@ def create_user_actions(actionable, users)
 end
 
 # レシピにトッピングを追加する関数
-def create_toppings(recipe, users)
-  users.sample(MAX_TOPPINGS).each do |user|
-    next if Topping.exists?(user: user, recipe: recipe)
+def create_toppings
+  Recipe.find_each do |recipe|
+    user = User.order("RANDOM()").first
+    topping_name = "Sample Topping #{recipe.id}" # トッピング名をユニークに生成する
 
-    begin
-      Topping.create!(
-        user: user,
-        recipe: recipe,
-        name: Faker::Food.ingredient
-      )
-    rescue ActiveRecord::RecordInvalid => e
-      puts "Failed to create topping for recipe #{recipe.id}: #{e.message}"
+    # トッピングが既に存在するかを確認
+    unless Topping.exists?(name: topping_name)
+      topping = Topping.new(recipe: recipe, user: user, name: topping_name)
+      if topping.save
+        puts "Topping created for Recipe #{recipe.id}"
+      else
+        puts "Failed to create topping for Recipe #{recipe.id}: #{topping.errors.full_messages.join(', ')}"
+      end
+    else
+      puts "Topping already exists for Recipe #{recipe.id} with name #{topping_name}"
     end
   end
 end
+
 
 # 全ユーザーを取得
 users = User.all
