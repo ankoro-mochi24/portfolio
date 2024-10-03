@@ -2,6 +2,8 @@ require 'faker'
 
 users = User.all # ユーザーを取得
 
+s3_image_url = 'https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg'
+
 users.each do |user| # 各ユーザーに対してFoodstuffを作成
   5.times do
     Foodstuff.create!(
@@ -10,7 +12,7 @@ users.each do |user| # 各ユーザーに対してFoodstuffを作成
       description: Faker::Food.description, # ランダムな説明文を生成
       link: Faker::Internet.url, # ランダムなURLを生成
       user: user, # 作成したユーザーを割り当てる
-      image: Rails.root.join("app/assets/images/sample_food.jpg").open # サンプル画像を指定（事前にアップロード済みのもの）
+      image: s3_image_url # S3の画像URLを使用
     )
   end
 end
