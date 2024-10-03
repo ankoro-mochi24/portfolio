@@ -1,95 +1,72 @@
 require 'faker'
 
-# サンプル画像のURL
-sample_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
-sample_step_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
+# サンプルデータ生成数を制限
+MAX_COMMENTS = 3
+MAX_ACTIONS = 5
+MAX_TOPPINGS = 2
 
-# 材料、調理器具、ユーザーごとに必要なデータを生成
-User.find_each do |user|
-  # 材料の生成 (既存の材料が少ない場合のみ追加)
-  ingredients = Ingredient.all.to_a
-  if ingredients.count < 10
-    rice = Ingredient.find_or_create_by!(name: '白米') # 必須の「白米」を最初に生成
-    ingredients << rice
+# サンプルのアクションタイプ
+ACTION_TYPES = %w[bookmark good bad]
 
-    (9 - ingredients.count).times do
-      ingredients << Ingredient.find_or_create_by!(name: Faker::Food.ingredient)
-    end
+# サンプルのコメントを生成する関数
+def create_comments(commentable, users)
+  users.sample(MAX_COMMENTS).each do |user|
+    next if Comment.exists?(user: user, commentable: commentable)
+
+    Comment.create!(
+      user: user,
+      commentable: commentable,
+      body: Faker::Restaurant.review
+    )
   end
+end
 
-  # 調理器具の生成 (5種類未満の調理器具が存在する場合のみ追加)
-  kitchen_tools = KitchenTool.all.to_a
-  if kitchen_tools.count < 5
-    (5 - kitchen_tools.count).times do
-      kitchen_tools << KitchenTool.find_or_create_by!(name: Faker::Appliance.equipment)
-    end
-  end
+# ユーザアクションを生成する関数
+def create_user_actions(actionable, users)
+  users.sample(MAX_ACTIONS).each do |user|
+    ACTION_TYPES.sample(2).each do |action_type|
+      next if UserAction.exists?(user: user, actionable: actionable, action_type: action_type)
 
-  # ユーザーごとにレシピが3件未満であれば作成
-  if user.recipes.count < 3
-    (3 - user.recipes.count).times do
-      begin
-        # レシピの作成
-        recipe = Recipe.new(
-          title: Faker::Food.dish,
-          dish_image: sample_dish_image_url,
-          user: user
-        )
-        recipe.save!
-
-        # 材料の追加
-        recipe.recipe_ingredients.create!(ingredient: ingredients.sample)
-
-        # 調理器具の追加
-        recipe.recipe_kitchen_tools.create!(kitchen_tool: kitchen_tools.sample)
-
-        # 調理手順の追加
-        3.times do |step_number|
-          recipe.recipe_steps.create!(
-            text: "ステップ #{step_number + 1}: #{Faker::Food.description}",
-            step_image: sample_step_image_url
-          )
-        end
-
-        # レシピにコメントがなければコメントを追加
-        if recipe.comments.count < 3
-          (3 - recipe.comments.count).times do
-            Comment.create!(
-              user: user,
-              commentable: recipe,
-              body: Faker::Lorem.sentence
-            )
-          end
-        end
-
-        # トッピングの追加
-        if recipe.toppings.count < 2
-          (2 - recipe.toppings.count).times do
-            Topping.create!(
-              user: user,
-              recipe: recipe,
-              name: Faker::Food.ingredient
-            )
-          end
-        end
-
-        # ユーザーアクションの追加
-        %w[bookmark good bad].sample(2).each do |action_type|
-          unless UserAction.exists?(user: user, actionable: recipe, action_type: action_type)
-            UserAction.create!(
-              user: user,
-              actionable: recipe,
-              action_type: action_type
-            )
-          end
-        end
-
-      rescue ActiveRecord::RecordInvalid => e
-        puts "Error creating recipe or related data for user #{user.id}: #{e.message}"
-      end
+      UserAction.create!(
+        user: user,
+        actionable: actionable,
+        action_type: action_type
+      )
     end
   end
 end
+
+# レシピにトッピングを追加する関数
+def create_toppings(recipe, users)
+  users.sample(MAX_TOPPINGS).each do |user|
+    next if Topping.exists?(user: user, recipe: recipe)
+
+    Topping.create!(
+      user: user,
+      recipe: recipe,
+      name: Faker::Food.ingredient
+    )
+  end
+end
+
+# 全ユーザーを取得
+users = User.all
+
+# レシピに対してコメント、ユーザアクション、トッピングを追加
+Recipe.find_each do |recipe|
+  create_comments(recipe, users)
+  create_user_actions(recipe, users)
+  create_toppings(recipe, users)
+end
+
+# 食品に対してコメントとユーザアクションを追加
+Foodstuff.find_each do |foodstuff|
+  create_comments(foodstuff, users)
+  create_user_actions(foodstuff, users)
+end
+
+puts "Seeding completed successfully."
+
 =begin
 # サンプル画像のURL
 sample_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
