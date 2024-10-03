@@ -40,7 +40,7 @@ User.find_each do |user|
       end
 
       # 調理器具をレシピに追加
-      kitchen_tools.sample(3).each do |kitchen_tool|
+      kitchen_tools.sample(1).each do |kitchen_tool| # 必ず1つ以上の調理器具を追加
         RecipeKitchenTool.create!(
           recipe: recipe,
           kitchen_tool: kitchen_tool,
