@@ -1,5 +1,36 @@
 require 'faker'
+User.find_each do |user|
+  Recipe.find_each do |recipe|
+    # コメントを生成
+    3.times do
+      Comment.create!(
+        user: user,
+        commentable: recipe,
+        body: Faker::Food.review
+      )
+    end
 
+    # トッピングを生成
+    2.times do
+      Topping.create!(
+        user: user,
+        recipe: recipe,
+        name: Faker::Food.ingredient
+      )
+    end
+
+    # ユーザーアクションを生成
+    action_types = %w[bookmark good bad]
+    action_types.sample(2).each do |action_type|
+      UserAction.create!(
+        user: user,
+        actionable: recipe,
+        action_type: action_type
+      )
+    end
+  end
+end
+=begin
 # サンプル画像のURL
 sample_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
 sample_step_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
@@ -66,8 +97,6 @@ User.find_each do |user|
       # レシピを保存
       recipe.save!
 
-      puts "Successfully created recipe: #{recipe.title} for user: #{user.name}"
-
     rescue ActiveRecord::RecordInvalid => e
       puts "Error creating recipe: #{e.record.errors.full_messages}"
       break # 最初のエラーでループを中断
@@ -75,7 +104,6 @@ User.find_each do |user|
   end
 end
 
-=begin
 # 画像のパスを環境によって変更
 if Rails.env.production?
   sample_image_url = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
