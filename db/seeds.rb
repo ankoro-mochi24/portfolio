@@ -70,7 +70,6 @@ def create_toppings
   end
 end
 
-
 # 全ユーザーを取得
 users = User.all
 
@@ -78,7 +77,7 @@ users = User.all
 Recipe.find_each do |recipe|
   create_comments(recipe, users)
   create_user_actions(recipe, users)
-  create_toppings(recipe, users)
+  create_toppings # 引数を削除
 end
 
 # 食品に対してコメントとユーザアクションを追加
@@ -86,6 +85,7 @@ Foodstuff.find_each do |foodstuff|
   create_comments(foodstuff, users)
   create_user_actions(foodstuff, users)
 end
+
 =begin
 # サンプル画像のURL
 sample_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
