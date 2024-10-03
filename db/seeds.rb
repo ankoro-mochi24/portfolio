@@ -151,20 +151,20 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
       user: user
     )
 
-    # dish_image (単一ファイルアップロードの処理)
+    # dish_imageの保存処理を配列形式に変更
     if Rails.env.production?
-      recipe.remote_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
+      recipe.remote_dish_image_urls = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
     else
-      recipe.dish_image = File.open(sample_image_path)
+      recipe.dish_image = [File.open(sample_image_path)]
     end
 
-    # 材料をレシピに追加（白米は必ず1つ、他の材料も重複を避ける）
+    # 材料と調理器具の追加は同様
     added_ingredients = []
     rice = Ingredient.find_by(name: '白米')
     recipe.recipe_ingredients.build(ingredient: rice, ingredient_name: rice.name)
     added_ingredients << rice.name
     Ingredient.where.not(name: '白米').sample(4).each do |ingredient|
-      next if added_ingredients.include?(ingredient.name) # 重複を避ける
+      next if added_ingredients.include?(ingredient.name)
       recipe.recipe_ingredients.build(ingredient: ingredient, ingredient_name: ingredient.name)
       added_ingredients << ingredient.name
     end
@@ -179,11 +179,11 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
         text: "ステップ #{step_number + 1}: #{Faker::Food.description}"
       )
 
-      # step_image (単一ファイルアップロードの処理)
+      # step_imageも配列形式に変更
       if Rails.env.production?
-        recipe_step.remote_step_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
+        recipe_step.remote_step_image_urls = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
       else
-        recipe_step.step_image = File.open(sample_image_path)
+        recipe_step.step_image = [File.open(sample_image_path)]
       end
     end
 
