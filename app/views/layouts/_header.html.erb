@@ -1,44 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="<%= root_path %>">MyApp</a>
+  <a class="navbar-brand" href="<%= root_path %>"><%= t('navbar.brand') %></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= link_to '米炊きチュートリアル', cookrice_path, class: 'nav-link' %>
-      </li>
-    </ul>
-    <ul class="navbar-nav">
-      <% if user_signed_in? %>
-        <li class="nav-item">
-          <span class="navbar-text">
-            名前： <%= link_to current_user.name, profile_path  %>
-          </span>
-        </li>
-        <li class="nav-item">
-          <%= link_to t('レシピ投稿'), new_recipe_path, class: 'btn btn-outline-danger ml-2' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to t('foodstuffs.new.title'), new_foodstuff_path, class: 'btn btn-outline-danger ml-2' %>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
-        </li>
-      <% end %>
-    </ul>
 
     <!-- 検索フォーム -->
     <%= form_with url: root_path, method: :get, local: true, class: "form-inline my-2 my-lg-0 ml-auto" do |form| %>
       <%= hidden_field_tag :view, @view, id: "unique_view_for_search" %>
       <div class="input-group">
-        <%= form.search_field :query, class: "form-control", placeholder: "検索", aria: { label: "検索" }, id: "unique_query_for_search" %>
+        <%= form.search_field :query, class: "form-control", placeholder: t('navbar.search_placeholder'), aria: { label: t('navbar.search_placeholder') }, id: "unique_query_for_search" %>
         <div class="input-group-append">
-          <%= form.submit "検索", class: "btn btn-outline-success" %>
+          <%= form.submit t('navbar.search_button'), class: "btn btn-outline-success" %>
         </div>
       </div>
     <% end %>
@@ -48,13 +21,42 @@
       <%= hidden_field_tag :view, @view, id: "unique_view_for_sort" %>
       <%= hidden_field_tag :query, params[:query], id: "unique_query_for_sort" %>
       <%= select_tag :sort_by, options_for_select([
-          ['投稿が新しい順', 'newest'],
-          ['投稿が古い順', 'oldest'],
-          ['材料の少ない順', 'few_ingredients'],
-          ['調理が簡単順', 'easy_cooking'],
-          ['Goodが多い順', 'most_good'],
-          ['ブックマークが多い順', 'most_bookmarks']
+          [t('navbar.sort_options.newest'), 'newest'],
+          [t('navbar.sort_options.oldest'), 'oldest'],
+          [t('navbar.sort_options.few_ingredients'), 'few_ingredients'],
+          [t('navbar.sort_options.easy_cooking'), 'easy_cooking'],
+          [t('navbar.sort_options.most_good'), 'most_good'],
+          [t('navbar.sort_options.most_bookmarks'), 'most_bookmarks']
         ], params[:sort_by]), { class: "form-control", onchange: 'this.form.submit();' } %>
     <% end %>
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to t('navbar.cookrice'), cookrice_path, class: 'nav-link' %>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to t('navbar.post_recipe'), new_recipe_path, class: 'btn btn-outline-danger ml-2' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('navbar.post_foodstuff'), new_foodstuff_path, class: 'btn btn-outline-danger ml-2' %>
+        </li>
+        <li class="nav-item">
+          <span class="navbar-text">
+            <%= t('navbar.user_name') %> <%= link_to current_user.name, profile_path  %>
+          </span>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to t('navbar.login'), new_user_session_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to t('navbar.register'), new_user_registration_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </nav>

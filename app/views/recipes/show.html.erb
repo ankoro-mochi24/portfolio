@@ -1,24 +1,24 @@
 <div class="recipe-show">
   <div class="recipe-header">
     <p>
-      <strong>レシピ名:</strong>
+      <strong><%= t('recipes.show.title') %>:</strong>
       <%= @recipe.title %>
     </p>
 
     <p>
-      <strong>完成写真:</strong>
+      <strong><%= t('recipes.show.dish_image') %>:</strong>
       <%= image_tag @recipe.dish_image.url, size: "100x100" if @recipe.dish_image.present? %>
     </p>
   </div>
 
   <% if user_signed_in? %>
-    <h3>トッピング</h3>
+    <h3><%= t('recipes.show.toppings') %></h3>
     <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
       <div class="form-group">
-        <%= form.label :name, "味変/トッピング" %>
+        <%= form.label :name, t('recipes.show.toppings') %>
         <%= form.text_field :name, class: "form-control" %>
       </div>
-      <%= form.submit "追加", class: "btn btn-primary" %>
+      <%= form.submit t('recipes.show.add_topping'), class: "btn btn-primary" %>
     <% end %>
 
     <ul id="toppings">
@@ -28,7 +28,7 @@
           <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %></div>
           <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %></div>
           <% if topping.user == current_user %>
-            <div><%= button_to "削除", remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, remote: true, class: "btn btn-danger" %></div>
+            <div><%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-danger" %></div>
           <% end %>
         </li>
       <% end %>
@@ -36,11 +36,11 @@
   <% end %>
 
   <div class="recipe-section">
-    <h3>調理工程</h3>
+    <h3><%= t('recipes.show.steps') %></h3>
     <% @recipe.recipe_steps.each do |step| %>
       <div class="recipe-step">
         <p>
-          <strong>工程:</strong>
+          <strong><%= t('recipes.form.step') %>:</strong>
           <%= step.text %>
         </p>
         <% if step.step_image.present? %>
@@ -53,7 +53,7 @@
   </div>
 
   <div class="recipe-section">
-    <h3>必要な調理器具</h3>
+    <h3><%= t('recipes.show.kitchen_tools') %></h3>
     <ul>
       <% @recipe.kitchen_tools.each do |tool| %>
         <li><%= tool.name %></li>
@@ -62,7 +62,7 @@
   </div>
 
   <div class="recipe-section">
-    <h3>用意する材料+調味料</h3>
+    <h3><%= t('recipes.show.ingredients') %></h3>
     <ul>
       <% @recipe.ingredients.each do |ingredient| %>
         <li><%= ingredient.name %></li>
@@ -77,12 +77,12 @@
 
     <%= link_to t('foodstuffs.back_to_list'), root_path, class: 'btn btn-secondary' %>
     <% if @recipe.user == current_user %>
-      <%= link_to 'レシピを編集する', edit_recipe_path(@recipe), class: 'btn btn-primary' %>
-      <%= button_to 'レシピを削除する', recipe_path(@recipe), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+      <%= link_to t('recipes.edit.title'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+      <%= button_to t('recipes.show.confirm_delete'), recipe_path(@recipe), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, class: 'btn btn-danger' %>
     <% end %>
   </div>
 
-  <h2>コメント</h2>
+  <h2><%= t('recipes.show.comment_section_title') %></h2>
   <div id="comments">
     <%= render @recipe.comments %> <!-- /comments/_comment.html.erb -->
   </div>

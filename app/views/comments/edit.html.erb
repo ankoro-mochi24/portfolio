@@ -1,11 +1,11 @@
-<h1>コメントを編集</h1>
+<h1><%= t('comments.edit_title') %></h1>
 
 <%= form_with(model: [@commentable, @comment], local: true) do |form| %>
   <div class="field">
-    <%= form.label :body, "コメント" %>
+    <%= form.label :body, t('comments.body_label') %>
     <%= form.text_area :body, required: true %>
   </div>
   <div class="actions">
-    <%= form.submit "更新する" %>
+    <%= form.submit t('comments.update') %>
   </div>
 <% end %>

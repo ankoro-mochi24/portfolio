@@ -4,11 +4,11 @@
     <%= hidden_field_tag :commentable_type, commentable.class.name %>
     <%= hidden_field_tag :commentable_id, commentable.id %>
     <div class="field">
-      <%= form.label :body, "コメント" %>
+      <%= form.label :body, t('comments.body_label') %>
       <%= form.text_area :body, required: true %>
     </div>
     <div class="actions">
-      <%= form.submit "コメントを投稿" %>
+      <%= form.submit t('comments.post') %>
     </div>
   <% end %>
 <% end %>

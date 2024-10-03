@@ -1,7 +1,7 @@
 <%= form_with(model: recipe, local: true, html: { multipart: true }) do |form| %>
   <% if recipe.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+      <h2><%= pluralize(recipe.errors.count, t('recipes.form.error')) %> <%= t('recipes.form.prohibited') %></h2>
       <ul>
         <% recipe.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,15 +11,15 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title, "レシピ名" %>
+    <%= form.label :title, t('recipes.form.title') %>
     <%= form.text_field :title, required: true %>
   </div>
 
   <div class="field">
-    <%= form.label :dish_image, "完成写真" %>
+    <%= form.label :dish_image, t('recipes.form.dish_image') %>
     <% if recipe.dish_image.present? %>
       <div id="dish_image_preview">
-        <%= image_tag recipe.dish_image.url, alt: "Dish Image", style: "max-width: 300px; max-height: 300px;" %>
+        <%= image_tag recipe.dish_image.url, alt: t('recipes.form.dish_image_alt'), style: "max-width: 300px; max-height: 300px;" %>
       </div>
       <%= form.hidden_field :dish_image_cache, value: recipe.dish_image_cache %>
     <% else %>
@@ -29,18 +29,18 @@
     <%= form.hidden_field :remove_dish_image, value: false %>
   </div>
 
-  <h3>調理工程</h3>
+  <h3><%= t('recipes.form.steps_title') %></h3>
   <div data-controller="recipe-steps">
     <div data-recipe-steps-target="container">
       <%= form.fields_for :recipe_steps do |step_form| %>
         <div class="nested-fields" data-new-record="false">
           <%= step_form.hidden_field :_destroy %>
-          <%= step_form.label :text, "工程" %>
+          <%= step_form.label :text, t('recipes.form.step') %>
           <%= step_form.text_area :text, required: true %>
-          <%= step_form.label :step_image, "工程写真" %>
+          <%= step_form.label :step_image, t('recipes.form.step_image') %>
           <% if step_form.object.step_image.present? %>
             <div class="step_image_preview">
-              <%= image_tag step_form.object.step_image.url, alt: "Step Image", style: "max-width: 300px; max-height: 300px;" %>
+              <%= image_tag step_form.object.step_image.url, alt: t('recipes.form.step_image_alt'), style: "max-width: 300px; max-height: 300px;" %>
               <%= step_form.hidden_field :step_image_cache, value: step_form.object.step_image_cache %>
             </div>
           <% else %>
@@ -49,37 +49,37 @@
           <%= step_form.file_field :step_image, required: step_form.object.step_image.blank? %>
           <%= step_form.hidden_field :remove_step_image, value: false %>
           <% if step_form.index > 0 %>
-            <a href="#" data-action="click->recipe-steps#removeField">削除</a>
+            <a href="#" data-action="click->recipe-steps#removeField"><%= t('recipes.form.remove') %></a>
           <% end %>
         </div>
       <% end %>
     </div>
-    <a href="#" data-action="click->recipe-steps#addField">追加</a>
+    <a href="#" data-action="click->recipe-steps#addField"><%= t('recipes.form.add') %></a>
     <template data-recipe-steps-target="template">
       <div class="nested-fields" data-new-record="true">
         <%= form.fields_for :recipe_steps, RecipeStep.new, child_index: "TEMPLATE_RECORD" do |step_form| %>
           <%= step_form.hidden_field :_destroy %>
-          <%= step_form.label :text, "工程" %>
+          <%= step_form.label :text, t('recipes.form.step') %>
           <%= step_form.text_area :text, required: true %>
-          <%= step_form.label :step_image, "工程写真" %>
+          <%= step_form.label :step_image, t('recipes.form.step_image') %>
           <%= step_form.file_field :step_image, required: true %>
-          <a href="#" data-action="click->recipe-steps#removeField">削除</a>
+          <a href="#" data-action="click->recipe-steps#removeField"><%= t('recipes.form.remove') %></a>
         <% end %>
       </div>
     </template>
   </div>
 
-  <h3>必要な調理器具</h3>
+  <h3><%= t('recipes.form.kitchen_tools_title') %></h3>
   <div data-controller="kitchen-tools">
     <div data-kitchen-tools-target="container">
       <%= form.fields_for :recipe_kitchen_tools do |tool_form| %>
         <div class="nested-fields" data-new-record="false">
           <%= tool_form.hidden_field :_destroy %>
           <%= tool_form.hidden_field :kitchen_tool_id %>
-          <%= tool_form.label :kitchen_tool_name, "調理器具" %>
+          <%= tool_form.label :kitchen_tool_name, t('recipes.form.kitchen_tool') %>
           <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name, required: true %>
           <% if tool_form.index > 0 %>
-            <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
+            <a href="#" data-action="click->kitchen-tools#removeField"><%= t('recipes.form.remove') %></a>
           <% end %>
         </div>
       <% end %>
@@ -88,60 +88,60 @@
           <div class="nested-fields" data-new-record="true">
             <%= tool_form.hidden_field :_destroy %>
             <%= tool_form.hidden_field :kitchen_tool_id %>
-            <%= tool_form.label :kitchen_tool_name, "調理器具" %>
+            <%= tool_form.label :kitchen_tool_name, t('recipes.form.kitchen_tool') %>
             <%= tool_form.text_field :kitchen_tool_name, required: true %>
           </div>
         <% end %>
       <% end %>
     </div>
-    <a href="#" data-action="click->kitchen-tools#addField">追加</a>
+    <a href="#" data-action="click->kitchen-tools#addField"><%= t('recipes.form.add') %></a>
     <template data-kitchen-tools-target="template">
       <div class="nested-fields" data-new-record="true">
         <%= form.fields_for :recipe_kitchen_tools, RecipeKitchenTool.new, child_index: "TEMPLATE_RECORD" do |tool_form| %>
           <%= tool_form.hidden_field :_destroy %>
           <%= tool_form.hidden_field :kitchen_tool_id %>
-          <%= tool_form.label :kitchen_tool_name, "調理器具" %>
+          <%= tool_form.label :kitchen_tool_name, t('recipes.form.kitchen_tool') %>
           <%= tool_form.text_field :kitchen_tool_name, required: true %>
-          <a href="#" data-action="click->kitchen-tools#removeField">削除</a>
+          <a href="#" data-action="click->kitchen-tools#removeField"><%= t('recipes.form.remove') %></a>
         <% end %>
       </div>
     </template>
   </div>
 
-  <h3>用意する材料+調味料</h3>
+  <h3><%= t('recipes.form.ingredients_title') %></h3>
   <div data-controller="recipe-ingredients">
     <div data-recipe-ingredients-target="container">
       <%= form.fields_for :recipe_ingredients do |ingredient_form| %>
         <div class="nested-fields" data-new-record="false">
           <%= ingredient_form.hidden_field :_destroy %>
           <%= ingredient_form.hidden_field :ingredient_id %>
-          <%= ingredient_form.label :ingredient_name, "材料" %>
+          <%= ingredient_form.label :ingredient_name, t('recipes.form.ingredient') %>
           <% if ingredient_form.index == 0 %>
             <!-- 1つ目の材料フォーム（白米） -->
             <%= ingredient_form.text_field :ingredient_name, readonly: true %>
           <% else %>
             <!-- それ以外の材料フォーム -->
             <%= ingredient_form.text_field :ingredient_name %>
-            <a href="#" data-action="click->recipe-ingredients#removeField">削除</a>
+            <a href="#" data-action="click->recipe-ingredients#removeField"><%= t('recipes.form.remove') %></a>
           <% end %>
         </div>
       <% end %>
     </div>
-    <a href="#" data-action="click->recipe-ingredients#addField">追加</a>
+    <a href="#" data-action="click->recipe-ingredients#addField"><%= t('recipes.form.add') %></a>
     <template data-recipe-ingredients-target="template">
       <div class="nested-fields" data-new-record="true">
         <%= form.fields_for :recipe_ingredients, RecipeIngredient.new, child_index: "TEMPLATE_RECORD" do |ingredient_form| %>
           <%= ingredient_form.hidden_field :_destroy %>
           <%= ingredient_form.hidden_field :ingredient_id %>
-          <%= ingredient_form.label :ingredient_name, "材料" %>
+          <%= ingredient_form.label :ingredient_name, t('recipes.form.ingredient') %>
           <%= ingredient_form.text_field :ingredient_name %>
-          <a href="#" data-action="click->recipe-ingredients#removeField">削除</a>
+          <a href="#" data-action="click->recipe-ingredients#removeField"><%= t('recipes.form.remove') %></a>
         <% end %>
       </div>
     </template>
   </div>
 
   <div class="actions">
-    <%= form.submit recipe.new_record? ? "投稿" : "保存" %>
+    <%= form.submit recipe.new_record? ? t('recipes.form.submit') : t('recipes.form.save') %>
   </div>
 <% end %>
