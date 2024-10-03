@@ -54,13 +54,13 @@ end
 def create_toppings
   Recipe.find_each do |recipe|
     user = User.order("RANDOM()").first
-    topping_name = "Sample Topping #{recipe.id}" # トッピング名をユニークに生成する
+    topping_name = Faker::Food.ingredient # Fakerを使用してランダムなトッピング名を生成
 
-    # トッピングが既に存在するかを確認
-    unless Topping.exists?(name: topping_name)
+    # トッピングが既に存在するか確認
+    unless Topping.exists?(name: topping_name, recipe: recipe)
       topping = Topping.new(recipe: recipe, user: user, name: topping_name)
       if topping.save
-        puts "Topping created for Recipe #{recipe.id}"
+        puts "Topping '#{topping_name}' created for Recipe #{recipe.id}"
       else
         puts "Failed to create topping for Recipe #{recipe.id}: #{topping.errors.full_messages.join(', ')}"
       end
