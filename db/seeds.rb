@@ -142,7 +142,7 @@ end
 
 # レシピの作成
 check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
-  sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")
+  sample_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg" # S3の画像URLを使用
 
   needed.times do
     user = User.order("RANDOM()").first
@@ -151,12 +151,8 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
       user: user
     )
 
-    # 画像を設定（本番環境とローカル環境で処理を分ける）
-    if Rails.env.production?
-      recipe.remote_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
-    else
-      recipe.dish_image = File.open(sample_image_path)
-    end
+    # Heroku上でS3の画像を使用
+    recipe.remote_dish_image_url = sample_image_url
 
     # 材料をレシピに追加（白米は必ず1つ、他の材料も重複を避ける）
     added_ingredients = []
@@ -178,13 +174,8 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
       recipe_step = recipe.recipe_steps.build(
         text: "ステップ #{step_number + 1}: #{Faker::Food.description}"
       )
-
-      # ステップ画像を設定（本番環境とローカル環境で処理を分ける）
-      if Rails.env.production?
-        recipe_step.remote_step_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
-      else
-        recipe_step.step_image = File.open(sample_image_path)
-      end
+      # ステップ画像もS3を使用
+      recipe_step.remote_step_image_url = sample_image_url
     end
 
     if recipe.save
@@ -208,12 +199,8 @@ check_and_create_records(Foodstuff, USER_COUNT, $total_foodstuffs) do |needed|
       user: user
     )
     
-    if Rails.env.production?
-      foodstuff.remote_image_urls = sample_image_url
-    else
-      sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")
-      foodstuff.image = [File.open(sample_image_path)]
-    end
+    # Heroku上でS3を使用
+    foodstuff.remote_image_urls = sample_image_url
 
     if foodstuff.save
       $total_foodstuffs += 1
