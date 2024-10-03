@@ -9,6 +9,6 @@ CarrierWave.configure do |config|
     region:                ENV['AWS_REGION'],
   }
   config.fog_directory  = ENV['S3_BUCKET_NAME']
-  config.fog_public     = false  # 画像を非公開にしたい場合はfalse
+  config.fog_public     = false  # プライベートにしたい場合はfalse
   config.storage        = :fog
 end
