@@ -10,8 +10,11 @@ User.find_each do |user|
   ingredients = []
   kitchen_tools = []
 
-  # 材料を10種類生成
-  10.times do
+  # 材料を10種類生成（必ず "白米" を追加）
+  rice = Ingredient.find_or_create_by!(name: '白米') # 必須の「白米」を最初に生成
+  ingredients << rice
+
+  9.times do
     ingredients << Ingredient.find_or_create_by!(name: Faker::Food.ingredient)
   end
 
@@ -24,38 +27,44 @@ User.find_each do |user|
   3.times do
     begin
       # レシピを作成
-      recipe = Recipe.create!(
+      recipe = Recipe.new(
         title: Faker::Food.dish,
         dish_image: sample_dish_image_url, # サンプル画像URL
         user: user
       )
 
-      # 材料をレシピに追加
-      ingredients.sample(5).each do |ingredient|
-        RecipeIngredient.create!(
-          recipe: recipe,
+      # 最初の材料として必ず "白米" を追加
+      recipe.recipe_ingredients.build(
+        ingredient: rice,
+        ingredient_name: rice.name
+      )
+
+      # 残りの材料を追加（"白米" 以外のものをランダムに選択）
+      ingredients.sample(4).each do |ingredient|
+        next if ingredient == rice # 白米は既に追加されているのでスキップ
+        recipe.recipe_ingredients.build(
           ingredient: ingredient,
           ingredient_name: ingredient.name
         )
       end
 
-      # 調理器具をレシピに追加
-      kitchen_tools.sample(1).each do |kitchen_tool| # 必ず1つ以上の調理器具を追加
-        RecipeKitchenTool.create!(
-          recipe: recipe,
-          kitchen_tool: kitchen_tool,
-          kitchen_tool_name: kitchen_tool.name
-        )
-      end
+      # 調理器具をレシピに追加（必ず1つ以上追加）
+      kitchen_tool = kitchen_tools.sample(1).first
+      recipe.recipe_kitchen_tools.build(
+        kitchen_tool: kitchen_tool,
+        kitchen_tool_name: kitchen_tool.name
+      )
 
       # レシピの調理手順を追加
       3.times do |step_number|
-        RecipeStep.create!(
-          recipe: recipe,
+        recipe.recipe_steps.build(
           text: "ステップ #{step_number + 1}: #{Faker::Food.description}",
           step_image: sample_step_image_url # サンプル画像URL
         )
       end
+
+      # レシピを保存
+      recipe.save!
 
       puts "Successfully created recipe: #{recipe.title} for user: #{user.name}"
 
@@ -65,6 +74,7 @@ User.find_each do |user|
     end
   end
 end
+
 
 =begin
 # 画像のパスを環境によって変更
