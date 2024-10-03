@@ -1,6 +1,17 @@
 require 'faker'
 
-# ユーザーのサンプルデータを作成（ユーザーがいない場合のため）
+30.times do
+  Foodstuff.create!(
+    name: Faker::Food.ingredient, # ランダムな食品名を生成
+    price: Faker::Commerce.price(range: 1.0..100.0), # ランダムな価格を生成
+    description: Faker::Food.description, # ランダムな説明文を生成
+    link: Faker::Internet.url, # ランダムなURLを生成
+    user: user, # 作成したユーザーをランダムに割り当てる
+    image: Rails.root.join("app/assets/images/sample_food.jpg").open # サンプル画像を利用（Heroku環境に画像をアップロード済みと仮定）
+  )
+end
+
+=begin
 10.times do
   User.create!(
     name: Faker::Name.name,                  # ランダムな名前を生成
@@ -11,7 +22,5 @@ require 'faker'
     updated_at: Faker::Date.between(from: 2.years.ago, to: Date.today)   # 過去2年間でランダムな更新日
   )
 end
-
-=begin
 =end
 puts "サンプルデータの作成が完了しました！"
