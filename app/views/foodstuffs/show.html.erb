@@ -2,27 +2,27 @@
 
 <div class="foodstuff-header">
   <p>
-    <strong>食品名:</strong>
+    <strong><%= t('foodstuffs.show.name') %>:</strong>
     <%= @foodstuff.name %>
   </p>
 
   <p>
-    <strong>価格:</strong>
+    <strong><%= t('foodstuffs.show.price') %>:</strong>
     <%= @foodstuff.price %>
   </p>
 
   <p>
-    <strong>説明:</strong>
+    <strong><%= t('foodstuffs.show.description') %>:</strong>
     <%= @foodstuff.description %>
   </p>
 
   <p>
-    <strong>リンク:</strong>
+    <strong><%= t('foodstuffs.show.link') %>:</strong>
     <%= @foodstuff.link %>
   </p>
 
   <p>
-    <strong>写真:</strong>
+    <strong><%= t('foodstuffs.show.image') %>:</strong>
     <% if @foodstuff.image.present? %>
       <% @foodstuff.image.each do |img| %>
         <%= image_tag img.url, size: "100x100" %>
@@ -31,7 +31,7 @@
   </p>
 </div>
 
-<%= link_to 'この食品を使ったレシピを投稿', new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
+<%= link_to t('foodstuffs.show.post_recipe'), new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
 
 <div class="d-flex align-items-center user-actions-container">
   <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bookmark' } %>
@@ -41,11 +41,11 @@
   <%= link_to t('foodstuffs.back_to_list'), root_path, class: 'btn btn-secondary' %>
   <% if current_user == @foodstuff.user %>
     <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary' %>
-    <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: t('foodstuffs.confirm_delete') }, class: 'btn btn-danger' %>
   <% end %>
 </div>
 
-<h2>コメント</h2>
+<h2><%= t('comments.title') %></h2>
 <div id="comments">
   <%= render @foodstuff.comments %> <!-- /comments/_comment.html.erb コメントの一覧表示、編集、削除機能 -->
 </div>

@@ -1,21 +1,21 @@
 <ul class="nav nav-tabs mb-3">
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= posts_profile_path(view: 'both') %>">両方</a>
+    <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= posts_profile_path(view: 'both') %>"><%= t('profiles.posts.both') %></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= posts_profile_path(view: 'recipes') %>">レシピ</a>
+    <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= posts_profile_path(view: 'recipes') %>"><%= t('profiles.posts.recipes') %></a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= posts_profile_path(view: 'foodstuffs') %>">食品</a>
+    <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= posts_profile_path(view: 'foodstuffs') %>"><%= t('profiles.posts.foodstuffs') %></a>
   </li>
 </ul>
 
-<h1>投稿したレシピ/投稿した食品</h1>
+<h1><%= t('profiles.posts.title') %></h1>
 
 <div class="row">
   <% if @view == 'both' || @view == 'recipes' %>
     <div class="col-md-6">
-      <h2>投稿したレシピ</h2>
+      <h2><%= t('profiles.posts.recipes_title') %></h2>
       <div id="user-recipes">
         <% if @recipes.present? %>
           <% @recipes.each do |recipe| %>
@@ -23,7 +23,7 @@
           <% end %>
           <%= paginate @recipes %>
         <% else %>
-          <p>投稿したレシピはありません。</p>
+          <p><%= t('profiles.posts.no_recipes') %></p>
         <% end %>
       </div>
     </div>
@@ -31,7 +31,7 @@
 
   <% if @view == 'both' || @view == 'foodstuffs' %>
     <div class="col-md-6">
-      <h2>投稿した食品</h2>
+      <h2><%= t('profiles.posts.foodstuffs_title') %></h2>
       <div id="user-foodstuffs">
         <% if @foodstuffs.present? %>
           <% @foodstuffs.each do |foodstuff| %>
@@ -39,7 +39,7 @@
           <% end %>
           <%= paginate @foodstuffs %>
         <% else %>
-          <p>投稿した食品はありません。</p>
+          <p><%= t('profiles.posts.no_foodstuffs') %></p>
         <% end %>
       </div>
     </div>
