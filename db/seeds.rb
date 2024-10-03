@@ -8,10 +8,10 @@ User.find_each do |user|
     begin
       Foodstuff.create!(
         name: Faker::Food.ingredient,
-        price: Faker::Commerce.price(range: 100..1000),
+        price: Faker::Commerce.price(range: 100..1000).to_i,  # 小数を整数に変換
         description: Faker::Food.description,
         link: Faker::Internet.url,
-        image: sample_image_url,  # 配列として渡す
+        image: sample_image_url,  # 画像を配列ではなく単一のURLとして渡す
         user: user
       )
     rescue ActiveRecord::RecordInvalid => e
@@ -32,4 +32,3 @@ end
   )
 end
 =end
-puts "サンプルデータの作成が完了しました！"
