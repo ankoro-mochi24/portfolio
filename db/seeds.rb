@@ -143,6 +143,7 @@ end
 # レシピの作成
 check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
   sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")
+  sample_image_url = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
 
   needed.times do
     user = User.order("RANDOM()").first
@@ -153,7 +154,7 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
 
     # dish_image (単一ファイルアップロードの処理)
     if Rails.env.production?
-      recipe.remote_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
+      recipe.remote_dish_image_url = sample_image_url.first
     else
       recipe.dish_image = File.open(sample_image_path)
     end
@@ -181,7 +182,7 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
 
       # step_image (単一ファイルアップロードの処理)
       if Rails.env.production?
-        recipe_step.remote_step_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
+        recipe_step.remote_step_image_url = sample_image_url.first
       else
         recipe_step.step_image = File.open(sample_image_path)
       end
