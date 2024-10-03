@@ -151,11 +151,10 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
       user: user
     )
 
-    # ローカル環境と本番環境でアップロードの方法を区別
+    # dish_image (単一ファイルアップロードの処理)
     if Rails.env.production?
       recipe.remote_dish_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
     else
-      # mount_uploaderを利用して単一の画像をアップロード
       recipe.dish_image = File.open(sample_image_path)
     end
 
@@ -180,7 +179,7 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
         text: "ステップ #{step_number + 1}: #{Faker::Food.description}"
       )
 
-      # mount_uploaderを使用して単一の画像をアップロード
+      # step_image (単一ファイルアップロードの処理)
       if Rails.env.production?
         recipe_step.remote_step_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"
       else
@@ -209,8 +208,12 @@ check_and_create_records(Foodstuff, USER_COUNT, $total_foodstuffs) do |needed|
       user: user
     )
     
-    # Heroku上でS3を使用
-    foodstuff.remote_image_urls = sample_image_url
+    if Rails.env.production?
+      foodstuff.remote_image_urls = sample_image_url
+    else
+      sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")
+      foodstuff.image = [File.open(sample_image_path)]
+    end
 
     if foodstuff.save
       $total_foodstuffs += 1
