@@ -26,10 +26,10 @@ User.find_each do |user|
   # レシピを作成
   3.times do
     begin
-      # レシピを作成
+      # レシピを作成（remote_dish_image_urlを使用して画像を設定）
       recipe = Recipe.new(
         title: Faker::Food.dish,
-        dish_image: sample_dish_image_url, # サンプル画像URL
+        remote_dish_image_url: sample_dish_image_url,  # サンプル画像URLを設定
         user: user
       )
 
@@ -59,7 +59,7 @@ User.find_each do |user|
       3.times do |step_number|
         recipe.recipe_steps.build(
           text: "ステップ #{step_number + 1}: #{Faker::Food.description}",
-          step_image: sample_step_image_url # サンプル画像URL
+          remote_step_image_url: sample_step_image_url # サンプル画像URL
         )
       end
 
@@ -74,7 +74,6 @@ User.find_each do |user|
     end
   end
 end
-
 
 =begin
 # 画像のパスを環境によって変更
