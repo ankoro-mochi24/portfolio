@@ -143,7 +143,7 @@ end
 # レシピの作成
 check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
   sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")
-  sample_image_url = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
+  recipe_sample_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"  # Recipe用のサンプル画像URL
 
   needed.times do
     user = User.order("RANDOM()").first
@@ -154,7 +154,7 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
 
     # dish_image (単一ファイルアップロードの処理)
     if Rails.env.production?
-      recipe.remote_dish_image_url = sample_image_url.first
+      recipe.remote_dish_image_url = recipe_sample_image_url
     else
       recipe.dish_image = File.open(sample_image_path)
     end
@@ -182,7 +182,7 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
 
       # step_image (単一ファイルアップロードの処理)
       if Rails.env.production?
-        recipe_step.remote_step_image_url = sample_image_url.first
+        recipe_step.remote_step_image_url = recipe_sample_image_url
       else
         recipe_step.step_image = File.open(sample_image_path)
       end
@@ -198,7 +198,7 @@ end
 
 # 食品を生成
 check_and_create_records(Foodstuff, USER_COUNT, $total_foodstuffs) do |needed|
-  sample_image_url = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]
+  foodstuff_sample_image_url = ["https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"]  # Foodstuff用のサンプル画像URL
 
   User.find_each do |user|
     foodstuff = Foodstuff.new(
@@ -210,7 +210,7 @@ check_and_create_records(Foodstuff, USER_COUNT, $total_foodstuffs) do |needed|
     )
     
     if Rails.env.production?
-      foodstuff.remote_image_urls = sample_image_url
+      foodstuff.remote_image_urls = foodstuff_sample_image_url
     else
       sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")
       foodstuff.image = [File.open(sample_image_path)]
