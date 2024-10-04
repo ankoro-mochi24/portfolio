@@ -5,7 +5,11 @@ class DishImageUploader < CarrierWave::Uploader::Base
   permissions 0600
   directory_permissions 0700
 
-  storage :file
+  if Rails.env.production?
+    storage :fog   # 本番環境ではS3に保存
+  else
+    storage :file  # ローカルではファイルシステムに保存
+  end
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
