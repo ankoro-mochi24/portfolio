@@ -14,7 +14,7 @@ ja:
       oldest: "投稿が古い順"
       few_ingredients: "材料の少ない順"
       easy_cooking: "調理が簡単順"
-      most_good: "Goodが多い順"
+      most_good: "うめぇ!が多い順"
       most_bookmarks: "ブックマークが多い順"
     cookrice: "米炊きチュートリアル"
     login: "ログイン"
@@ -31,8 +31,8 @@ ja:
     home:
       filter: "絞り込み"
       bookmarks: "ブックマーク"
-      good: "Good"
-      bad: "Bad"
+      good: "うめぇ!"
+      bad: "うーん..."
       kitchen_tools: "持っている調理器具で作れる"
       reset_filter: "絞り込み解除"
   helpers:
@@ -121,8 +121,8 @@ ja:
       delete: "削除"
     actions:
       bookmark: "ブックマーク"
-      good: "Good"
-      bad: "Bad"
+      good: "うめぇ!"
+      bad: "うーん..."
     form:
       error: "エラー"
       prohibited: "このレシピを保存できませんでした。"

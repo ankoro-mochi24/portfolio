@@ -14,7 +14,7 @@ en:
       oldest: "Oldest"
       few_ingredients: "Fewest Ingredients"
       easy_cooking: "Easiest to Cook"
-      most_good: "Most Good"
+      most_good: "Most Yammy!"
       most_bookmarks: "Most Bookmarked"
     cookrice: "Rice Cooking Tutorial"
     login: "Login"
@@ -31,8 +31,8 @@ en:
     home:
       filter: "Filter"
       bookmarks: "Bookmarks"
-      good: "Good"
-      bad: "Bad"
+      good: "Yammy!"
+      bad: "Umm..."
       kitchen_tools: "Can Cook with Owned Kitchen Tools"
       reset_filter: "Reset Filter"
   helpers:
@@ -121,8 +121,8 @@ recipes:
     delete: "Delete"
   actions:
     bookmark: "Bookmark"
-    good: "Good"
-    bad: "Bad"
+    good: "Yammy!"
+    bad: "Umm..."
   form:
     error: "error"
     prohibited: "This recipe couldn't be saved."
