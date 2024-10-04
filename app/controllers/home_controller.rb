@@ -63,19 +63,19 @@ class HomeController < ApplicationController
     when 'most_good'
       @recipes = @recipes.left_outer_joins(:user_actions)
                          .group('recipes.id, recipes.title, recipes.dish_image, recipes.created_at')
-                         .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "good" AND user_actions.actionable_type = "Recipe" THEN 1 ELSE NULL END) DESC'))
+                         .order(Arel.sql("COUNT(CASE WHEN user_actions.action_type = 'good' AND user_actions.actionable_type = 'Recipe' THEN 1 ELSE NULL END) DESC"))
       
       @foodstuffs = @foodstuffs.left_outer_joins(:user_actions)
                                 .group('foodstuffs.id, foodstuffs.name, foodstuffs.price, foodstuffs.created_at')
-                                .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "good" AND user_actions.actionable_type = "Foodstuff" THEN 1 ELSE NULL END) DESC'))
+                                .order(Arel.sql("COUNT(CASE WHEN user_actions.action_type = 'good' AND user_actions.actionable_type = 'Foodstuff' THEN 1 ELSE NULL END) DESC"))
     when 'most_bookmarks'
       @recipes = @recipes.left_outer_joins(:user_actions)
                          .group('recipes.id, recipes.title, recipes.dish_image, recipes.created_at')
-                         .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "bookmark" AND user_actions.actionable_type = "Recipe" THEN 1 ELSE NULL END) DESC'))
+                         .order(Arel.sql("COUNT(CASE WHEN user_actions.action_type = 'bookmark' AND user_actions.actionable_type = 'Recipe' THEN 1 ELSE NULL END) DESC"))
       
       @foodstuffs = @foodstuffs.left_outer_joins(:user_actions)
                                 .group('foodstuffs.id, foodstuffs.name, foodstuffs.price, foodstuffs.created_at')
-                                .order(Arel.sql('COUNT(CASE WHEN user_actions.action_type = "bookmark" AND user_actions.actionable_type = "Foodstuff" THEN 1 ELSE NULL END) DESC'))
+                                .order(Arel.sql("COUNT(CASE WHEN user_actions.action_type = 'bookmark' AND user_actions.actionable_type = 'Foodstuff' THEN 1 ELSE NULL END) DESC"))
     end
   end
 
