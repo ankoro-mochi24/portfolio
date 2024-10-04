@@ -15,8 +15,8 @@ class HomeController < ApplicationController
       sort_content
     else
       # ソートの指定がない場合は新しい順に並べる
-      @recipes = @recipes.order(created_at: :desc)
-      @foodstuffs = @foodstuffs.order(created_at: :desc)
+      @recipes = @recipes.is_a?(Array) ? @recipes.sort_by { |r| r.created_at }.reverse : @recipes.order(created_at: :desc)
+      @foodstuffs = @foodstuffs.is_a?(Array) ? @foodstuffs.sort_by { |f| f.created_at }.reverse : @foodstuffs.order(created_at: :desc)
     end
 
     filter_content if user_signed_in? && params[:filter].present?
