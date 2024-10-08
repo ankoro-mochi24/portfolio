@@ -179,6 +179,8 @@ ja:
               blank: "画像をアップロードしてください"
             user:
               required: "ユーザーが必要です"
+      messages:
+        record_invalid: "無効なレコードです"
   errors:
     messages:
       blank: "を入力してください"

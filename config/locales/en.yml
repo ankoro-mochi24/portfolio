@@ -179,6 +179,8 @@ recipes:
               blank: "Please upload an image"
             user:
               required: "User is required"
+      messages:
+        record_invalid: "Invalid record"
   errors:
     messages:
       blank: "can't be blank"

@@ -32,6 +32,7 @@ group :test do
   gem "selenium-webdriver"           # ブラウザを操作するためのWebDriver
   gem 'factory_bot_rails'            # テストデータの生成
   gem 'faker'                        # 疑似データ
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 gem 'sassc'                    # scss
