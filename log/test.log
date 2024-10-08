@@ -3497,3 +3497,533 @@ FOREIGN KEY ("user_id")
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
   [1m[36mKitchenTool Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "kitchen_tools" INNER JOIN "user_kitchen_tools" ON "kitchen_tools"."id" = "user_kitchen_tools"."kitchen_tool_id" WHERE "user_kitchen_tools"."user_id" = $1 LIMIT $2[0m  [["user_id", 124], ["LIMIT", 1]]
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+[dotenv] Set [36mLINE_NOTIFY_CLIENT_ID[0m, [36mLINE_NOTIFY_CLIENT_SECRET[0m, [36mLINE_NOTIFY_REDIRECT_URI[0m, [36mELASTICSEARCH_URL[0m, [36mDB_USERNAME[0m, [36mDB_PASSWORD[0m, and [36mDB_HOST[0m
+[dotenv] Loaded [33m.env[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+[dotenv] Saved a snapshot of [32mENV[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:17.174917"], ["updated_at", "2024-10-08 08:03:17.174917"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.6ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.191220"], ["updated_at", "2024-10-08 08:03:17.191220"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (1.3ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "9d5648a6-dfdc-4957-95b7-b9e58842bf48.jpg"], ["user_id", 125], ["created_at", "2024-10-08 08:03:17.375699"], ["updated_at", "2024-10-08 08:03:17.375699"]]
+  [1m[36mRecipeIngredient Create (1.1ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 87], ["ingredient_id", 174], ["created_at", "2024-10-08 08:03:17.378959"], ["updated_at", "2024-10-08 08:03:17.378959"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.381095"], ["updated_at", "2024-10-08 08:03:17.381095"]]
+  [1m[36mRecipeIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 87], ["ingredient_id", 175], ["created_at", "2024-10-08 08:03:17.382096"], ["updated_at", "2024-10-08 08:03:17.382096"]]
+  [1m[36mKitchenTool Create (0.8ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:17.383364"], ["updated_at", "2024-10-08 08:03:17.383364"]]
+  [1m[36mRecipeKitchenTool Create (1.0ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 87], ["kitchen_tool_id", 95], ["created_at", "2024-10-08 08:03:17.384895"], ["updated_at", "2024-10-08 08:03:17.384895"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (58.1ms)[0m  {"id":87}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:17.559219"], ["updated_at", "2024-10-08 08:03:17.559219"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.562130"], ["updated_at", "2024-10-08 08:03:17.562130"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "6f8bb05c-cead-4b9a-a562-76afd558908c.jpg"], ["user_id", 126], ["created_at", "2024-10-08 08:03:17.642847"], ["updated_at", "2024-10-08 08:03:17.642847"]]
+  [1m[36mRecipeIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 88], ["ingredient_id", 176], ["created_at", "2024-10-08 08:03:17.644997"], ["updated_at", "2024-10-08 08:03:17.644997"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.646308"], ["updated_at", "2024-10-08 08:03:17.646308"]]
+  [1m[36mRecipeIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 88], ["ingredient_id", 177], ["created_at", "2024-10-08 08:03:17.647308"], ["updated_at", "2024-10-08 08:03:17.647308"]]
+  [1m[36mKitchenTool Create (0.2ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:17.648569"], ["updated_at", "2024-10-08 08:03:17.648569"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 88], ["kitchen_tool_id", 96], ["created_at", "2024-10-08 08:03:17.649359"], ["updated_at", "2024-10-08 08:03:17.649359"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (14.2ms)[0m  {"id":88}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:17.702690"], ["updated_at", "2024-10-08 08:03:17.702690"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.706152"], ["updated_at", "2024-10-08 08:03:17.706152"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "f3702c66-a4de-4990-b62f-0a1d96475d73.jpg"], ["user_id", 127], ["created_at", "2024-10-08 08:03:17.779868"], ["updated_at", "2024-10-08 08:03:17.779868"]]
+  [1m[36mRecipeIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 89], ["ingredient_id", 178], ["created_at", "2024-10-08 08:03:17.781944"], ["updated_at", "2024-10-08 08:03:17.781944"]]
+  [1m[36mIngredient Create (0.2ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.783172"], ["updated_at", "2024-10-08 08:03:17.783172"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 89], ["ingredient_id", 179], ["created_at", "2024-10-08 08:03:17.784067"], ["updated_at", "2024-10-08 08:03:17.784067"]]
+  [1m[36mKitchenTool Create (0.2ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:17.785276"], ["updated_at", "2024-10-08 08:03:17.785276"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 89], ["kitchen_tool_id", 97], ["created_at", "2024-10-08 08:03:17.786143"], ["updated_at", "2024-10-08 08:03:17.786143"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (15.4ms)[0m  {"id":89}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:17.840088"], ["updated_at", "2024-10-08 08:03:17.840088"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.843260"], ["updated_at", "2024-10-08 08:03:17.843260"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "52cbe895-5160-455b-adf9-3442b4af13ef.jpg"], ["user_id", 128], ["created_at", "2024-10-08 08:03:17.919135"], ["updated_at", "2024-10-08 08:03:17.919135"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 90], ["ingredient_id", 180], ["created_at", "2024-10-08 08:03:17.921344"], ["updated_at", "2024-10-08 08:03:17.921344"]]
+  [1m[36mIngredient Create (0.2ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.922573"], ["updated_at", "2024-10-08 08:03:17.922573"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 90], ["ingredient_id", 181], ["created_at", "2024-10-08 08:03:17.923450"], ["updated_at", "2024-10-08 08:03:17.923450"]]
+  [1m[36mKitchenTool Create (0.2ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:17.925320"], ["updated_at", "2024-10-08 08:03:17.925320"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 90], ["kitchen_tool_id", 98], ["created_at", "2024-10-08 08:03:17.926131"], ["updated_at", "2024-10-08 08:03:17.926131"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (16.7ms)[0m  {"id":90}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:17.978843"], ["updated_at", "2024-10-08 08:03:17.978843"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:18.037427"], ["updated_at", "2024-10-08 08:03:18.037427"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "564d376d-f3a6-4e39-b0d2-a5510984eb50.jpg"], ["user_id", 129], ["created_at", "2024-10-08 08:03:18.064261"], ["updated_at", "2024-10-08 08:03:18.064261"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 91], ["ingredient_id", 182], ["created_at", "2024-10-08 08:03:18.066331"], ["updated_at", "2024-10-08 08:03:18.066331"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:18.068047"], ["updated_at", "2024-10-08 08:03:18.068047"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 91], ["ingredient_id", 183], ["created_at", "2024-10-08 08:03:18.069147"], ["updated_at", "2024-10-08 08:03:18.069147"]]
+  [1m[36mKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:18.070354"], ["updated_at", "2024-10-08 08:03:18.070354"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 91], ["kitchen_tool_id", 99], ["created_at", "2024-10-08 08:03:18.071355"], ["updated_at", "2024-10-08 08:03:18.071355"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (12.4ms)[0m  {"id":91}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:18.125126"], ["updated_at", "2024-10-08 08:03:18.125126"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:19.512478"], ["updated_at", "2024-10-08 08:03:19.512478"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.2ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:19.515514"], ["updated_at", "2024-10-08 08:03:19.515514"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "d1100a30-cc22-4b97-87d4-3031f8948140.jpg"], ["user_id", 131], ["created_at", "2024-10-08 08:03:19.593986"], ["updated_at", "2024-10-08 08:03:19.593986"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 92], ["ingredient_id", 184], ["created_at", "2024-10-08 08:03:19.596136"], ["updated_at", "2024-10-08 08:03:19.596136"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:19.598369"], ["updated_at", "2024-10-08 08:03:19.598369"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 92], ["ingredient_id", 185], ["created_at", "2024-10-08 08:03:19.599196"], ["updated_at", "2024-10-08 08:03:19.599196"]]
+  [1m[36mKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:19.600256"], ["updated_at", "2024-10-08 08:03:19.600256"]]
+  [1m[36mRecipeKitchenTool Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 92], ["kitchen_tool_id", 100], ["created_at", "2024-10-08 08:03:19.601129"], ["updated_at", "2024-10-08 08:03:19.601129"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (15.5ms)[0m  {"id":92}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComment Create (1.0ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "body", "commentable_type", "commentable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 131], ["body", "テストコメント"], ["commentable_type", "Recipe"], ["commentable_id", 92], ["created_at", "2024-10-08 08:03:19.650684"], ["updated_at", "2024-10-08 08:03:19.650684"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mComment Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFoodstuff Load (0.5ms)[0m  [1m[34mSELECT "foodstuffs".* FROM "foodstuffs" WHERE "foodstuffs"."user_id" = $1[0m  [["user_id", 131]]
+  [1m[36mRecipe Load (0.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."user_id" = $1[0m  [["user_id", 131]]
+  [1m[36mRecipeIngredient Load (0.3ms)[0m  [1m[34mSELECT "recipe_ingredients".* FROM "recipe_ingredients" WHERE "recipe_ingredients"."recipe_id" = $1[0m  [["recipe_id", 92]]
+  [1m[36mRecipeIngredient Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 183]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 184]]
+  [1m[36mRecipeStep Load (0.5ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 92]]
+  [1m[36mRecipeKitchenTool Load (0.3ms)[0m  [1m[34mSELECT "recipe_kitchen_tools".* FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."recipe_id" = $1[0m  [["recipe_id", 92]]
+  [1m[36mRecipeKitchenTool Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 92]]
+  [1m[36mTopping Load (0.6ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 92]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 92], ["commentable_type", "Recipe"]]
+  [1m[36mComment Destroy (0.2ms)[0m  [1m[31mDELETE FROM "comments" WHERE "comments"."id" = $1[0m  [["id", 9]]
+  [1m[36mUserAction Load (0.9ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 92], ["actionable_type", "Recipe"]]
+  [1m[36mRecipe Destroy (0.9ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 92]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."user_id" = $1[0m  [["user_id", 131]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."user_id" = $1[0m  [["user_id", 131]]
+  [1m[36mUserAction Load (0.3ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."user_id" = $1[0m  [["user_id", 131]]
+  [1m[36mUserKitchenTool Load (0.4ms)[0m  [1m[34mSELECT "user_kitchen_tools".* FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."user_id" = $1[0m  [["user_id", 131]]
+  [1m[36mUser Destroy (0.9ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 131]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Remove (15.3ms)[0m  {"id":92}
+  [1m[36mComment Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:19.806070"], ["updated_at", "2024-10-08 08:03:19.806070"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:19.808984"], ["updated_at", "2024-10-08 08:03:19.808984"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "23e996a6-b7dd-4867-9e8f-14c8b502df53.jpg"], ["user_id", 132], ["created_at", "2024-10-08 08:03:19.890294"], ["updated_at", "2024-10-08 08:03:19.890294"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 93], ["ingredient_id", 186], ["created_at", "2024-10-08 08:03:19.892339"], ["updated_at", "2024-10-08 08:03:19.892339"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:19.893667"], ["updated_at", "2024-10-08 08:03:19.893667"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 93], ["ingredient_id", 187], ["created_at", "2024-10-08 08:03:19.894697"], ["updated_at", "2024-10-08 08:03:19.894697"]]
+  [1m[36mKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:19.895823"], ["updated_at", "2024-10-08 08:03:19.895823"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 93], ["kitchen_tool_id", 101], ["created_at", "2024-10-08 08:03:19.896701"], ["updated_at", "2024-10-08 08:03:19.896701"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (16.7ms)[0m  {"id":93}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComment Create (0.5ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "body", "commentable_type", "commentable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 132], ["body", "テストコメント"], ["commentable_type", "Recipe"], ["commentable_id", 93], ["created_at", "2024-10-08 08:03:19.947062"], ["updated_at", "2024-10-08 08:03:19.947062"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mComment Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 185]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 186]]
+  [1m[36mRecipeStep Load (0.3ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 93]]
+  [1m[36mRecipeKitchenTool Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 93]]
+  [1m[36mTopping Load (0.3ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 93]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 93], ["commentable_type", "Recipe"]]
+  [1m[36mComment Destroy (0.3ms)[0m  [1m[31mDELETE FROM "comments" WHERE "comments"."id" = $1[0m  [["id", 10]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 93], ["actionable_type", "Recipe"]]
+  [1m[36mRecipe Destroy (0.4ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 93]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Remove (14.2ms)[0m  {"id":93}
+  [1m[36mComment Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:20.037413"], ["updated_at", "2024-10-08 08:03:20.037413"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:20.057780"], ["updated_at", "2024-10-08 08:03:20.057780"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:20.061091"], ["updated_at", "2024-10-08 08:03:20.061091"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "944ef456-8a1f-4a0a-911b-5987ad9e4918.jpg"], ["user_id", 134], ["created_at", "2024-10-08 08:03:20.146405"], ["updated_at", "2024-10-08 08:03:20.146405"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 94], ["ingredient_id", 188], ["created_at", "2024-10-08 08:03:20.148580"], ["updated_at", "2024-10-08 08:03:20.148580"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:20.149836"], ["updated_at", "2024-10-08 08:03:20.149836"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 94], ["ingredient_id", 189], ["created_at", "2024-10-08 08:03:20.150765"], ["updated_at", "2024-10-08 08:03:20.150765"]]
+  [1m[36mKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:20.151927"], ["updated_at", "2024-10-08 08:03:20.151927"]]
+  [1m[36mRecipeKitchenTool Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 94], ["kitchen_tool_id", 102], ["created_at", "2024-10-08 08:03:20.152878"], ["updated_at", "2024-10-08 08:03:20.152878"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (14.3ms)[0m  {"id":94}
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "a82b34fe-54bf-44dd-b403-fd925a798849.jpg"], ["user_id", 134], ["created_at", "2024-10-08 08:03:20.269524"], ["updated_at", "2024-10-08 08:03:20.269524"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 95], ["ingredient_id", 188], ["created_at", "2024-10-08 08:03:20.271776"], ["updated_at", "2024-10-08 08:03:20.271776"]]
+  [1m[36mIngredient Create (0.2ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:20.272970"], ["updated_at", "2024-10-08 08:03:20.272970"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 95], ["ingredient_id", 190], ["created_at", "2024-10-08 08:03:20.273717"], ["updated_at", "2024-10-08 08:03:20.273717"]]
+  [1m[36mKitchenTool Create (0.2ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:20.274702"], ["updated_at", "2024-10-08 08:03:20.274702"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 95], ["kitchen_tool_id", 103], ["created_at", "2024-10-08 08:03:20.275433"], ["updated_at", "2024-10-08 08:03:20.275433"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (14.0ms)[0m  {"id":95}
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "c55728fe-ffa4-48dc-ad17-686fc5b95e58.jpg"], ["user_id", 134], ["created_at", "2024-10-08 08:03:20.397334"], ["updated_at", "2024-10-08 08:03:20.397334"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 96], ["ingredient_id", 188], ["created_at", "2024-10-08 08:03:20.399372"], ["updated_at", "2024-10-08 08:03:20.399372"]]
+  [1m[36mIngredient Create (0.2ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:20.400490"], ["updated_at", "2024-10-08 08:03:20.400490"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 96], ["ingredient_id", 191], ["created_at", "2024-10-08 08:03:20.401332"], ["updated_at", "2024-10-08 08:03:20.401332"]]
+  [1m[36mKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:20.402472"], ["updated_at", "2024-10-08 08:03:20.402472"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 96], ["kitchen_tool_id", 104], ["created_at", "2024-10-08 08:03:20.403394"], ["updated_at", "2024-10-08 08:03:20.403394"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (13.5ms)[0m  {"id":96}
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.5ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "3329f131-8340-4d86-b096-519b69df511d.jpg"], ["user_id", 134], ["created_at", "2024-10-08 08:03:20.525141"], ["updated_at", "2024-10-08 08:03:20.525141"]]
+  [1m[36mRecipeIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 97], ["ingredient_id", 188], ["created_at", "2024-10-08 08:03:20.527599"], ["updated_at", "2024-10-08 08:03:20.527599"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:20.529077"], ["updated_at", "2024-10-08 08:03:20.529077"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 97], ["ingredient_id", 192], ["created_at", "2024-10-08 08:03:20.530259"], ["updated_at", "2024-10-08 08:03:20.530259"]]
+  [1m[36mKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:20.531552"], ["updated_at", "2024-10-08 08:03:20.531552"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 97], ["kitchen_tool_id", 105], ["created_at", "2024-10-08 08:03:20.532511"], ["updated_at", "2024-10-08 08:03:20.532511"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (12.3ms)[0m  {"id":97}
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "3c56badd-e410-409c-a26f-b9cef2fcdb8a.jpg"], ["user_id", 134], ["created_at", "2024-10-08 08:03:20.659037"], ["updated_at", "2024-10-08 08:03:20.659037"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 98], ["ingredient_id", 188], ["created_at", "2024-10-08 08:03:20.661198"], ["updated_at", "2024-10-08 08:03:20.661198"]]
+  [1m[36mIngredient Create (0.2ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:20.662483"], ["updated_at", "2024-10-08 08:03:20.662483"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 98], ["ingredient_id", 193], ["created_at", "2024-10-08 08:03:20.663313"], ["updated_at", "2024-10-08 08:03:20.663313"]]
+  [1m[36mKitchenTool Create (0.2ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:20.664406"], ["updated_at", "2024-10-08 08:03:20.664406"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 98], ["kitchen_tool_id", 106], ["created_at", "2024-10-08 08:03:20.665131"], ["updated_at", "2024-10-08 08:03:20.665131"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (14.0ms)[0m  {"id":98}
+  [1m[36mRecipe Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "recipes" WHERE "recipes"."user_id" = $1[0m  [["user_id", 134]]
+  [1m[36mRecipe Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "recipes"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFoodstuff Load (0.2ms)[0m  [1m[34mSELECT "foodstuffs".* FROM "foodstuffs" WHERE "foodstuffs"."user_id" = $1[0m  [["user_id", 134]]
+  [1m[36mRecipe Load (0.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."user_id" = $1[0m  [["user_id", 134]]
+  [1m[36mRecipeIngredient Load (0.3ms)[0m  [1m[34mSELECT "recipe_ingredients".* FROM "recipe_ingredients" WHERE "recipe_ingredients"."recipe_id" = $1[0m  [["recipe_id", 94]]
+  [1m[36mRecipeIngredient Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 187]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 188]]
+  [1m[36mRecipeStep Load (0.2ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 94]]
+  [1m[36mRecipeKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "recipe_kitchen_tools".* FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."recipe_id" = $1[0m  [["recipe_id", 94]]
+  [1m[36mRecipeKitchenTool Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 94]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 94]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 94], ["commentable_type", "Recipe"]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 94], ["actionable_type", "Recipe"]]
+  [1m[36mRecipe Destroy (0.5ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 94]]
+  [1m[36mRecipeIngredient Load (0.2ms)[0m  [1m[34mSELECT "recipe_ingredients".* FROM "recipe_ingredients" WHERE "recipe_ingredients"."recipe_id" = $1[0m  [["recipe_id", 95]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 189]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 190]]
+  [1m[36mRecipeStep Load (0.2ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 95]]
+  [1m[36mRecipeKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "recipe_kitchen_tools".* FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."recipe_id" = $1[0m  [["recipe_id", 95]]
+  [1m[36mRecipeKitchenTool Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 95]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 95]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 95], ["commentable_type", "Recipe"]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 95], ["actionable_type", "Recipe"]]
+  [1m[36mRecipe Destroy (0.4ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 95]]
+  [1m[36mRecipeIngredient Load (0.2ms)[0m  [1m[34mSELECT "recipe_ingredients".* FROM "recipe_ingredients" WHERE "recipe_ingredients"."recipe_id" = $1[0m  [["recipe_id", 96]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 191]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 192]]
+  [1m[36mRecipeStep Load (0.2ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 96]]
+  [1m[36mRecipeKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "recipe_kitchen_tools".* FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."recipe_id" = $1[0m  [["recipe_id", 96]]
+  [1m[36mRecipeKitchenTool Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 96]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 96]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 96], ["commentable_type", "Recipe"]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 96], ["actionable_type", "Recipe"]]
+  [1m[36mRecipe Destroy (0.5ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 96]]
+  [1m[36mRecipeIngredient Load (0.2ms)[0m  [1m[34mSELECT "recipe_ingredients".* FROM "recipe_ingredients" WHERE "recipe_ingredients"."recipe_id" = $1[0m  [["recipe_id", 97]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 193]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 194]]
+  [1m[36mRecipeStep Load (0.2ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 97]]
+  [1m[36mRecipeKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "recipe_kitchen_tools".* FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."recipe_id" = $1[0m  [["recipe_id", 97]]
+  [1m[36mRecipeKitchenTool Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 97]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 97]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 97], ["commentable_type", "Recipe"]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 97], ["actionable_type", "Recipe"]]
+  [1m[36mRecipe Destroy (0.4ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 97]]
+  [1m[36mRecipeIngredient Load (0.2ms)[0m  [1m[34mSELECT "recipe_ingredients".* FROM "recipe_ingredients" WHERE "recipe_ingredients"."recipe_id" = $1[0m  [["recipe_id", 98]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 195]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 196]]
+  [1m[36mRecipeStep Load (0.1ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 98]]
+  [1m[36mRecipeKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "recipe_kitchen_tools".* FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."recipe_id" = $1[0m  [["recipe_id", 98]]
+  [1m[36mRecipeKitchenTool Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 98]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 98]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 98], ["commentable_type", "Recipe"]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 98], ["actionable_type", "Recipe"]]
+  [1m[36mRecipe Destroy (0.4ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 98]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."user_id" = $1[0m  [["user_id", 134]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."user_id" = $1[0m  [["user_id", 134]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."user_id" = $1[0m  [["user_id", 134]]
+  [1m[36mUserKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "user_kitchen_tools".* FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."user_id" = $1[0m  [["user_id", 134]]
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 134]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Remove (11.5ms)[0m  {"id":94}
+  [1m[33mRecipe Remove (11.0ms)[0m  {"id":95}
+  [1m[33mRecipe Remove (11.4ms)[0m  {"id":96}
+  [1m[33mRecipe Remove (11.0ms)[0m  {"id":97}
+  [1m[33mRecipe Remove (34.1ms)[0m  {"id":98}
+  [1m[36mRecipe Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "recipes"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:20.898347"], ["updated_at", "2024-10-08 08:03:20.898347"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFoodstuff Create (0.9ms)[0m  [1m[32mINSERT INTO "foodstuffs" ("name", "price", "description", "link", "user_id", "created_at", "updated_at", "image") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "テスト食品"], ["price", 100], ["description", "食品のテスト説明です。"], ["link", "https://example.com"], ["user_id", 135], ["created_at", "2024-10-08 08:03:20.962401"], ["updated_at", "2024-10-08 08:03:20.962401"], ["image", "[\"9066fe6f-a6ec-4a9f-a748-1d6beaf38150.jpg\"]"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mFoodstuff Store (25.2ms)[0m  {"id":4}
+  [1m[36mFoodstuff Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "foodstuffs"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFoodstuff Load (0.2ms)[0m  [1m[34mSELECT "foodstuffs".* FROM "foodstuffs" WHERE "foodstuffs"."user_id" = $1[0m  [["user_id", 135]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 4], ["commentable_type", "Foodstuff"]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 4], ["actionable_type", "Foodstuff"]]
+  [1m[36mFoodstuff Destroy (0.3ms)[0m  [1m[31mDELETE FROM "foodstuffs" WHERE "foodstuffs"."id" = $1[0m  [["id", 4]]
+  [1m[36mRecipe Load (0.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."user_id" = $1[0m  [["user_id", 135]]
+  [1m[36mTopping Load (0.3ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."user_id" = $1[0m  [["user_id", 135]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."user_id" = $1[0m  [["user_id", 135]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."user_id" = $1[0m  [["user_id", 135]]
+  [1m[36mUserKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "user_kitchen_tools".* FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."user_id" = $1[0m  [["user_id", 135]]
+  [1m[36mUser Destroy (0.6ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 135]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mFoodstuff Remove (15.7ms)[0m  {"id":4}
+  [1m[36mFoodstuff Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "foodstuffs"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:21.065557"], ["updated_at", "2024-10-08 08:03:21.065557"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:21.069532"], ["updated_at", "2024-10-08 08:03:21.069532"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.5ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "e4521811-268b-445b-8d86-2dc3cb954053.jpg"], ["user_id", 136], ["created_at", "2024-10-08 08:03:21.157922"], ["updated_at", "2024-10-08 08:03:21.157922"]]
+  [1m[36mRecipeIngredient Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 99], ["ingredient_id", 194], ["created_at", "2024-10-08 08:03:21.160472"], ["updated_at", "2024-10-08 08:03:21.160472"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:21.161847"], ["updated_at", "2024-10-08 08:03:21.161847"]]
+  [1m[36mRecipeIngredient Create (0.6ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 99], ["ingredient_id", 195], ["created_at", "2024-10-08 08:03:21.162780"], ["updated_at", "2024-10-08 08:03:21.162780"]]
+  [1m[36mKitchenTool Create (0.4ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:21.167295"], ["updated_at", "2024-10-08 08:03:21.167295"]]
+  [1m[36mRecipeKitchenTool Create (0.4ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 99], ["kitchen_tool_id", 107], ["created_at", "2024-10-08 08:03:21.169118"], ["updated_at", "2024-10-08 08:03:21.169118"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (12.3ms)[0m  {"id":99}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mComment Create (0.4ms)[0m  [1m[32mINSERT INTO "comments" ("user_id", "body", "commentable_type", "commentable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 136], ["body", "テストコメント"], ["commentable_type", "Recipe"], ["commentable_id", 99], ["created_at", "2024-10-08 08:03:21.217338"], ["updated_at", "2024-10-08 08:03:21.217338"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mComment Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFoodstuff Load (0.2ms)[0m  [1m[34mSELECT "foodstuffs".* FROM "foodstuffs" WHERE "foodstuffs"."user_id" = $1[0m  [["user_id", 136]]
+  [1m[36mRecipe Load (0.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."user_id" = $1[0m  [["user_id", 136]]
+  [1m[36mRecipeIngredient Load (0.2ms)[0m  [1m[34mSELECT "recipe_ingredients".* FROM "recipe_ingredients" WHERE "recipe_ingredients"."recipe_id" = $1[0m  [["recipe_id", 99]]
+  [1m[36mRecipeIngredient Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 197]]
+  [1m[36mRecipeIngredient Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 198]]
+  [1m[36mRecipeStep Load (0.2ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 99]]
+  [1m[36mRecipeKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "recipe_kitchen_tools".* FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."recipe_id" = $1[0m  [["recipe_id", 99]]
+  [1m[36mRecipeKitchenTool Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 99]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 99]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 99], ["commentable_type", "Recipe"]]
+  [1m[36mComment Destroy (0.3ms)[0m  [1m[31mDELETE FROM "comments" WHERE "comments"."id" = $1[0m  [["id", 11]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 99], ["actionable_type", "Recipe"]]
+  [1m[36mRecipe Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 99]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."user_id" = $1[0m  [["user_id", 136]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."user_id" = $1[0m  [["user_id", 136]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."user_id" = $1[0m  [["user_id", 136]]
+  [1m[36mUserKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "user_kitchen_tools".* FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."user_id" = $1[0m  [["user_id", 136]]
+  [1m[36mUser Destroy (0.7ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 136]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Remove (15.0ms)[0m  {"id":99}
+  [1m[36mComment Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "comments"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:21.274717"], ["updated_at", "2024-10-08 08:03:21.274717"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:21.280603"], ["updated_at", "2024-10-08 08:03:21.280603"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.5ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "36603445-348a-4334-b21e-019ebb54446e.jpg"], ["user_id", 137], ["created_at", "2024-10-08 08:03:21.368132"], ["updated_at", "2024-10-08 08:03:21.368132"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 100], ["ingredient_id", 196], ["created_at", "2024-10-08 08:03:21.370429"], ["updated_at", "2024-10-08 08:03:21.370429"]]
+  [1m[36mIngredient Create (0.2ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:21.371633"], ["updated_at", "2024-10-08 08:03:21.371633"]]
+  [1m[36mRecipeIngredient Create (0.2ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 100], ["ingredient_id", 197], ["created_at", "2024-10-08 08:03:21.372368"], ["updated_at", "2024-10-08 08:03:21.372368"]]
+  [1m[36mKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:21.373324"], ["updated_at", "2024-10-08 08:03:21.373324"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 100], ["kitchen_tool_id", 108], ["created_at", "2024-10-08 08:03:21.374177"], ["updated_at", "2024-10-08 08:03:21.374177"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (14.2ms)[0m  {"id":100}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserAction Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "user_actions" WHERE "user_actions"."user_id" = $1 AND "user_actions"."actionable_type" = $2 AND "user_actions"."actionable_id" = $3 AND "user_actions"."action_type" = $4 LIMIT $5[0m  [["user_id", 137], ["actionable_type", "Recipe"], ["actionable_id", 100], ["action_type", "good"], ["LIMIT", 1]]
+  [1m[36mUserAction Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "user_actions" WHERE "user_actions"."user_id" = $1 AND "user_actions"."actionable_type" = $2 AND "user_actions"."actionable_id" = $3 AND "user_actions"."action_type" = $4 LIMIT $5[0m  [["user_id", 137], ["actionable_type", "Recipe"], ["actionable_id", 100], ["action_type", "bad"], ["LIMIT", 1]]
+  [1m[36mUserAction Create (0.8ms)[0m  [1m[32mINSERT INTO "user_actions" ("user_id", "action_type", "actionable_type", "actionable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 137], ["action_type", "good"], ["actionable_type", "Recipe"], ["actionable_id", 100], ["created_at", "2024-10-08 08:03:21.438041"], ["updated_at", "2024-10-08 08:03:21.438041"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUserAction Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_actions"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mFoodstuff Load (0.2ms)[0m  [1m[34mSELECT "foodstuffs".* FROM "foodstuffs" WHERE "foodstuffs"."user_id" = $1[0m  [["user_id", 137]]
+  [1m[36mRecipe Load (0.3ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."user_id" = $1[0m  [["user_id", 137]]
+  [1m[36mRecipeIngredient Load (0.3ms)[0m  [1m[34mSELECT "recipe_ingredients".* FROM "recipe_ingredients" WHERE "recipe_ingredients"."recipe_id" = $1[0m  [["recipe_id", 100]]
+  [1m[36mRecipeIngredient Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 199]]
+  [1m[36mRecipeIngredient Destroy (0.3ms)[0m  [1m[31mDELETE FROM "recipe_ingredients" WHERE "recipe_ingredients"."id" = $1[0m  [["id", 200]]
+  [1m[36mRecipeStep Load (0.2ms)[0m  [1m[34mSELECT "recipe_steps".* FROM "recipe_steps" WHERE "recipe_steps"."recipe_id" = $1[0m  [["recipe_id", 100]]
+  [1m[36mRecipeKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "recipe_kitchen_tools".* FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."recipe_id" = $1[0m  [["recipe_id", 100]]
+  [1m[36mRecipeKitchenTool Destroy (0.2ms)[0m  [1m[31mDELETE FROM "recipe_kitchen_tools" WHERE "recipe_kitchen_tools"."id" = $1[0m  [["id", 100]]
+  [1m[36mTopping Load (0.2ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."recipe_id" = $1[0m  [["recipe_id", 100]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."commentable_id" = $1 AND "comments"."commentable_type" = $2[0m  [["commentable_id", 100], ["commentable_type", "Recipe"]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."actionable_id" = $1 AND "user_actions"."actionable_type" = $2[0m  [["actionable_id", 100], ["actionable_type", "Recipe"]]
+  [1m[36mUserAction Destroy (0.3ms)[0m  [1m[31mDELETE FROM "user_actions" WHERE "user_actions"."id" = $1[0m  [["id", 11]]
+  [1m[36mRecipe Destroy (0.5ms)[0m  [1m[31mDELETE FROM "recipes" WHERE "recipes"."id" = $1[0m  [["id", 100]]
+  [1m[36mTopping Load (0.3ms)[0m  [1m[34mSELECT "toppings".* FROM "toppings" WHERE "toppings"."user_id" = $1[0m  [["user_id", 137]]
+  [1m[36mComment Load (0.2ms)[0m  [1m[34mSELECT "comments".* FROM "comments" WHERE "comments"."user_id" = $1[0m  [["user_id", 137]]
+  [1m[36mUserAction Load (0.2ms)[0m  [1m[34mSELECT "user_actions".* FROM "user_actions" WHERE "user_actions"."user_id" = $1[0m  [["user_id", 137]]
+  [1m[36mUserKitchenTool Load (0.3ms)[0m  [1m[34mSELECT "user_kitchen_tools".* FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."user_id" = $1[0m  [["user_id", 137]]
+  [1m[36mUser Destroy (0.7ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 137]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Remove (11.9ms)[0m  {"id":100}
+  [1m[36mUserAction Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "user_actions"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:21.492542"], ["updated_at", "2024-10-08 08:03:21.492542"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mIngredient Load (0.2ms)[0m  [1m[34mSELECT "ingredients".* FROM "ingredients" WHERE "ingredients"."name" = $1 LIMIT $2[0m  [["name", "白米"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:21.495771"], ["updated_at", "2024-10-08 08:03:21.495771"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mRecipe Create (0.4ms)[0m  [1m[32mINSERT INTO "recipes" ("title", "dish_image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "テストレシピ"], ["dish_image", "8c8358e1-9b82-47d2-b856-9fc8878bfe62.jpg"], ["user_id", 138], ["created_at", "2024-10-08 08:03:21.575403"], ["updated_at", "2024-10-08 08:03:21.575403"]]
+  [1m[36mRecipeIngredient Create (0.5ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 101], ["ingredient_id", 198], ["created_at", "2024-10-08 08:03:21.578794"], ["updated_at", "2024-10-08 08:03:21.578794"]]
+  [1m[36mIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "ingredients" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "白米"], ["created_at", "2024-10-08 08:03:21.580304"], ["updated_at", "2024-10-08 08:03:21.580304"]]
+  [1m[36mRecipeIngredient Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_ingredients" ("recipe_id", "ingredient_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 101], ["ingredient_id", 199], ["created_at", "2024-10-08 08:03:21.581547"], ["updated_at", "2024-10-08 08:03:21.581547"]]
+  [1m[36mKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:21.582775"], ["updated_at", "2024-10-08 08:03:21.582775"]]
+  [1m[36mRecipeKitchenTool Create (0.3ms)[0m  [1m[32mINSERT INTO "recipe_kitchen_tools" ("recipe_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["recipe_id", 101], ["kitchen_tool_id", 109], ["created_at", "2024-10-08 08:03:21.583739"], ["updated_at", "2024-10-08 08:03:21.583739"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[33mRecipe Store (11.9ms)[0m  {"id":101}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserAction Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "user_actions" WHERE "user_actions"."user_id" = $1 AND "user_actions"."actionable_type" = $2 AND "user_actions"."actionable_id" = $3 AND "user_actions"."action_type" = $4 LIMIT $5[0m  [["user_id", 138], ["actionable_type", "Recipe"], ["actionable_id", 101], ["action_type", "good"], ["LIMIT", 1]]
+  [1m[36mUserAction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "user_actions" WHERE "user_actions"."user_id" = $1 AND "user_actions"."actionable_type" = $2 AND "user_actions"."actionable_id" = $3 AND "user_actions"."action_type" = $4 LIMIT $5[0m  [["user_id", 138], ["actionable_type", "Recipe"], ["actionable_id", 101], ["action_type", "bad"], ["LIMIT", 1]]
+  [1m[36mUserAction Create (0.4ms)[0m  [1m[32mINSERT INTO "user_actions" ("user_id", "action_type", "actionable_type", "actionable_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 138], ["action_type", "good"], ["actionable_type", "Recipe"], ["actionable_id", 101], ["created_at", "2024-10-08 08:03:21.632926"], ["updated_at", "2024-10-08 08:03:21.632926"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mUserAction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "user_actions" WHERE "user_actions"."user_id" = $1 AND "user_actions"."actionable_type" = $2 AND "user_actions"."actionable_id" = $3 AND "user_actions"."action_type" = $4 LIMIT $5[0m  [["user_id", 138], ["actionable_type", "Recipe"], ["actionable_id", 101], ["action_type", "bad"], ["LIMIT", 1]]
+  [1m[36mUserAction Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "user_actions" WHERE "user_actions"."user_id" = $1 AND "user_actions"."actionable_type" = $2 AND "user_actions"."actionable_id" = $3 AND "user_actions"."action_type" = $4 LIMIT $5[0m  [["user_id", 138], ["actionable_type", "Recipe"], ["actionable_id", 101], ["action_type", "good"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mKitchenTool Create (0.4ms)[0m  [1m[32mINSERT INTO "kitchen_tools" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "フライパン"], ["created_at", "2024-10-08 08:03:21.640510"], ["updated_at", "2024-10-08 08:03:21.640510"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "kitchen_tools".* FROM "kitchen_tools" WHERE "kitchen_tools"."name" = $1 LIMIT $2[0m  [["name", "フライパン"], ["LIMIT", 1]]
+  [1m[36mUserKitchenTool Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."user_id" IS NULL AND "user_kitchen_tools"."kitchen_tool_id" = $1 LIMIT $2[0m  [["kitchen_tool_id", 110], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "name", "created_at", "updated_at", "line_notify_token", "notify_enabled") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["name", "テストユーザー"], ["created_at", "2024-10-08 08:03:21.654606"], ["updated_at", "2024-10-08 08:03:21.654606"], ["line_notify_token", "[FILTERED]"], ["notify_enabled", false]]
+  [1m[36mUserKitchenTool Create (0.7ms)[0m  [1m[32mINSERT INTO "user_kitchen_tools" ("user_id", "kitchen_tool_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 139], ["kitchen_tool_id", 110], ["created_at", "2024-10-08 08:03:21.656023"], ["updated_at", "2024-10-08 08:03:21.656023"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mKitchenTool Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "kitchen_tools" INNER JOIN "user_kitchen_tools" ON "kitchen_tools"."id" = "user_kitchen_tools"."kitchen_tool_id" WHERE "user_kitchen_tools"."user_id" = $1 AND "kitchen_tools"."id" = $2 LIMIT $3[0m  [["user_id", 139], ["id", 110], ["LIMIT", 1]]
+  [1m[36mUserKitchenTool Load (0.3ms)[0m  [1m[34mSELECT "user_kitchen_tools".* FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."user_id" = $1 ORDER BY "user_kitchen_tools"."id" ASC LIMIT $2[0m  [["user_id", 139], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUserKitchenTool Load (0.2ms)[0m  [1m[34mSELECT "user_kitchen_tools".* FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."user_id" = $1 AND "user_kitchen_tools"."id" = $2[0m  [["user_id", 139], ["id", 9]]
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "test@example.com"], ["id", 139], ["LIMIT", 1]]
+  [1m[36mUserKitchenTool Destroy (0.2ms)[0m  [1m[31mDELETE FROM "user_kitchen_tools" WHERE "user_kitchen_tools"."id" = $1[0m  [["id", 9]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mKitchenTool Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "kitchen_tools" INNER JOIN "user_kitchen_tools" ON "kitchen_tools"."id" = "user_kitchen_tools"."kitchen_tool_id" WHERE "user_kitchen_tools"."user_id" = $1 LIMIT $2[0m  [["user_id", 139], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
