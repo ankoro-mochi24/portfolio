@@ -173,6 +173,8 @@ ja:
             price:
               blank: "価格を入力してください"
               not_a_number: "価格は数値で入力してください"
+              greater_than_or_equal_to: "価格は0以上の値にしてください"
+              not_an_integer: "価格は整数で入力してください"
             link:
               blank: "リンクを入力してください"
             image:

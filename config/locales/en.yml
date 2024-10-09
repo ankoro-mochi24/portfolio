@@ -173,6 +173,8 @@ recipes:
             price:
               blank: "Please enter a price"
               not_a_number: "Price must be a number"
+              greater_than_or_equal_to: "Price must be greater than or equal to 0"
+              not_an_integer: "Price must be an integer"
             link:
               blank: "Please enter a link"
             image:
