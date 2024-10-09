@@ -23,10 +23,9 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :recipe_kitchen_tools, allow_destroy: true
 
   validates :title, presence: true
+  validates :dish_image, presence: true
   validate :must_have_at_least_one_kitchen_tool
 
-  attr_accessor :remove_dish_image
-  before_save :check_remove_dish_image
   after_initialize :initialize_with_rice, if: :new_record?
 
   private
@@ -39,10 +38,6 @@ class Recipe < ApplicationRecord
     self.recipe_ingredients.build(ingredient_id: rice.id, ingredient_name: rice.name)
   end
   
-  def check_remove_dish_image
-    self.dish_image = nil if remove_dish_image == 'true'
-  end
-
   def must_have_at_least_one_kitchen_tool
     if recipe_kitchen_tools.reject { |rkt| rkt.marked_for_destruction? || rkt.kitchen_tool_name.blank? }.empty?
       errors.add(:recipe_kitchen_tools, 'を最低1つ追加してください')

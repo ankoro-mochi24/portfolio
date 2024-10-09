@@ -114,7 +114,6 @@ class RecipesController < ApplicationController
       :title,
       :dish_image,
       :dish_image_cache,
-      :remove_dish_image,
       recipe_steps_attributes: [:id, :text, :step_image, :step_image_cache, :remove_step_image, :_destroy],
       recipe_ingredients_attributes: [:id, :ingredient_id, :_destroy, :ingredient_name],
       recipe_kitchen_tools_attributes: [:id, :kitchen_tool_id, :_destroy, :kitchen_tool_name]

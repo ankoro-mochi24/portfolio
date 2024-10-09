@@ -26,7 +26,6 @@
       <div id="dish_image_preview"></div>
     <% end %>
     <%= form.file_field :dish_image, required: recipe.dish_image.blank? %>
-    <%= form.hidden_field :remove_dish_image, value: false %>
   </div>
 
   <h3><%= t('recipes.form.steps_title') %></h3>
