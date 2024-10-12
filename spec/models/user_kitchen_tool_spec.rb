@@ -1,4 +1,3 @@
-# spec/models/user_kitchen_tool_spec.rb
 require 'rails_helper'
 
 RSpec.describe UserKitchenTool, type: :model do

@@ -1,4 +1,3 @@
-# spec/factories/toppings.rb
 FactoryBot.define do
   factory :topping do
     name { "Test Topping" }

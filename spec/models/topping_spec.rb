@@ -1,4 +1,3 @@
-# spec/models/topping_spec.rb
 require 'rails_helper'
 
 RSpec.describe Topping, type: :model do
