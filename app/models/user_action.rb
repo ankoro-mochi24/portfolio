@@ -8,7 +8,7 @@ class UserAction < ApplicationRecord
   belongs_to :actionable, polymorphic: true
 
   validates :action_type, presence: true, inclusion: { in: %w[bookmark good bad] }
-  validates :user_id, uniqueness: { scope: [:actionable_type, :actionable_id, :action_type], message: "You can only perform this action once per item." }
+  validates :user_id, uniqueness: { scope: [:actionable_type, :actionable_id, :action_type], message: "はすでに存在します" }
   
   validate :good_or_bad
 

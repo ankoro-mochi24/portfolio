@@ -188,6 +188,7 @@ ja:
       blank: "を入力してください"
       not_a_number: "は数値で入力してください"
       required: "が必要です"
+      inclusion: "は一覧にありません"
   notices:
     foodstuff_created: "食品が正常に作成されました。"
   kaminari:
