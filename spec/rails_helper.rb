@@ -24,4 +24,24 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+  config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :request
+
+  # テストの前にSearchkickのコールバックを無効化
+  config.before(:each) do
+    Searchkick.disable_callbacks
+  end
+
+  # テストの後にSearchkickのコールバックを再度有効化し、再インデックスを実行
+  config.after(:each) do
+    Searchkick.enable_callbacks
+    Recipe.reindex
+    Foodstuff.reindex
+  end
+
+  # テスト終了後にインデックスを削除する処理
+  config.after(:suite) do
+    Recipe.search_index.delete if Recipe.search_index.exists?
+    Foodstuff.search_index.delete if Foodstuff.search_index.exists?
+  end
 end
