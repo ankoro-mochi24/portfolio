@@ -5,6 +5,13 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 
+# WebMockの設定を追加
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true, allow: 'elasticsearch:9200')
+
+# Eager load 設定
+Rails.application.eager_load! if Rails.env.test?
+
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e

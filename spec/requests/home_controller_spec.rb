@@ -20,8 +20,8 @@ RSpec.describe HomeController, type: :request do
   end
 
   describe "GET /" do
-    context "when visiting the top page" do
-      it "renders the top page successfully" do
+    context "トップページを訪れたとき" do
+      it "トップページが正常に表示される" do
         get root_path
         expect(response).to have_http_status(:success)
         expect(response.body).to include("レシピ")
@@ -29,16 +29,16 @@ RSpec.describe HomeController, type: :request do
       end
     end
 
-    context "when searching by query" do
-      it "returns the search results" do
+    context "クエリで検索したとき" do
+      it "検索結果が返される" do
         get root_path, params: { query: recipe.title }
         expect(response).to have_http_status(:success)
         expect(response.body).to include(recipe.title)
       end
     end
 
-    context "when sorting by newest" do
-      it "sorts recipes and foodstuffs by newest" do
+    context "最新順でソートしたとき" do
+      it "レシピと食品が最新順でソートされる" do
         get root_path, params: { sort_by: 'newest' }
         expect(response).to have_http_status(:success)
         expect(response.body).to include(recipe.title)
@@ -46,8 +46,8 @@ RSpec.describe HomeController, type: :request do
       end
     end
 
-    context "when filtering by bookmarks" do
-      it "filters recipes by bookmarks" do
+    context "ブックマークでフィルタリングしたとき" do
+      it "レシピがブックマークでフィルタリングされる" do
         sign_in user
         user.user_actions.create!(actionable: recipe, action_type: 'bookmark')
         get root_path, params: { filter: 'bookmarks' }

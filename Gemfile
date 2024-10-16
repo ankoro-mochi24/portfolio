@@ -33,6 +33,7 @@ group :test do
   gem 'factory_bot_rails'            # テストデータの生成
   gem 'faker'                        # 疑似データ
   gem 'shoulda-matchers', '~> 5.0'
+  gem 'webmock'
 end
 
 gem 'sassc'                    # scss

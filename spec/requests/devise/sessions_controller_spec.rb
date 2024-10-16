@@ -4,7 +4,7 @@ RSpec.describe Devise::SessionsController, type: :request do
   let!(:user) { create(:user) }
 
   describe "GET /users/sign_in" do
-    it "renders the login page successfully" do
+    it "ログインページが正常に表示される" do
       get new_user_session_path
       expect(response).to have_http_status(:success)
       expect(response.body).to include("ログイン")  # ログインページに「ログイン」というテキストが含まれているか確認
@@ -12,8 +12,8 @@ RSpec.describe Devise::SessionsController, type: :request do
   end
 
   describe "POST /users/sign_in" do
-    context "with valid credentials" do
-      it "logs the user in and redirects to the root path" do
+    context "有効な資格情報が与えられた場合" do
+      it "ユーザーがログインし、ルートパスにリダイレクトされる" do
         post user_session_path, params: { user: { email: user.email, password: user.password } }
         expect(response).to redirect_to(root_path)
         follow_redirect!
@@ -21,8 +21,8 @@ RSpec.describe Devise::SessionsController, type: :request do
       end
     end
 
-    context "with invalid credentials" do
-      it "renders the login page with errors" do
+    context "無効な資格情報が与えられた場合" do
+      it "ログインページがエラーと共に表示される" do
         post user_session_path, params: { user: { email: user.email, password: "wrongpassword" } }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to include("無効なメールアドレスまたはパスワードです")
@@ -35,7 +35,7 @@ RSpec.describe Devise::SessionsController, type: :request do
       sign_in user
     end
 
-    it "logs the user out and redirects to the root path" do
+    it "ユーザーがログアウトし、ルートパスにリダイレクトされる" do
       delete destroy_user_session_path
       expect(response).to redirect_to(root_path)
       follow_redirect!

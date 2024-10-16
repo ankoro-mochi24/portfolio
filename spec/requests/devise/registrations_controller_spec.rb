@@ -8,7 +8,7 @@ RSpec.describe Devise::RegistrationsController, type: :request do
   end
 
   describe "GET /users/sign_up" do
-    it "renders the sign up page successfully" do
+    it "サインアップページが正常に表示される" do
       get new_user_registration_path
       expect(response).to have_http_status(:success)
       expect(response.body).to include(I18n.t('devise.registrations.new.title'))  # "サインアップ"を期待
@@ -16,8 +16,8 @@ RSpec.describe Devise::RegistrationsController, type: :request do
   end
 
   describe "POST /users" do
-    context "with valid parameters" do
-      it "creates a new user" do
+    context "有効なパラメータが与えられた場合" do
+      it "新しいユーザーが作成される" do
         expect {
           post user_registration_path, params: { user: attributes_for(:user) }
         }.to change(User, :count).by(1)
@@ -25,11 +25,11 @@ RSpec.describe Devise::RegistrationsController, type: :request do
       end
     end
 
-    context "with invalid parameters" do
-      it "renders the sign up page with errors" do
+    context "無効なパラメータが与えられた場合" do
+      it "エラーと共にサインアップページが表示される" do
         post user_registration_path, params: { user: attributes_for(:user, email: '') }
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.body).to include(I18n.t('errors.messages.blank'))  # "を入力してください"
+        expect(response.body).to include(I18n.t('errors.messages.blank'))  # "を入力してください"のエラーメッセージを期待
       end
     end
   end
@@ -39,7 +39,7 @@ RSpec.describe Devise::RegistrationsController, type: :request do
       sign_in user
     end
 
-    it "deletes the user" do
+    it "ユーザーが削除される" do
       expect {
         delete user_registration_path
       }.to change(User, :count).by(-1)
