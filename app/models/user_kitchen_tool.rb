@@ -1,11 +1,11 @@
 class UserKitchenTool < ApplicationRecord
   belongs_to :user
-  belongs_to :kitchen_tool
+  belongs_to :kitchen_tool, optional: true
 
   attr_accessor :kitchen_tool_name
 
   validates :user_id, uniqueness: { scope: :kitchen_tool_id }
-  validates :kitchen_tool, presence: true
+  validates :kitchen_tool_name, presence: true
 
   before_validation :set_kitchen_tool
 
