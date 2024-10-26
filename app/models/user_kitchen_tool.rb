@@ -1,6 +1,6 @@
 class UserKitchenTool < ApplicationRecord
   belongs_to :user
-  belongs_to :kitchen_tool, optional: true
+  belongs_to :kitchen_tool
 
   attr_accessor :kitchen_tool_name
 
