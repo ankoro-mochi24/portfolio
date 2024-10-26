@@ -19,11 +19,12 @@ RSpec.describe RecipeIngredient, type: :model do
       expect(recipe_ingredient.errors[:recipe]).to include("が必要です")
     end
 
-    it 'ingredientがない場合でも有効である（オプション）' do
+    it 'ingredientがない場合、無効である' do
       recipe_ingredient = FactoryBot.build(:recipe_ingredient, recipe: recipe, ingredient: nil)
-      expect(recipe_ingredient).to be_valid
+      expect(recipe_ingredient).not_to be_valid
+      expect(recipe_ingredient.errors[:ingredient]).to include("が必要です")
     end
-
+    
     it '同じrecipe_idとingredient_idの組み合わせは無効である' do
       FactoryBot.create(:recipe_ingredient, recipe: recipe, ingredient: ingredient1)
       duplicate_recipe_ingredient = FactoryBot.build(:recipe_ingredient, recipe: recipe, ingredient: ingredient1)
