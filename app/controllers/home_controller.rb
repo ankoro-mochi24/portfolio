@@ -4,13 +4,15 @@ class HomeController < ApplicationController
   def top
     @recipes = Recipe.includes(:user_actions)
     @foodstuffs = Foodstuff.includes(:user_actions)
-
+  
+    # 検索機能
     if params[:query].present?
       query = params[:query]
       @recipes = Recipe.search(query).to_a
       @foodstuffs = Foodstuff.search(query).to_a
     end
-
+  
+    # ソート機能
     if params[:sort_by].present?
       sort_content
     else
@@ -18,23 +20,26 @@ class HomeController < ApplicationController
       @recipes = @recipes.is_a?(Array) ? @recipes.sort_by { |r| r.created_at }.reverse : @recipes.order(created_at: :desc)
       @foodstuffs = @foodstuffs.is_a?(Array) ? @foodstuffs.sort_by { |f| f.created_at }.reverse : @foodstuffs.order(created_at: :desc)
     end
-
+  
+    # フィルター機能
     filter_content if user_signed_in? && params[:filter].present?
     set_filter_counts if user_signed_in?
-
-    # @recipes または @foodstuffs が nil の場合、空の配列に置き換える
+  
+    # デフォルト値の設定
     @recipes ||= []
     @foodstuffs ||= []
-
-    # ページネーションを最後に適用
-    @recipes = Kaminari.paginate_array(@recipes).page(params[:page]).per(10)
-    @foodstuffs = Kaminari.paginate_array(@foodstuffs).page(params[:page]).per(10)
-
+  
+    # ページネーションを@viewパラメータに応じて適用
     case @view
     when 'recipes'
+      @recipes = Kaminari.paginate_array(@recipes).page(params[:page]).per(10)
       @foodstuffs = nil
     when 'foodstuffs'
+      @foodstuffs = Kaminari.paginate_array(@foodstuffs).page(params[:page]).per(10)
       @recipes = nil
+    when 'both'
+      @recipes = Kaminari.paginate_array(@recipes).page(params[:page]).per(10)
+      @foodstuffs = Kaminari.paginate_array(@foodstuffs).page(params[:page]).per(10)
     end
   end
 
