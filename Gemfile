@@ -42,6 +42,7 @@ gem 'carrierwave'              # 画像保存
 gem 'fog-aws'                  # S3との連携
 gem 'i18n'                     # 国際化対応全般
 gem 'devise-i18n'              # deviceの国際化対応
+gem 'i18n-tasks'               # 未使用のキーを自動的に確認
 gem 'searchkick', '~> 4.4'     # 検索
 gem 'elasticsearch', '~> 7.6.0'# Elasticsearchとの連携
 gem 'kaminari'                 # ページネーション
