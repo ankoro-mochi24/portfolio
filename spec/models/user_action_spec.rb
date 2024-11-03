@@ -87,7 +87,5 @@ RSpec.describe UserAction, type: :model do
 
   describe 'データベースインデックスのテスト' do
     it { should have_db_index([:user_id, :actionable_type, :actionable_id, :action_type]).unique(true) }
-    it { should have_db_index(:user_id) }
-    it { should have_db_index([:actionable_type, :actionable_id]) }
   end
 end

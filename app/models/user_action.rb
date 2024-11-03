@@ -5,9 +5,7 @@ t.string "actionable_type", null: false
 t.bigint "actionable_id", null: false
 t.datetime "created_at", null: false
 t.datetime "updated_at", null: false
-t.index ["actionable_type", "actionable_id"], name: "index_actions_on_actionable"
 t.index ["user_id", "actionable_type", "actionable_id", "action_type"], name: "index_user_actions_on_user_and_actionable_and_action_type", unique: true
-t.index ["user_id"], name: "index_user_actions_on_user_id"
 
 User(1)-(n)UserAction(n)-(1)Foodstuff
 User(1)-(n)UserAction(n)-(1)Recipe
