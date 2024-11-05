@@ -5,6 +5,8 @@ t.datetime "created_at", null: false
 t.datetime "updated_at", null: false
 t.index ["kitchen_tool_id"], name: "index_user_kitchen_tools_on_kitchen_tool_id"
 t.index ["user_id", "kitchen_tool_id"], name: "index_user_kitchen_tools_on_user_id_and_kitchen_tool_id", unique: true
+
+user(1)-(n)user_kitchen_tool(n)-(1)kitchen_tool
 =end
 class UserKitchenTool < ApplicationRecord
   belongs_to :user

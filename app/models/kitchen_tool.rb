@@ -2,6 +2,8 @@
 t.string "name", null: false
 t.datetime "created_at", null: false
 t.datetime "updated_at", null: false
+
+user(1)-(n)user_kitchen_tool(n)-(1)kitchen_tool
 =end
 class KitchenTool < ApplicationRecord
   has_many :recipe_kitchen_tools, dependent: :destroy
