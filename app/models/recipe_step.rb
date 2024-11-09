@@ -5,6 +5,8 @@ t.string "step_image"
 t.datetime "created_at", null: false
 t.datetime "updated_at", null: false
 t.index ["recipe_id"], name: "index_recipe_steps_on_recipe_id"
+
+recipe(1)-(n)recipe_step
 =end
 class RecipeStep < ApplicationRecord
   mount_uploader :step_image, StepImageUploader
