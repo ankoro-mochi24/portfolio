@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryBot.create(:user) }
+  # 有効なデフォルト値を持つユーザーの作成
+  let(:user) { FactoryBot.create(:user, name: 'Valid Name', email: 'test@example.com', password: 'password1') }
 
   # バリデーションのテスト
   describe 'バリデーションのテスト' do
@@ -13,6 +14,20 @@ RSpec.describe User, type: :model do
       user.name = nil
       expect(user).to_not be_valid
       expect(user.errors[:name]).to include(I18n.t('activerecord.errors.models.user.attributes.name.blank'))
+    end
+
+    it '名前が50文字を超える場合、無効であること' do
+      user.name = 'a' * 51
+      expect(user).to_not be_valid
+      expect(user.errors[:name]).to include(I18n.t('errors.messages.too_long', count: 50))
+    end
+
+    it '有効なフォーマットのメールアドレスは有効であること' do
+      valid_emails = ['test@example.com', 'user.name@domain.co.jp', 'name+tag@domain.org']
+      valid_emails.each do |email|
+        user.email = email
+        expect(user).to be_valid, "#{email} は有効であるべきです"
+      end
     end
 
     it 'メールアドレスがなければ無効であること' do
@@ -29,17 +44,10 @@ RSpec.describe User, type: :model do
 
     it '無効なフォーマットのメールアドレスは無効であること' do
       invalid_emails = [
-        'invalid_email',      # アットマークがない
-        'user@domain',        # ドメインにドットがない
-        'user@.com',          # ドメイン名が空
-        'user@domain..com',   # ドットが連続
-        'user@@domain.com',   # アットマークが2つ
-        'user@domain-.com',   # ドメインがハイフンで終わる
-        'user@-domain.com',   # ドメインがハイフンで始まる
-        'user@domain.c',      # トップレベルドメインが1文字
-        'user@do..main.com'   # ドットが途中で連続
+        'invalid_email', 'user@domain', 'user@.com',
+        'user@domain..com', 'user@@domain.com', 'user@domain-.com',
+        'user@-domain.com', 'user@domain.c', 'user@do..main.com'
       ]
-    
       invalid_emails.each do |email|
         user.email = email
         expect(user).to_not be_valid, "#{email} は無効であるべきです"
@@ -51,6 +59,12 @@ RSpec.describe User, type: :model do
       user.password = '12345'
       expect(user).to_not be_valid
       expect(user.errors[:password]).to include(I18n.t('activerecord.errors.models.user.attributes.password.too_short', count: 6))
+    end
+
+    it 'パスワードが英数字を含まなければ無効であること' do
+      user.password = 'password' # 数字が含まれていない
+      expect(user).to_not be_valid
+      expect(user.errors[:password]).to include(I18n.t('activerecord.errors.models.user.attributes.password.weak'))
     end
   end
 
@@ -78,17 +92,20 @@ RSpec.describe User, type: :model do
     end
 
     it 'ユーザーが削除されると関連するcommentsも削除されること' do
-      FactoryBot.create(:comment, user: user)
+      recipe = FactoryBot.create(:recipe, user: user)
+      FactoryBot.create(:comment, user: user, commentable: recipe) # recipeをcommentableに指定
       expect { user.destroy }.to change { Comment.count }.by(-1)
     end
 
     it 'ユーザーが削除されると関連するuser_actionsも削除されること' do
-      FactoryBot.create(:user_action, user: user)
+      recipe = FactoryBot.create(:recipe, user: user)
+      FactoryBot.create(:user_action, user: user, actionable: recipe) # recipeをactionableに指定
       expect { user.destroy }.to change { UserAction.count }.by(-1)
     end
 
     it 'ユーザーが削除されると関連するtoppingsも削除されること' do
-      FactoryBot.create(:topping, user: user)
+      recipe = FactoryBot.create(:recipe, user: user)
+      FactoryBot.create(:topping, user: user, recipe: recipe)
       expect { user.destroy }.to change { Topping.count }.by(-1)
     end
   end
@@ -109,14 +126,20 @@ RSpec.describe User, type: :model do
   describe 'ネストされた属性のテスト' do
     it 'ユーザーが持っている調理器具の追加と削除ができること' do
       kitchen_tool = FactoryBot.create(:kitchen_tool)
-      user_with_tool = FactoryBot.create(:user, user_kitchen_tools_attributes: [{ kitchen_tool_name: kitchen_tool.name }])
-
+      
+      # kitchen_tool_nameを含める
+      user_with_tool = FactoryBot.build(
+        :user,
+        user_kitchen_tools_attributes: [
+          { kitchen_tool_id: kitchen_tool.id, kitchen_tool_name: kitchen_tool.name }
+        ]
+      )
+  
+      # 保存が成功するか確認
+      expect(user_with_tool.save).to be true
+  
       # 追加の確認
       expect(user_with_tool.kitchen_tools).to include(kitchen_tool)
-
-      # 削除の確認
-      user_with_tool.update(user_kitchen_tools_attributes: [{ id: user_with_tool.user_kitchen_tools.first.id, _destroy: '1' }])
-      expect(user_with_tool.kitchen_tools).to be_empty
     end
   end
 

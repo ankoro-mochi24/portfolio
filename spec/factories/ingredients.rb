@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :ingredient do
-    name { "白米" }  # 任意の材料名
+    sequence(:name) { |n| "材料_#{n}" }
   end
 end

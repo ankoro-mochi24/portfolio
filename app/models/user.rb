@@ -28,13 +28,24 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, presence: true
+  # バリデーション
+  validates :name, presence: true, length: { maximum: 50 }
+  
+  # メールアドレスのフォーマットチェック
   validates :email, presence: true, uniqueness: true,
-  format: { 
-    with: /\A[^@\s]+@([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}\z/, 
-    message: I18n.t('activerecord.errors.models.user.attributes.email.invalid') 
-  }
+    format: { 
+      with: /\A[^@\s]+@([a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}\z/, 
+      message: I18n.t('activerecord.errors.models.user.attributes.email.invalid') 
+    }
 
+  # パスワードの複雑性チェック
+  validates :password, length: { minimum: 6 }, 
+    format: { 
+      with: /\A(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}\z/, 
+      message: I18n.t('activerecord.errors.models.user.attributes.password.weak') 
+    }
+
+  # アソシエーション
   has_many :foodstuffs, dependent: :destroy
   has_many :recipes, dependent: :destroy
   has_many :toppings, dependent: :destroy

@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :kitchen_tool do
-    name { "フライパン" }  # 任意の調理器具名
+    sequence(:name) { |n| "調理器具#{n}" }
   end
 end

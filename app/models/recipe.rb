@@ -42,11 +42,10 @@ class Recipe < ApplicationRecord
   private
 
   def initialize_with_rice
-    # 「白米」という材料をデータベースから探し、なければ作成
     rice = Ingredient.find_or_create_by(name: '白米')
-  
-    # 「白米」をレシピの材料として追加
-    self.recipe_ingredients.build(ingredient_id: rice.id, ingredient_name: rice.name)
+    unless self.recipe_ingredients.any? { |ri| ri.ingredient_id == rice.id }
+      self.recipe_ingredients.build(ingredient_id: rice.id, ingredient_name: rice.name)
+    end
   end
   
   def must_have_at_least_one_kitchen_tool
