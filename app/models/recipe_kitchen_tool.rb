@@ -6,6 +6,8 @@ t.datetime "updated_at", null: false
 t.index ["kitchen_tool_id"], name: "index_recipe_kitchen_tools_on_kitchen_tool_id"
 t.index ["recipe_id", "kitchen_tool_id"], name: "index_recipe_kitchen_tools_on_recipe_id_and_kitchen_tool_id", unique: true
 t.index ["recipe_id"], name: "index_recipe_kitchen_tools_on_recipe_id"
+
+recipe(1)-(n)recipe_kitchen_tool(n)-(1)kitchen_tool
 =end
 class RecipeKitchenTool < ApplicationRecord
   belongs_to :recipe

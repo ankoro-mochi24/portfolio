@@ -5,9 +5,8 @@ RSpec.describe RecipeKitchenTool, type: :model do
   let(:recipe) { FactoryBot.create(:recipe, user: user) }
   let(:kitchen_tool) { FactoryBot.create(:kitchen_tool) }
 
-  # 各テストの前に実行されるセットアップ
   before do
-    # 必要に応じてデータの初期化
+    # データの初期化
     RecipeKitchenTool.delete_all
     Recipe.delete_all
     KitchenTool.delete_all
@@ -23,7 +22,7 @@ RSpec.describe RecipeKitchenTool, type: :model do
     it 'kitchen_tool_nameがない場合、無効である' do
       recipe_kitchen_tool = FactoryBot.build(:recipe_kitchen_tool, recipe: recipe, kitchen_tool_name: nil)
       expect(recipe_kitchen_tool).not_to be_valid
-      expect(recipe_kitchen_tool.errors[:kitchen_tool_name]).to include("を入力してください")
+      expect(recipe_kitchen_tool.errors[:kitchen_tool_name]).to include(I18n.t('errors.messages.blank'))
     end
   end
 
@@ -43,7 +42,7 @@ RSpec.describe RecipeKitchenTool, type: :model do
       duplicate_recipe_kitchen_tool = FactoryBot.build(:recipe_kitchen_tool, recipe: recipe, kitchen_tool: kitchen_tool)
       
       expect(duplicate_recipe_kitchen_tool).not_to be_valid
-      expect(duplicate_recipe_kitchen_tool.errors[:recipe_id]).to include("この調理器具は既にレシピに追加されています")
+      expect(duplicate_recipe_kitchen_tool.errors[:recipe_id]).to include(I18n.t('activerecord.errors.models.recipe_kitchen_tool.attributes.recipe_id.taken'))
     end
   end
 
@@ -59,9 +58,8 @@ RSpec.describe RecipeKitchenTool, type: :model do
       # レシピ削除によって削除されるレコードの数を確認
       expect { recipe.destroy }.to change { RecipeKitchenTool.count }.from(initial_count).to(0)
     end
-  
 
-    it '調理器具が削除されても、関連するrecipe_kitchen_toolが削除される' do
+    it '調理器具が削除されると関連するrecipe_kitchen_toolも削除される' do
       recipe_kitchen_tool = FactoryBot.create(:recipe_kitchen_tool, recipe: recipe, kitchen_tool: kitchen_tool)
       expect { kitchen_tool.destroy }.to change { RecipeKitchenTool.count }.by(-1)
     end
