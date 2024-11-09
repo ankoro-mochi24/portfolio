@@ -209,6 +209,10 @@ ja:
               taken: "すでに登録済みです"
           messages:
             good_bad_conflict: "同時に「うめぇ!」と「うーん...」を選択することはできません"
+        user_kitchen_tool:
+          attributes:
+            user_id:
+              taken: "はすでに存在します"
       messages:
         record_invalid: "無効なレコードです"
   errors:
