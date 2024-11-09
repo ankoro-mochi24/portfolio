@@ -9,3 +9,4 @@ log/development.log
 
 # Ignore .bundle directory
 .bundle/
+'/log/' 
