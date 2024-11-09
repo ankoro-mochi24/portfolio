@@ -6,6 +6,12 @@ RSpec.describe RecipeIngredient, type: :model do
   let(:ingredient1) { FactoryBot.create(:ingredient) }
   let(:ingredient2) { FactoryBot.create(:ingredient) }
 
+  before do
+    RecipeIngredient.delete_all
+    Recipe.delete_all
+    Ingredient.delete_all
+  end
+
   # バリデーションのテスト
   describe 'バリデーションのテスト' do
     it 'すべての属性が有効である場合、有効である' do
@@ -16,21 +22,21 @@ RSpec.describe RecipeIngredient, type: :model do
     it 'recipeがない場合、無効である' do
       recipe_ingredient = FactoryBot.build(:recipe_ingredient, recipe: nil, ingredient: ingredient1)
       expect(recipe_ingredient).not_to be_valid
-      expect(recipe_ingredient.errors[:recipe]).to include("が必要です")
+      expect(recipe_ingredient.errors[:recipe]).to include(I18n.t('errors.messages.required'))
     end
 
     it 'ingredientがない場合、無効である' do
       recipe_ingredient = FactoryBot.build(:recipe_ingredient, recipe: recipe, ingredient: nil)
       expect(recipe_ingredient).not_to be_valid
-      expect(recipe_ingredient.errors[:ingredient]).to include("が必要です")
+      expect(recipe_ingredient.errors[:ingredient]).to include(I18n.t('errors.messages.required'))
     end
-    
+
     it '同じrecipe_idとingredient_idの組み合わせは無効である' do
       FactoryBot.create(:recipe_ingredient, recipe: recipe, ingredient: ingredient1)
       duplicate_recipe_ingredient = FactoryBot.build(:recipe_ingredient, recipe: recipe, ingredient: ingredient1)
       
       expect(duplicate_recipe_ingredient).not_to be_valid
-      expect(duplicate_recipe_ingredient.errors[:recipe_id]).to include("この材料は既にレシピに追加されています")
+      expect(duplicate_recipe_ingredient.errors[:recipe_id]).to include(I18n.t('activerecord.errors.models.recipe_ingredient.attributes.recipe_id.taken'))
     end
   end
 
@@ -46,20 +52,19 @@ RSpec.describe RecipeIngredient, type: :model do
   # 削除時のテスト
   describe '削除時のテスト' do
     before do
-      # 必要なデータのみを作成するために余分なデータが作成されないようにFactoryBot.createでなくFactoryBot.buildを使用する
+      RecipeIngredient.delete_all
       recipe.recipe_ingredients.destroy_all
       FactoryBot.create(:recipe_ingredient, recipe: recipe, ingredient: ingredient1)
       FactoryBot.create(:recipe_ingredient, recipe: recipe, ingredient: ingredient2)
     end
 
     it 'レシピが削除されたときに関連するrecipe_ingredientがすべて削除され、ingredient自体は削除されない' do
-      # レシピに関連するRecipeIngredientが2つあることを確認
       expect(recipe.recipe_ingredients.count).to eq(2)
 
-      # レシピを削除
+      # レシピ削除により RecipeIngredient が 2 件削除されることを確認
       expect { recipe.destroy }.to change { RecipeIngredient.count }.by(-2)
 
-      # Ingredient自体は削除されていないことを確認
+      # Ingredient 自体は削除されていないことを確認
       expect(Ingredient.exists?(ingredient1.id)).to be true
       expect(Ingredient.exists?(ingredient2.id)).to be true
     end
