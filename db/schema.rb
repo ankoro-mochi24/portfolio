@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_07_011142) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_06_012958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_011142) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_kitchen_tools_on_name", unique: true
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|
@@ -55,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_011142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
-    t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
+    t.index ["recipe_id", "ingredient_id"], name: "index_recipe_ingredients_on_recipe_id_and_ingredient_id", unique: true
   end
 
   create_table "recipe_kitchen_tools", force: :cascade do |t|
@@ -64,6 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_011142) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["kitchen_tool_id"], name: "index_recipe_kitchen_tools_on_kitchen_tool_id"
+    t.index ["recipe_id", "kitchen_tool_id"], name: "index_recipe_kitchen_tools_on_recipe_id_and_kitchen_tool_id", unique: true
     t.index ["recipe_id"], name: "index_recipe_kitchen_tools_on_recipe_id"
   end
 
@@ -91,6 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_011142) do
     t.text "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipe_id", "name"], name: "index_toppings_on_recipe_id_and_name", unique: true
     t.index ["recipe_id"], name: "index_toppings_on_recipe_id"
     t.index ["user_id"], name: "index_toppings_on_user_id"
   end
@@ -102,9 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_011142) do
     t.bigint "actionable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["actionable_type", "actionable_id"], name: "index_actions_on_actionable"
     t.index ["user_id", "actionable_type", "actionable_id", "action_type"], name: "index_user_actions_on_user_and_actionable_and_action_type", unique: true
-    t.index ["user_id"], name: "index_user_actions_on_user_id"
   end
 
   create_table "user_kitchen_tools", force: :cascade do |t|
@@ -114,7 +115,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_011142) do
     t.datetime "updated_at", null: false
     t.index ["kitchen_tool_id"], name: "index_user_kitchen_tools_on_kitchen_tool_id"
     t.index ["user_id", "kitchen_tool_id"], name: "index_user_kitchen_tools_on_user_id_and_kitchen_tool_id", unique: true
-    t.index ["user_id"], name: "index_user_kitchen_tools_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -135,9 +135,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_07_011142) do
   add_foreign_key "comments", "users"
   add_foreign_key "foodstuffs", "users"
   add_foreign_key "recipe_ingredients", "ingredients"
-  add_foreign_key "recipe_ingredients", "recipes"
+  add_foreign_key "recipe_ingredients", "recipes", on_delete: :cascade
   add_foreign_key "recipe_kitchen_tools", "kitchen_tools"
-  add_foreign_key "recipe_kitchen_tools", "recipes"
+  add_foreign_key "recipe_kitchen_tools", "recipes", on_delete: :cascade
   add_foreign_key "recipe_steps", "recipes"
   add_foreign_key "recipes", "users"
   add_foreign_key "toppings", "recipes"

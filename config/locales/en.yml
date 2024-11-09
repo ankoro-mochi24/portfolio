@@ -1,7 +1,7 @@
 en:
   home:
     top:
-      title: "Home"
+      title: "Entrance"
       both: "Both"
       recipes: "Recipes"
       foodstuffs: "Foodstuffs"
@@ -13,9 +13,9 @@ en:
       newest: "Newest"
       oldest: "Oldest"
       few_ingredients: "Fewest Ingredients"
-      easy_cooking: "Easiest to Cook"
+      easy_cooking: "Easiest Cooking"
       most_good: "Most Yammy!"
-      most_bookmarks: "Most Bookmarked"
+      most_bookmarks: "Most Bookmarks"
     cookrice: "Rice Cooking Tutorial"
     login: "Login"
     register: "Sign Up"
@@ -80,7 +80,7 @@ en:
   foodstuffs:
     index:
       title: "Foodstuff List"
-      no_results: "No foodstuffs found."
+      no_results: "No matching foodstuffs found."
     show:
       name: "Name"
       price: "Price"
@@ -99,48 +99,48 @@ en:
     confirm_delete: "Are you sure you want to delete this?"
   comments:
     title: "Comments"
-recipes:
-  index:
-    title: "Recipe List"
-    no_results: "No recipes were found."
-  new:
-    title: "Post a Recipe"
-  edit:
-    title: "Edit Recipe"
-  show:
-    title: "Recipe Details"
-    dish_image: "Dish Image"
-    steps: "Steps"
-    kitchen_tools: "Required Kitchen Tools"
-    ingredients: "Ingredients + Seasonings"
-    toppings: "Toppings"
-    add_topping: "Add"
-    comment_section_title: "Comments"
-    confirm_delete: "Are you sure you want to delete this?"
-  topping:
-    delete: "Delete"
-  actions:
-    bookmark: "Bookmark"
-    good: "Yammy!"
-    bad: "Umm..."
-  form:
-    error: "error"
-    prohibited: "This recipe couldn't be saved."
-    title: "Recipe Title"
-    dish_image: "Dish Image"
-    dish_image_alt: "Image of the Dish"
-    steps_title: "Cooking Steps"
-    step: "Step"
-    step_image: "Step Image"
-    step_image_alt: "Image of the Step"
-    kitchen_tools_title: "Required Kitchen Tools"
-    kitchen_tool: "Kitchen Tool"
-    ingredients_title: "Ingredients + Seasonings"
-    ingredient: "Ingredient"
-    add: "Add"
-    remove: "Remove"
-    submit: "Submit"
-    save: "Save"
+  recipes:
+    index:
+      title: "Recipe List"
+      no_results: "No matching recipes found."
+    new:
+      title: "Post a Recipe"
+    edit:
+      title: "Edit Recipe"
+    show:
+      title: "Recipe Details"
+      dish_image: "Dish Image"
+      steps: "Cooking Steps"
+      kitchen_tools: "Required Kitchen Tools"
+      ingredients: "Ingredients + Seasonings"
+      toppings: "Toppings"
+      add_topping: "Add"
+      comment_section_title: "Comments"
+      confirm_delete: "Are you sure you want to delete this?"
+    topping:
+      delete: "Delete"
+    actions:
+      bookmark: "Bookmark"
+      good: "Yammy!"
+      bad: "Umm..."
+    form:
+      error: "Error"
+      prohibited: "This recipe couldn't be saved."
+      title: "Recipe Name"
+      dish_image: "Dish Image"
+      dish_image_alt: "Image of the Dish"
+      steps_title: "Cooking Steps"
+      step: "Step"
+      step_image: "Step Image"
+      step_image_alt: "Image of the Step"
+      kitchen_tools_title: "Required Kitchen Tools"
+      kitchen_tool: "Kitchen Tool"
+      ingredients_title: "Ingredients + Seasonings"
+      ingredient: "Ingredient"
+      add: "Add"
+      remove: "Remove"
+      submit: "Submit"
+      save: "Save"
   comments:
     edit: "Edit"
     delete: "Delete"
@@ -173,17 +173,22 @@ recipes:
             price:
               blank: "Please enter a price"
               not_a_number: "Price must be a number"
+              greater_than_or_equal_to: "Price must be greater than or equal to 0"
+              not_an_integer: "Price must be an integer"
             link:
               blank: "Please enter a link"
             image:
               blank: "Please upload an image"
             user:
               required: "User is required"
+      messages:
+        record_invalid: "Invalid record"
   errors:
     messages:
       blank: "can't be blank"
       not_a_number: "is not a number"
       required: "is required"
+      inclusion: "is not included in the list"
   notices:
     foodstuff_created: "Foodstuff was successfully created."
   kaminari:

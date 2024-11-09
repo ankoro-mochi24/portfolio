@@ -1,3 +1,11 @@
+=begin
+t.bigint "recipe_id", null: false
+t.text "text", null: false
+t.string "step_image"
+t.datetime "created_at", null: false
+t.datetime "updated_at", null: false
+t.index ["recipe_id"], name: "index_recipe_steps_on_recipe_id"
+=end
 class RecipeStep < ApplicationRecord
   mount_uploader :step_image, StepImageUploader
 

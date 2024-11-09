@@ -1,5 +1,5 @@
-# Load the Rails application.
+# Railsアプリケーションを読み込む
 require_relative "application"
 
-# Initialize the Rails application.
+# Railsアプリケーションを初期化する
 Rails.application.initialize!

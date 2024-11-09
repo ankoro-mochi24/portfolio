@@ -142,7 +142,7 @@ end
 
 # レシピの作成
 check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
-  sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")
+  sample_image_path = Rails.root.join("app", "assets", "images", "sample.jpg")
   recipe_sample_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"  # Recipe用のサンプル画像URL
 
   needed.times do

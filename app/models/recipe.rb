@@ -1,3 +1,11 @@
+=begin
+t.string "title", null: false
+t.string "dish_image", null: false
+t.bigint "user_id", null: false
+t.datetime "created_at", null: false
+t.datetime "updated_at", null: false
+t.index ["user_id"], name: "index_recipes_on_user_id"
+=end
 class Recipe < ApplicationRecord
   searchkick
   mount_uploader :dish_image, DishImageUploader
@@ -11,7 +19,7 @@ class Recipe < ApplicationRecord
   has_many :toppings, dependent: :destroy
   
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :user_actions, as: :actionable, dependent: :destroy, class_name: 'UserAction'
+  has_many :user_actions, class_name: 'UserAction', as: :actionable, dependent: :destroy
   
   # レシピの調理工程をネストされた属性として受け入れる
   accepts_nested_attributes_for :recipe_steps, allow_destroy: true
@@ -23,32 +31,30 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :recipe_kitchen_tools, allow_destroy: true
 
   validates :title, presence: true
+  validates :dish_image, presence: true
+
+  # レシピには調理器具が1つ以上必要
   validate :must_have_at_least_one_kitchen_tool
 
-  attr_accessor :remove_dish_image
-  before_save :check_remove_dish_image
+  # Recipe.newの際、必ず材料に白米を加える
   after_initialize :initialize_with_rice, if: :new_record?
 
   private
 
   def initialize_with_rice
-    # 「白米」という材料をデータベースから探し、なければ作成
     rice = Ingredient.find_or_create_by(name: '白米')
-  
-    # 「白米」をレシピの材料として追加
-    self.recipe_ingredients.build(ingredient_id: rice.id, ingredient_name: rice.name)
+    unless self.recipe_ingredients.any? { |ri| ri.ingredient_id == rice.id }
+      self.recipe_ingredients.build(ingredient_id: rice.id, ingredient_name: rice.name)
+    end
   end
   
-  def check_remove_dish_image
-    self.dish_image = nil if remove_dish_image == 'true'
-  end
-
   def must_have_at_least_one_kitchen_tool
     if recipe_kitchen_tools.reject { |rkt| rkt.marked_for_destruction? || rkt.kitchen_tool_name.blank? }.empty?
-      errors.add(:recipe_kitchen_tools, 'を最低1つ追加してください')
+      errors.add(:recipe_kitchen_tools, I18n.t('activerecord.errors.models.recipe.attributes.recipe_kitchen_tools.must_have_one'))
     end
   end
 
+  # searchkickの検索インデックスに登録するデータを指定
   def search_data
     {
       title: title
