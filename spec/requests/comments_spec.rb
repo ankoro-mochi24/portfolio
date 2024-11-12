@@ -33,6 +33,16 @@ RSpec.describe "Comments", type: :request do
         follow_redirect!
         expect(response.body).to include("コメントの追加に失敗しました。")
       end
+
+      it "無効なcommentable_typeが指定された場合、エラーメッセージが表示されること" do
+        expect {
+          post recipe_comments_path(recipe), params: { comment: { body: "新しいコメント" }, commentable_type: "InvalidType", commentable_id: recipe.id }
+        }.not_to change(Comment, :count)
+
+        expect(response).to redirect_to(root_path)
+        follow_redirect!
+        expect(response.body).to include("不正なリクエストです。")
+      end
     end
   end
 
@@ -74,6 +84,16 @@ RSpec.describe "Comments", type: :request do
         expect(comment.reload.body).to eq("元のコメント")
       end
     end
+
+    context "存在しないコメントを更新しようとした場合" do
+      it "エラーメッセージが表示されること" do
+        patch recipe_comment_path(recipe, id: 9999), params: { comment: { body: "不正な更新" } }
+
+        expect(response).to redirect_to(root_path)
+        follow_redirect!
+        expect(response.body).to include("コメントが見つかりません。")
+      end
+    end
   end
 
   describe "DELETE /comments/:id" do
@@ -103,6 +123,16 @@ RSpec.describe "Comments", type: :request do
         expect(response).to redirect_to(root_path)
         follow_redirect!
         expect(response.body).to include("他のユーザーのコメントを編集・削除することはできません。")
+      end
+    end
+
+    context "存在しないコメントを削除しようとした場合" do
+      it "エラーメッセージが表示されること" do
+        delete recipe_comment_path(recipe, id: 9999)
+
+        expect(response).to redirect_to(root_path)
+        follow_redirect!
+        expect(response.body).to include("コメントが見つかりません。")
       end
     end
   end
