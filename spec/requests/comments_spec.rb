@@ -19,7 +19,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("コメントが追加されました。")
+        expect(response.body).to include(I18n.t('comments.create.success'))
       end
     end
 
@@ -31,7 +31,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("コメントの追加に失敗しました。")
+        expect(response.body).to include(I18n.t('comments.create.failure'))
       end
 
       it "無効なcommentable_typeが指定された場合、エラーメッセージが表示されること" do
@@ -41,7 +41,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("不正なリクエストです。")
+        expect(response.body).to include(I18n.t('comments.errors.invalid_request'))
       end
     end
   end
@@ -53,7 +53,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("コメントが更新されました。")
+        expect(response.body).to include(I18n.t('comments.update.success'))
         expect(comment.reload.body).to eq("更新されたコメント")
       end
     end
@@ -64,7 +64,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("コメントの更新に失敗しました。")
+        expect(response.body).to include(I18n.t('comments.update.failure'))
         expect(comment.reload.body).to eq("元のコメント")
       end
     end
@@ -80,7 +80,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("他のユーザーのコメントを編集・削除することはできません。")
+        expect(response.body).to include(I18n.t('comments.errors.unauthorized'))
         expect(comment.reload.body).to eq("元のコメント")
       end
     end
@@ -91,7 +91,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("コメントが見つかりません。")
+        expect(response.body).to include(I18n.t('comments.errors.not_found'))
       end
     end
   end
@@ -105,7 +105,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("コメントが削除されました。")
+        expect(response.body).to include(I18n.t('comments.destroy.success'))
       end
     end
 
@@ -122,7 +122,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("他のユーザーのコメントを編集・削除することはできません。")
+        expect(response.body).to include(I18n.t('comments.errors.unauthorized'))
       end
     end
 
@@ -132,7 +132,7 @@ RSpec.describe "Comments", type: :request do
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include("コメントが見つかりません。")
+        expect(response.body).to include(I18n.t('comments.errors.not_found'))
       end
     end
   end
