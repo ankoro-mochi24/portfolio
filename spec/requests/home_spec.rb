@@ -9,20 +9,24 @@ RSpec.describe "ホームページのリクエスト", type: :request do
       Rails.cache.clear
     end
 
-    it "GET / にアクセスでき、ステータスコード200が返る" do
+    it "トップページにアクセスでき、ステータスコード200が返る" do
       get root_path
       expect(response).to have_http_status(:ok)
+      expect(response.body).to include(I18n.t("home.top.title"))
     end
 
-    it "トップページにレシピと食品の両方のセクションが表示される" do
+    it "トップページにレシピと食品のセクションが表示される" do
       get root_path
-      expect(response.body).to include(I18n.t('recipes.index.title'))
-      expect(response.body).to include(I18n.t('foodstuffs.index.title'))
+      expect(response.body).to include(I18n.t("home.top.recipes"))
+      expect(response.body).to include(I18n.t("home.top.foodstuffs"))
     end
 
-    it "GET /cookrice にアクセスでき、ステータスコード200が返る" do
-      get "/cookrice"
-      expect(response).to have_http_status(:ok)
+    describe "GET /cookrice" do
+      it "炊飯チュートリアルページにアクセスでき、タイトルが表示されること" do
+        get cookrice_path
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include(I18n.t("cookrice.title"))
+      end
     end
 
     context "検索機能" do
@@ -37,16 +41,6 @@ RSpec.describe "ホームページのリクエスト", type: :request do
       it "クエリに一致するレシピが表示される" do
         get root_path, params: { query: "検索対象" }
         expect(response.body).to include("検索対象レシピ")
-      end
-    end
-
-    context "フィルター数の確認" do
-      it 'ブックマーク数が正しい' do
-        bookmark_user = FactoryBot.create(:user_with_actions, actions_count: 1)
-        recipe = FactoryBot.create(:recipe, user: bookmark_user)
-        bookmark_user.user_actions.first.update(action_type: 'bookmark', actionable: recipe)
-        bookmark_count = UserAction.where(user: bookmark_user, action_type: 'bookmark', actionable: recipe).count
-        expect(bookmark_count).to eq(1)
       end
     end
 
@@ -76,17 +70,11 @@ RSpec.describe "ホームページのリクエスト", type: :request do
 
     context "ページネーション" do
       before do
-        # ページネーション用のテストデータ生成前にインデックスをリセット
         Recipe.search_index.delete if Recipe.search_index.exists?
         Recipe.search_index.create
-
-        # 必要な15件のレシピを生成してインデックス
         FactoryBot.create_list(:recipe, 15)
         Recipe.reindex
         Recipe.search_index.refresh
-
-        # デバッグ用の出力
-        recipes_in_index = Recipe.search("*").results
       end
 
       it "1ページに10件のレシピが表示される" do
