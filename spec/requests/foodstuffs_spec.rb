@@ -11,7 +11,7 @@ RSpec.describe "Foodstuffs", type: :request do
 
   describe "GET /foodstuffs" do
     it "食品一覧が表示されること" do
-      get foodstuffs_path
+      get foodstuffs_view_path
       expect(response).to have_http_status(:ok)
       expect(response.body).to include(I18n.t("foodstuffs.index.title"))
     end
@@ -40,23 +40,23 @@ RSpec.describe "Foodstuffs", type: :request do
       it "食品が作成され、成功メッセージが表示されること" do
         image_path = Rails.root.join("spec", "fixtures", "sample.jpg")
         image = Rack::Test::UploadedFile.new(image_path, "image/jpeg")
-      
+
         expect {
           post foodstuffs_path, params: { foodstuff: { name: "New Foodstuff", price: 1500, link: "http://newlink.com", image: [image] } }
         }.to change(Foodstuff, :count).by(1)
-      
+
         expect(response).to redirect_to(Foodstuff.last)
         follow_redirect!
         expect(response.body).to include(I18n.t("notices.foodstuff_created"))
       end
     end
-  
+
     context "無効なパラメータの場合" do
       it "食品が作成されず、エラーメッセージが表示されること" do
         expect {
           post foodstuffs_path, params: { foodstuff: { name: "", price: -100, link: "", image: nil } }
         }.not_to change(Foodstuff, :count)
-  
+
         expect(response.body).to include(I18n.t("activerecord.errors.models.foodstuff.attributes.name.blank"))
         expect(response.body).to include(I18n.t("activerecord.errors.models.foodstuff.attributes.price.greater_than_or_equal_to"))
         expect(response.body).to include(I18n.t("activerecord.errors.models.foodstuff.attributes.link.blank"))

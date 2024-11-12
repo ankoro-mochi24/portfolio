@@ -21,6 +21,13 @@ RSpec.describe "ホームページのリクエスト", type: :request do
       expect(response.body).to include(I18n.t("home.top.foodstuffs"))
     end
 
+    it "JSON形式で食品一覧が表示されること" do
+      get foodstuffs_view_path, headers: { 'ACCEPT' => 'application/json' }
+      expect(response).to have_http_status(:ok)
+      expect(response.content_type).to eq("application/json; charset=utf-8")
+      expect(JSON.parse(response.body)).to include("foodstuffs")
+    end
+    
     describe "GET /cookrice" do
       it "炊飯チュートリアルページにアクセスでき、タイトルが表示されること" do
         get cookrice_path
