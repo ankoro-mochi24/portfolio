@@ -1,11 +1,18 @@
-require 'rails_helper'  # Railsのヘルパーを読み込む
-require 'webmock/rspec'  # WebMockの設定も合わせて読み込む
+require 'rails_helper'
 
 RSpec.describe LineNotifyController, type: :request do
   let(:user) { create(:user) }
 
   before do
     sign_in user
+  end
+
+  describe "GET /line_notify/authorize" do
+    it "LINE Notify認証ページにリダイレクトされること" do
+      get line_notify_authorize_path
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(/https:\/\/notify-bot.line.me\/oauth\/authorize/)
+    end
   end
 
   describe "GET /line_notify/callback" do
@@ -17,19 +24,24 @@ RSpec.describe LineNotifyController, type: :request do
         }
       end
 
-      it "コールバックを処理し、プロフィールページにリダイレクトする" do
+      it "トークンが保存され、プロフィールページにリダイレクトされること" do
         response_body = {
           access_token: 'valid_access_token'
         }.to_json
 
         stub_request(:post, "https://notify-bot.line.me/oauth/token")
+          .with(
+            body: hash_including(code: "valid_code"),
+            headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
+          )
           .to_return(status: 200, body: response_body, headers: { 'Content-Type' => 'application/json' })
 
         get line_notify_callback_path, params: valid_params
 
-        expect(user.reload.line_notify_token).to eq('valid_access_token')
+        user.reload
+        expect(user.line_notify_token).to eq('valid_access_token')
         expect(response).to redirect_to(profile_path)
-        expect(flash[:notice]).to eq('LINE Notifyとの連携が完了しました。')
+        expect(flash[:notice]).to eq(I18n.t("notices.line_notify_connected"))
       end
     end
 
@@ -41,14 +53,40 @@ RSpec.describe LineNotifyController, type: :request do
         }
       end
 
-      it "コールバック処理に失敗し、エラーと共にリダイレクトする" do
+      it "プロフィールページにエラーメッセージと共にリダイレクトされること" do
         stub_request(:post, "https://notify-bot.line.me/oauth/token")
           .to_return(status: 400, body: "", headers: {})
 
         get line_notify_callback_path, params: invalid_params
 
         expect(response).to redirect_to(profile_path)
-        expect(flash[:alert]).to eq('LINE Notifyとの連携に失敗しました。')
+        expect(flash[:alert]).to eq(I18n.t("errors.messages.line_notify_failed"))
+      end
+    end
+  end
+
+  describe "DELETE /line_notify/unlink" do
+    context "ユーザーがLINE Notifyトークンを持っている場合" do
+      before do
+        user.update(line_notify_token: "valid_token")
+        allow_any_instance_of(LineNotifyService).to receive(:send_notification).and_return(true)
+      end
+
+      it "連携解除の通知が送信され、トークンが削除されること" do
+        delete line_notify_unlink_path
+        expect(response).to redirect_to(profile_path)
+        expect(flash[:notice]).to eq(I18n.t("notices.line_notify_unlinked"))
+
+        user.reload
+        expect(user.line_notify_token).to be_nil
+      end
+    end
+
+    context "ユーザーがLINE Notifyトークンを持っていない場合" do
+      it "プロフィールページにリダイレクトされ、エラーがないこと" do
+        delete line_notify_unlink_path
+        expect(response).to redirect_to(profile_path)
+        expect(flash[:notice]).to eq(I18n.t("notices.line_notify_unlinked"))
       end
     end
   end
