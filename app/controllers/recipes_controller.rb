@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save
-        format.html { redirect_to @recipe, notice: 'レシピが投稿されました。' }
+        format.html { redirect_to @recipe, notice: I18n.t('notices.recipe_created') }
         format.json { render :show, status: :created, location: @recipe }
       else
         @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
@@ -61,7 +61,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save
-        format.html { redirect_to @recipe, notice: 'レシピが更新されました。' }
+        format.html { redirect_to @recipe, notice: I18n.t('notices.recipe_updated') }
         format.json { render :show, status: :ok, location: @recipe }
       else
         @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
@@ -72,34 +72,46 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe.destroy
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'レシピが削除されました。' }
-      format.json { head :no_content }
+    if @recipe.user == current_user
+      @recipe.destroy
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: I18n.t('notices.recipe_deleted') }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: I18n.t('errors.messages.unauthorized_recipe') }
+        format.json { render json: { error: I18n.t('errors.messages.unauthorized_recipe') }, status: :forbidden }
+      end
     end
   end
 
   def add_topping
     @topping = @recipe.toppings.find_or_initialize_by(name: topping_params[:name])
-    @topping.user ||= current_user # userがnilの場合のみcurrent_userを設定
-  
+    @topping.user ||= current_user
+
     respond_to do |format|
       if @topping.persisted? || @topping.save
         format.turbo_stream
-        format.html { redirect_to @recipe, notice: 'トッピングが追加されました。' }
+        format.html { redirect_to @recipe, notice: I18n.t('notices.topping_added') }
       else
-        format.html { redirect_to @recipe, alert: 'トッピングの追加に失敗しました。' }
+        format.html { redirect_to @recipe, alert: I18n.t('alerts.topping_add_failed') }
       end
     end
   end
 
   def remove_topping
-    @topping = @recipe.toppings.find(params[:topping_id])
-    @topping.destroy
-    
-    respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to @recipe, notice: 'トッピングが削除されました。' }
+    Rails.logger.info "Removing Topping ID: #{params[:topping_id]}"
+    @topping = @recipe.toppings.find_by(id: params[:topping_id])
+
+    if @topping
+      @topping.destroy
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @recipe, notice: I18n.t('notices.topping_removed') }
+      end
+    else
+      redirect_to @recipe, alert: I18n.t('errors.messages.not_found')
     end
   end
 

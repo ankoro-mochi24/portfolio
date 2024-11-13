@@ -41,6 +41,12 @@ class HomeController < ApplicationController
       @recipes = Kaminari.paginate_array(@recipes).page(params[:page]).per(10)
       @foodstuffs = Kaminari.paginate_array(@foodstuffs).page(params[:page]).per(10)
     end
+    
+    # JSON形式のレスポンスを追加
+    respond_to do |format|
+      format.html # HTMLリクエストの場合はそのままビューを表示
+      format.json { render json: { recipes: @recipes.as_json, foodstuffs: @foodstuffs.as_json } }
+    end
   end
 
   private

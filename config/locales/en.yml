@@ -6,34 +6,34 @@ en:
       recipes: "Recipes"
       foodstuffs: "Foodstuffs"
   navbar:
-    brand: "Okome Biyori"
+    brand: "Rice Days"
     search_placeholder: "Search"
     search_button: "Search"
     sort_options:
-      newest: "Newest"
-      oldest: "Oldest"
-      few_ingredients: "Fewest Ingredients"
-      easy_cooking: "Easiest Cooking"
-      most_good: "Most Yammy!"
-      most_bookmarks: "Most Bookmarks"
+      newest: "Newest first"
+      oldest: "Oldest first"
+      few_ingredients: "Fewest ingredients"
+      easy_cooking: "Easiest to cook"
+      most_good: "Most 'Yummy!'"
+      most_bookmarks: "Most bookmarked"
     cookrice: "Rice Cooking Tutorial"
     login: "Login"
-    register: "Sign Up"
+    register: "Register"
     post_recipe: "Post Recipe"
     post_foodstuff: "Post Foodstuff"
     user_name: "Name:"
   sidebar:
     profile:
       menu: "Menu"
-      user_info: "User Info"
+      user_info: "User Information"
       posts: "Posted Recipes/Posted Foodstuffs"
       logout: "Logout"
     home:
       filter: "Filter"
       bookmarks: "Bookmarks"
-      good: "Yammy!"
-      bad: "Umm..."
-      kitchen_tools: "Can Cook with Owned Kitchen Tools"
+      good: "Yummy!"
+      bad: "Hmm..."
+      kitchen_tools: "Cook with available kitchen tools"
       reset_filter: "Reset Filter"
   helpers:
     submit:
@@ -47,39 +47,39 @@ en:
     rice_cooker: "Rice Cooker"
     microwave: "Microwave"
     steps: "Steps"
-    description_rice_cooker: "Here we explain how to cook rice using a rice cooker."
-    description_microwave: "Here we explain how to cook rice using a microwave."
-    step1: "Measure the rice. Use chopsticks or similar to level it off."
-    step1_image_alt: "Measuring Rice"
-    step2: "Wash the rice. Add enough water to cover the rice quickly, stir briefly, then drain immediately."
-    step2_image_alt: "Washing Rice Step 1"
-    step3: "Add water again to cover the rice, then drain some water. Stir the rice with your palm about 20 times."
-    step3_image_alt: "Washing Rice Step 2"
-    step4: "Repeat rinsing and draining 2–3 times. When the water becomes clear, the rice washing is done."
-    step4_image_alt: "Rinsing Rice"
-    step5: "Transfer the rice to the rice cooker and fill water up to the 2-cup line. Start the cooker."
-    step5_image_alt: "Adding Rice and Water to Rice Cooker"
-    step6: "Open the lid when the rice is done."
-    step6_image_alt: "Cooked Rice"
-    step7: "Fluff the rice with a rice paddle to release moisture."
-    step7_image_alt: "Fluffing the Rice"
-    microwave_step1: "Measure and wash the rice."
-    microwave_step1_image_alt: "Washing Rice"
-    microwave_step2: "Put the rice and appropriate amount of water in a heatproof container."
-    microwave_step2_image_alt: "Adding Rice and Water to Heatproof Container"
-    microwave_step3: "Cook in the microwave."
-    microwave_step3_image_alt: "Microwaving Rice"
-    microwave_step4: "Measure and wash the rice."
-    microwave_step4_image_alt: "Washing Rice"
-    microwave_step5: "Measure and wash the rice."
-    microwave_step5_image_alt: "Washing Rice"
-    microwave_step6: "Measure and wash the rice."
-    microwave_step6_image_alt: "Washing Rice"
-    microwave_step7: "Measure and wash the rice."
-    microwave_step7_image_alt: "Washing Rice"
+    description_rice_cooker: "This section explains how to cook rice using a rice cooker."
+    description_microwave: "This section explains how to cook rice using a microwave."
+    step1: "Measure the rice. Use chopsticks to level it out."
+    step1_image_alt: "Rice measuring process"
+    step2: "Wash the rice. Quickly add water to cover the rice, stir briefly, then pour out the water."
+    step2_image_alt: "First rice washing step"
+    step3: "Add water again, swirl, and pour out until water is clear."
+    step3_image_alt: "Second rice washing step"
+    step4: "Rinse 2-3 times until the water is clear."
+    step4_image_alt: "Final rinsing step"
+    step5: "Transfer rice to rice cooker, fill with water up to the 2-cup line, and start cooking."
+    step5_image_alt: "Adding rice and water to rice cooker"
+    step6: "Once cooked, open the rice cooker."
+    step6_image_alt: "Opening rice cooker"
+    step7: "Fluff the rice with a rice paddle to release excess moisture."
+    step7_image_alt: "Fluffing rice"
+    microwave_step1: "Measure and wash rice."
+    microwave_step1_image_alt: "Washing rice step"
+    microwave_step2: "Put rice and water in a heatproof container."
+    microwave_step2_image_alt: "Rice and water in heatproof container"
+    microwave_step3: "Heat in microwave."
+    microwave_step3_image_alt: "Heating in microwave"
+    microwave_step4: "Check rice."
+    microwave_step4_image_alt: "Checking rice"
+    microwave_step5: "Repeat the process if necessary"
+    microwave_step5_image_alt: "Repeated washing step"
+    microwave_step6: "Let it rest after microwaving."
+    microwave_step6_image_alt: "Resting the rice"
+    microwave_step7: "Fluff rice after resting."
+    microwave_step7_image_alt: "Fluffing the rested rice"
   foodstuffs:
     index:
-      title: "Foodstuff List"
+      title: "Foodstuffs List"
       no_results: "No matching foodstuffs found."
     show:
       name: "Name"
@@ -87,70 +87,86 @@ en:
       description: "Description"
       link: "Link"
       image: "Image"
-      post_recipe: "Post a Recipe"
+      post_recipe: "Post Recipe"
     new:
-      title: "Post a Foodstuff"
+      title: "Post Foodstuff"
     edit:
       title: "Edit Foodstuff"
-    show_foodstuff: "View this Foodstuff"
+    show_foodstuff: "Show Foodstuff"
     back_to_list: "Back to Top"
     edit_foodstuff: "Edit Foodstuff"
     destroy_foodstuff: "Delete Foodstuff"
-    confirm_delete: "Are you sure you want to delete this?"
-  comments:
-    title: "Comments"
+    confirm_delete: "Are you sure you want to delete?"
   recipes:
     index:
       title: "Recipe List"
       no_results: "No matching recipes found."
     new:
-      title: "Post a Recipe"
+      title: "Post Recipe"
     edit:
       title: "Edit Recipe"
     show:
       title: "Recipe Details"
       dish_image: "Dish Image"
-      steps: "Cooking Steps"
+      steps: "Steps"
       kitchen_tools: "Required Kitchen Tools"
-      ingredients: "Ingredients + Seasonings"
-      toppings: "Toppings"
+      ingredients: "Ingredients + Seasoning"
+      toppings: "Optional Toppings"
       add_topping: "Add"
       comment_section_title: "Comments"
-      confirm_delete: "Are you sure you want to delete this?"
+      confirm_delete: "Are you sure you want to delete?"
     topping:
       delete: "Delete"
     actions:
       bookmark: "Bookmark"
-      good: "Yammy!"
-      bad: "Umm..."
+      good: "Yummy!"
+      bad: "Hmm..."
     form:
       error: "Error"
-      prohibited: "This recipe couldn't be saved."
-      title: "Recipe Name"
+      prohibited: "Unable to save this recipe."
+      title: "Recipe Title"
       dish_image: "Dish Image"
-      dish_image_alt: "Image of the Dish"
-      steps_title: "Cooking Steps"
+      dish_image_alt: "Dish image"
+      steps_title: "Steps"
       step: "Step"
       step_image: "Step Image"
-      step_image_alt: "Image of the Step"
+      step_image_alt: "Step image"
       kitchen_tools_title: "Required Kitchen Tools"
       kitchen_tool: "Kitchen Tool"
-      ingredients_title: "Ingredients + Seasonings"
+      ingredients_title: "Ingredients + Seasoning"
       ingredient: "Ingredient"
       add: "Add"
       remove: "Remove"
-      submit: "Submit"
+      submit: "Post"
       save: "Save"
   comments:
+    title: "Comments"
     edit: "Edit"
     delete: "Delete"
-    confirm_delete: "Are you sure you want to delete this?"
+    confirm_delete: "Are you sure you want to delete?"
     body_label: "Comment"
     update: "Update"
     cancel: "Cancel"
     post: "Post Comment"
     edit_title: "Edit Comment"
-    submit_error: "Submit Comment"
+    submit_error: "Failed to post comment"
+    create:
+      success: "Comment has been added."
+      failure: "Failed to add comment."
+    update:
+      success: "Comment has been updated."
+      failure: "Failed to update comment."
+    destroy:
+      success: "Comment has been deleted."
+    errors:
+      invalid_request: "Invalid request."
+      not_found: "Comment not found."
+      unauthorized: "You are not authorized to edit or delete other users' comments."
+  user_actions:
+    action_type_texts:
+      bookmark: "Bookmark"
+      good: "Yummy!"
+      bad: "Hmm..."
   activerecord:
     attributes:
       foodstuff:
@@ -164,6 +180,8 @@ en:
         title: "Title"
         dish_image: "Dish Image"
         user: "User"
+      recipe_kitchen_tool:
+        recipe_kitchen_tools: "Kitchen Tools"
     errors:
       models:
         foodstuff:
@@ -173,7 +191,7 @@ en:
             price:
               blank: "Please enter a price"
               not_a_number: "Price must be a number"
-              greater_than_or_equal_to: "Price must be greater than or equal to 0"
+              greater_than_or_equal_to: "Price must be at least 0"
               not_an_integer: "Price must be an integer"
             link:
               blank: "Please enter a link"
@@ -181,16 +199,47 @@ en:
               blank: "Please upload an image"
             user:
               required: "User is required"
+        recipe_ingredient:
+          attributes:
+            recipe_id:
+              taken: "This ingredient is already added to the recipe"
+        recipe_kitchen_tool:
+          attributes:
+            recipe_id:
+              taken: "This kitchen tool is already added to the recipe"
+        recipe:
+          attributes:
+            recipe_kitchen_tools:
+              must_have_one: "At least one kitchen tool is required"
+        topping:
+          attributes:
+            name:
+              taken: "%{value} is duplicated within the recipe"
+        user_action:
+          attributes:
+            user_id:
+              taken: "Already registered"
+          messages:
+            good_bad_conflict: "Cannot select both 'Yummy!' and 'Hmm...' simultaneously"
+        user_kitchen_tool:
+          attributes:
+            user_id:
+              taken: "Already exists"
       messages:
         record_invalid: "Invalid record"
   errors:
     messages:
-      blank: "can't be blank"
-      not_a_number: "is not a number"
+      blank: "is required"
+      not_a_number: "must be a number"
       required: "is required"
       inclusion: "is not included in the list"
+      too_short: "is too short (minimum is %{count} characters)"
+      too_long: "is too long (maximum is %{count} characters)"
+      line_notify_failed: "Failed to connect with LINE Notify."
   notices:
-    foodstuff_created: "Foodstuff was successfully created."
+    foodstuff_created: "Foodstuff created successfully."
+    line_notify_connected: "Connected to LINE Notify successfully."
+    line_notify_unlinked: "Disconnected from LINE Notify successfully."
   kaminari:
     next: "Next"
     prev: "Previous"
@@ -200,25 +249,25 @@ en:
     page_gap: "..."
     page_entries_info:
       single_page:
-        zero: "No entries found"
-        one: "Showing 1 entry"
-        other: "Showing all %{count} entries"
+        zero: "No entries"
+        one: "1 entry"
+        other: "%{count} entries"
       multiple_pages:
-        zero: "No entries found"
-        one: "Showing 1 entry"
-        other: "Displaying %{from} to %{to} of %{total} entries"
+        zero: "No entries"
+        one: "1 entry"
+        other: "Showing %{from} to %{to} of %{total} entries"
   profiles:
     edit:
       title: "Edit User Information"
       error: "Error"
-      prohibited: "This user could not be saved."
+      prohibited: "Unable to save this user."
       name: "Name"
-      email: "Email"
+      email: "Email Address"
       password: "New Password"
-      password_confirmation: "Confirm Password"
+      password_confirmation: "Password Confirmation"
       current_password: "Current Password"
       minimum_password_length: "Minimum %{length} characters"
-      kitchen_tools: "Owned Kitchen Tools"
+      kitchen_tools: "Available Kitchen Tools"
       add: "Add"
       remove: "Remove"
       save: "Save"
@@ -232,15 +281,15 @@ en:
       title: "Posted Recipes/Posted Foodstuffs"
       recipes_title: "Posted Recipes"
       foodstuffs_title: "Posted Foodstuffs"
-      no_recipes: "No posted recipes."
-      no_foodstuffs: "No posted foodstuffs."
+      no_recipes: "No recipes posted."
+      no_foodstuffs: "No foodstuffs posted."
     show:
       title: "My Page"
       username: "Username"
-      email: "Email"
-      kitchen_tools: "Owned Kitchen Tools"
-      no_kitchen_tools: "No kitchen tools registered yet."
+      email: "Email Address"
+      kitchen_tools: "Available Kitchen Tools"
+      no_kitchen_tools: "No kitchen tools registered."
       line_notify: "LINE Notifications"
-      line_notify_unlink: "Unlink LINE Notifications"
-      line_notify_link: "Receive LINE Notifications"
+      line_notify_unlink: "Disable LINE notifications"
+      line_notify_link: "Enable LINE notifications"
       edit: "Edit"

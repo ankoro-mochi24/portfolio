@@ -110,7 +110,7 @@ RSpec.describe "Foodstuffs", type: :request do
         delete foodstuff_path(foodstuff)
         expect(response).to redirect_to(root_path)
         follow_redirect!
-        expect(response.body).to include(I18n.t("errors.messages.unauthorized"))
+        expect(response.body).to include(I18n.t('errors.messages.unauthorized_foodstuff'))
       end
     end
   end

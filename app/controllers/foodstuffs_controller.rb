@@ -1,5 +1,6 @@
 class FoodstuffsController < ApplicationController
   before_action :set_foodstuff, only: %i[show edit update destroy]
+  before_action :authorize_user!, only: %i[destroy] # 削除時のみ投稿者をチェック
 
   def index # /foodstuffs.json用
     @foodstuffs = Foodstuff.all
@@ -26,7 +27,7 @@ class FoodstuffsController < ApplicationController
 
     respond_to do |format|
       if @foodstuff.save
-        format.html { redirect_to @foodstuff, notice: "食品が正常に作成されました。" }
+        format.html { redirect_to @foodstuff, notice: I18n.t("notices.foodstuff_created") }
         format.json { render :show, status: :created, location: @foodstuff }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class FoodstuffsController < ApplicationController
   def update
     respond_to do |format|
       if @foodstuff.update(foodstuff_params)
-        format.html { redirect_to @foodstuff, notice: "食品が正常に更新されました。" }
+        format.html { redirect_to @foodstuff, notice: I18n.t("notices.foodstuff_updated") }
         format.json { render :show, status: :ok, location: @foodstuff }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,7 +51,7 @@ class FoodstuffsController < ApplicationController
   def destroy
     @foodstuff.destroy
     respond_to do |format|
-      format.html { redirect_to root_path, notice: "食品が正常に削除されました。" }
+      format.html { redirect_to root_path, notice: I18n.t("notices.foodstuff_deleted") }
       format.json { head :no_content }
     end
   end
@@ -62,8 +63,15 @@ class FoodstuffsController < ApplicationController
     @foodstuff = Foodstuff.find(params[:id])
   end
 
+  # 投稿者のみが削除できるようにする認可メソッド
+  def authorize_user!
+    unless @foodstuff.user == current_user
+      redirect_to root_path, alert: I18n.t('errors.messages.unauthorized_foodstuff')
+    end
+  end
+
   # ストロングパラメーター
   def foodstuff_params
-    params.require(:foodstuff).permit(:name, :price, :description, :link, {image: []})
+    params.require(:foodstuff).permit(:name, :price, :description, :link, { image: [] })
   end
 end

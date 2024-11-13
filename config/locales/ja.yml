@@ -150,6 +150,18 @@ ja:
     post: "コメントを投稿"
     edit_title: "コメントを編集"
     submit_error: "コメントを投稿する"
+    create:
+      success: "コメントが追加されました。"
+      failure: "コメントの追加に失敗しました。"
+    update:
+      success: "コメントが更新されました。"
+      failure: "コメントの更新に失敗しました。"
+    destroy:
+      success: "コメントが削除されました。"
+    errors:
+      invalid_request: "不正なリクエストです。"
+      not_found: "コメントが見つかりません。"
+      unauthorized: "他のユーザーのコメントを編集・削除することはできません。"
   user_actions:
     action_type_texts:
       bookmark: "ブックマーク"
@@ -197,6 +209,8 @@ ja:
               taken: "この調理器具は既にレシピに追加されています"
         recipe:
           attributes:
+            title:
+              blank: "タイトルを入力してください"
             recipe_kitchen_tools:
               must_have_one: "を最低1つ追加してください"
         topping:
@@ -223,8 +237,24 @@ ja:
       inclusion: "は一覧にありません"
       too_short: "は%{count}文字以上で入力してください"
       too_long: "は%{count}文字以内で入力してください"
+      line_notify_failed: "LINE Notifyとの連携に失敗しました。"
+      unauthorized_recipe: "他のユーザーのレシピを編集・削除することはできません。"
+      unauthorized_foodstuff: "他のユーザーの食品を編集・削除することはできません。"
+      not_found: "食品が見つかりません。"
+      invalid_params: "無効なパラメータです。"
   notices:
-    foodstuff_created: "食品が正常に作成されました。"
+    foodstuff_created: "食品が正常に投稿されました。"
+    foodstuff_updated: "食品が正常に更新されました。"
+    foodstuff_deleted: "食品が正常に削除されました。"
+    line_notify_connected: "LINE Notifyとの連携が正常に完了しました。"
+    line_notify_unlinked: "LINE Notifyとの連携が正常に解除されました。"
+    recipe_created: "レシピが正常に投稿されました。"
+    recipe_updated: "レシピが正常に更新されました。"
+    recipe_deleted: "レシピが正常に削除されました。"
+    topping_added: "トッピングが正常に追加されました。"
+    topping_removed: "トッピングが正常に削除されました。"
+  alerts:
+    topping_add_failed: "トッピングの追加に失敗しました。"
   kaminari:
     next: "次"
     prev: "前"

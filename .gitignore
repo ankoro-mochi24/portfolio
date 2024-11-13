@@ -1,5 +1,7 @@
 /node_modules
 log/development.log
+log/*.log
+
 .env
 
 # Elastic Beanstalk Files
@@ -9,4 +11,3 @@ log/development.log
 
 # Ignore .bundle directory
 .bundle/
-'/log/' 
