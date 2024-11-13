@@ -9,12 +9,12 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, notice: 'コメントが追加されました。' }
+        format.html { redirect_back fallback_location: root_path, notice: t('comments.create.success') }
         format.turbo_stream
       end
     else
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, alert: 'コメントの追加に失敗しました。' }
+        format.html { redirect_back fallback_location: root_path, alert: t('comments.create.failure') }
         format.turbo_stream { render :error }
       end
     end
@@ -23,12 +23,12 @@ class CommentsController < ApplicationController
   def update
     if @comment.update(comment_params)
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, notice: 'コメントが更新されました。' }
+        format.html { redirect_back fallback_location: root_path, notice: t('comments.update.success') }
         format.turbo_stream
       end
     else
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, alert: 'コメントの更新に失敗しました。' }
+        format.html { redirect_back fallback_location: root_path, alert: t('comments.update.failure') }
         format.turbo_stream { render :error }
       end
     end
@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_back fallback_location: root_path, notice: 'コメントが削除されました。' }
+      format.html { redirect_back fallback_location: root_path, notice: t('comments.destroy.success') }
       format.turbo_stream
     end
   end
@@ -48,18 +48,18 @@ class CommentsController < ApplicationController
     @commentable = params[:commentable_type].constantize.find(params[:commentable_id])
   rescue NameError, ActiveRecord::RecordNotFound => e
     Rails.logger.warn("不正なリクエスト: #{e.message}")
-    redirect_back fallback_location: root_path, alert: '不正なリクエストです。'
+    redirect_back fallback_location: root_path, alert: t('comments.errors.invalid_request')
   end
 
   def set_comment
     @comment = Comment.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    redirect_back fallback_location: root_path, alert: 'コメントが見つかりません。'
+    redirect_back fallback_location: root_path, alert: t('comments.errors.not_found')
   end
 
   def authorize_user
     unless @comment.user == current_user
-      redirect_back fallback_location: root_path, alert: '他のユーザーのコメントを編集・削除することはできません。'
+      redirect_back fallback_location: root_path, alert: t('comments.errors.unauthorized')
     end
   end
 

@@ -3,6 +3,7 @@ FactoryBot.define do
     name { "テストユーザー" }
     email { Faker::Internet.unique.email }
     password { "password1" }
+    line_notify_token { nil }
 
     # user_with_recipes
     factory :user_with_recipes do
