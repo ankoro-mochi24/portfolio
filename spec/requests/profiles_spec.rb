@@ -93,8 +93,8 @@ RSpec.describe "Profiles", type: :request do
   end
 
   describe "GET /profile/posts" do
-    let!(:recipe) { FactoryBot.create(:recipe, user: user, title: "ユーザーのレシピ") }
-    let!(:foodstuff) { FactoryBot.create(:foodstuff, user: user, name: "ユーザーの食品") }
+    let!(:recipe) { FactoryBot.create(:recipe, user:, title: "ユーザーのレシピ") }
+    let!(:foodstuff) { FactoryBot.create(:foodstuff, user:, name: "ユーザーの食品") }
 
     it "ユーザーの投稿したレシピと食品が表示されること" do
       get posts_profile_path

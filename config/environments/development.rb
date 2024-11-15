@@ -12,8 +12,8 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.server_timing = true
 
-  config.log_level = :debug       # ログレベルをデバッグに設定
-  config.logger = Logger.new(STDOUT)  # 標準出力にログを出力
+  config.log_level = :debug # ログレベルをデバッグに設定
+  config.logger = Logger.new($stdout) # 標準出力にログを出力
 
   if Rails.root.join("tmp/caching-dev.txt").exist?
     config.action_controller.perform_caching = true

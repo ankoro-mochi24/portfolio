@@ -14,9 +14,9 @@ before_fork do
   pid_file = File.join(Dir.pwd, 'tmp', 'pids', 'server.pid')
   if File.exist?(pid_file)
     File.delete(pid_file)
-    puts "server.pid ファイルを削除しました"
+    Rails.logger.debug "server.pid ファイルを削除しました"
   else
-    puts "server.pid ファイルは存在しません"
+    Rails.logger.debug "server.pid ファイルは存在しません"
   end
 end
 

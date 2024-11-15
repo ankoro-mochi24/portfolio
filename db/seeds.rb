@@ -61,7 +61,7 @@ def create_user_actions(actionable, users)
         $total_created += 1
       rescue ActiveRecord::RecordInvalid => e
         $total_failures += 1
-        puts "ユーザー #{user.id} の #{actionable.class.name} #{actionable.id} に対するアクションの作成に失敗しました: #{e.message}"
+        Rails.logger.debug "ユーザー #{user.id} の #{actionable.class.name} #{actionable.id} に対するアクションの作成に失敗しました: #{e.message}"
       end
     end
   end
@@ -101,7 +101,7 @@ end
 def check_and_create_records(model, count, counter_var)
   existing_count = model.count
   if existing_count >= count
-    puts "#{model.name} テーブルにはすでに#{count}個以上のレコードが存在します。"
+    Rails.logger.debug "#{model.name} テーブルにはすでに#{count}個以上のレコードが存在します。"
   else
     needed = count - existing_count
     yield(needed)
@@ -117,8 +117,8 @@ check_and_create_records(User, USER_COUNT, $total_created) do |needed|
       email: Faker::Internet.unique.email,
       password: 'password',
       password_confirmation: 'password',
-      created_at: Faker::Date.between(from: 2.years.ago, to: Date.today),
-      updated_at: Faker::Date.between(from: 2.years.ago, to: Date.today)
+      created_at: Faker::Date.between(from: 2.years.ago, to: Time.zone.today),
+      updated_at: Faker::Date.between(from: 2.years.ago, to: Time.zone.today)
     )
   end
 end
@@ -142,7 +142,7 @@ end
 
 # レシピの作成
 check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
-  sample_image_path = Rails.root.join("app", "assets", "images", "sample.jpg")
+  sample_image_path = Rails.root.join("app/assets/images/sample.jpg")
   recipe_sample_image_url = "https://okome-biyori-bucket.s3.ap-northeast-1.amazonaws.com/sample.jpg"  # Recipe用のサンプル画像URL
 
   needed.times do
@@ -191,7 +191,7 @@ check_and_create_records(Recipe, RECIPE_COUNT, $total_recipes) do |needed|
     if recipe.save
       $total_recipes += 1
     else
-      puts "レシピの作成に失敗しました: #{recipe.errors.full_messages.join(', ')}"
+      Rails.logger.debug "レシピの作成に失敗しました: #{recipe.errors.full_messages.join(', ')}"
     end
   end
 end
@@ -212,24 +212,24 @@ check_and_create_records(Foodstuff, USER_COUNT, $total_foodstuffs) do |needed|
     if Rails.env.production?
       foodstuff.remote_image_urls = foodstuff_sample_image_url
     else
-      sample_image_path = Rails.root.join("public", "uploads", "sample.jpg")
+      sample_image_path = Rails.root.join("public/uploads/sample.jpg")
       foodstuff.image = [File.open(sample_image_path)]
     end
 
     if foodstuff.save
       $total_foodstuffs += 1
     else
-      puts "食品の作成に失敗しました: #{foodstuff.errors.full_messages.join(', ')}"
+      Rails.logger.debug "食品の作成に失敗しました: #{foodstuff.errors.full_messages.join(', ')}"
     end
   end
 end
 
 # まとめて結果を出力
-puts "#{$total_created} 件のユーザアクションが追加されました。"
-puts "#{$total_skipped_good} 件の 'good' アクションは既存の 'bad' アクションのためスキップされました。"
-puts "#{$total_skipped_bad} 件の 'bad' アクションは既存の 'good' アクションのためスキップされました。"
-puts "#{$total_failures} 件のアクションの作成に失敗しました。"
-puts "#{$total_comments} 件のコメントが作成されました。"
-puts "#{$total_toppings} 件のトッピングが作成されました。"
-puts "#{$total_recipes} 件のレシピが作成されました。"
-puts "#{$total_foodstuffs} 件の食品が作成されました。"
+Rails.logger.debug "#{$total_created} 件のユーザアクションが追加されました。"
+Rails.logger.debug "#{$total_skipped_good} 件の 'good' アクションは既存の 'bad' アクションのためスキップされました。"
+Rails.logger.debug "#{$total_skipped_bad} 件の 'bad' アクションは既存の 'good' アクションのためスキップされました。"
+Rails.logger.debug "#{$total_failures} 件のアクションの作成に失敗しました。"
+Rails.logger.debug "#{$total_comments} 件のコメントが作成されました。"
+Rails.logger.debug "#{$total_toppings} 件のトッピングが作成されました。"
+Rails.logger.debug "#{$total_recipes} 件のレシピが作成されました。"
+Rails.logger.debug "#{$total_foodstuffs} 件の食品が作成されました。"

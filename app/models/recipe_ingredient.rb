@@ -1,11 +1,9 @@
-=begin
-t.bigint "recipe_id", null: false
-t.bigint "ingredient_id", null: false
-t.datetime "created_at", null: false
-t.datetime "updated_at", null: false
-t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
-t.index ["recipe_id", "ingredient_id"], name: "index_recipe_ingredients_on_recipe_id_and_ingredient_id", unique: true
-=end
+# t.bigint "recipe_id", null: false
+# t.bigint "ingredient_id", null: false
+# t.datetime "created_at", null: false
+# t.datetime "updated_at", null: false
+# t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
+# t.index ["recipe_id", "ingredient_id"], name: "index_recipe_ingredients_on_recipe_id_and_ingredient_id", unique: true
 class RecipeIngredient < ApplicationRecord
   belongs_to :recipe
   belongs_to :ingredient

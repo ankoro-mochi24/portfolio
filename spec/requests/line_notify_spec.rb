@@ -10,14 +10,14 @@ RSpec.describe LineNotifyController, type: :request do
   describe "GET /line_notify/authorize" do
     it "LINE Notify認証ページにリダイレクトされ、外部ホストのリダイレクトが許可されること" do
       get line_notify_authorize_path
-      
+
       # リダイレクト先がLINE Notifyの認証ページであることを確認
       expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to(/https:\/\/notify-bot.line.me\/oauth\/authorize/)
-      
+      expect(response).to redirect_to(%r{https://notify-bot.line.me/oauth/authorize})
+
       # 外部ホストのリダイレクトが許可されているかは、リダイレクト先URLのパターンで確認する
       redirected_url = response.headers["Location"]
-      expect(redirected_url).to match(/https:\/\/notify-bot.line.me\/oauth\/authorize/)
+      expect(redirected_url).to match(%r{https://notify-bot.line.me/oauth/authorize})
     end
   end
 

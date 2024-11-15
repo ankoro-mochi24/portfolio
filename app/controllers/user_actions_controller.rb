@@ -75,7 +75,7 @@ class UserActionsController < ApplicationController
 
   def send_line_notification(user_action)
     token = user_action.actionable.user.line_notify_token
-    return unless token.present?
+    return if token.blank?
 
     message =
       case user_action.action_type

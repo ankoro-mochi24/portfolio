@@ -1,16 +1,14 @@
-=begin
-t.bigint "recipe_id", null: false
-t.bigint "user_id", null: false
-t.text "name", null: false
-t.datetime "created_at", null: false
-t.datetime "updated_at", null: false
-t.index ["recipe_id", "name"], name: "index_toppings_on_recipe_id_and_name", unique: true
-t.index ["recipe_id"], name: "index_toppings_on_recipe_id"
-t.index ["user_id"], name: "index_toppings_on_user_id"
-
-User(1)-(n)Topping(n)-(1)Foodstuff
-User(1)-(n)Topping(n)-(1)Recipe
-=end
+# t.bigint "recipe_id", null: false
+# t.bigint "user_id", null: false
+# t.text "name", null: false
+# t.datetime "created_at", null: false
+# t.datetime "updated_at", null: false
+# t.index ["recipe_id", "name"], name: "index_toppings_on_recipe_id_and_name", unique: true
+# t.index ["recipe_id"], name: "index_toppings_on_recipe_id"
+# t.index ["user_id"], name: "index_toppings_on_user_id"
+#
+# User(1)-(n)Topping(n)-(1)Foodstuff
+# User(1)-(n)Topping(n)-(1)Recipe
 class Topping < ApplicationRecord
   belongs_to :recipe
   belongs_to :user

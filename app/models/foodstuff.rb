@@ -1,14 +1,12 @@
-=begin
-t.string "name", null: false
-t.decimal "price", precision: 10, null: false
-t.text "description"
-t.string "link", null: false
-t.bigint "user_id", null: false
-t.datetime "created_at", null: false
-t.datetime "updated_at", null: false
-t.string "image", null: false
-t.index ["user_id"], name: "index_foodstuffs_on_user_id"
-=end
+# t.string "name", null: false
+# t.decimal "price", precision: 10, null: false
+# t.text "description"
+# t.string "link", null: false
+# t.bigint "user_id", null: false
+# t.datetime "created_at", null: false
+# t.datetime "updated_at", null: false
+# t.string "image", null: false
+# t.index ["user_id"], name: "index_foodstuffs_on_user_id"
 
 class Foodstuff < ApplicationRecord
   # 検索機能の設定

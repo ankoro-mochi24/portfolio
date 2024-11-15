@@ -29,7 +29,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.fixture_path = "#{::Rails.root}/spec/fixtures" # テスト用データの保存場所を指定
+  config.fixture_path = Rails.root.join("spec/fixtures").to_s # テスト用データの保存場所を指定
   config.use_transactional_fixtures = true # テストごとにデータをリセット
   config.infer_spec_type_from_file_location! # ファイルパスからテストタイプを自動判定
   config.filter_rails_from_backtrace! # Rails内部の不要なエラーログを省略

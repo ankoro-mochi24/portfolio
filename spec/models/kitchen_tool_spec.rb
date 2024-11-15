@@ -26,7 +26,7 @@ RSpec.describe KitchenTool, type: :model do
     end
 
     it "名前が特定の長さを超える場合は無効である" do
-      kitchen_tool.name = "a" * 256  # 仮に255文字が上限の場合
+      kitchen_tool.name = "a" * 256 # 仮に255文字が上限の場合
       expect(kitchen_tool).not_to be_valid
     end
 
@@ -46,14 +46,14 @@ RSpec.describe KitchenTool, type: :model do
 
     it 'キッチンツールが削除されたとき、関連するrecipe_kitchen_toolsも削除される' do
       recipe = FactoryBot.create(:recipe)
-      FactoryBot.create(:recipe_kitchen_tool, recipe: recipe, kitchen_tool: kitchen_tool, kitchen_tool_name: kitchen_tool.name)
+      FactoryBot.create(:recipe_kitchen_tool, recipe:, kitchen_tool:, kitchen_tool_name: kitchen_tool.name)
 
       expect { kitchen_tool.destroy }.to change { RecipeKitchenTool.count }.by(-1)
     end
 
     it 'キッチンツールが削除されたとき、関連するuser_kitchen_toolsも削除される' do
       user = FactoryBot.create(:user)
-      FactoryBot.create(:user_kitchen_tool, user: user, kitchen_tool: kitchen_tool)
+      FactoryBot.create(:user_kitchen_tool, user:, kitchen_tool:)
 
       kitchen_tool.destroy
       expect(UserKitchenTool.where(kitchen_tool_id: kitchen_tool.id)).to be_empty

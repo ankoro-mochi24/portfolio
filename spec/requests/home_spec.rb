@@ -27,7 +27,7 @@ RSpec.describe "ホームページのリクエスト", type: :request do
       expect(response.content_type).to eq("application/json; charset=utf-8")
       expect(JSON.parse(response.body)).to include("foodstuffs")
     end
-    
+
     describe "GET /cookrice" do
       it "炊飯チュートリアルページにアクセスでき、タイトルが表示されること" do
         get cookrice_path
@@ -56,8 +56,8 @@ RSpec.describe "ホームページのリクエスト", type: :request do
       let!(:bookmarked_recipe) { FactoryBot.create(:recipe, title: "ブックマークしたレシピ") }
 
       before do
-        good_recipe.user_actions.create(user: user, action_type: 'good')
-        bookmarked_recipe.user_actions.create(user: user, action_type: 'bookmark')
+        good_recipe.user_actions.create(user:, action_type: 'good')
+        bookmarked_recipe.user_actions.create(user:, action_type: 'bookmark')
         Recipe.reindex
         Recipe.search_index.refresh
       end
