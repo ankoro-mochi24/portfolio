@@ -40,7 +40,12 @@ class UserActionsController < ApplicationController
 
   def destroy
     @user_action = current_user.user_actions.find_by(id: params[:id])
-    return redirect_to root_path, alert: t("user_actions.errors.not_found") if @user_action.nil?
+
+    # 自分のアクションではない場合は403を返す
+    if @user_action.nil?
+      head :forbidden
+      return
+    end
 
     @actionable = @user_action.actionable
     @action_type = @user_action.action_type

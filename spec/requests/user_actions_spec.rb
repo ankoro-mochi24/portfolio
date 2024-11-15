@@ -69,6 +69,48 @@ RSpec.describe "UserActions", type: :request do
         follow_redirect!
         expect(response.body).to include(I18n.t('user_actions.success.added', action_type: I18n.t('user_actions.action_type_texts.bad')))
       end
+
+      it "未ログイン状態でリクエストを送るとリダイレクトされる" do
+        sign_out user
+        post recipe_user_actions_path(recipe), params: {
+          user_action: { action_type: "good", actionable_type: "Recipe", actionable_id: recipe.id }
+        }
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
+  describe "DELETE /recipes/:id/user_actions/:id" do
+    context "正常系" do
+      it "自分のアクションを削除できること" do
+        delete recipe_user_action_path(recipe, user_action)
+        expect(response).to redirect_to(recipe_path(recipe))
+        expect(UserAction.find_by(id: user_action.id)).to be_nil
+      end
+    end
+
+    context "異常系" do
+      it "他のユーザーが作成したアクションを削除しようとするとエラーになる" do
+        action = FactoryBot.create(:user_action, user: other_user, actionable: recipe, action_type: "good")
+        delete recipe_user_action_path(recipe, action)
+        expect(response).to have_http_status(:forbidden)
+      end
+    end
+  end
+
+  describe "Turbo Stream形式のレスポンス確認" do
+    it "アクションを作成するとTurbo Streamレスポンスが返される" do
+      post recipe_user_actions_path(recipe), params: {
+        user_action: { action_type: "good", actionable_type: "Recipe", actionable_id: recipe.id }
+      }, headers: { "Accept" => "text/vnd.turbo-stream.html" }
+      expect(response.media_type).to eq("text/vnd.turbo-stream.html")
+      expect(response.body).to include("turbo-stream")
+    end
+
+    it "アクションを削除するとTurbo Streamレスポンスが返される" do
+      delete recipe_user_action_path(recipe, user_action), headers: { "Accept" => "text/vnd.turbo-stream.html" }
+      expect(response.media_type).to eq("text/vnd.turbo-stream.html")
+      expect(response.body).to include("turbo-stream")
     end
   end
 end
