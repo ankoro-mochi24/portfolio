@@ -15,6 +15,23 @@ action_type: bookmark/good/bad
 actionable_type: recipe/foodstuff/topping
 actionable_id: recipe.id/foodstuff.id/topping.id
 =end
+=begin
+t.bigint "user_id", null: false
+t.string "action_type", null: false
+t.string "actionable_type", null: false
+t.bigint "actionable_id", null: false
+t.datetime "created_at", null: false
+t.datetime "updated_at", null: false
+t.index ["user_id", "actionable_type", "actionable_id", "action_type"], name: "index_user_actions_on_user_and_actionable_and_action_type", unique: true
+
+User(1)-(n)UserAction(n)-(1)Foodstuff
+User(1)-(n)UserAction(n)-(1)Recipe
+User(1)-(n)UserAction(n)-(1)Topping
+
+action_type: bookmark/good/bad
+actionable_type: recipe/foodstuff/topping
+actionable_id: recipe.id/foodstuff.id/topping.id
+=end
 class UserAction < ApplicationRecord
   belongs_to :user
   belongs_to :actionable, polymorphic: true
