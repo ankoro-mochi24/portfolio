@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe KitchenTool, type: :model do
-  let(:kitchen_tool) { FactoryBot.create(:kitchen_tool) }
+  let(:kitchen_tool) { create(:kitchen_tool) }
 
   before do
     described_class.delete_all
@@ -20,7 +20,7 @@ RSpec.describe KitchenTool, type: :model do
     end
 
     it "重複する名前の場合は無効である" do
-      duplicate_kitchen_tool = FactoryBot.build(:kitchen_tool, name: kitchen_tool.name)
+      duplicate_kitchen_tool = build(:kitchen_tool, name: kitchen_tool.name)
       expect(duplicate_kitchen_tool).not_to be_valid
       expect(duplicate_kitchen_tool.errors[:name]).to include(I18n.t('errors.messages.taken'))
     end
@@ -45,15 +45,15 @@ RSpec.describe KitchenTool, type: :model do
     it { is_expected.to have_many(:users).through(:user_kitchen_tools) }
 
     it 'キッチンツールが削除されたとき、関連するrecipe_kitchen_toolsも削除される' do
-      recipe = FactoryBot.create(:recipe)
-      FactoryBot.create(:recipe_kitchen_tool, recipe:, kitchen_tool:, kitchen_tool_name: kitchen_tool.name)
+      recipe = create(:recipe)
+      create(:recipe_kitchen_tool, recipe:, kitchen_tool:, kitchen_tool_name: kitchen_tool.name)
 
       expect { kitchen_tool.destroy }.to change(RecipeKitchenTool, :count).by(-1)
     end
 
     it 'キッチンツールが削除されたとき、関連するuser_kitchen_toolsも削除される' do
-      user = FactoryBot.create(:user)
-      FactoryBot.create(:user_kitchen_tool, user:, kitchen_tool:)
+      user = create(:user)
+      create(:user_kitchen_tool, user:, kitchen_tool:)
 
       kitchen_tool.destroy
       expect(UserKitchenTool.where(kitchen_tool_id: kitchen_tool.id)).to be_empty

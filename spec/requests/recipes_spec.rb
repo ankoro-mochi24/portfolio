@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe "Recipes", type: :request do
-  let(:user) { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user) }
-  let(:kitchen_tool) { FactoryBot.create(:kitchen_tool) }
-  let(:ingredient) { FactoryBot.create(:ingredient) }
-  let!(:recipe) { FactoryBot.create(:recipe, user:, dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg")) }
-  let!(:other_recipe) { FactoryBot.create(:recipe, user: other_user, dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg")) }
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
+  let(:kitchen_tool) { create(:kitchen_tool) }
+  let(:ingredient) { create(:ingredient) }
+  let!(:recipe) { create(:recipe, user:, dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg")) }
+  let!(:other_recipe) { create(:recipe, user: other_user, dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg")) }
 
   before do
     sign_in user

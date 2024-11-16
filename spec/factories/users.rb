@@ -9,7 +9,7 @@ FactoryBot.define do
     trait :with_token do
       line_notify_token { "test_token" } # 特定のトークン値を指定
     end
-    
+
     # user_with_recipes
     factory :user_with_recipes do
       transient do

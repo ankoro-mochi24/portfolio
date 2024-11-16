@@ -3,3 +3,9 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-factory_bot
+
+AllCops:
+  NewCops: enable
+
+RSpec/ContextWording:
+  Enabled: false

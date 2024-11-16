@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   # 有効なデフォルト値を持つユーザーの作成
-  let(:user) { FactoryBot.create(:user, name: 'Valid Name', email: 'test@example.com', password: 'password1') }
+  let(:user) { create(:user, name: 'Valid Name', email: 'test@example.com', password: 'password1') }
 
   # バリデーションのテスト
   describe 'バリデーションのテスト' do
@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'メールアドレスが重複していれば無効であること' do
-      user_with_duplicate_email = FactoryBot.build(:user, email: user.email)
+      user_with_duplicate_email = build(:user, email: user.email)
       expect(user_with_duplicate_email).not_to be_valid
       expect(user_with_duplicate_email.errors[:email]).to include(I18n.t('activerecord.errors.models.user.attributes.email.taken'))
     end
@@ -82,30 +82,30 @@ RSpec.describe User, type: :model do
   # 削除時のテスト
   describe '削除時のテスト' do
     it 'ユーザーが削除されると関連するfoodstuffsも削除されること' do
-      FactoryBot.create(:foodstuff, user:)
+      create(:foodstuff, user:)
       expect { user.destroy }.to change(Foodstuff, :count).by(-1)
     end
 
     it 'ユーザーが削除されると関連するrecipesも削除されること' do
-      FactoryBot.create(:recipe, user:)
+      create(:recipe, user:)
       expect { user.destroy }.to change(Recipe, :count).by(-1)
     end
 
     it 'ユーザーが削除されると関連するcommentsも削除されること' do
-      recipe = FactoryBot.create(:recipe, user:)
-      FactoryBot.create(:comment, user:, commentable: recipe) # recipeをcommentableに指定
+      recipe = create(:recipe, user:)
+      create(:comment, user:, commentable: recipe) # recipeをcommentableに指定
       expect { user.destroy }.to change(Comment, :count).by(-1)
     end
 
     it 'ユーザーが削除されると関連するuser_actionsも削除されること' do
-      recipe = FactoryBot.create(:recipe, user:)
-      FactoryBot.create(:user_action, user:, actionable: recipe) # recipeをactionableに指定
+      recipe = create(:recipe, user:)
+      create(:user_action, user:, actionable: recipe) # recipeをactionableに指定
       expect { user.destroy }.to change(UserAction, :count).by(-1)
     end
 
     it 'ユーザーが削除されると関連するtoppingsも削除されること' do
-      recipe = FactoryBot.create(:recipe, user:)
-      FactoryBot.create(:topping, user:, recipe:)
+      recipe = create(:recipe, user:)
+      create(:topping, user:, recipe:)
       expect { user.destroy }.to change(Topping, :count).by(-1)
     end
   end
@@ -113,10 +113,10 @@ RSpec.describe User, type: :model do
   # カスタムバリデーションのテスト
   describe 'カスタムバリデーションのテスト' do
     it '「good」と「bad」のアクションが同時に存在できないこと' do
-      recipe = FactoryBot.create(:recipe, user:)
-      FactoryBot.create(:user_action, user:, actionable: recipe, action_type: 'good')
+      recipe = create(:recipe, user:)
+      create(:user_action, user:, actionable: recipe, action_type: 'good')
 
-      conflicting_action = FactoryBot.build(:user_action, user:, actionable: recipe, action_type: 'bad')
+      conflicting_action = build(:user_action, user:, actionable: recipe, action_type: 'bad')
       expect(conflicting_action).not_to be_valid
       expect(conflicting_action.errors[:base]).to include(I18n.t('activerecord.errors.models.user_action.messages.good_bad_conflict'))
     end
@@ -125,10 +125,10 @@ RSpec.describe User, type: :model do
   # ネストされた属性のテスト
   describe 'ネストされた属性のテスト' do
     it 'ユーザーが持っている調理器具の追加と削除ができること' do
-      kitchen_tool = FactoryBot.create(:kitchen_tool)
+      kitchen_tool = create(:kitchen_tool)
 
       # kitchen_tool_nameを含める
-      user_with_tool = FactoryBot.build(
+      user_with_tool = build(
         :user,
         user_kitchen_tools_attributes: [
           { kitchen_tool_id: kitchen_tool.id, kitchen_tool_name: kitchen_tool.name }

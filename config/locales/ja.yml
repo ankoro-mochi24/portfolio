@@ -258,6 +258,8 @@ ja:
     recipe_deleted: "レシピが正常に削除されました。"
     topping_added: "トッピングが正常に追加されました。"
     topping_removed: "トッピングが正常に削除されました。"
+    profile_updated: "ユーザー情報が更新されました。"
+    profile_deleted: "アカウントが削除されました。"
   alerts:
     topping_add_failed: "トッピングの追加に失敗しました。"
   kaminari:

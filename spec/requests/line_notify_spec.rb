@@ -24,20 +24,20 @@ RSpec.describe LineNotifyController, type: :request do
       it "トークンが保存され、プロフィールページにリダイレクトされること" do
         response_body = { access_token: 'valid_access_token' }.to_json
         Rails.logger.info "Stubbed response_body: #{response_body}"
-        
+
         stub_request(:post, "https://notify-bot.line.me/oauth/token")
           .with(
             body: hash_including(
               grant_type: "authorization_code",
               code: "valid_code",
-              redirect_uri: ENV['LINE_NOTIFY_REDIRECT_URI'],
-              client_id: ENV['LINE_NOTIFY_CLIENT_ID'],
-              client_secret: ENV['LINE_NOTIFY_CLIENT_SECRET']
+              redirect_uri: ENV.fetch('LINE_NOTIFY_REDIRECT_URI', nil),
+              client_id: ENV.fetch('LINE_NOTIFY_CLIENT_ID', nil),
+              client_secret: ENV.fetch('LINE_NOTIFY_CLIENT_SECRET', nil)
             ),
             headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
           )
           .to_return(status: 200, body: response_body, headers: { 'Content-Type' => 'application/json' })
-        
+
         get line_notify_callback_path, params: valid_params
         user.reload
         Rails.logger.info "After reload: user.line_notify_token=#{user.line_notify_token}"

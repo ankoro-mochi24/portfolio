@@ -3,11 +3,11 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              ENV['SMTP_ADDRESS'],  # メールサーバーのアドレス
-    port:                 ENV['SMTP_PORT'],     # メールサーバーのポート
-    domain:               ENV['SMTP_DOMAIN'],   # ドメイン名
-    user_name:            ENV['SMTP_USERNAME'], # SMTP認証用のユーザー名
-    password:             ENV['SMTP_PASSWORD'], # SMTP認証用のパスワード
+    address:              ENV.fetch('SMTP_ADDRESS', nil),  # メールサーバーのアドレス
+    port:                 ENV.fetch('SMTP_PORT', nil),     # メールサーバーのポート
+    domain:               ENV.fetch('SMTP_DOMAIN', nil),   # ドメイン名
+    user_name:            ENV.fetch('SMTP_USERNAME', nil), # SMTP認証用のユーザー名
+    password:             ENV.fetch('SMTP_PASSWORD', nil), # SMTP認証用のパスワード
     authentication:       :plain,
     enable_starttls_auto: true
   }
@@ -37,7 +37,7 @@ Rails.application.configure do
 
   config.active_support.report_deprecations = false
 
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :topping do
     name { "Test Topping" }
-    association :user
-    association :recipe
+    user
+    recipe
   end
 end

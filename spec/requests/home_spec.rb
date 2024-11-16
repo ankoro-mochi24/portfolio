@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "ホームページのリクエスト", type: :request do
   describe "GET /" do
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { create(:user) }
 
     before do
       sign_in user
@@ -25,7 +25,7 @@ RSpec.describe "ホームページのリクエスト", type: :request do
       get foodstuffs_view_path, headers: { 'ACCEPT' => 'application/json' }
       expect(response).to have_http_status(:ok)
       expect(response.content_type).to eq("application/json; charset=utf-8")
-      expect(JSON.parse(response.body)).to include("foodstuffs")
+      expect(response.parsed_body).to include("foodstuffs")
     end
 
     describe "GET /cookrice" do
@@ -37,8 +37,8 @@ RSpec.describe "ホームページのリクエスト", type: :request do
     end
 
     context "検索機能" do
-      let!(:recipe1) { FactoryBot.create(:recipe, title: "テストレシピ1") }
-      let!(:recipe2) { FactoryBot.create(:recipe, title: "検索対象レシピ") }
+      let!(:recipe1) { create(:recipe, title: "テストレシピ1") }
+      let!(:recipe2) { create(:recipe, title: "検索対象レシピ") }
 
       before do
         Recipe.reindex
@@ -52,8 +52,8 @@ RSpec.describe "ホームページのリクエスト", type: :request do
     end
 
     context "フィルター機能" do
-      let!(:good_recipe) { FactoryBot.create(:recipe, title: "良い評価のレシピ") }
-      let!(:bookmarked_recipe) { FactoryBot.create(:recipe, title: "ブックマークしたレシピ") }
+      let!(:good_recipe) { create(:recipe, title: "良い評価のレシピ") }
+      let!(:bookmarked_recipe) { create(:recipe, title: "ブックマークしたレシピ") }
 
       before do
         good_recipe.user_actions.create(user:, action_type: 'good')
@@ -79,20 +79,20 @@ RSpec.describe "ホームページのリクエスト", type: :request do
       before do
         Recipe.search_index.delete if Recipe.search_index.exists?
         Recipe.search_index.create
-        FactoryBot.create_list(:recipe, 15)
+        create_list(:recipe, 15)
         Recipe.reindex
         Recipe.search_index.refresh
       end
 
       it "1ページに10件のレシピが表示される" do
         get root_path, params: { page: 1 }
-        recipe_count = response.body.scan(/class="recipe-item"/).size
+        recipe_count = response.body.scan('class="recipe-item"').size
         expect(recipe_count).to eq(10)
       end
 
       it "2ページ目に残りの5件のレシピが表示される" do
         get root_path, params: { page: 2 }
-        recipe_count = response.body.scan(/class="recipe-item"/).size
+        recipe_count = response.body.scan('class="recipe-item"').size
         expect(recipe_count).to eq(5)
       end
     end
@@ -112,8 +112,8 @@ RSpec.describe "ホームページのリクエスト", type: :request do
     end
 
     context "ソート機能" do
-      let!(:old_recipe) { FactoryBot.create(:recipe, title: "古いレシピ", created_at: 1.day.ago) }
-      let!(:new_recipe) { FactoryBot.create(:recipe, title: "新しいレシピ", created_at: Time.zone.now) }
+      let!(:old_recipe) { create(:recipe, title: "古いレシピ", created_at: 1.day.ago) }
+      let!(:new_recipe) { create(:recipe, title: "新しいレシピ", created_at: Time.zone.now) }
 
       before do
         Recipe.reindex

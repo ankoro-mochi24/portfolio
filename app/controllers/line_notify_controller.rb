@@ -1,6 +1,7 @@
 class LineNotifyController < ApplicationController
   def authorize
-    redirect_to "https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=#{ENV['LINE_NOTIFY_CLIENT_ID']}&redirect_uri=#{ENV['LINE_NOTIFY_REDIRECT_URI']}&scope=notify&state=#{current_user.id}", allow_other_host: true
+    redirect_to "https://notify-bot.line.me/oauth/authorize?response_type=code&client_id=#{ENV.fetch('LINE_NOTIFY_CLIENT_ID', nil)}&redirect_uri=#{ENV.fetch('LINE_NOTIFY_REDIRECT_URI', nil)}&scope=notify&state=#{current_user.id}", 
+                allow_other_host: true
   end
 
   def callback
@@ -11,9 +12,9 @@ class LineNotifyController < ApplicationController
       body: {
         grant_type: "authorization_code",
         code: code,
-        redirect_uri: ENV['LINE_NOTIFY_REDIRECT_URI'],
-        client_id: ENV['LINE_NOTIFY_CLIENT_ID'],
-        client_secret: ENV['LINE_NOTIFY_CLIENT_SECRET']
+        redirect_uri: ENV.fetch('LINE_NOTIFY_REDIRECT_URI', nil),
+        client_id: ENV.fetch('LINE_NOTIFY_CLIENT_ID', nil),
+        client_secret: ENV.fetch('LINE_NOTIFY_CLIENT_SECRET', nil)
       },
       headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
     })

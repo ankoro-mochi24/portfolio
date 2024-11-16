@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe RecipeStep, type: :model do
-  let(:recipe) { FactoryBot.create(:recipe) }
-  let(:recipe_step) { FactoryBot.build(:recipe_step, recipe:, text: '切る') }
+  let(:recipe) { create(:recipe) }
+  let(:recipe_step) { build(:recipe_step, recipe:, text: '切る') }
 
   # バリデーションのテスト
   describe 'バリデーションのテスト' do

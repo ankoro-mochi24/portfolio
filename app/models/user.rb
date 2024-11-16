@@ -56,10 +56,8 @@ class User < ApplicationRecord
 
   # LINE Notifyトークンを更新する専用メソッド
   def update_line_notify_token(token, current_user)
-    if current_user == self
-      update_columns(line_notify_token: token) # バリデーションを無視して直接カラムを更新
-    else
-      raise SecurityError, "Unauthorized access to update line_notify_token"
-    end
+    raise SecurityError, "Unauthorized access to update line_notify_token" unless current_user == self
+
+    update_columns(line_notify_token: token) # バリデーションを無視して直接カラムを更新
   end
 end

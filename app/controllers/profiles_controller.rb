@@ -27,7 +27,7 @@ class ProfilesController < ApplicationController
           ukt.save
         end
       end
-      redirect_to profile_path, notice: 'ユーザー情報が更新されました。'
+      redirect_to profile_path, notice: t('notices.profile_updated')
     else
       @user.user_kitchen_tools.build if @user.user_kitchen_tools.empty?
       render :edit, status: :unprocessable_entity
@@ -36,7 +36,7 @@ class ProfilesController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to root_path, notice: 'アカウントが削除されました。'
+    redirect_to root_path, notice: t('notices.profile_deleted')
   end
 
   def posts

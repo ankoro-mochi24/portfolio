@@ -2,13 +2,13 @@
 require 'rails_helper'
 
 RSpec.describe Topping, type: :model do
-  let(:user) { FactoryBot.create(:user) }
-  let(:recipe) { FactoryBot.create(:recipe, user:) }
+  let(:user) { create(:user) }
+  let(:recipe) { create(:recipe, user:) }
 
   describe 'バリデーションのテスト' do
     subject { topping.valid? }
 
-    let(:topping) { FactoryBot.build(:topping, name: topping_name, user:, recipe:) }
+    let(:topping) { build(:topping, name: topping_name, user:, recipe:) }
 
     context 'すべての属性が有効な場合' do
       let(:topping_name) { 'ネギ' }
@@ -28,7 +28,7 @@ RSpec.describe Topping, type: :model do
     end
 
     context '同じレシピに同じnameが存在する場合' do
-      before { FactoryBot.create(:topping, name: 'ネギ', user:, recipe:) }
+      before { create(:topping, name: 'ネギ', user:, recipe:) }
 
       let(:topping_name) { 'ネギ' }
 
@@ -41,8 +41,8 @@ RSpec.describe Topping, type: :model do
 
   describe '削除時のテスト' do
     it 'toppingが削除されたときに関連するuser_actionsも削除される' do
-      topping = FactoryBot.create(:topping, user:, recipe:)
-      FactoryBot.create(:user_action, user:, actionable: topping)
+      topping = create(:topping, user:, recipe:)
+      create(:user_action, user:, actionable: topping)
 
       expect { topping.destroy }.to change(UserAction, :count).by(-1)
     end
