@@ -7,10 +7,12 @@ RSpec.describe Topping, type: :model do
 
   describe 'バリデーションのテスト' do
     subject { topping.valid? }
+
     let(:topping) { FactoryBot.build(:topping, name: topping_name, user:, recipe:) }
 
     context 'すべての属性が有効な場合' do
       let(:topping_name) { 'ネギ' }
+
       it '有効である' do
         expect(topping).to be_valid
       end
@@ -18,6 +20,7 @@ RSpec.describe Topping, type: :model do
 
     context 'nameがない場合' do
       let(:topping_name) { nil }
+
       it '無効であり、エラーメッセージが正しいこと' do
         topping.valid?
         expect(topping.errors[:name]).to include(I18n.t('errors.messages.blank'))
@@ -26,6 +29,7 @@ RSpec.describe Topping, type: :model do
 
     context '同じレシピに同じnameが存在する場合' do
       before { FactoryBot.create(:topping, name: 'ネギ', user:, recipe:) }
+
       let(:topping_name) { 'ネギ' }
 
       it '無効であり、エラーメッセージが正しいこと' do
@@ -40,13 +44,13 @@ RSpec.describe Topping, type: :model do
       topping = FactoryBot.create(:topping, user:, recipe:)
       FactoryBot.create(:user_action, user:, actionable: topping)
 
-      expect { topping.destroy }.to change { UserAction.count }.by(-1)
+      expect { topping.destroy }.to change(UserAction, :count).by(-1)
     end
   end
 
   describe 'アソシエーションのテスト' do
-    it { should belong_to(:recipe) }
-    it { should belong_to(:user) }
-    it { should have_many(:user_actions).dependent(:destroy) }
+    it { is_expected.to belong_to(:recipe) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:user_actions).dependent(:destroy) }
   end
 end

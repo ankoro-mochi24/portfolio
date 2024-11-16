@@ -42,9 +42,10 @@ RSpec.describe UserAction, type: :model do
   end
 
   describe 'アソシエーションのテスト' do
-    it { should belong_to(:user) }
+    it { is_expected.to belong_to(:user) }
+
     it 'actionableがポリモーフィック関連であることを確認する' do
-      expect(UserAction.reflect_on_association(:actionable).options[:polymorphic]).to be_truthy
+      expect(described_class.reflect_on_association(:actionable).options[:polymorphic]).to be_truthy
     end
 
     it 'actionableがRecipeモデルと関連付けられることを確認する' do
@@ -66,26 +67,26 @@ RSpec.describe UserAction, type: :model do
   describe '削除時のテスト' do
     it 'userが削除されたときに関連するuser_actionsも削除される' do
       FactoryBot.create(:user_action, user:, actionable: recipe, action_type: 'good')
-      expect { user.destroy }.to change { UserAction.count }.by(-1)
+      expect { user.destroy }.to change(described_class, :count).by(-1)
     end
 
     it 'actionableがRecipeモデルのインスタンスである場合、Recipeが削除されると関連するuser_actionsも削除される' do
       FactoryBot.create(:user_action, user:, actionable: recipe, action_type: 'good')
-      expect { recipe.destroy }.to change { UserAction.count }.by(-1)
+      expect { recipe.destroy }.to change(described_class, :count).by(-1)
     end
 
     it 'actionableがFoodstuffモデルのインスタンスである場合、Foodstuffが削除されると関連するuser_actionsも削除される' do
       FactoryBot.create(:user_action, user:, actionable: foodstuff, action_type: 'good')
-      expect { foodstuff.destroy }.to change { UserAction.count }.by(-1)
+      expect { foodstuff.destroy }.to change(described_class, :count).by(-1)
     end
 
     it 'actionableがToppingモデルのインスタンスである場合、Toppingが削除されると関連するuser_actionsも削除される' do
       FactoryBot.create(:user_action, user:, actionable: topping, action_type: 'good')
-      expect { topping.destroy }.to change { UserAction.count }.by(-1)
+      expect { topping.destroy }.to change(described_class, :count).by(-1)
     end
   end
 
   describe 'データベースインデックスのテスト' do
-    it { should have_db_index([:user_id, :actionable_type, :actionable_id, :action_type]).unique(true) }
+    it { is_expected.to have_db_index([:user_id, :actionable_type, :actionable_id, :action_type]).unique(true) }
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe RecipeIngredient, type: :model do
   let(:ingredient2) { FactoryBot.create(:ingredient) }
 
   before do
-    RecipeIngredient.delete_all
+    described_class.delete_all
     Recipe.delete_all
     Ingredient.delete_all
   end
@@ -52,7 +52,7 @@ RSpec.describe RecipeIngredient, type: :model do
   # 削除時のテスト
   describe '削除時のテスト' do
     before do
-      RecipeIngredient.delete_all
+      described_class.delete_all
       recipe.recipe_ingredients.destroy_all
       FactoryBot.create(:recipe_ingredient, recipe:, ingredient: ingredient1)
       FactoryBot.create(:recipe_ingredient, recipe:, ingredient: ingredient2)
@@ -62,7 +62,7 @@ RSpec.describe RecipeIngredient, type: :model do
       expect(recipe.recipe_ingredients.count).to eq(2)
 
       # レシピ削除により RecipeIngredient が 2 件削除されることを確認
-      expect { recipe.destroy }.to change { RecipeIngredient.count }.by(-2)
+      expect { recipe.destroy }.to change(described_class, :count).by(-2)
 
       # Ingredient 自体は削除されていないことを確認
       expect(Ingredient.exists?(ingredient1.id)).to be true
@@ -72,6 +72,6 @@ RSpec.describe RecipeIngredient, type: :model do
 
   # データベースインデックスのテスト
   describe 'データベースインデックスのテスト' do
-    it { should have_db_index([:recipe_id, :ingredient_id]).unique(true) }
+    it { is_expected.to have_db_index([:recipe_id, :ingredient_id]).unique(true) }
   end
 end

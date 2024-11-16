@@ -31,14 +31,14 @@ RSpec.describe Recipe, type: :model do
 
   # アソシエーションのテスト
   describe "アソシエーションのテスト" do
-    it { should belong_to(:user) }
-    it { should have_many(:recipe_ingredients).dependent(:destroy) }
-    it { should have_many(:ingredients).through(:recipe_ingredients) }
-    it { should have_many(:recipe_kitchen_tools).dependent(:destroy) }
-    it { should have_many(:kitchen_tools).through(:recipe_kitchen_tools) }
-    it { should have_many(:recipe_steps).dependent(:destroy) }
-    it { should have_many(:comments).dependent(:destroy) }
-    it { should have_many(:user_actions).dependent(:destroy) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:recipe_ingredients).dependent(:destroy) }
+    it { is_expected.to have_many(:ingredients).through(:recipe_ingredients) }
+    it { is_expected.to have_many(:recipe_kitchen_tools).dependent(:destroy) }
+    it { is_expected.to have_many(:kitchen_tools).through(:recipe_kitchen_tools) }
+    it { is_expected.to have_many(:recipe_steps).dependent(:destroy) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
+    it { is_expected.to have_many(:user_actions).dependent(:destroy) }
   end
 
   # ネストされた属性のテスト

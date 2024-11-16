@@ -10,6 +10,8 @@ class LineNotifyService
   end
 
   def send_notification(message)
+    Rails.logger.info "Sending LINE Notify message: #{message}"
+    
     options = {
       headers: { 
         'Authorization' => "Bearer #{@token}",
@@ -17,6 +19,17 @@ class LineNotifyService
       },
       body: { message: message }
     }
-    self.class.post('/api/notify', options)
+
+    response = self.class.post('/api/notify', options)
+
+    Rails.logger.info "LINE Notify response: #{response.body}, status: #{response.code}"
+
+    if response.success?
+      Rails.logger.info "Notification sent successfully."
+    else
+      Rails.logger.error "Failed to send notification. Response: #{response.body}"
+    end
+
+    response
   end
 end

@@ -4,7 +4,12 @@ FactoryBot.define do
     email { Faker::Internet.unique.email }
     password { "password1" }
     line_notify_token { nil }
+    notify_enabled { false } # デフォルト値
 
+    trait :with_token do
+      line_notify_token { "test_token" } # 特定のトークン値を指定
+    end
+    
     # user_with_recipes
     factory :user_with_recipes do
       transient do

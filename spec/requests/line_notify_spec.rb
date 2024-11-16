@@ -14,10 +14,6 @@ RSpec.describe LineNotifyController, type: :request do
       # リダイレクト先がLINE Notifyの認証ページであることを確認
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to(%r{https://notify-bot.line.me/oauth/authorize})
-
-      # 外部ホストのリダイレクトが許可されているかは、リダイレクト先URLのパターンで確認する
-      redirected_url = response.headers["Location"]
-      expect(redirected_url).to match(%r{https://notify-bot.line.me/oauth/authorize})
     end
   end
 
@@ -27,17 +23,25 @@ RSpec.describe LineNotifyController, type: :request do
 
       it "トークンが保存され、プロフィールページにリダイレクトされること" do
         response_body = { access_token: 'valid_access_token' }.to_json
-
+        Rails.logger.info "Stubbed response_body: #{response_body}"
+        
         stub_request(:post, "https://notify-bot.line.me/oauth/token")
           .with(
-            body: hash_including(code: "valid_code"),
+            body: hash_including(
+              grant_type: "authorization_code",
+              code: "valid_code",
+              redirect_uri: ENV['LINE_NOTIFY_REDIRECT_URI'],
+              client_id: ENV['LINE_NOTIFY_CLIENT_ID'],
+              client_secret: ENV['LINE_NOTIFY_CLIENT_SECRET']
+            ),
             headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
           )
           .to_return(status: 200, body: response_body, headers: { 'Content-Type' => 'application/json' })
-
+        
         get line_notify_callback_path, params: valid_params
-
         user.reload
+        Rails.logger.info "After reload: user.line_notify_token=#{user.line_notify_token}"
+
         expect(user.line_notify_token).to eq('valid_access_token')
         expect(response).to redirect_to(profile_path)
         expect(flash[:notice]).to eq(I18n.t("notices.line_notify_connected"))

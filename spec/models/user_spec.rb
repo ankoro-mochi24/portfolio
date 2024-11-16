@@ -12,13 +12,13 @@ RSpec.describe User, type: :model do
 
     it '名前がなければ無効であること' do
       user.name = nil
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
       expect(user.errors[:name]).to include(I18n.t('activerecord.errors.models.user.attributes.name.blank'))
     end
 
     it '名前が50文字を超える場合、無効であること' do
       user.name = 'a' * 51
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
       expect(user.errors[:name]).to include(I18n.t('errors.messages.too_long', count: 50))
     end
 
@@ -32,13 +32,13 @@ RSpec.describe User, type: :model do
 
     it 'メールアドレスがなければ無効であること' do
       user.email = nil
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
       expect(user.errors[:email]).to include(I18n.t('activerecord.errors.models.user.attributes.email.blank'))
     end
 
     it 'メールアドレスが重複していれば無効であること' do
       user_with_duplicate_email = FactoryBot.build(:user, email: user.email)
-      expect(user_with_duplicate_email).to_not be_valid
+      expect(user_with_duplicate_email).not_to be_valid
       expect(user_with_duplicate_email.errors[:email]).to include(I18n.t('activerecord.errors.models.user.attributes.email.taken'))
     end
 
@@ -50,63 +50,63 @@ RSpec.describe User, type: :model do
       ]
       invalid_emails.each do |email|
         user.email = email
-        expect(user).to_not be_valid, "#{email} は無効であるべきです"
+        expect(user).not_to be_valid, "#{email} は無効であるべきです"
         expect(user.errors[:email]).to include(I18n.t('activerecord.errors.models.user.attributes.email.invalid'))
       end
     end
 
     it 'パスワードが6文字以上でなければ無効であること' do
       user.password = '12345'
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
       expect(user.errors[:password]).to include(I18n.t('activerecord.errors.models.user.attributes.password.too_short', count: 6))
     end
 
     it 'パスワードが英数字を含まなければ無効であること' do
       user.password = 'password' # 数字が含まれていない
-      expect(user).to_not be_valid
+      expect(user).not_to be_valid
       expect(user.errors[:password]).to include(I18n.t('activerecord.errors.models.user.attributes.password.weak'))
     end
   end
 
   # アソシエーションのテスト
   describe 'アソシエーションのテスト' do
-    it { should have_many(:foodstuffs).dependent(:destroy) }
-    it { should have_many(:recipes).dependent(:destroy) }
-    it { should have_many(:toppings).dependent(:destroy) }
-    it { should have_many(:comments).dependent(:destroy) }
-    it { should have_many(:user_actions).dependent(:destroy).class_name('UserAction') }
-    it { should have_many(:user_kitchen_tools).dependent(:destroy) }
-    it { should have_many(:kitchen_tools).through(:user_kitchen_tools) }
+    it { is_expected.to have_many(:foodstuffs).dependent(:destroy) }
+    it { is_expected.to have_many(:recipes).dependent(:destroy) }
+    it { is_expected.to have_many(:toppings).dependent(:destroy) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
+    it { is_expected.to have_many(:user_actions).dependent(:destroy).class_name('UserAction') }
+    it { is_expected.to have_many(:user_kitchen_tools).dependent(:destroy) }
+    it { is_expected.to have_many(:kitchen_tools).through(:user_kitchen_tools) }
   end
 
   # 削除時のテスト
   describe '削除時のテスト' do
     it 'ユーザーが削除されると関連するfoodstuffsも削除されること' do
       FactoryBot.create(:foodstuff, user:)
-      expect { user.destroy }.to change { Foodstuff.count }.by(-1)
+      expect { user.destroy }.to change(Foodstuff, :count).by(-1)
     end
 
     it 'ユーザーが削除されると関連するrecipesも削除されること' do
       FactoryBot.create(:recipe, user:)
-      expect { user.destroy }.to change { Recipe.count }.by(-1)
+      expect { user.destroy }.to change(Recipe, :count).by(-1)
     end
 
     it 'ユーザーが削除されると関連するcommentsも削除されること' do
       recipe = FactoryBot.create(:recipe, user:)
       FactoryBot.create(:comment, user:, commentable: recipe) # recipeをcommentableに指定
-      expect { user.destroy }.to change { Comment.count }.by(-1)
+      expect { user.destroy }.to change(Comment, :count).by(-1)
     end
 
     it 'ユーザーが削除されると関連するuser_actionsも削除されること' do
       recipe = FactoryBot.create(:recipe, user:)
       FactoryBot.create(:user_action, user:, actionable: recipe) # recipeをactionableに指定
-      expect { user.destroy }.to change { UserAction.count }.by(-1)
+      expect { user.destroy }.to change(UserAction, :count).by(-1)
     end
 
     it 'ユーザーが削除されると関連するtoppingsも削除されること' do
       recipe = FactoryBot.create(:recipe, user:)
       FactoryBot.create(:topping, user:, recipe:)
-      expect { user.destroy }.to change { Topping.count }.by(-1)
+      expect { user.destroy }.to change(Topping, :count).by(-1)
     end
   end
 
@@ -117,7 +117,7 @@ RSpec.describe User, type: :model do
       FactoryBot.create(:user_action, user:, actionable: recipe, action_type: 'good')
 
       conflicting_action = FactoryBot.build(:user_action, user:, actionable: recipe, action_type: 'bad')
-      expect(conflicting_action).to_not be_valid
+      expect(conflicting_action).not_to be_valid
       expect(conflicting_action.errors[:base]).to include(I18n.t('activerecord.errors.models.user_action.messages.good_bad_conflict'))
     end
   end
@@ -145,7 +145,7 @@ RSpec.describe User, type: :model do
 
   # データベースインデックスのテスト
   describe 'データベースインデックスのテスト' do
-    it { should have_db_index(:email).unique(true) }
-    it { should have_db_index(:reset_password_token).unique(true) }
+    it { is_expected.to have_db_index(:email).unique(true) }
+    it { is_expected.to have_db_index(:reset_password_token).unique(true) }
   end
 end

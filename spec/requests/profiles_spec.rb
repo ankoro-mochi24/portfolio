@@ -88,7 +88,7 @@ RSpec.describe "Profiles", type: :request do
       expect(response).to redirect_to(root_path)
       follow_redirect!
       expect(response.body).to include("アカウントが削除されました。")
-      expect(User.exists?(user.id)).to be_falsey
+      expect(User).not_to exist(user.id)
     end
   end
 

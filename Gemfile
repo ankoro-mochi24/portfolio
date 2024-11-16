@@ -25,6 +25,8 @@ group :development do
   gem "mailcatcher"                  # 開発環境でのメール送信テスト用ツール
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false     # RSpec用のルールセット
+  gem 'rubocop-factory_bot', require: false # FactoryBot用のルールセット
 end
 
 group :test do

@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe KitchenTool, type: :model do
   let(:kitchen_tool) { FactoryBot.create(:kitchen_tool) }
 
-  before(:each) do
-    KitchenTool.delete_all
+  before do
+    described_class.delete_all
   end
 
   # バリデーションのテスト
@@ -39,16 +39,16 @@ RSpec.describe KitchenTool, type: :model do
 
   # アソシエーションのテスト
   describe 'アソシエーションのテスト' do
-    it { should have_many(:recipe_kitchen_tools).dependent(:destroy) }
-    it { should have_many(:recipes).through(:recipe_kitchen_tools) }
-    it { should have_many(:user_kitchen_tools).dependent(:destroy) }
-    it { should have_many(:users).through(:user_kitchen_tools) }
+    it { is_expected.to have_many(:recipe_kitchen_tools).dependent(:destroy) }
+    it { is_expected.to have_many(:recipes).through(:recipe_kitchen_tools) }
+    it { is_expected.to have_many(:user_kitchen_tools).dependent(:destroy) }
+    it { is_expected.to have_many(:users).through(:user_kitchen_tools) }
 
     it 'キッチンツールが削除されたとき、関連するrecipe_kitchen_toolsも削除される' do
       recipe = FactoryBot.create(:recipe)
       FactoryBot.create(:recipe_kitchen_tool, recipe:, kitchen_tool:, kitchen_tool_name: kitchen_tool.name)
 
-      expect { kitchen_tool.destroy }.to change { RecipeKitchenTool.count }.by(-1)
+      expect { kitchen_tool.destroy }.to change(RecipeKitchenTool, :count).by(-1)
     end
 
     it 'キッチンツールが削除されたとき、関連するuser_kitchen_toolsも削除される' do

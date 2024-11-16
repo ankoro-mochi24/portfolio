@@ -29,7 +29,7 @@ RSpec.describe RecipeStep, type: :model do
   describe '削除時のテスト' do
     it 'レシピが削除されたときに関連するrecipe_stepも削除される' do
       recipe_step.save
-      expect { recipe.destroy }.to change { RecipeStep.count }.by(-1)
+      expect { recipe.destroy }.to change(described_class, :count).by(-1)
     end
   end
 
@@ -54,6 +54,6 @@ RSpec.describe RecipeStep, type: :model do
 
   # データベースインデックスのテスト
   describe 'データベースインデックスのテスト' do
-    it { should have_db_index(:recipe_id) }
+    it { is_expected.to have_db_index(:recipe_id) }
   end
 end

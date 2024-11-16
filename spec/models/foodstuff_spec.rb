@@ -49,9 +49,9 @@ RSpec.describe Foodstuff, type: :model do
 
   # アソシエーションのテスト
   describe 'アソシエーションのテスト' do
-    it { should belong_to(:user) }
-    it { should have_many(:comments).dependent(:destroy) }
-    it { should have_many(:user_actions).dependent(:destroy) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:comments).dependent(:destroy) }
+    it { is_expected.to have_many(:user_actions).dependent(:destroy) }
   end
 
   # 削除時のテスト
@@ -59,18 +59,18 @@ RSpec.describe Foodstuff, type: :model do
     it 'foodstuffが削除されたときに関連するcommentsも削除される' do
       foodstuff = FactoryBot.create(:foodstuff, user:)
       FactoryBot.create(:comment, user:, commentable: foodstuff)
-      expect { foodstuff.destroy }.to change { Comment.count }.by(-1)
+      expect { foodstuff.destroy }.to change(Comment, :count).by(-1)
     end
 
     it 'foodstuffが削除されたときに関連するuser_actionsも削除される' do
       foodstuff = FactoryBot.create(:foodstuff, user:)
       FactoryBot.create(:user_action, user:, actionable: foodstuff)
-      expect { foodstuff.destroy }.to change { UserAction.count }.by(-1)
+      expect { foodstuff.destroy }.to change(UserAction, :count).by(-1)
     end
   end
 
   # データベースインデックスのテスト
   describe 'データベースインデックスのテスト' do
-    it { should have_db_index(:user_id) }
+    it { is_expected.to have_db_index(:user_id) }
   end
 end

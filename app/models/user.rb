@@ -53,4 +53,9 @@ class User < ApplicationRecord
   has_many :kitchen_tools, through: :user_kitchen_tools
 
   accepts_nested_attributes_for :user_kitchen_tools, allow_destroy: true
+
+  # LINE Notifyトークンを更新する専用メソッド
+  def update_line_notify_token(token)
+    update_columns(line_notify_token: token) # バリデーションを無視して直接カラムを更新
+  end
 end

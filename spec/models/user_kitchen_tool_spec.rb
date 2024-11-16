@@ -5,7 +5,7 @@ RSpec.describe UserKitchenTool, type: :model do
   let(:kitchen_tool) { FactoryBot.create(:kitchen_tool) }
 
   before do
-    UserKitchenTool.delete_all
+    described_class.delete_all
     User.delete_all
     KitchenTool.delete_all
   end
@@ -56,17 +56,17 @@ RSpec.describe UserKitchenTool, type: :model do
   describe '削除時のテスト' do
     it 'userが削除されたときに関連するuser_kitchen_toolも削除される' do
       FactoryBot.create(:user_kitchen_tool, user:, kitchen_tool:, kitchen_tool_name: kitchen_tool.name)
-      expect { user.destroy }.to change { UserKitchenTool.count }.by(-1)
+      expect { user.destroy }.to change(described_class, :count).by(-1)
     end
 
     it 'kitchen_toolが削除されたときに関連するuser_kitchen_toolも削除される' do
       FactoryBot.create(:user_kitchen_tool, user:, kitchen_tool:, kitchen_tool_name: kitchen_tool.name)
-      expect { kitchen_tool.destroy }.to change { UserKitchenTool.count }.by(-1)
+      expect { kitchen_tool.destroy }.to change(described_class, :count).by(-1)
     end
   end
 
   # データベースインデックスのテスト
   describe 'データベースインデックスのテスト' do
-    it { should have_db_index([:user_id, :kitchen_tool_id]).unique(true) }
+    it { is_expected.to have_db_index([:user_id, :kitchen_tool_id]).unique(true) }
   end
 end

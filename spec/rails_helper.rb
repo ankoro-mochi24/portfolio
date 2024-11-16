@@ -10,6 +10,13 @@ require 'rspec/rails'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true, allow: 'elasticsearch:9200') # localhostやElasticsearchを除き、インターネットへ自動的に接続することを防ぐ
 
+# WebMockでリクエストをログに記録する設定を追加
+WebMock.after_request do |request, response|
+  Rails.logger.info "WebMock intercepted request: #{request.method} #{request.uri}"
+  Rails.logger.info "Request body: #{request.body}"
+  Rails.logger.info "Response: #{response.body}, status: #{response.status}"
+end
+
 # Eager load 設定
 Rails.application.eager_load! if Rails.env.test? # テストのとき、使うファイルをすべて最初に読み込む
 
@@ -38,12 +45,12 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request # リクエストテストでDeviseのログイン機能を使用可能にする
 
   # テスト(itブロック毎)の前に実行
-  config.before(:each) do
+  config.before do
     Searchkick.disable_callbacks # Searchkickの自動インデックス更新を一時的に無効化し、テスト処理を高速化
   end
 
   # テスト(itブロック毎)の後に実行
-  config.after(:each) do
+  config.after do
     Searchkick.enable_callbacks # Searchkickの自動インデックス更新を有効化
     Recipe.reindex # Recipeのレコードを検索機能に反映
     Foodstuff.reindex # Foodstuffのレコードを検索機能に反映

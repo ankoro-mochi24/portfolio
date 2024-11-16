@@ -7,7 +7,7 @@ RSpec.describe RecipeKitchenTool, type: :model do
 
   before do
     # データの初期化
-    RecipeKitchenTool.delete_all
+    described_class.delete_all
     Recipe.delete_all
     KitchenTool.delete_all
   end
@@ -54,19 +54,19 @@ RSpec.describe RecipeKitchenTool, type: :model do
       FactoryBot.create(:recipe_kitchen_tool, recipe:, kitchen_tool: another_kitchen_tool)
 
       # 削除前のカウント
-      initial_count = RecipeKitchenTool.count
+      initial_count = described_class.count
       # レシピ削除によって削除されるレコードの数を確認
-      expect { recipe.destroy }.to change { RecipeKitchenTool.count }.from(initial_count).to(0)
+      expect { recipe.destroy }.to change(described_class, :count).from(initial_count).to(0)
     end
 
     it '調理器具が削除されると関連するrecipe_kitchen_toolも削除される' do
       FactoryBot.create(:recipe_kitchen_tool, recipe:, kitchen_tool:)
-      expect { kitchen_tool.destroy }.to change { RecipeKitchenTool.count }.by(-1)
+      expect { kitchen_tool.destroy }.to change(described_class, :count).by(-1)
     end
   end
 
   # データベースインデックスのテスト
   describe 'データベースインデックスのテスト' do
-    it { should have_db_index([:recipe_id, :kitchen_tool_id]).unique(true) }
+    it { is_expected.to have_db_index([:recipe_id, :kitchen_tool_id]).unique(true) }
   end
 end
