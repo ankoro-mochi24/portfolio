@@ -55,7 +55,11 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :user_kitchen_tools, allow_destroy: true
 
   # LINE Notifyトークンを更新する専用メソッド
-  def update_line_notify_token(token)
-    update_columns(line_notify_token: token) # バリデーションを無視して直接カラムを更新
+  def update_line_notify_token(token, current_user)
+    if current_user == self
+      update_columns(line_notify_token: token) # バリデーションを無視して直接カラムを更新
+    else
+      raise SecurityError, "Unauthorized access to update line_notify_token"
+    end
   end
 end
