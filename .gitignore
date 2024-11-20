@@ -11,3 +11,6 @@ log/*.log
 
 # Ignore .bundle directory
 .bundle/
+
+# Ignore uploads directory
+/public/uploads/*
