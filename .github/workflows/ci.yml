@@ -36,7 +36,7 @@ jobs:
 
     env:
       RAILS_ENV: test
-      DB_HOST: db  # 修正: localhost → db
+      DB_HOST: localhost  # localhostに戻す
       DB_USERNAME: postgres
       DB_PASSWORD: password
       ELASTICSEARCH_URL: http://localhost:9200
@@ -60,7 +60,7 @@ jobs:
         run: |
           echo "Waiting for database to become ready..."
           for i in {1..20}; do
-            pg_isready -h db -p 5432 -U postgres -d v3_advanced_rails_test && echo "Database is ready!" && exit 0
+            pg_isready -h localhost -p 5432 -U postgres -d v3_advanced_rails_test && echo "Database is ready!" && exit 0
             echo "Database not ready, retrying in 5 seconds... (Attempt $i of 20)"
             sleep 5
           done
@@ -79,10 +79,7 @@ jobs:
 
           # PostgreSQL 接続テスト
           echo "=== Testing DB connection ==="
-          if ! PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USERNAME -c '\l'; then
-            echo "Failed to connect to the database. Exiting."
-            exit 1
-          fi
+          PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USERNAME -c '\l'
 
           # データベースの削除（もし存在すれば）
           echo "=== Dropping existing database (if exists) ==="
