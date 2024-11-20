@@ -2,14 +2,19 @@ services:
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: postgres  # 'root' から 'postgres' に変更
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: v3_advanced_rails_development
+      POSTGRES_DB: v3_advanced_rails_test  # テスト環境用に修正
       TZ: Asia/Tokyo
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    healthcheck:  # ヘルスチェックを追加
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   web:
     build:
@@ -48,18 +53,18 @@ services:
     environment:
       - discovery.type=single-node
     volumes:
-      - es_data:/usr/share/elasticsearch/data  # Elasticsearchのデータを永続化
+      - es_data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
 
   mailcatcher:
     image: schickling/mailcatcher
     ports:
-      - "1080:1080"  # Webインターフェース
-      - "1025:1025"  # SMTPサーバー
+      - "1080:1080"
+      - "1025:1025"
 
 volumes:
-  postgres_data:  # PostgreSQL用のボリュームに変更
+  postgres_data:
   bundle_data:
   node_modules:
-  es_data:  # Elasticsearch用のボリューム
+  es_data:
