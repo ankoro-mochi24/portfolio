@@ -22,7 +22,7 @@ jobs:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: v3_advanced_rails_test
         options: >-
-          --health-cmd="pg_isready -U postgres -d v3_advanced_rails_test"
+          --health-cmd="pg_isready -U postgres"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -40,6 +40,8 @@ jobs:
       DB_USERNAME: postgres
       DB_PASSWORD: password
       ELASTICSEARCH_URL: http://localhost:9200
+      PGUSER: postgres
+      PGPASSWORD: password
 
     steps:
       # 1. コードのチェックアウト
@@ -53,33 +55,30 @@ jobs:
           ruby-version: 3.3.0
           bundler-cache: true
 
-      # 3. Dockerネットワークのデバッグ（新規追加）
+      # 3. PostgreSQLネットワークのデバッグ
+      - name: Debug PostgreSQL Service
+        run: |
+          echo "Checking PostgreSQL service..."
+          docker ps -a
+          docker logs $(docker ps -q --filter "ancestor=postgres:13")
+
+      # 4. Dockerネットワークの診断
       - name: Debug Docker Network
         run: |
           echo "Inspecting Docker network..."
           docker network ls
-          docker ps -a
           docker inspect $(docker ps -q)
 
-      # 4. PostgreSQLサービスのログ確認（新規追加）
-      - name: Check PostgreSQL Logs
-        run: |
-          echo "Checking PostgreSQL logs..."
-          docker logs $(docker ps -q --filter "ancestor=postgres:13")
-
-      # 5. PostgreSQL起動待機（改善版）
+      # 5. PostgreSQL起動待機（強化版）
       - name: Wait for Database
         run: |
           echo "Waiting for database to become ready..."
-          for i in {1..15}; do
+          for i in {1..20}; do
             pg_isready -h db -p 5432 -U postgres -d v3_advanced_rails_test && echo "Database is ready!" && exit 0
-            echo "Database not ready, retrying in 5 seconds... (Attempt $i of 15)"
+            echo "Database not ready, retrying in 5 seconds... (Attempt $i of 20)"
             sleep 5
           done
           echo "Database did not become ready in time!" && exit 1
-        env:
-          PGUSER: postgres
-          PGPASSWORD: password
 
       # 6. データベースのセットアップ
       - name: Set up Database
