@@ -36,7 +36,7 @@ jobs:
 
     env:
       RAILS_ENV: test
-      DB_HOST: db  # 修正: localhost -> db
+      DB_HOST: localhost
       DB_USERNAME: postgres
       DB_PASSWORD: password
       ELASTICSEARCH_URL: http://localhost:9200
@@ -55,15 +55,12 @@ jobs:
           ruby-version: 3.3.0
           bundler-cache: true
 
-      # 3. PostgreSQL 起動待機
+      # 3. PostgreSQL起動待機（改善版）
       - name: Wait for Database
         run: |
           echo "Waiting for database to become ready..."
           for i in {1..20}; do
-            pg_isready -h $DB_HOST -p 5432 -U postgres -d v3_advanced_rails_test
-            if [ $? -eq 0 ]; then
-              echo "Database is ready!" && exit 0
-            fi
+            pg_isready -h localhost -p 5432 -U postgres -d v3_advanced_rails_test && echo "Database is ready!" && exit 0
             echo "Database not ready, retrying in 5 seconds... (Attempt $i of 20)"
             sleep 5
           done
@@ -95,3 +92,4 @@ jobs:
       # 5. RSpec の実行
       - name: Run RSpec
         run: bin/rspec
+        
