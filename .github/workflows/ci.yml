@@ -22,7 +22,7 @@ jobs:
           POSTGRES_PASSWORD: password
           POSTGRES_DB: v3_advanced_rails_test
         options: >-
-          --health-cmd="pg_isready -U postgres"
+          --health-cmd="pg_isready -U postgres -d v3_advanced_rails_test"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -53,24 +53,21 @@ jobs:
           ruby-version: 3.3.0
           bundler-cache: true
 
-      # 3. PostgreSQL起動待機（デバッグ付き）
+      # 3. PostgreSQL起動待機（改善版）
       - name: Wait for Database
         run: |
-          echo "Starting database connection test..."
-          for i in {1..10}; do
-            nc -z db 5432 && echo "Database is up" && exit 0
-            echo "Waiting for database..."
+          echo "Checking database connectivity..."
+          for i in {1..12}; do
+            pg_isready -h db -p 5432 -U postgres && echo "Database is ready!" && exit 0
+            echo "Waiting for database to be ready... Attempt $i of 12"
             sleep 5
           done
-          echo "Database did not start in time" && exit 1
+          echo "Database did not become ready in time!" && exit 1
         env:
-          RAILS_ENV: test
-          DB_HOST: db
-          DB_USERNAME: postgres
-          DB_PASSWORD: password
-          ELASTICSEARCH_URL: http://localhost:9200
+          PGUSER: postgres
+          PGPASSWORD: password
 
-      # 4. サービス間接続をデバッグ
+      # 4. サービスのデバッグ（必要に応じて削除可）
       - name: Debug Services
         run: |
           echo "Testing db service..."
@@ -79,14 +76,14 @@ jobs:
           echo "Testing if port 5432 on db is accessible..."
           nc -zv db 5432 || echo "Port 5432 on db is not accessible"
 
-      # 5. Dockerネットワークのデバッグ
+      # 5. Dockerネットワークのデバッグ（必要に応じて削除可）
       - name: Debug Docker Network
         run: |
           docker network ls
           docker ps -a
           docker inspect $(docker ps -q)
 
-      # 6. PostgreSQLのログ確認
+      # 6. PostgreSQLのログ確認（必要に応じて削除可）
       - name: Check PostgreSQL Logs
         run: |
           docker logs $(docker ps -q --filter "ancestor=postgres:13")
@@ -94,10 +91,10 @@ jobs:
       # 7. データベースのセットアップ
       - name: Set up Database
         run: |
-          sudo apt-get install libpq-dev
+          sudo apt-get install -y libpq-dev
           chmod +x bin/rails
           cp config/database.yml.ci config/database.yml
-          RAILS_ENV=test bin/rails db:create db:schema:load
+          bin/rails db:create db:schema:load
 
       # 8. RSpecの実行
       - name: Run RSpec
