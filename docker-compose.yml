@@ -4,13 +4,13 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: v3_advanced_rails_test  # テスト環境用に修正
+      POSTGRES_DB: v3_advanced_rails_test
       TZ: Asia/Tokyo
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-    healthcheck:  # ヘルスチェックを追加
+    healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
@@ -37,10 +37,14 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
-      - chrome
-      - elasticsearch
-      - mailcatcher
+      db:
+        condition: service_healthy
+      chrome:
+        condition: service_started
+      elasticsearch:
+        condition: service_healthy
+      mailcatcher:
+        condition: service_started
 
   chrome:
     image: seleniarm/standalone-chromium:latest
@@ -56,6 +60,11 @@ services:
       - es_data:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsSL http://localhost:9200/_cat/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   mailcatcher:
     image: schickling/mailcatcher
