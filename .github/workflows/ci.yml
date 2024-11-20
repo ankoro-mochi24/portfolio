@@ -39,7 +39,7 @@ jobs:
       DB_HOST: db
       DB_USERNAME: postgres
       DB_PASSWORD: password
-      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_URL: http://localhost:9200
       PGUSER: postgres
       PGPASSWORD: password
 
@@ -55,7 +55,21 @@ jobs:
           ruby-version: 3.3.0
           bundler-cache: true
 
-      # 3. PostgreSQL起動待機
+      # 3. PostgreSQLネットワークのデバッグ
+      - name: Debug PostgreSQL Service
+        run: |
+          echo "Checking PostgreSQL service..."
+          docker ps -a
+          docker logs $(docker ps -q --filter "ancestor=postgres:13")
+
+      # 4. Dockerネットワークの診断
+      - name: Debug Docker Network
+        run: |
+          echo "Inspecting Docker network..."
+          docker network ls
+          docker inspect $(docker ps -q)
+
+      # 5. PostgreSQL起動待機（強化版）
       - name: Wait for Database
         run: |
           echo "Waiting for database to become ready..."
@@ -66,7 +80,7 @@ jobs:
           done
           echo "Database did not become ready in time!" && exit 1
 
-      # 4. データベースのセットアップ
+      # 6. データベースのセットアップ
       - name: Set up Database
         run: |
           sudo apt-get update && sudo apt-get install -y libpq-dev
@@ -74,6 +88,6 @@ jobs:
           cp config/database.yml.ci config/database.yml
           bin/rails db:create db:schema:load
 
-      # 5. RSpecの実行
+      # 7. RSpecの実行
       - name: Run RSpec
         run: bin/rspec
