@@ -91,4 +91,6 @@ jobs:
 
       # 5. RSpec の実行
       - name: Run RSpec
-        run: bin/rspec
+        run: |
+          chmod +x bin/rspec  # 実行権限を付与
+          bin/rspec           # RSpec を実行
