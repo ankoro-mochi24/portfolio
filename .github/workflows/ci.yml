@@ -1,0 +1,96 @@
+name: RSpec CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: v3_advanced_rails_test
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+      elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+        ports:
+          - 9200:9200
+        env:
+          discovery.type: single-node
+
+    env:
+      RAILS_ENV: test
+      DB_HOST: localhost  # localhostに戻す
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+      ELASTICSEARCH_URL: http://localhost:9200
+      PGUSER: postgres
+      PGPASSWORD: password
+
+    steps:
+      # 1. コードのチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Rubyのセットアップ
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.0
+          bundler-cache: true
+
+      # 3. PostgreSQL起動待機
+      - name: Wait for Database
+        run: |
+          echo "Waiting for database to become ready..."
+          for i in {1..20}; do
+            pg_isready -h localhost -p 5432 -U postgres -d v3_advanced_rails_test && echo "Database is ready!" && exit 0
+            echo "Database not ready, retrying in 5 seconds... (Attempt $i of 20)"
+            sleep 5
+          done
+          echo "Database did not become ready in time!" && exit 1
+
+      # 4. データベースのセットアップ
+      - name: Set up Database
+        run: |
+          sudo apt-get update && sudo apt-get install -y libpq-dev
+          chmod +x bin/rails
+          cp config/database.yml.ci config/database.yml
+
+          # デバッグ: コピー確認
+          echo "=== Copied database.yml ==="
+          cat config/database.yml
+
+          # PostgreSQL 接続テスト
+          echo "=== Testing DB connection ==="
+          PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USERNAME -c '\l'
+
+          # データベースの削除（もし存在すれば）
+          echo "=== Dropping existing database (if exists) ==="
+          PGPASSWORD=$DB_PASSWORD dropdb -h $DB_HOST -U $DB_USERNAME --if-exists v3_advanced_rails_test
+
+          # データベース作成とスキーマロード
+          echo "=== Creating and setting up database ==="
+          bin/rails db:create db:schema:load
+
+      # 5. RSpec の実行
+      - name: Run RSpec
+        run: |
+          chmod +x bin/rspec  # 実行権限を付与
+          bin/rspec           # RSpec を実行
