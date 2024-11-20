@@ -36,6 +36,9 @@ jobs:
 
     env:
       RAILS_ENV: test
+      DB_HOST: db
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
       ELASTICSEARCH_URL: http://localhost:9200
 
     steps:
@@ -47,6 +50,15 @@ jobs:
         with:
           ruby-version: 3.3.0
           bundler-cache: true
+
+      - name: Wait for Database
+        run: |
+          for i in {1..10}; do
+            nc -z db 5432 && echo "Database is up" && exit 0
+            echo "Waiting for database..."
+            sleep 5
+          done
+          echo "Database did not start in time" && exit 1
 
       - name: Set up Database
         run: |
