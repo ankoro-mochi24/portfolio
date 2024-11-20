@@ -19,4 +19,7 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation = :raise
   config.active_support.disallowed_deprecation_warnings = []
   config.log_level = :debug
+  config.elasticsearch = {
+    host: ENV.fetch("ELASTICSEARCH_URL", "http://localhost:9200")
+  }
 end
