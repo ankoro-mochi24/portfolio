@@ -53,13 +53,27 @@ jobs:
           ruby-version: 3.3.0
           bundler-cache: true
 
-      # 3. PostgreSQL起動待機（改善版）
+      # 3. Dockerネットワークのデバッグ（新規追加）
+      - name: Debug Docker Network
+        run: |
+          echo "Inspecting Docker network..."
+          docker network ls
+          docker ps -a
+          docker inspect $(docker ps -q)
+
+      # 4. PostgreSQLサービスのログ確認（新規追加）
+      - name: Check PostgreSQL Logs
+        run: |
+          echo "Checking PostgreSQL logs..."
+          docker logs $(docker ps -q --filter "ancestor=postgres:13")
+
+      # 5. PostgreSQL起動待機（改善版）
       - name: Wait for Database
         run: |
-          echo "Checking database connectivity..."
-          for i in {1..12}; do
-            pg_isready -h db -p 5432 -U postgres && echo "Database is ready!" && exit 0
-            echo "Waiting for database to be ready... Attempt $i of 12"
+          echo "Waiting for database to become ready..."
+          for i in {1..15}; do
+            pg_isready -h db -p 5432 -U postgres -d v3_advanced_rails_test && echo "Database is ready!" && exit 0
+            echo "Database not ready, retrying in 5 seconds... (Attempt $i of 15)"
             sleep 5
           done
           echo "Database did not become ready in time!" && exit 1
@@ -67,35 +81,14 @@ jobs:
           PGUSER: postgres
           PGPASSWORD: password
 
-      # 4. サービスのデバッグ（必要に応じて削除可）
-      - name: Debug Services
-        run: |
-          echo "Testing db service..."
-          ping -c 4 db || echo "Ping to db failed"
-          nslookup db || echo "NSLookup to db failed"
-          echo "Testing if port 5432 on db is accessible..."
-          nc -zv db 5432 || echo "Port 5432 on db is not accessible"
-
-      # 5. Dockerネットワークのデバッグ（必要に応じて削除可）
-      - name: Debug Docker Network
-        run: |
-          docker network ls
-          docker ps -a
-          docker inspect $(docker ps -q)
-
-      # 6. PostgreSQLのログ確認（必要に応じて削除可）
-      - name: Check PostgreSQL Logs
-        run: |
-          docker logs $(docker ps -q --filter "ancestor=postgres:13")
-
-      # 7. データベースのセットアップ
+      # 6. データベースのセットアップ
       - name: Set up Database
         run: |
-          sudo apt-get install -y libpq-dev
+          sudo apt-get update && sudo apt-get install -y libpq-dev
           chmod +x bin/rails
           cp config/database.yml.ci config/database.yml
           bin/rails db:create db:schema:load
 
-      # 8. RSpecの実行
+      # 7. RSpecの実行
       - name: Run RSpec
         run: bin/rspec
