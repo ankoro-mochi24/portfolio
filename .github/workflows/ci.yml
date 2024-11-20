@@ -42,24 +42,56 @@ jobs:
       ELASTICSEARCH_URL: http://localhost:9200
 
     steps:
+      # 1. コードのチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # 2. Rubyのセットアップ
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.0
           bundler-cache: true
 
+      # 3. PostgreSQL起動待機（デバッグ付き）
       - name: Wait for Database
         run: |
+          echo "Starting database connection test..."
           for i in {1..10}; do
             nc -z db 5432 && echo "Database is up" && exit 0
             echo "Waiting for database..."
             sleep 5
           done
           echo "Database did not start in time" && exit 1
+        env:
+          RAILS_ENV: test
+          DB_HOST: db
+          DB_USERNAME: postgres
+          DB_PASSWORD: password
+          ELASTICSEARCH_URL: http://localhost:9200
 
+      # 4. サービス間接続をデバッグ
+      - name: Debug Services
+        run: |
+          echo "Testing db service..."
+          ping -c 4 db || echo "Ping to db failed"
+          nslookup db || echo "NSLookup to db failed"
+          echo "Testing if port 5432 on db is accessible..."
+          nc -zv db 5432 || echo "Port 5432 on db is not accessible"
+
+      # 5. Dockerネットワークのデバッグ
+      - name: Debug Docker Network
+        run: |
+          docker network ls
+          docker ps -a
+          docker inspect $(docker ps -q)
+
+      # 6. PostgreSQLのログ確認
+      - name: Check PostgreSQL Logs
+        run: |
+          docker logs $(docker ps -q --filter "ancestor=postgres:13")
+
+      # 7. データベースのセットアップ
       - name: Set up Database
         run: |
           sudo apt-get install libpq-dev
@@ -67,5 +99,6 @@ jobs:
           cp config/database.yml.ci config/database.yml
           RAILS_ENV=test bin/rails db:create db:schema:load
 
+      # 8. RSpecの実行
       - name: Run RSpec
         run: bin/rspec
