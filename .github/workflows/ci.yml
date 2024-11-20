@@ -36,7 +36,7 @@ jobs:
 
     env:
       RAILS_ENV: test
-      DB_HOST: localhost
+      DB_HOST: db
       DB_USERNAME: postgres
       DB_PASSWORD: password
       ELASTICSEARCH_URL: http://localhost:9200
@@ -55,25 +55,43 @@ jobs:
           ruby-version: 3.3.0
           bundler-cache: true
 
-      # 3. PostgreSQL起動待機（改善版）
+      # 3. PostgreSQL 起動待機（改善版）
       - name: Wait for Database
         run: |
           echo "Waiting for database to become ready..."
           for i in {1..20}; do
-            pg_isready -h localhost -p 5432 -U postgres -d v3_advanced_rails_test && echo "Database is ready!" && exit 0
+            pg_isready -h db -p 5432 -U postgres -d v3_advanced_rails_test
+            if [ $? -eq 0 ]; then
+              echo "Database is ready!" && exit 0
+            fi
             echo "Database not ready, retrying in 5 seconds... (Attempt $i of 20)"
             sleep 5
           done
           echo "Database did not become ready in time!" && exit 1
 
-      # 4. データベースのセットアップ
+      # 4. データベースのセットアップ（改善版）
       - name: Set up Database
         run: |
           sudo apt-get update && sudo apt-get install -y libpq-dev
           chmod +x bin/rails
           cp config/database.yml.ci config/database.yml
+
+          # デバッグ: コピー確認
+          echo "=== Copied database.yml ==="
+          cat config/database.yml
+
+          # PostgreSQL 接続テスト
+          echo "=== Testing DB connection ==="
+          PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USERNAME -c '\l'
+
+          # データベースの削除（もし存在すれば）
+          echo "=== Dropping existing database (if exists) ==="
+          PGPASSWORD=$DB_PASSWORD dropdb -h $DB_HOST -U $DB_USERNAME --if-exists v3_advanced_rails_test
+
+          # データベース作成とスキーマロード
+          echo "=== Creating and setting up database ==="
           bin/rails db:create db:schema:load
 
-      # 5. RSpecの実行
+      # 5. RSpec の実行
       - name: Run RSpec
         run: bin/rspec
