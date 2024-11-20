@@ -40,6 +40,7 @@ jobs:
       - name: Set up Database
         run: |
           sudo apt-get install libpq-dev
+          chmod +x bin/rails
           cp config/database.yml.ci config/database.yml
           bin/rails db:create db:schema:load
 
