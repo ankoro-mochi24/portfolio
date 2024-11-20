@@ -1,6 +1,6 @@
 # ログに表示するためのElasticsearchのURLを確認
 elasticsearch_url = ENV['BONSAI_URL'] || ENV['ELASTICSEARCH_URL'] || 'http://elasticsearch:9200'
-puts "Elasticsearch URL: #{elasticsearch_url}"
+Rails.logger.debug { "Elasticsearch URL: #{elasticsearch_url}" }
 
 # Searchkickクライアントの設定
 Searchkick.client = Elasticsearch::Client.new(

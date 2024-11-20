@@ -2,15 +2,17 @@
 require 'rails_helper'
 
 RSpec.describe Topping, type: :model do
-  let(:user) { FactoryBot.create(:user) }
-  let(:recipe) { FactoryBot.create(:recipe, user: user) }
-  
+  let(:user) { create(:user) }
+  let(:recipe) { create(:recipe, user:) }
+
   describe 'バリデーションのテスト' do
     subject { topping.valid? }
-    let(:topping) { FactoryBot.build(:topping, name: topping_name, user: user, recipe: recipe) }
+
+    let(:topping) { build(:topping, name: topping_name, user:, recipe:) }
 
     context 'すべての属性が有効な場合' do
       let(:topping_name) { 'ネギ' }
+
       it '有効である' do
         expect(topping).to be_valid
       end
@@ -18,6 +20,7 @@ RSpec.describe Topping, type: :model do
 
     context 'nameがない場合' do
       let(:topping_name) { nil }
+
       it '無効であり、エラーメッセージが正しいこと' do
         topping.valid?
         expect(topping.errors[:name]).to include(I18n.t('errors.messages.blank'))
@@ -25,9 +28,10 @@ RSpec.describe Topping, type: :model do
     end
 
     context '同じレシピに同じnameが存在する場合' do
-      before { FactoryBot.create(:topping, name: 'ネギ', user: user, recipe: recipe) }
+      before { create(:topping, name: 'ネギ', user:, recipe:) }
+
       let(:topping_name) { 'ネギ' }
-      
+
       it '無効であり、エラーメッセージが正しいこと' do
         topping.valid?
         expect(topping.errors[:name]).to include(I18n.t('activerecord.errors.models.topping.attributes.name.taken', value: 'ネギ'))
@@ -37,16 +41,16 @@ RSpec.describe Topping, type: :model do
 
   describe '削除時のテスト' do
     it 'toppingが削除されたときに関連するuser_actionsも削除される' do
-      topping = FactoryBot.create(:topping, user: user, recipe: recipe)
-      FactoryBot.create(:user_action, user: user, actionable: topping)
+      topping = create(:topping, user:, recipe:)
+      create(:user_action, user:, actionable: topping)
 
-      expect { topping.destroy }.to change { UserAction.count }.by(-1)
+      expect { topping.destroy }.to change(UserAction, :count).by(-1)
     end
   end
 
   describe 'アソシエーションのテスト' do
-    it { should belong_to(:recipe) }
-    it { should belong_to(:user) }
-    it { should have_many(:user_actions).dependent(:destroy) }
+    it { is_expected.to belong_to(:recipe) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:user_actions).dependent(:destroy) }
   end
 end

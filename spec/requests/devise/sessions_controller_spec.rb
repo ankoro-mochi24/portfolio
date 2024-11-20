@@ -7,7 +7,7 @@ RSpec.describe Devise::SessionsController, type: :request do
     it "ログインページが正常に表示される" do
       get new_user_session_path
       expect(response).to have_http_status(:success)
-      expect(response.body).to include("ログイン")  # ログインページに「ログイン」というテキストが含まれているか確認
+      expect(response.body).to include("ログイン") # ログインページに「ログイン」というテキストが含まれているか確認
     end
   end
 

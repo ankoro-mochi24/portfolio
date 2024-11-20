@@ -17,7 +17,7 @@ class DishImageUploader < CarrierWave::Uploader::Base
 
   # ファイルサイズ制限による不正アップロードの防止
   def size_range
-    1..5.megabytes
+    1..(5.megabytes)
   end
 
   # 拡張子の限定によるセキュリティ対策

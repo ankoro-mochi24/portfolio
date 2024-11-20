@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe "Recipes", type: :request do
-  let(:user) { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user) }
-  let(:kitchen_tool) { FactoryBot.create(:kitchen_tool) }
-  let(:ingredient) { FactoryBot.create(:ingredient) }
-  let!(:recipe) { FactoryBot.create(:recipe, user: user, dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg")) }
-  let!(:other_recipe) { FactoryBot.create(:recipe, user: other_user, dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg")) }
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
+  let(:kitchen_tool) { create(:kitchen_tool) }
+  let(:ingredient) { create(:ingredient) }
+  let!(:recipe) { create(:recipe, user:, dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg")) }
+  let!(:other_recipe) { create(:recipe, user: other_user, dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg")) }
 
   before do
     sign_in user
@@ -17,13 +17,13 @@ RSpec.describe "Recipes", type: :request do
   describe "PATCH /recipes/:id" do
     context "ユーザーが自身のレシピを更新する場合" do
       let(:valid_params) do
-        { 
-          recipe: { 
-            title: "新しいタイトル", 
-            dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg"), 
-            recipe_kitchen_tools_attributes: [{ kitchen_tool_name: "フライパン" }], 
-            recipe_ingredients_attributes: [{ ingredient_name: "塩" }] 
-          } 
+        {
+          recipe: {
+            title: "新しいタイトル",
+            dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg"),
+            recipe_kitchen_tools_attributes: [{ kitchen_tool_name: "フライパン" }],
+            recipe_ingredients_attributes: [{ ingredient_name: "塩" }]
+          }
         }
       end
       let(:invalid_params) { { recipe: { title: "", dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg") } } }
@@ -46,7 +46,9 @@ RSpec.describe "Recipes", type: :request do
   describe "POST /recipes" do
     context "有効なパラメータの場合" do
       it "レシピが作成され、成功メッセージが表示されること" do
-        post recipes_path, params: { recipe: { title: "New Recipe", dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg"), recipe_kitchen_tools_attributes: [{ kitchen_tool_name: kitchen_tool.name }], recipe_ingredients_attributes: [{ ingredient_name: ingredient.name }] } }
+        post recipes_path,
+             params: { recipe: { title: "New Recipe", dish_image: fixture_file_upload("spec/fixtures/sample.jpg", "image/jpg"), recipe_kitchen_tools_attributes: [{ kitchen_tool_name: kitchen_tool.name }],
+                                 recipe_ingredients_attributes: [{ ingredient_name: ingredient.name }] } }
         expect(response).to redirect_to(recipe_path(Recipe.last))
         follow_redirect!
         expect(response.body).to include(I18n.t("notices.recipe_created"))
@@ -82,7 +84,7 @@ RSpec.describe "Recipes", type: :request do
 
   describe "DELETE /recipes/:id/remove_topping" do
     it "トッピングが削除され、成功メッセージが表示されること" do
-      topping = recipe.toppings.create(name: "Sample Topping", user: user)
+      topping = recipe.toppings.create(name: "Sample Topping", user:)
       delete remove_topping_recipe_path(recipe, topping_id: topping.id), headers: { "Accept" => "text/vnd.turbo-stream.html" }
       expect(response.media_type).to eq("text/vnd.turbo-stream.html")
       expect(response.body).to include("topping_#{topping.id}")

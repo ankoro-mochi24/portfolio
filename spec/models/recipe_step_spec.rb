@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe RecipeStep, type: :model do
-  let(:recipe) { FactoryBot.create(:recipe) }
-  let(:recipe_step) { FactoryBot.build(:recipe_step, recipe: recipe, text: '切る') }
+  let(:recipe) { create(:recipe) }
+  let(:recipe_step) { build(:recipe_step, recipe:, text: '切る') }
 
   # バリデーションのテスト
   describe 'バリデーションのテスト' do
@@ -29,13 +29,13 @@ RSpec.describe RecipeStep, type: :model do
   describe '削除時のテスト' do
     it 'レシピが削除されたときに関連するrecipe_stepも削除される' do
       recipe_step.save
-      expect { recipe.destroy }.to change { RecipeStep.count }.by(-1)
+      expect { recipe.destroy }.to change(described_class, :count).by(-1)
     end
   end
 
   # 画像削除機能のテスト
   describe '画像削除機能のテスト' do
-    let(:image_path) { Rails.root.join('spec', 'fixtures', 'sample.jpg') }
+    let(:image_path) { Rails.root.join("spec/fixtures/sample.jpg") }
 
     it 'remove_step_imageがtrueの場合、step_imageが削除される' do
       recipe_step.step_image = File.open(image_path)
@@ -54,6 +54,6 @@ RSpec.describe RecipeStep, type: :model do
 
   # データベースインデックスのテスト
   describe 'データベースインデックスのテスト' do
-    it { should have_db_index(:recipe_id) }
+    it { is_expected.to have_db_index(:recipe_id) }
   end
 end

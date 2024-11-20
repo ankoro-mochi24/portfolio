@@ -4,6 +4,11 @@ FactoryBot.define do
     email { Faker::Internet.unique.email }
     password { "password1" }
     line_notify_token { nil }
+    notify_enabled { false } # デフォルト値
+
+    trait :with_token do
+      line_notify_token { "test_token" } # 特定のトークン値を指定
+    end
 
     # user_with_recipes
     factory :user_with_recipes do
@@ -14,7 +19,7 @@ FactoryBot.define do
 
       # ユーザーが作成された後に、指定された数のレシピを関連付ける
       after(:create) do |user, evaluator|
-        create_list(:recipe, evaluator.recipes_count, user: user)
+        create_list(:recipe, evaluator.recipes_count, user:)
       end
     end
 
@@ -27,7 +32,7 @@ FactoryBot.define do
 
       # ユーザーが作成された後に、指定された数の食材を関連付ける
       after(:create) do |user, evaluator|
-        create_list(:foodstuff, evaluator.foodstuffs_count, user: user)
+        create_list(:foodstuff, evaluator.foodstuffs_count, user:)
       end
     end
 
@@ -40,7 +45,7 @@ FactoryBot.define do
 
       # ユーザーが作成された後に、指定された数のコメントを関連付ける
       after(:create) do |user, evaluator|
-        create_list(:comment, evaluator.comments_count, user: user)
+        create_list(:comment, evaluator.comments_count, user:)
       end
     end
 
@@ -53,7 +58,7 @@ FactoryBot.define do
 
       # ユーザーが作成された後に、指定された数のアクションを関連付ける
       after(:create) do |user, evaluator|
-        create_list(:user_action, evaluator.actions_count, user: user)
+        create_list(:user_action, evaluator.actions_count, user:)
       end
     end
   end

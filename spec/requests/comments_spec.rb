@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "Comments", type: :request do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
-  let(:recipe) { create(:recipe, user: user) }
-  let!(:comment) { create(:comment, commentable: recipe, user: user, body: "元のコメント") }
+  let(:recipe) { create(:recipe, user:) }
+  let!(:comment) { create(:comment, commentable: recipe, user:, body: "元のコメント") }
 
   before do
     sign_in user
@@ -13,9 +13,9 @@ RSpec.describe "Comments", type: :request do
   describe "POST /comments" do
     context "有効なパラメータの場合" do
       it "コメントが作成され、成功メッセージが表示されること" do
-        expect {
+        expect do
           post recipe_comments_path(recipe), params: { comment: { body: "新しいコメント" }, commentable_type: "Recipe", commentable_id: recipe.id }
-        }.to change(Comment, :count).by(1)
+        end.to change(Comment, :count).by(1)
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
@@ -25,9 +25,9 @@ RSpec.describe "Comments", type: :request do
 
     context "無効なパラメータの場合" do
       it "コメントが作成されず、エラーメッセージが表示されること" do
-        expect {
+        expect do
           post recipe_comments_path(recipe), params: { comment: { body: "" }, commentable_type: "Recipe", commentable_id: recipe.id }
-        }.not_to change(Comment, :count)
+        end.not_to change(Comment, :count)
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
@@ -35,9 +35,9 @@ RSpec.describe "Comments", type: :request do
       end
 
       it "無効なcommentable_typeが指定された場合、エラーメッセージが表示されること" do
-        expect {
+        expect do
           post recipe_comments_path(recipe), params: { comment: { body: "新しいコメント" }, commentable_type: "InvalidType", commentable_id: recipe.id }
-        }.not_to change(Comment, :count)
+        end.not_to change(Comment, :count)
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
@@ -99,9 +99,9 @@ RSpec.describe "Comments", type: :request do
   describe "DELETE /comments/:id" do
     context "ユーザーが自身のコメントを削除する場合" do
       it "コメントが削除され、成功メッセージが表示されること" do
-        expect {
+        expect do
           delete recipe_comment_path(recipe, comment)
-        }.to change(Comment, :count).by(-1)
+        end.to change(Comment, :count).by(-1)
 
         expect(response).to redirect_to(root_path)
         follow_redirect!
@@ -116,9 +116,9 @@ RSpec.describe "Comments", type: :request do
       end
 
       it "削除が許可されず、エラーメッセージが表示されること" do
-        expect {
+        expect do
           delete recipe_comment_path(recipe, comment)
-        }.not_to change(Comment, :count)
+        end.not_to change(Comment, :count)
 
         expect(response).to redirect_to(root_path)
         follow_redirect!

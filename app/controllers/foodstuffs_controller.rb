@@ -65,9 +65,9 @@ class FoodstuffsController < ApplicationController
 
   # 投稿者のみが削除できるようにする認可メソッド
   def authorize_user!
-    unless @foodstuff.user == current_user
-      redirect_to root_path, alert: I18n.t('errors.messages.unauthorized_foodstuff')
-    end
+    return if @foodstuff.user == current_user
+
+    redirect_to root_path, alert: I18n.t('errors.messages.unauthorized_foodstuff')
   end
 
   # ストロングパラメーター

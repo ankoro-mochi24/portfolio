@@ -9,12 +9,12 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, notice: t('comments.create.success') }
+        format.html { redirect_back fallback_location: root_path, notice: t('.success') }
         format.turbo_stream
       end
     else
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, alert: t('comments.create.failure') }
+        format.html { redirect_back fallback_location: root_path, alert: t('.failure') }
         format.turbo_stream { render :error }
       end
     end
@@ -23,12 +23,12 @@ class CommentsController < ApplicationController
   def update
     if @comment.update(comment_params)
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, notice: t('comments.update.success') }
+        format.html { redirect_back fallback_location: root_path, notice: t('.success') }
         format.turbo_stream
       end
     else
       respond_to do |format|
-        format.html { redirect_back fallback_location: root_path, alert: t('comments.update.failure') }
+        format.html { redirect_back fallback_location: root_path, alert: t('.failure') }
         format.turbo_stream { render :error }
       end
     end
@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_back fallback_location: root_path, notice: t('comments.destroy.success') }
+      format.html { redirect_back fallback_location: root_path, notice: t('.success') }
       format.turbo_stream
     end
   end

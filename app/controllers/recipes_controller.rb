@@ -9,11 +9,25 @@ class RecipesController < ApplicationController
     end
   end
 
+  def show
+    @commentable = @recipe
+  end
+
   def new
     @recipe = Recipe.new
     @recipe.recipe_steps.build
+  end  
+
+  def edit
+    @recipe.recipe_ingredients.each do |ri|
+      ri.ingredient_name = ri.ingredient.name if ri.ingredient.present?
+    end
+    @recipe.recipe_kitchen_tools.each do |rkt|
+      rkt.kitchen_tool_name = rkt.kitchen_tool.name if rkt.kitchen_tool.present?
+    end
+    @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
   end
-  
+
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
@@ -28,20 +42,6 @@ class RecipesController < ApplicationController
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def show
-    @commentable = @recipe
-  end
-
-  def edit
-    @recipe.recipe_ingredients.each do |ri|
-      ri.ingredient_name = ri.ingredient.name if ri.ingredient.present?
-    end
-    @recipe.recipe_kitchen_tools.each do |rkt|
-      rkt.kitchen_tool_name = rkt.kitchen_tool.name if rkt.kitchen_tool.present?
-    end
-    @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
   end
 
   def update

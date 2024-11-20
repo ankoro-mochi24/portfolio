@@ -61,7 +61,7 @@ RSpec.describe "Profiles", type: :request do
         patch profile_path, params: valid_params
         expect(response).to redirect_to(profile_path)
         follow_redirect!
-        expect(response.body).to include("ユーザー情報が更新されました。")
+        expect(response.body).to include(I18n.t('notices.profile_updated'))
         user.reload
         expect(user.name).to eq("新しい名前")
         expect(user.email).to eq("new_email@example.com")
@@ -87,14 +87,14 @@ RSpec.describe "Profiles", type: :request do
       delete profile_path
       expect(response).to redirect_to(root_path)
       follow_redirect!
-      expect(response.body).to include("アカウントが削除されました。")
-      expect(User.exists?(user.id)).to be_falsey
+      expect(response.body).to include(I18n.t('notices.profile_deleted'))
+      expect(User).not_to exist(user.id)
     end
   end
 
   describe "GET /profile/posts" do
-    let!(:recipe) { FactoryBot.create(:recipe, user: user, title: "ユーザーのレシピ") }
-    let!(:foodstuff) { FactoryBot.create(:foodstuff, user: user, name: "ユーザーの食品") }
+    let!(:recipe) { create(:recipe, user:, title: "ユーザーのレシピ") }
+    let!(:foodstuff) { create(:foodstuff, user:, name: "ユーザーの食品") }
 
     it "ユーザーの投稿したレシピと食品が表示されること" do
       get posts_profile_path

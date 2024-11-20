@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Foodstuffs", type: :request do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
-  let!(:foodstuff) { create(:foodstuff, user: user, name: "Sample Foodstuff", price: 1000, link: "http://example.com") }
+  let!(:foodstuff) { create(:foodstuff, user:, name: "Sample Foodstuff", price: 1000, link: "http://example.com") }
 
   before do
     sign_in user
@@ -28,9 +28,9 @@ RSpec.describe "Foodstuffs", type: :request do
 
     context "食品が存在しない場合" do
       it "エラーメッセージが表示されること" do
-        expect {
+        expect do
           get foodstuff_path(id: 9999)
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -38,12 +38,12 @@ RSpec.describe "Foodstuffs", type: :request do
   describe "POST /foodstuffs" do
     context "有効なパラメータの場合" do
       it "食品が作成され、成功メッセージが表示されること" do
-        image_path = Rails.root.join("spec", "fixtures", "sample.jpg")
+        image_path = Rails.root.join("spec/fixtures/sample.jpg")
         image = Rack::Test::UploadedFile.new(image_path, "image/jpeg")
 
-        expect {
+        expect do
           post foodstuffs_path, params: { foodstuff: { name: "New Foodstuff", price: 1500, link: "http://newlink.com", image: [image] } }
-        }.to change(Foodstuff, :count).by(1)
+        end.to change(Foodstuff, :count).by(1)
 
         expect(response).to redirect_to(Foodstuff.last)
         follow_redirect!
@@ -53,9 +53,9 @@ RSpec.describe "Foodstuffs", type: :request do
 
     context "無効なパラメータの場合" do
       it "食品が作成されず、エラーメッセージが表示されること" do
-        expect {
+        expect do
           post foodstuffs_path, params: { foodstuff: { name: "", price: -100, link: "", image: nil } }
-        }.not_to change(Foodstuff, :count)
+        end.not_to change(Foodstuff, :count)
 
         expect(response.body).to include(I18n.t("activerecord.errors.models.foodstuff.attributes.name.blank"))
         expect(response.body).to include(I18n.t("activerecord.errors.models.foodstuff.attributes.price.greater_than_or_equal_to"))
@@ -90,9 +90,9 @@ RSpec.describe "Foodstuffs", type: :request do
   describe "DELETE /foodstuffs/:id" do
     context "ユーザーが自身の食品を削除する場合" do
       it "食品が削除され、成功メッセージが表示されること" do
-        expect {
+        expect do
           delete foodstuff_path(foodstuff)
-        }.to change(Foodstuff, :count).by(-1)
+        end.to change(Foodstuff, :count).by(-1)
 
         expect(response).to redirect_to(root_path)
         follow_redirect!

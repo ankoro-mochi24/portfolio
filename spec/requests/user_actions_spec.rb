@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "UserActions", type: :request do
-  let(:user) { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user) }
-  let(:recipe) { FactoryBot.create(:recipe, user: other_user) }
-  let(:foodstuff) { FactoryBot.create(:foodstuff, user: other_user) }
-  let(:topping) { FactoryBot.create(:topping, recipe: recipe, user: other_user) }
-  let(:user_action) { FactoryBot.create(:user_action, user: user, actionable: recipe, action_type: 'good') }
+  let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
+  let(:recipe) { create(:recipe, user: other_user) }
+  let(:foodstuff) { create(:foodstuff, user: other_user) }
+  let(:topping) { create(:topping, recipe:, user: other_user) }
+  let(:user_action) { create(:user_action, user:, actionable: recipe, action_type: 'good') }
 
   before do
     sign_in user
@@ -41,7 +41,7 @@ RSpec.describe "UserActions", type: :request do
 
     context "異常系" do
       it "同じアクションを重複して追加しようとするとエラーが表示されること" do
-        FactoryBot.create(:user_action, user: user, actionable: recipe, action_type: "good")
+        create(:user_action, user:, actionable: recipe, action_type: "good")
 
         post recipe_user_actions_path(recipe), params: {
           user_action: { action_type: "good", actionable_type: "Recipe", actionable_id: recipe.id }
@@ -59,7 +59,7 @@ RSpec.describe "UserActions", type: :request do
       end
 
       it "同時にgoodとbadを追加しようとするとエラーが表示されること" do
-        FactoryBot.create(:user_action, user: user, actionable: recipe, action_type: "good")
+        create(:user_action, user:, actionable: recipe, action_type: "good")
 
         post recipe_user_actions_path(recipe), params: {
           user_action: { action_type: "bad", actionable_type: "Recipe", actionable_id: recipe.id }
@@ -91,7 +91,7 @@ RSpec.describe "UserActions", type: :request do
 
     context "異常系" do
       it "他のユーザーが作成したアクションを削除しようとするとエラーになる" do
-        action = FactoryBot.create(:user_action, user: other_user, actionable: recipe, action_type: "good")
+        action = create(:user_action, user: other_user, actionable: recipe, action_type: "good")
         delete recipe_user_action_path(recipe, action)
         expect(response).to have_http_status(:forbidden)
       end
