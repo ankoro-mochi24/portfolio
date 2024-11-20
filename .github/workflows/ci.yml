@@ -1,0 +1,43 @@
+name: RSpec CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:13
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.0
+          bundler-cache: true
+
+      - name: Set up Database
+        run: |
+          sudo apt-get install libpq-dev
+          cp config/database.yml.ci config/database.yml
+          bin/rails db:create db:schema:load
+
+      - name: Run RSpec
+        run: bin/rspec
