@@ -1,3 +1,10 @@
+development:
+  adapter: postgresql
+  database: development_db
+  username: postgres
+  password: password
+  host: db
+
 test:
   adapter: postgresql
   database: v3_advanced_rails_test
