@@ -17,7 +17,11 @@ header.fixed-top {
 }
 
 .navbar-brand {
-  font-weight: bold;
+  display: flex; /* フレックスボックスで整列 */
+  align-items: center; /* 垂直方向の中央揃え */
+  height: 60px; /* ヘッダーの高さに合わせる */
+  padding: 0; /* 余白をなくす */
+  font-weight: bold; /* テキスト表示時に太字を維持 */
 }
 
 .navbar-nav .nav-link {
@@ -70,4 +74,14 @@ footer {
 .sidebar .list-group-item.active {
   background-color: #f8f9fa;
   font-weight: bold;
+}
+
+.logo-img {
+  height: 100%; /* 高さを40pxに設定 */
+  width: auto; /* アスペクト比を維持 */
+  margin-right: 10px; /* 他の要素との余白 */
+  object-fit: contain; /* 枠内に収める */
+  border-radius: 50%; /* 角を丸くする */
+  border: 2px solid #dee2e6; /* 外枠を追加してデザインを整える */
+  display: block; /* ロゴを正しく整列 */
 }
