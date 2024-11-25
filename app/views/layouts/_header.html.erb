@@ -1,52 +1,58 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="<%= root_path %>"><%= t('navbar.brand') %></a>
+  <!-- 左側：ロゴ -->
+  <a class="navbar-brand d-flex align-items-center" href="<%= root_path %>" title="トップページへ戻る" data-bs-toggle="tooltip">
+    <%= image_tag('logo.jpg', alt: 'お米日和', class: 'logo-img') %>
+    <span class="site-name ml-2">お米日和</span>
+  </a>
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="navbarNav">
-
-    <!-- 検索フォーム -->
-    <%= form_with url: root_path, method: :get, local: true, class: "form-inline my-2 my-lg-0 ml-auto" do |form| %>
-      <%= hidden_field_tag :view, @view, id: "unique_view_for_search" %>
-      <div class="input-group">
-        <%= form.search_field :query, class: "form-control", placeholder: t('navbar.search_placeholder'), aria: { label: t('navbar.search_placeholder') }, id: "unique_query_for_search" %>
-        <div class="input-group-append">
-          <%= form.submit t('navbar.search_button'), class: "btn btn-outline-success" %>
+    <!-- 中央：検索、ソート、レシピ投稿、食品投稿 -->
+    <div class="navbar-center mx-auto d-flex align-items-center">
+      <!-- 検索フォーム -->
+      <%= form_with url: root_path, method: :get, local: true, class: "form-inline my-2 my-lg-0" do |form| %>
+        <%= hidden_field_tag :view, @view, id: "unique_view_for_search" %>
+        <div class="input-group">
+          <%= form.search_field :query, class: "form-control", placeholder: t('navbar.search_placeholder'), aria: { label: t('navbar.search_placeholder') }, id: "unique_query_for_search" %>
+          <div class="input-group-append">
+            <%= form.submit t('navbar.search_button'), class: "btn btn-outline-success" %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
-    <!-- ソートフォーム -->
-    <%= form_with url: root_path, method: :get, local: true, class: "form-inline ml-2" do %>
-      <%= hidden_field_tag :view, @view, id: "unique_view_for_sort" %>
-      <%= hidden_field_tag :query, params[:query], id: "unique_query_for_sort" %>
-      <%= select_tag :sort_by, options_for_select([
-          [t('navbar.sort_options.newest'), 'newest'],
-          [t('navbar.sort_options.oldest'), 'oldest'],
-          [t('navbar.sort_options.few_ingredients'), 'few_ingredients'],
-          [t('navbar.sort_options.easy_cooking'), 'easy_cooking'],
-          [t('navbar.sort_options.most_good'), 'most_good'],
-          [t('navbar.sort_options.most_bookmarks'), 'most_bookmarks']
-        ], params[:sort_by]), { class: "form-control", onchange: 'this.form.submit();' } %>
-    <% end %>
+      <!-- ソートフォーム -->
+      <%= form_with url: root_path, method: :get, local: true, class: "form-inline ml-2" do %>
+        <%= hidden_field_tag :view, @view, id: "unique_view_for_sort" %>
+        <%= hidden_field_tag :query, params[:query], id: "unique_query_for_sort" %>
+        <%= select_tag :sort_by, options_for_select([
+            [t('navbar.sort_options.newest'), 'newest'],
+            [t('navbar.sort_options.oldest'), 'oldest'],
+            [t('navbar.sort_options.few_ingredients'), 'few_ingredients'],
+            [t('navbar.sort_options.easy_cooking'), 'easy_cooking'],
+            [t('navbar.sort_options.most_good'), 'most_good'],
+            [t('navbar.sort_options.most_bookmarks'), 'most_bookmarks']
+          ], params[:sort_by]), { class: "form-control", onchange: 'this.form.submit();' } %>
+      <% end %>
 
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= link_to t('navbar.cookrice'), cookrice_path, class: 'nav-link' %>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav">
+      <!-- 投稿ボタン -->
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to t('navbar.post_recipe'), new_recipe_path, class: 'btn btn-outline-danger ml-2' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to t('navbar.post_foodstuff'), new_foodstuff_path, class: 'btn btn-outline-danger ml-2' %>
-        </li>
-        <li class="nav-item">
+        <%= link_to t('navbar.post_recipe'), new_recipe_path, class: 'btn btn-outline-danger ml-2' %>
+        <%= link_to t('navbar.post_foodstuff'), new_foodstuff_path, class: 'btn btn-outline-danger ml-2' %>
+      <% end %>
+    </div>
+
+    <!-- 右側：米炊きチュートリアルとユーザー情報 -->
+    <ul class="navbar-nav navbar-nav-right ml-auto d-flex align-items-center">
+      <li class="nav-item">
+        <%= link_to " #{t('navbar.cookrice')}", cookrice_path, class: 'nav-link text-primary font-weight-bold' %>
+      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item ml-3">
           <span class="navbar-text">
-            <%= t('navbar.user_name') %> <%= link_to current_user.name, profile_path  %>
+            <%= t('navbar.user_name') %> <%= link_to current_user.name, profile_path, class: 'font-weight-bold text-dark' %>
           </span>
         </li>
       <% else %>

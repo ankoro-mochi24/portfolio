@@ -3,34 +3,90 @@ header.fixed-top {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1030; /* 他のコンテンツの上に表示されるようにする */
-  background-color: #fff; /* ヘッダーの背景色を設定 */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* ヘッダーに影を追加 */
+  z-index: 1030;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
-  background-color: #fff; /* ナビゲーションバーの背景色を白に設定 */
-  margin: 0; /* ナビゲーションバー周りの余白を取り除く */
-  padding: 0 15px; /* 必要に応じてパディングを調整 */
-  border-bottom: 1px solid #dee2e6; /* 下部に薄い区切り線を追加 */
-  box-shadow: none; /* 影を取り除く */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .navbar-brand {
-  font-weight: bold;
+  font-weight: bold; /* ロゴやテキストの強調 */
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0;
 }
 
-.navbar-nav .nav-link {
-  padding: 10px 15px;
+.logo-img {
+  height: 40px; /* 適切な高さに調整 */
+  width: auto;
+  border-radius: 50%;
+  border: 2px solid #dee2e6;
+  object-fit: contain;
 }
 
-.btn {
+.navbar-center {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-text {
+  font-size: 14px;
   margin-left: 10px;
 }
 
 .form-inline {
   display: flex;
   align-items: center;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+/* タブスタイルのカスタマイズ */
+.nav-tabs {
+  border-bottom: 2px solid #dee2e6; /* タブ下部のラインを太めに */
+  justify-content: center; /* フレックスで中央揃え */
+}
+
+.nav-tabs .nav-item {
+  margin-bottom: -1px; /* アクティブなタブのデザインを調整 */
+}
+
+.nav-tabs .nav-link {
+  color: #495057; /* 通常時のテキスト色 */
+  border: 1px solid transparent; /* デフォルトでボーダーを透明に */
+  border-radius: 0; /* 丸みをなくす */
+  padding: 10px 20px; /* パディングを調整 */
+  font-size: 1rem; /* 文字サイズを適度に大きく */
+  transition: all 0.3s ease; /* ホバー時の滑らかな変化 */
+}
+
+.nav-tabs .nav-link:hover {
+  color: #0056b3; /* ホバー時のテキスト色 */
+  border-color: #dee2e6 #dee2e6 #fff; /* ボーダーを強調 */
+  background-color: #f8f9fa; /* 背景色を追加 */
+}
+
+.nav-tabs .nav-link.active {
+  color: #fff; /* アクティブ時のテキスト色 */
+  background-color: #007bff; /* アクティブ時の背景色 */
+  border-color: #007bff #007bff #fff; /* アクティブ時のボーダー */
+  font-weight: bold; /* アクティブ時に太字 */
 }
 
 .sidebar {
@@ -44,6 +100,11 @@ header.fixed-top {
   height: calc(100vh - 60px); /* サイドバーの高さを画面全体の高さからヘッダーの高さを引いたものに設定 */
   overflow-y: auto; /* 内容が多い場合にスクロール可能にする */
   box-sizing: border-box; /* パディングを含めて幅・高さを計算 */
+}
+
+.sidebar .list-group-item.active {
+  background-color: #f8f9fa;
+  font-weight: bold;
 }
 
 .main-content {
@@ -65,9 +126,4 @@ footer {
   margin-left: 270px;
   padding: 10px;
   text-align: center;
-}
-
-.sidebar .list-group-item.active {
-  background-color: #f8f9fa;
-  font-weight: bold;
 }
