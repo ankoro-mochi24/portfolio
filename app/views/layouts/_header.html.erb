@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <!-- 左側：ロゴ -->
-  <a class="navbar-brand d-flex align-items-center" href="<%= root_path %>" title="トップページへ戻る">
+  <a class="navbar-brand d-flex align-items-center" href="<%= root_path %>" title="トップページへ戻る" data-bs-toggle="tooltip">
     <%= image_tag('logo.jpg', alt: 'お米日和', class: 'logo-img') %>
+    <span class="site-name ml-2">お米日和</span>
   </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
