@@ -29,20 +29,9 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <% if @profile_layout %>
-      <div class="sidebar">
-        <%= render 'profiles/sidebar' %>
-      </div>
-      <div class="container" style="margin-left: 250px;">
-        <div class="main-content">
-          <%= yield %>
-        </div>
-      </div>
-    <% else %>
-      <div class="container mt-5 pt-4">
-        <%= yield %>
-      </div>
-    <% end %>
+    <div class="container mt-5 pt-4">
+      <%= yield %>
+    </div>
 
     <footer>
       <%= render 'layouts/footer' %>
