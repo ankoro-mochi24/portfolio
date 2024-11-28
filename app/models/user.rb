@@ -37,13 +37,12 @@ class User < ApplicationRecord
                     }
 
   # パスワードの複雑性チェック
-  validates :password, length: { minimum: 6 }, 
-                       format: { 
+  validates :password, length: { minimum: 6 },
+                       format: {
                          with: /\A(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}\z/,
                          message: I18n.t('activerecord.errors.models.user.attributes.password.weak')
                        },
-                       allow_nil: true, 
-                       if: :password_blank?
+                       allow_nil: true # パスワードが空の場合はスキップ
 
   # アソシエーション
   has_many :foodstuffs, dependent: :destroy
@@ -58,7 +57,7 @@ class User < ApplicationRecord
 
   # LINE Notifyトークンを更新する専用メソッド
   def update_line_notify_token(token, current_user)
-    raise SecurityError, "Unauthorized access to update line_notify_token" unless current_user == self
+    raise SecurityError, I18n.t('errors.messages.unauthorized_line_notify') unless current_user == self
 
     update_columns(line_notify_token: token) # バリデーションを無視して直接カラムを更新
   end

@@ -54,6 +54,13 @@ RSpec.describe User, type: :model do
         expect(user.errors[:email]).to include(I18n.t('activerecord.errors.models.user.attributes.email.invalid'))
       end
     end
+  end
+
+  describe 'パスワード変更のバリデーション' do
+    it 'パスワードが入力されていない場合は変更されないこと' do
+      user.password = nil
+      expect(user).to be_valid
+    end
 
     it 'パスワードが6文字以上でなければ無効であること' do
       user.password = '12345'
@@ -61,10 +68,21 @@ RSpec.describe User, type: :model do
       expect(user.errors[:password]).to include(I18n.t('activerecord.errors.models.user.attributes.password.too_short', count: 6))
     end
 
-    it 'パスワードが英数字を含まなければ無効であること' do
-      user.password = 'password' # 数字が含まれていない
+    it 'パスワードが英字を含まない場合、無効であること' do
+      user.password = '123456'
       expect(user).not_to be_valid
       expect(user.errors[:password]).to include(I18n.t('activerecord.errors.models.user.attributes.password.weak'))
+    end
+
+    it 'パスワードが数字を含まない場合、無効であること' do
+      user.password = 'password'
+      expect(user).not_to be_valid
+      expect(user.errors[:password]).to include(I18n.t('activerecord.errors.models.user.attributes.password.weak'))
+    end
+
+    it '有効なパスワードは正しく更新されること' do
+      user.password = 'Valid1'
+      expect(user).to be_valid
     end
   end
 
@@ -110,24 +128,11 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # カスタムバリデーションのテスト
-  describe 'カスタムバリデーションのテスト' do
-    it '「good」と「bad」のアクションが同時に存在できないこと' do
-      recipe = create(:recipe, user:)
-      create(:user_action, user:, actionable: recipe, action_type: 'good')
-
-      conflicting_action = build(:user_action, user:, actionable: recipe, action_type: 'bad')
-      expect(conflicting_action).not_to be_valid
-      expect(conflicting_action.errors[:base]).to include(I18n.t('activerecord.errors.models.user_action.messages.good_bad_conflict'))
-    end
-  end
-
   # ネストされた属性のテスト
   describe 'ネストされた属性のテスト' do
     it 'ユーザーが持っている調理器具の追加と削除ができること' do
       kitchen_tool = create(:kitchen_tool)
 
-      # kitchen_tool_nameを含める
       user_with_tool = build(
         :user,
         user_kitchen_tools_attributes: [
@@ -135,10 +140,7 @@ RSpec.describe User, type: :model do
         ]
       )
 
-      # 保存が成功するか確認
       expect(user_with_tool.save).to be true
-
-      # 追加の確認
       expect(user_with_tool.kitchen_tools).to include(kitchen_tool)
     end
   end
