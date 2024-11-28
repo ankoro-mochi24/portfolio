@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :posts]
-  before_action :set_layout, only: [:show, :edit, :posts]
   before_action :set_view, only: [:posts]
 
   def show
@@ -67,9 +66,5 @@ class ProfilesController < ApplicationController
       :email,
       user_kitchen_tools_attributes: [:id, :kitchen_tool_id, :_destroy, :kitchen_tool_name]
     )
-  end
-
-  def set_layout
-    @profile_layout = true
   end
 end
