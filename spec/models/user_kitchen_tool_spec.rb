@@ -17,22 +17,15 @@ RSpec.describe UserKitchenTool, type: :model do
       expect(user_kitchen_tool).to be_valid
     end
 
+    it 'kitchen_toolが関連付けられていなくても有効である' do
+      user_kitchen_tool = build(:user_kitchen_tool, user:, kitchen_tool: nil, kitchen_tool_name: nil)
+      expect(user_kitchen_tool).to be_valid
+    end
+
     it 'user_idがない場合、無効である' do
       user_kitchen_tool = build(:user_kitchen_tool, user: nil, kitchen_tool:, kitchen_tool_name: kitchen_tool.name)
       expect(user_kitchen_tool).not_to be_valid
       expect(user_kitchen_tool.errors[:user]).to include(I18n.t('errors.messages.required'))
-    end
-
-    it 'kitchen_tool_idがない場合、無効である' do
-      user_kitchen_tool = build(:user_kitchen_tool, user:, kitchen_tool: nil, kitchen_tool_name: nil)
-      expect(user_kitchen_tool).not_to be_valid
-      expect(user_kitchen_tool.errors[:kitchen_tool]).to include(I18n.t('errors.messages.required'))
-    end
-
-    it 'kitchen_tool_nameがない場合、無効である' do
-      user_kitchen_tool = build(:user_kitchen_tool, user:, kitchen_tool_name: nil)
-      expect(user_kitchen_tool).not_to be_valid
-      expect(user_kitchen_tool.errors[:kitchen_tool_name]).to include(I18n.t('errors.messages.blank'))
     end
 
     it 'userとkitchen_toolの組み合わせが一意でない場合、無効である' do

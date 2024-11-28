@@ -245,6 +245,7 @@ ja:
       line_notify_failed: "LINE Notifyとの連携に失敗しました。"
       unauthorized_recipe: "他のユーザーのレシピを編集・削除することはできません。"
       unauthorized_foodstuff: "他のユーザーの食品を編集・削除することはできません。"
+      unauthorized_line_notify: "LINE Notifyトークンの更新権限がありません。"
       not_found: "食品が見つかりません。"
       invalid_params: "無効なパラメータです。"
   notices:

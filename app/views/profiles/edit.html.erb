@@ -1,94 +1,86 @@
-<div class="row">
-  <div class="col-md-3">
-    <%= render 'profiles/sidebar' %>
-  </div>
-  <div class="col-md-9">
-    <h1><%= t('profiles.edit.title') %></h1>
-    <div class="row justify-content-center">
-      <%= form_with(model: @user, url: profile_path, local: true) do |form| %>
-        <% if @user.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@user.errors.count, t('profiles.edit.error')) %> <%= t('profiles.edit.prohibited') %></h2>
-            <ul>
-              <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
+<%= render 'profiles/profile_layout', title: t('profiles.edit.title') do %>
+  <%= form_with(model: @user, url: profile_path, local: true) do |form| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, t('profiles.edit.error')) %> <%= t('profiles.edit.prohibited') %></h2>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :name, t('profiles.edit.name') %><br>
+      <%= form.text_field :name, required: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :email, t('profiles.edit.email') %><br>
+      <%= form.email_field :email, required: true %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password, t('profiles.edit.password') %> <br>
+      <%= form.password_field :password, autocomplete: "new-password", onpaste: "return false;" %>
+      <% if @minimum_password_length %>
+        <em>(<%= t('profiles.edit.minimum_password_length', length: @minimum_password_length) %>)</em>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= form.label :password_confirmation, t('profiles.edit.password_confirmation') %><br>
+      <%= form.password_field :password_confirmation, autocomplete: "new-password", onpaste: "return false;" %>
+    </div>
+
+    <div class="field">
+      <%= form.label :current_password, t('profiles.edit.current_password') %><br>
+      <%= form.password_field :current_password, autocomplete: "current-password", onpaste: "return false;" %>
+    </div>
+
+    <h3><%= t('profiles.edit.kitchen_tools') %></h3>
+    <div data-controller="kitchen-tools">
+      <div data-kitchen-tools-target="container">
+        <%= form.fields_for :user_kitchen_tools do |tool_form| %>
+          <div class="nested-fields" data-new-record="false">
+            <%= tool_form.hidden_field :_destroy %>
+            <%= tool_form.hidden_field :kitchen_tool_id %>
+            <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name %>
+            <a href="#" data-action="click->kitchen-tools#removeField"><%= t('profiles.edit.remove') %></a>
           </div>
         <% end %>
-
-        <div class="field">
-          <%= form.label :name, t('profiles.edit.name') %><br>
-          <%= form.text_field :name, required: true %>
-        </div>
-
-        <div class="field">
-          <%= form.label :email, t('profiles.edit.email') %><br>
-          <%= form.email_field :email, required: true %>
-        </div>
-
-        <div class="field">
-          <%= form.label :password, t('profiles.edit.password') %> <br>
-          <%= form.password_field :password, autocomplete: "new-password", onpaste: "return false;" %>
-          <% if @minimum_password_length %>
-            <em>(<%= t('profiles.edit.minimum_password_length', length: @minimum_password_length) %>)</em>
+        <% if @user.user_kitchen_tools.empty? %>
+          <%= form.fields_for :user_kitchen_tools, UserKitchenTool.new do |tool_form| %>
+            <div class="nested-fields" data-new-record="true">
+              <%= tool_form.hidden_field :_destroy %>
+              <%= tool_form.hidden_field :kitchen_tool_id %>
+              <%= tool_form.text_field :kitchen_tool_name %>
+              <a href="#" data-action="click->kitchen-tools#removeField"><%= t('profiles.edit.remove') %></a>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <a href="#" data-action="click->kitchen-tools#addField"><%= t('profiles.edit.add') %></a>
+      <template data-kitchen-tools-target="template">
+        <div class="nested-fields" data-new-record="true">
+          <%= form.fields_for :user_kitchen_tools, UserKitchenTool.new, child_index: "TEMPLATE_RECORD" do |tool_form| %>
+            <%= tool_form.hidden_field :_destroy %>
+            <%= tool_form.hidden_field :kitchen_tool_id %>
+            <%= tool_form.text_field :kitchen_tool_name %>
+            <a href="#" data-action="click->kitchen-tools#removeField"><%= t('profiles.edit.remove') %></a>
           <% end %>
         </div>
-
-        <div class="field">
-          <%= form.label :password_confirmation, t('profiles.edit.password_confirmation') %><br>
-          <%= form.password_field :password_confirmation, autocomplete: "new-password", onpaste: "return false;" %>
-        </div>
-
-        <div class="field">
-          <%= form.label :current_password, t('profiles.edit.current_password') %><br>
-          <%= form.password_field :current_password, autocomplete: "current-password", onpaste: "return false;" %>
-        </div>
-
-        <h3><%= t('profiles.edit.kitchen_tools') %></h3>
-        <div data-controller="kitchen-tools">
-          <div data-kitchen-tools-target="container">
-            <%= form.fields_for :user_kitchen_tools do |tool_form| %>
-              <div class="nested-fields" data-new-record="false">
-                <%= tool_form.hidden_field :_destroy %>
-                <%= tool_form.hidden_field :kitchen_tool_id %>
-                <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name, required: true %>
-                <a href="#" data-action="click->kitchen-tools#removeField"><%= t('profiles.edit.remove') %></a>
-              </div>
-            <% end %>
-            <% if @user.user_kitchen_tools.empty? %>
-              <%= form.fields_for :user_kitchen_tools, UserKitchenTool.new do |tool_form| %>
-                <div class="nested-fields" data-new-record="true">
-                  <%= tool_form.hidden_field :_destroy %>
-                  <%= tool_form.hidden_field :kitchen_tool_id %>
-                  <%= tool_form.text_field :kitchen_tool_name, required: true %>
-                  <a href="#" data-action="click->kitchen-tools#removeField"><%= t('profiles.edit.remove') %></a>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-          <a href="#" data-action="click->kitchen-tools#addField"><%= t('profiles.edit.add') %></a>
-          <template data-kitchen-tools-target="template">
-            <div class="nested-fields" data-new-record="true">
-              <%= form.fields_for :user_kitchen_tools, UserKitchenTool.new, child_index: "TEMPLATE_RECORD" do |tool_form| %>
-                <%= tool_form.hidden_field :_destroy %>
-                <%= tool_form.hidden_field :kitchen_tool_id %>
-                <%= tool_form.text_field :kitchen_tool_name, required: true %>
-                <a href="#" data-action="click->kitchen-tools#removeField"><%= t('profiles.edit.remove') %></a>
-              <% end %>
-            </div>
-          </template>
-        </div>
-
-        <div class="actions">
-          <%= form.submit t('profiles.edit.save') %>
-        </div>
-      <% end %>
-
-      <%= link_to t('helpers.cancel'), profile_path %>
-
-      <h3><%= t('profiles.edit.delete_account') %></h3>
-      <%= button_to t('profiles.edit.delete_account_button'), profile_path, method: :delete, data: { turbo_confirm: t('profiles.edit.confirm_delete') }, class: "btn btn-danger" %>
+      </template>
     </div>
-  </div>
-</div>
+
+    <div class="actions">
+      <%= form.submit t('profiles.edit.save') %>
+    </div>
+  <% end %>
+
+  <%= link_to t('helpers.cancel'), profile_path %>
+
+  <h3><%= t('profiles.edit.delete_account') %></h3>
+  <%= button_to t('profiles.edit.delete_account_button'), profile_path, method: :delete, data: { turbo_confirm: t('profiles.edit.confirm_delete') }, class: "btn btn-danger" %>
+<% end %>

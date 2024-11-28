@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy, :posts]
-  before_action :set_layout, only: [:show, :edit, :posts]
   before_action :set_view, only: [:posts]
 
   def show
@@ -19,18 +18,24 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      # 新しく追加された調理器具の処理
-      @user.user_kitchen_tools.each do |ukt|
-        if ukt.kitchen_tool_name.present? && ukt.kitchen_tool.nil?
-          ukt.set_kitchen_tool
-          ukt.save
-        end
+    # パスワード変更の有無を確認
+    password_params = params[:user].slice(:password, :password_confirmation, :current_password).values
+    if password_params.any?(&:present?)
+      # パスワード変更を伴う更新
+      if @user.update_with_password(user_params)
+        process_user_kitchen_tools
+        redirect_to profile_path, notice: t('notices.profile_updated')
+      else
+        handle_update_failure
       end
-      redirect_to profile_path, notice: t('notices.profile_updated')
     else
-      @user.user_kitchen_tools.build if @user.user_kitchen_tools.empty?
-      render :edit, status: :unprocessable_entity
+      # パスワード変更なしでの更新
+      if @user.update(user_params.except(:password, :password_confirmation, :current_password))
+        process_user_kitchen_tools
+        redirect_to profile_path, notice: t('notices.profile_updated')
+      else
+        handle_update_failure
+      end
     end
   end
 
@@ -65,11 +70,25 @@ class ProfilesController < ApplicationController
     params.require(:user).permit(
       :name,
       :email,
+      :password,
+      :password_confirmation,
+      :current_password,
       user_kitchen_tools_attributes: [:id, :kitchen_tool_id, :_destroy, :kitchen_tool_name]
     )
   end
 
-  def set_layout
-    @profile_layout = true
+  def process_user_kitchen_tools
+    # 新しく追加された調理器具の処理
+    @user.user_kitchen_tools.each do |ukt|
+      if ukt.kitchen_tool_name.present? && ukt.kitchen_tool.nil?
+        ukt.set_kitchen_tool
+        ukt.save
+      end
+    end
+  end
+
+  def handle_update_failure
+    @user.user_kitchen_tools.build if @user.user_kitchen_tools.empty?
+    render :edit, status: :unprocessable_entity
   end
 end
