@@ -1,0 +1,43 @@
+ja:
+  recipes:
+    index:
+      title: "レシピ一覧"
+      no_results: "該当するレシピが見つかりませんでした。"
+    new:
+      title: "レシピを投稿"
+    edit:
+      title: "レシピを編集する"
+    show:
+      title: "レシピの詳細"
+      dish_image: "完成写真"
+      steps: "調理工程"
+      kitchen_tools: "必要な調理器具"
+      ingredients: "用意する材料+調味料"
+      toppings: "味変/トッピング"
+      add_topping: "追加"
+      comment_section_title: "コメント"
+      confirm_delete: "本当に削除しますか？"
+    topping:
+      delete: "削除"
+    actions:
+      bookmark: "ブックマーク"
+      good: "うめぇ!"
+      bad: "うーん..."
+    form:
+      error: "エラー"
+      prohibited: "このレシピを保存できませんでした。"
+      title: "レシピ名"
+      dish_image: "完成写真"
+      dish_image_alt: "料理の画像"
+      steps_title: "調理工程"
+      step: "工程"
+      step_image: "工程写真"
+      step_image_alt: "工程画像"
+      kitchen_tools_title: "必要な調理器具"
+      kitchen_tool: "調理器具"
+      ingredients_title: "用意する材料+調味料"
+      ingredient: "材料"
+      add: "追加"
+      remove: "削除"
+      submit: "投稿"
+      save: "保存"

@@ -1,0 +1,18 @@
+en:
+  navbar:
+    brand: "Okome Biyori"
+    search_placeholder: "Search"
+    search_button: "Search"
+    sort_options:
+      newest: "Newest Posts"
+      oldest: "Oldest Posts"
+      few_ingredients: "Fewest Ingredients"
+      easy_cooking: "Easiest to Cook"
+      most_good: "Most 'Yummy!'"
+      most_bookmarks: "Most Bookmarked"
+    cookrice: "🔰 Rice Cooking Tutorial"
+    login: "Log In"
+    register: "Sign Up"
+    post_recipe: "Post Recipe"
+    post_foodstuff: "Post Foodstuff"
+    user_name: "Name:"

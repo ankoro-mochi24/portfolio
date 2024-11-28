@@ -1,0 +1,14 @@
+en:
+  sidebar:
+    profile:
+      menu: "Menu"
+      user_info: "User Information"
+      posts: "Posted Recipes/Foodstuffs"
+      logout: "Logout"
+    home:
+      filter: "Filter"
+      bookmarks: "Bookmarks"
+      good: "Good!"
+      bad: "Not Good..."
+      kitchen_tools: "Can be made with available kitchen tools"
+      reset_filter: "Reset Filter"

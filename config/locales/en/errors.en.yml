@@ -1,0 +1,15 @@
+en:
+  errors:
+    messages:
+      blank: "is required"
+      not_a_number: "must be a number"
+      required: "is required"
+      inclusion: "is not included in the list"
+      too_short: "must be at least %{count} characters"
+      too_long: "must be %{count} characters or fewer"
+      line_notify_failed: "Failed to connect with LINE Notify."
+      unauthorized_recipe: "You cannot edit or delete another user's recipe."
+      unauthorized_foodstuff: "You cannot edit or delete another user's food item."
+      unauthorized_line_notify: "You do not have permission to update the LINE Notify token."
+      not_found: "The food item was not found."
+      invalid_params: "Invalid parameters."

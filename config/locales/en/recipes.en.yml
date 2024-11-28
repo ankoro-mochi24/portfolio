@@ -1,0 +1,43 @@
+en:
+  recipes:
+    index:
+      title: "Recipe List"
+      no_results: "No recipes were found."
+    new:
+      title: "Post a Recipe"
+    edit:
+      title: "Edit Recipe"
+    show:
+      title: "Recipe Details"
+      dish_image: "Completed Dish Photo"
+      steps: "Cooking Steps"
+      kitchen_tools: "Required Kitchen Tools"
+      ingredients: "Ingredients + Seasonings"
+      toppings: "Toppings/Flavors"
+      add_topping: "Add"
+      comment_section_title: "Comments"
+      confirm_delete: "Are you sure you want to delete this?"
+    topping:
+      delete: "Delete"
+    actions:
+      bookmark: "Bookmark"
+      good: "Good!"
+      bad: "Not Good..."
+    form:
+      error: "Error"
+      prohibited: "Unable to save this recipe."
+      title: "Recipe Name"
+      dish_image: "Completed Dish Photo"
+      dish_image_alt: "Dish Image"
+      steps_title: "Cooking Steps"
+      step: "Step"
+      step_image: "Step Photo"
+      step_image_alt: "Step Image"
+      kitchen_tools_title: "Required Kitchen Tools"
+      kitchen_tool: "Kitchen Tool"
+      ingredients_title: "Ingredients + Seasonings"
+      ingredient: "Ingredient"
+      add: "Add"
+      remove: "Remove"
+      submit: "Post"
+      save: "Save"

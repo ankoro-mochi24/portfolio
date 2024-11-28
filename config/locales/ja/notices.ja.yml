@@ -1,0 +1,14 @@
+ja:
+  notices:
+    foodstuff_created: "食品が正常に投稿されました。"
+    foodstuff_updated: "食品が正常に更新されました。"
+    foodstuff_deleted: "食品が正常に削除されました。"
+    line_notify_connected: "LINE Notifyとの連携が正常に完了しました。"
+    line_notify_unlinked: "LINE Notifyとの連携が正常に解除されました。"
+    recipe_created: "レシピが正常に投稿されました。"
+    recipe_updated: "レシピが正常に更新されました。"
+    recipe_deleted: "レシピが正常に削除されました。"
+    topping_added: "トッピングが正常に追加されました。"
+    topping_removed: "トッピングが正常に削除されました。"
+    profile_updated: "ユーザー情報が更新されました。"
+    profile_deleted: "アカウントが削除されました。"

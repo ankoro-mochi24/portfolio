@@ -1,0 +1,11 @@
+en:
+  user_actions:
+    action_type_texts:
+      bookmark: "Bookmark"
+      good: "Good!"
+      bad: "Not Good..."
+    success:
+      added: "%{action_type} was successfully added."
+    notifications:
+      good: "Your post has been liked!"
+      bookmark: "Your post has been bookmarked!"

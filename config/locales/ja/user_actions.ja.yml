@@ -1,0 +1,11 @@
+ja:
+  user_actions:
+    action_type_texts:
+      bookmark: "ブックマーク"
+      good: "うめぇ！"
+      bad: "うーん..."
+    success:
+      added: "%{action_type}が正常に追加されました。"
+    notifications:
+      good: "あなたの投稿にいいねされました！"
+      bookmark: "あなたの投稿がブックマークされました！"

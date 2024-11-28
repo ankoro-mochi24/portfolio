@@ -1,0 +1,24 @@
+en:
+  comments:
+    title: "Comments"
+    edit: "Edit"
+    delete: "Delete"
+    confirm_delete: "Are you sure you want to delete?"
+    body_label: "Comment"
+    update: "Update"
+    cancel: "Cancel"
+    post: "Post Comment"
+    edit_title: "Edit Comment"
+    submit_error: "Failed to submit the comment"
+    create:
+      success: "The comment was successfully added."
+      failure: "Failed to add the comment."
+    update:
+      success: "The comment was successfully updated."
+      failure: "Failed to update the comment."
+    destroy:
+      success: "The comment was successfully deleted."
+    errors:
+      invalid_request: "Invalid request."
+      not_found: "Comment not found."
+      unauthorized: "You are not allowed to edit or delete another user's comment."

@@ -1,0 +1,63 @@
+en:
+  activerecord:
+    attributes:
+      foodstuff:
+        name: "Name"
+        price: "Price"
+        description: "Description"
+        link: "Link"
+        image: "Image"
+        user: "User"
+      recipe:
+        title: "Title"
+        dish_image: "Dish Image"
+        user: "User"
+      recipe_kitchen_tool:
+        recipe_kitchen_tools: "Kitchen Tools"
+    errors:
+      models:
+        foodstuff:
+          attributes:
+            name:
+              blank: "Please enter the name"
+            price:
+              blank: "Please enter the price"
+              not_a_number: "Price must be a number"
+              greater_than_or_equal_to: "Price must be greater than or equal to 0"
+              not_an_integer: "Price must be an integer"
+            link:
+              blank: "Please enter the link"
+            image:
+              blank: "Please upload an image"
+            user:
+              required: "User is required"
+        recipe_ingredient:
+          attributes:
+            recipe_id:
+              taken: "This ingredient has already been added to the recipe"
+        recipe_kitchen_tool:
+          attributes:
+            recipe_id:
+              taken: "This kitchen tool has already been added to the recipe"
+        recipe:
+          attributes:
+            title:
+              blank: "Please enter the title"
+            recipe_kitchen_tools:
+              must_have_one: "You must add at least one kitchen tool"
+        topping:
+          attributes:
+            name:
+              taken: "%{value} is already used within the same recipe"
+        user_action:
+          attributes:
+            user_id:
+              taken: "Already registered"
+          messages:
+            good_bad_conflict: "You cannot select both 'Good!' and 'Not so good...' at the same time"
+        user_kitchen_tool:
+          attributes:
+            user_id:
+              taken: "Already exists"
+      messages:
+        record_invalid: "Invalid record"

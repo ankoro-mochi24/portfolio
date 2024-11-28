@@ -1,0 +1,18 @@
+ja:
+  navbar:
+    brand: "お米日和"
+    search_placeholder: "検索"
+    search_button: "検索"
+    sort_options:
+      newest: "投稿が新しい順"
+      oldest: "投稿が古い順"
+      few_ingredients: "材料の少ない順"
+      easy_cooking: "調理が簡単順"
+      most_good: "うめぇ!が多い順"
+      most_bookmarks: "ブックマークが多い順"
+    cookrice: "🔰米炊きチュートリアル"
+    login: "ログイン"
+    register: "新規登録"
+    post_recipe: "レシピ投稿"
+    post_foodstuff: "食品を投稿"
+    user_name: "名前："
