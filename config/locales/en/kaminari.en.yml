@@ -1,0 +1,17 @@
+en:
+  kaminari:
+    next: "Next"
+    prev: "Previous"
+    first: "First"
+    last: "Last"
+    truncate: "..."
+    page_gap: "..."
+    page_entries_info:
+      single_page:
+        zero: "No entries"
+        one: "1 entry in total"
+        other: "%{count} entries in total"
+      multiple_pages:
+        zero: "No entries"
+        one: "1 entry in total"
+        other: "Showing %{from}–%{to} of %{total} entries"

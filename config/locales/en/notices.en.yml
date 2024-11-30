@@ -1,0 +1,14 @@
+en:
+  notices:
+    foodstuff_created: "The foodstuff has been successfully posted."
+    foodstuff_updated: "The foodstuff has been successfully updated."
+    foodstuff_deleted: "The foodstuff has been successfully deleted."
+    line_notify_connected: "LINE Notify integration was successfully completed."
+    line_notify_unlinked: "LINE Notify integration was successfully unlinked."
+    recipe_created: "The recipe has been successfully posted."
+    recipe_updated: "The recipe has been successfully updated."
+    recipe_deleted: "The recipe has been successfully deleted."
+    topping_added: "The topping has been successfully added."
+    topping_removed: "The topping has been successfully removed."
+    profile_updated: "User information has been successfully updated."
+    profile_deleted: "The account has been successfully deleted."

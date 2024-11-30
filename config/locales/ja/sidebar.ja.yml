@@ -1,0 +1,14 @@
+ja:
+  sidebar:
+    profile:
+      menu: "メニュー"
+      user_info: "ユーザー情報"
+      posts: "投稿したレシピ/投稿した食品"
+      logout: "ログアウト"
+    home:
+      filter: "絞り込み"
+      bookmarks: "ブックマーク"
+      good: "うめぇ!"
+      bad: "うーん..."
+      kitchen_tools: "持っている調理器具で作れる"
+      reset_filter: "絞り込み解除"

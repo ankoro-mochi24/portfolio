@@ -1,0 +1,7 @@
+ja:
+  helpers:
+    submit:
+      create: "作成"
+      update: "更新"
+      submit: "保存"
+    cancel: "キャンセル"

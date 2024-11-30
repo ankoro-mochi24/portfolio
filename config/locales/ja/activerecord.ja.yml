@@ -1,0 +1,63 @@
+ja:
+  activerecord:
+    attributes:
+      foodstuff:
+        name: "名前"
+        price: "価格"
+        description: "説明"
+        link: "リンク"
+        image: "画像"
+        user: "ユーザー"
+      recipe:
+        title: "タイトル"
+        dish_image: "料理の画像"
+        user: "ユーザー"
+      recipe_kitchen_tool:
+        recipe_kitchen_tools: "調理器具"
+    errors:
+      models:
+        foodstuff:
+          attributes:
+            name:
+              blank: "名前を入力してください"
+            price:
+              blank: "価格を入力してください"
+              not_a_number: "価格は数値で入力してください"
+              greater_than_or_equal_to: "価格は0以上の値にしてください"
+              not_an_integer: "価格は整数で入力してください"
+            link:
+              blank: "リンクを入力してください"
+            image:
+              blank: "画像をアップロードしてください"
+            user:
+              required: "ユーザーが必要です"
+        recipe_ingredient:
+          attributes:
+            recipe_id:
+              taken: "この材料は既にレシピに追加されています"
+        recipe_kitchen_tool:
+          attributes:
+            recipe_id:
+              taken: "この調理器具は既にレシピに追加されています"
+        recipe:
+          attributes:
+            title:
+              blank: "タイトルを入力してください"
+            recipe_kitchen_tools:
+              must_have_one: "を最低1つ追加してください"
+        topping:
+          attributes:
+            name:
+              taken: "%{value}は同じレシピ内で重複しています"
+        user_action:
+          attributes:
+            user_id:
+              taken: "すでに登録済みです"
+          messages:
+            good_bad_conflict: "同時に「うめぇ!」と「うーん...」を選択することはできません"
+        user_kitchen_tool:
+          attributes:
+            user_id:
+              taken: "はすでに存在します"
+      messages:
+        record_invalid: "無効なレコードです"

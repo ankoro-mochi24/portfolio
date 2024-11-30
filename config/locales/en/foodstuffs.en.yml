@@ -1,0 +1,21 @@
+en:
+  foodstuffs:
+    index:
+      title: "Food Items List"
+      no_results: "No matching food items were found."
+    show:
+      name: "Name"
+      price: "Price"
+      description: "Description"
+      link: "Link"
+      image: "Image"
+      post_recipe: "Post Recipe"
+    new:
+      title: "Post a Food Item"
+    edit:
+      title: "Edit Food Item"
+    show_foodstuff: "View This Food Item"
+    back_to_list: "Back to Top"
+    edit_foodstuff: "Edit Food Item"
+    destroy_foodstuff: "Delete Food Item"
+    confirm_delete: "Are you sure you want to delete?"

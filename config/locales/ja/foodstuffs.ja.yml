@@ -1,0 +1,21 @@
+ja:
+  foodstuffs:
+    index:
+      title: "食品一覧"
+      no_results: "該当する食品が見つかりませんでした。"
+    show:
+      name: "名前"
+      price: "価格"
+      description: "説明"
+      link: "リンク"
+      image: "画像"
+      post_recipe: "レシピを投稿"
+    new:
+      title: "食品を投稿"
+    edit:
+      title: "食品を編集"
+    show_foodstuff: "この食品を表示"
+    back_to_list: "トップに戻る"
+    edit_foodstuff: "食品を編集"
+    destroy_foodstuff: "食品を削除"
+    confirm_delete: "本当に削除しますか？"
