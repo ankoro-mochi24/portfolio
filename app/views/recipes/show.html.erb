@@ -1,3 +1,4 @@
+<!-- フラッシュメッセージ -->
 <% if flash[:notice] %>
   <div class="alert alert-success">
     <%= flash[:notice] %>
@@ -12,17 +13,20 @@
 
 <div class="recipe-show">
   <div class="recipe-header">
+    <!-- レジピ名 -->
     <p>
       <strong><%= t('recipes.show.title') %>:</strong>
       <%= @recipe.title %>
     </p>
 
+    <!-- レシピ画像 -->
     <p>
       <strong><%= t('recipes.show.dish_image') %>:</strong>
       <%= image_tag @recipe.dish_image.url, size: "100x100" if @recipe.dish_image.present? %>
     </p>
   </div>
 
+  <!-- 投稿されたトッピング -->
   <% if user_signed_in? %>
     <h3><%= t('recipes.show.toppings') %></h3>
     <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
@@ -33,6 +37,7 @@
       <%= form.submit t('recipes.show.add_topping'), class: "btn btn-primary" %>
     <% end %>
 
+    <!-- トッピングに対するアクション -->
     <ul id="toppings">
       <% @recipe.toppings.each do |topping| %>
         <li id="topping_<%= topping.id %>" class="d-flex align-items-center">
@@ -48,6 +53,7 @@
   <% end %>
 
   <div class="recipe-section">
+    <!-- 調理工程 -->
     <h3><%= t('recipes.show.steps') %></h3>
     <% @recipe.recipe_steps.each do |step| %>
       <div class="recipe-step">
@@ -56,6 +62,7 @@
           <%= step.text %>
         </p>
         <% if step.step_image.present? %>
+          <!-- 調理工程の画像 -->
           <p>
             <%= image_tag step.step_image.url, size: "100x100" %>
           </p>
@@ -64,6 +71,7 @@
     <% end %>
   </div>
 
+  <!-- 必要な調理器具 -->
   <div class="recipe-section">
     <h3><%= t('recipes.show.kitchen_tools') %></h3>
     <ul>
@@ -73,6 +81,7 @@
     </ul>
   </div>
 
+  <!-- 必要な材料 -->
   <div class="recipe-section">
     <h3><%= t('recipes.show.ingredients') %></h3>
     <ul>
@@ -82,18 +91,22 @@
     </ul>
   </div>
 
+  <!-- レシピへのアクション -->
   <div class="d-flex align-items-center user-actions-container">
     <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'bookmark' } %>
     <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'good' } %>
     <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'bad' } %>
+  </div>
 
-    <%= link_to t('foodstuffs.back_to_list'), root_path, class: 'btn btn-secondary' %>
+  <!-- レシピの編集/削除 -->
+  <div class="d-flex align-items-center user-actions-container">
     <% if @recipe.user == current_user %>
       <%= link_to t('recipes.edit.title'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
-      <%= button_to t('recipes.show.confirm_delete'), recipe_path(@recipe), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, class: 'btn btn-danger' %>
+      <%= button_to t('recipes.show.destroy_recipe'), recipe_path(@recipe), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, class: 'btn btn-danger' %>
     <% end %>
   </div>
 
+  <!-- コメント -->
   <h2><%= t('recipes.show.comment_section_title') %></h2>
   <div id="comments">
     <%= render @recipe.comments %> <!-- /comments/_comment.html.erb -->

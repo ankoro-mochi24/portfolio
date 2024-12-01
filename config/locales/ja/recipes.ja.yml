@@ -16,9 +16,10 @@ ja:
       toppings: "味変/トッピング"
       add_topping: "追加"
       comment_section_title: "コメント"
+      destroy_recipe: "レシピを削除"
       confirm_delete: "本当に削除しますか？"
     topping:
-      delete: "削除"
+      delete: "トッピングを削除"
     actions:
       bookmark: "ブックマーク"
       good: "うめぇ!"

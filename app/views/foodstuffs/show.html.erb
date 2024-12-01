@@ -1,26 +1,32 @@
+<!-- フラッシュメッセージ -->
 <p style="color: green"><%= notice %></p>
 
 <div class="foodstuff-header">
+  <!-- 食品名 -->
   <p>
     <strong><%= t('foodstuffs.show.name') %>:</strong>
     <%= @foodstuff.name %>
   </p>
 
+  <!-- 価格 -->
   <p>
     <strong><%= t('foodstuffs.show.price') %>:</strong>
     <%= @foodstuff.price %>
   </p>
 
+  <!-- 食品説明 -->
   <p>
     <strong><%= t('foodstuffs.show.description') %>:</strong>
     <%= @foodstuff.description %>
   </p>
 
+  <!-- 食品のリンク -->
   <p>
     <strong><%= t('foodstuffs.show.link') %>:</strong>
     <%= @foodstuff.link %>
   </p>
 
+  <!-- 食品のイメージ画像 -->
   <p>
     <strong><%= t('foodstuffs.show.image') %>:</strong>
     <% if @foodstuff.image.present? %>
@@ -31,6 +37,7 @@
   </p>
 </div>
 
+<!-- 関連レシピを投稿する -->
 <%= link_to t('foodstuffs.show.post_recipe'), new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
 
 <div class="d-flex align-items-center user-actions-container">
