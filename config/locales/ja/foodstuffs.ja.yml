@@ -9,7 +9,7 @@ ja:
       description: "説明"
       link: "リンク"
       image: "画像"
-      post_recipe: "レシピを投稿"
+      post_recipe: "この食品を使ったレシピを投稿"
     new:
       title: "食品を投稿"
     edit:
