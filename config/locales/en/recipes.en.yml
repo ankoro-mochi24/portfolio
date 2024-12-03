@@ -8,7 +8,7 @@ en:
     edit:
       title: "Edit Recipe"
     show:
-      title: "Recipe Details"
+      title: "Recipe Name"
       dish_image: "Completed Dish Photo"
       steps: "Cooking Steps"
       kitchen_tools: "Required Kitchen Tools"
