@@ -111,21 +111,21 @@
 
     <!-- コメントリスト -->
     <div id="comments" class="comment-list mt-3">
-      <% if @recipe.comments.any? %>
-        <%= render @recipe.comments %>
-      <% else %>
-        <p class="text-muted"><%= t('comments.no_comments') %></p>
+      <%= turbo_frame_tag "comments_list" do %>
+        <% @recipe.comments.each do |comment| %>
+          <%= render "comments/comment", comment: comment %>
+        <% end %>
       <% end %>
     </div>
 
     <!-- 新規コメント投稿フォーム -->
     <div class="new-comment-form mt-4">
-      <%= turbo_frame_tag "new_comment" do %>
-        <div class="card p-3">
-          <h5 class="card-title"><%= t('comments.form_title') %></h5>
-          <%= render "comments/form", commentable: @recipe, comment: Comment.new %>
-        </div>
-      <% end %>
+      <h5 class="card-title form-title"><%= t('comments.form_title') %></h5>
+      <div class="card p-4 comment-item">
+        <%= turbo_frame_tag "new_comment" do %>
+            <%= render "comments/form", commentable: @recipe, comment: Comment.new %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

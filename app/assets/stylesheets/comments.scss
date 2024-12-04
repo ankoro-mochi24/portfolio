@@ -19,60 +19,34 @@
 
   .new-comment-form {
     margin-top: 2rem;
-  }
-}
 
-.comment-item {
-  border: 1px solid #e5e5e5;
-  border-radius: 8px;
-  background-color: #ffffff;
+    .comment-item {
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      background-color: #ffffff;
+      padding: 1.5rem;
 
-  .comment-header {
-    font-size: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #e5e5e5;
-    padding-bottom: 0.5rem;
-  }
+      .form-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #e5e5e5;
+      }
 
-  .comment-meta {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+      textarea {
+        resize: none;
+        min-height: 120px;
+        width: 100%;
+      }
 
-  .comment-meta .text-muted {
-    font-size: 0.85rem;
-    color: #6c757d;
-  }
+      .d-flex {
+        justify-content: flex-end;
+        margin-top: 1rem;
 
-  .comment-author {
-    color: #007bff;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .comment-body {
-    margin-top: 0.5rem;
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    color: #495057;
-  }
-
-  .comment-actions {
-    display: flex;
-    gap: 0.5rem;
-
-    .btn {
-      font-size: 0.85rem;
+        .btn {
+          font-size: 1rem;
+        }
+      }
     }
   }
-}
-
-textarea {
-  resize: none;
-  min-height: 100px;
 }

@@ -6,7 +6,7 @@ ja:
     new:
       title: "レシピを投稿"
     edit:
-      title: "レシピを編集する"
+      title: "レシピを編集"
     show:
       title: "レシピ名"
       dish_image: "完成写真"
