@@ -10,6 +10,8 @@ ja:
     post: "コメントを投稿"
     edit_title: "コメントを編集"
     submit_error: "コメントを投稿する"
+    no_comments: "コメントがまだありません。"
+    form_title: "新しいコメントを投稿する"
     create:
       success: "コメントが追加されました。"
       failure: "コメントの追加に失敗しました。"
@@ -22,3 +24,7 @@ ja:
       invalid_request: "不正なリクエストです。"
       not_found: "コメントが見つかりません。"
       unauthorized: "他のユーザーのコメントを編集・削除することはできません。"
+  time:
+    formats:
+      short: "%Y/%m/%d %H:%M" # 年/月/日 時:分
+      long: "%Y年%m月%d日 %H時%M分" # 年月日 時間形式

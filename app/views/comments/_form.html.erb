@@ -3,12 +3,11 @@
   <%= form_with(model: [commentable, comment], remote: true, id: 'new_comment') do |form| %>
     <%= hidden_field_tag :commentable_type, commentable.class.name %>
     <%= hidden_field_tag :commentable_id, commentable.id %>
-    <div class="field">
-      <%= form.label :body, t('comments.body_label') %>
-      <%= form.text_area :body, required: true %>
+    <div class="mb-3">
+      <%= form.text_area :body, required: true, class: 'form-control', placeholder: t('comments.body_label') %>
     </div>
-    <div class="actions">
-      <%= form.submit t('comments.post') %>
+    <div class="d-flex justify-content-end">
+      <%= form.submit t('comments.post'), class: 'btn btn-primary' %>
     </div>
   <% end %>
 <% end %>

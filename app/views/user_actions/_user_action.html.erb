@@ -11,22 +11,22 @@ actionable_id: recipe.id/foodstuff.id
     <% if action.present? %> <!-- アクションが存在する場合 -->
       <%= button_to polymorphic_path([actionable, action]), method: :delete, remote: true, class: "btn btn-link" do %> <!-- アクションを削除するボタン -->
         <% if action_type == 'bookmark' %>
-          <a>ブクマ</a><i class="bi bi-bookmark-star-fill"></i> <!-- ブックマークアイコン（オン） -->
+          <a><%= t('user_actions.action_type_texts.bookmark') %></a><i class="bi bi-bookmark-star-fill"></i> <!-- ブックマークアイコン（オン） -->
         <% elsif action_type == 'good' %>
-          <a>うめぇ！</a><i class="bi bi-emoji-heart-eyes-fill"></i> <!-- goodアイコン（オン） -->
+          <a><%= t('user_actions.action_type_texts.good') %></a><i class="bi bi-emoji-heart-eyes-fill"></i> <!-- goodアイコン（オン） -->
         <% elsif action_type == 'bad' %>
-          <a>うーん...</a><i class="bi bi-emoji-expressionless-fill"></i> <!-- badアイコン（オン） -->
+          <a><%= t('user_actions.action_type_texts.bad') %></a><i class="bi bi-emoji-expressionless-fill"></i> <!-- badアイコン（オン） -->
         <% end %>
         <%= action_count %> <!-- アクション総数を表示 -->
       <% end %>
     <% else %> <!-- アクションが存在しない場合 -->
       <%= button_to polymorphic_path([actionable, :user_actions]), method: :post, params: { user_action: { action_type: action_type, actionable_type: actionable.class.name, actionable_id: actionable.id } }, remote: true, class: "btn btn-link" do %> <!-- アクションを作成するボタン -->
         <% if action_type == 'bookmark' %>
-          <a>ブクマ</a><i class="bi bi-bookmark-star"></i> <!-- ブックマークアイコン（オフ） -->
+          <a><%= t('user_actions.action_type_texts.bookmark') %></a><i class="bi bi-bookmark-star"></i> <!-- ブックマークアイコン（オフ） -->
         <% elsif action_type == 'good' %>
-          <a>うめぇ！</a><i class="bi bi-emoji-heart-eyes"></i> <!-- goodアイコン（オフ） -->
+          <a><%= t('user_actions.action_type_texts.good') %></a><i class="bi bi-emoji-heart-eyes"></i> <!-- goodアイコン（オフ） -->
         <% elsif action_type == 'bad' %>
-          <a>うーん...</a><i class="bi bi-emoji-expressionless"></i> <!-- badアイコン（オフ） -->
+          <a><%= t('user_actions.action_type_texts.bad') %></a><i class="bi bi-emoji-expressionless"></i> <!-- badアイコン（オフ） -->
         <% end %>
         <%= action_count %> <!-- アクション総数を表示 -->
       <% end %>

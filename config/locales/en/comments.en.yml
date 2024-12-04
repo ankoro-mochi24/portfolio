@@ -10,6 +10,8 @@ en:
     post: "Post Comment"
     edit_title: "Edit Comment"
     submit_error: "Failed to submit the comment"
+    no_comments: "No comments yet."
+    form_title: "Post a new comment"
     create:
       success: "The comment was successfully added."
       failure: "Failed to add the comment."
@@ -22,3 +24,7 @@ en:
       invalid_request: "Invalid request."
       not_found: "Comment not found."
       unauthorized: "You are not allowed to edit or delete another user's comment."
+  time:
+    formats:
+      short: "%m/%d/%Y %H:%M"
+      long: "%B %d, %Y %H:%M %p"

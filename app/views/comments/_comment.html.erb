@@ -1,24 +1,40 @@
 <!-- 投稿されたコメントの表示、編集、削除機能 -->
 <%= turbo_frame_tag dom_id(comment) do %>
-  <div id="comment-<%= comment.id %>" data-controller="comment">
-    <p data-comment-target="body">
-      <strong><%= comment.user.name %>:</strong>
-      <%= comment.body %>
-      <% if comment.user == current_user %>
-        <%= link_to t('comments.edit'), '#', data: { action: 'comment#edit' } %> |
-        <%= button_to t('comments.delete'), polymorphic_path([comment.commentable, comment]), method: :delete, data: { turbo_confirm: t('comments.confirm_delete') } %>
-      <% end %>
-    </p>
+  <div class="card comment-item mb-3 p-3" id="comment-<%= comment.id %>" data-controller="comment">
+    <!-- ユーザー情報とアクション -->
+    <div class="comment-header d-flex justify-content-between align-items-center">
+      <!-- ユーザー名と投稿日時 -->
+      <div class="comment-meta text-primary">
+        <i class="bi bi-person-circle"></i> <%= comment.user.name %>
+        <span class="text-muted ms-2" style="font-size: 0.85rem;">
+          <%= l(comment.created_at, format: :short) %>
+        </span>
+      </div>
 
-    <div data-comment-target="form" class="d-none">
-      <%= form_with(model: [comment.commentable, comment], remote: true, data: { action: 'ajax:success->comment#handleAjaxResponse' }) do |form| %>
-        <div class="field">
-          <%= form.label :body, t('comments.body_label') %>
-          <%= form.text_area :body, value: comment.body, required: true %>
+      <!-- 編集・削除ボタン -->
+      <% if comment.user == current_user %>
+        <div class="comment-actions d-flex gap-2">
+          <%= link_to t('comments.edit'), '#', class: 'btn btn-sm btn-outline-primary', data: { action: 'comment#edit' } %>
+          <%= button_to t('comments.delete'), polymorphic_path([comment.commentable, comment]), method: :delete, data: { turbo_confirm: t('comments.confirm_delete') }, class: 'btn btn-sm btn-outline-danger' %>
         </div>
-        <div class="actions">
-          <%= form.submit t('comments.update') %>
-          <%= link_to t('comments.cancel'), '#', data: { action: 'comment#cancel' } %>
+      <% end %>
+    </div>
+
+    <!-- コメント本文 -->
+    <div class="comment-body mt-2 p-2 bg-light rounded" data-comment-target="body">
+      <%= comment.body %>
+    </div>
+
+    <!-- 編集フォーム -->
+    <div data-comment-target="form" class="d-none mt-3">
+      <%= form_with(model: [comment.commentable, comment], remote: true, data: { action: 'ajax:success->comment#handleAjaxResponse' }) do |form| %>
+        <div class="mb-2">
+          <%= form.label :body, t('comments.body_label'), class: 'form-label' %>
+          <%= form.text_area :body, value: comment.body, required: true, class: 'form-control' %>
+        </div>
+        <div class="d-flex justify-content-end">
+          <%= form.submit t('comments.update'), class: 'btn btn-primary me-2' %>
+          <%= link_to t('comments.cancel'), '#', data: { action: 'comment#cancel' }, class: 'btn btn-secondary' %>
         </div>
       <% end %>
     </div>
