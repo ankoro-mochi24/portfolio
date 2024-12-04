@@ -4,7 +4,6 @@
     <%= hidden_field_tag :commentable_type, commentable.class.name %>
     <%= hidden_field_tag :commentable_id, commentable.id %>
     <div class="field">
-      <%= form.label :body, t('comments.body_label') %>
       <%= form.text_area :body, required: true %>
     </div>
     <div class="actions">

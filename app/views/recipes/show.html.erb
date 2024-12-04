@@ -108,14 +108,22 @@
   <!-- コメント -->
   <div class="comments-section mt-5">
     <h2 class="comments-title"><%= t('recipes.show.comment_section_title') %></h2>
+
+    <!-- コメントリスト -->
     <div id="comments" class="comment-list mt-3">
-      <%= render @recipe.comments %> <!-- /comments/_comment.html.erb -->
+      <% if @recipe.comments.any? %>
+        <%= render @recipe.comments %>
+      <% else %>
+        <p class="text-muted"><%= t('comments.no_comments') %></p>
+      <% end %>
     </div>
 
+    <!-- 新規コメント投稿フォーム -->
     <div class="new-comment-form mt-4">
       <%= turbo_frame_tag "new_comment" do %>
         <div class="card p-3">
-          <%= render "comments/form", commentable: @recipe, comment: Comment.new %> <!-- /comments/_form.html.erb -->
+          <h5 class="card-title"><%= t('comments.form_title') %></h5>
+          <%= render "comments/form", commentable: @recipe, comment: Comment.new %>
         </div>
       <% end %>
     </div>

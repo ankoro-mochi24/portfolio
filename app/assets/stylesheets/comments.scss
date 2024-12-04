@@ -29,22 +29,45 @@
 
   .comment-header {
     font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #e5e5e5;
     padding-bottom: 0.5rem;
   }
 
+  .comment-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .comment-meta .text-muted {
+    font-size: 0.85rem;
+    color: #6c757d;
+  }
+
   .comment-author {
     color: #007bff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 
   .comment-body {
     margin-top: 0.5rem;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
     color: #495057;
   }
 
   .comment-actions {
+    display: flex;
+    gap: 0.5rem;
+
     .btn {
-      margin-left: 0.5rem;
+      font-size: 0.85rem;
     }
   }
 }

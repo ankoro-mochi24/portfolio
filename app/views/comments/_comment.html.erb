@@ -1,16 +1,29 @@
 <!-- 投稿されたコメントの表示、編集、削除機能 -->
 <%= turbo_frame_tag dom_id(comment) do %>
   <div class="card comment-item mb-3 p-3" id="comment-<%= comment.id %>" data-controller="comment">
+    <!-- ユーザー情報とアクション -->
     <div class="comment-header d-flex justify-content-between align-items-center">
-      <span class="comment-author font-weight-bold"><%= comment.user.name %></span>
-      <div class="comment-actions">
-        <% if comment.user == current_user %>
-          <%= link_to t('comments.edit'), '#', data: { action: 'comment#edit' }, class: 'btn btn-sm btn-outline-primary' %>
-          <%= button_to t('comments.delete'), polymorphic_path([comment.commentable, comment]), method: :delete, data: { turbo_confirm: t('comments.confirm_delete') }, class: 'btn btn-sm btn-outline-danger' %>
-        <% end %>
+      <!-- ユーザー名と投稿日時 -->
+      <div class="comment-meta text-primary">
+        <i class="bi bi-person-circle"></i> <%= comment.user.name %>
+        <span class="text-muted ms-2" style="font-size: 0.85rem;">
+          <%= l(comment.created_at, format: :short) %>
+        </span>
       </div>
+
+      <!-- 編集・削除ボタン -->
+      <% if comment.user == current_user %>
+        <div class="comment-actions d-flex gap-2">
+          <%= link_to t('comments.edit'), '#', class: 'btn btn-sm btn-outline-primary', data: { action: 'comment#edit' } %>
+          <%= button_to t('comments.delete'), polymorphic_path([comment.commentable, comment]), method: :delete, data: { turbo_confirm: t('comments.confirm_delete') }, class: 'btn btn-sm btn-outline-danger' %>
+        </div>
+      <% end %>
     </div>
-    <p class="comment-body mt-2" data-comment-target="body"><%= comment.body %></p>
+
+    <!-- コメント本文 -->
+    <div class="comment-body mt-2 p-2 bg-light rounded" data-comment-target="body">
+      <%= comment.body %>
+    </div>
 
     <!-- 編集フォーム -->
     <div data-comment-target="form" class="d-none mt-3">
