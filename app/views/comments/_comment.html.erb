@@ -1,24 +1,27 @@
 <!-- 投稿されたコメントの表示、編集、削除機能 -->
 <%= turbo_frame_tag dom_id(comment) do %>
-  <div id="comment-<%= comment.id %>" data-controller="comment">
-    <p data-comment-target="body">
-      <strong><%= comment.user.name %>:</strong>
-      <%= comment.body %>
-      <% if comment.user == current_user %>
-        <%= link_to t('comments.edit'), '#', data: { action: 'comment#edit' } %> |
-        <%= button_to t('comments.delete'), polymorphic_path([comment.commentable, comment]), method: :delete, data: { turbo_confirm: t('comments.confirm_delete') } %>
-      <% end %>
-    </p>
+  <div class="card comment-item mb-3 p-3" id="comment-<%= comment.id %>" data-controller="comment">
+    <div class="comment-header d-flex justify-content-between align-items-center">
+      <span class="comment-author font-weight-bold"><%= comment.user.name %></span>
+      <div class="comment-actions">
+        <% if comment.user == current_user %>
+          <%= link_to t('comments.edit'), '#', data: { action: 'comment#edit' }, class: 'btn btn-sm btn-outline-primary' %>
+          <%= button_to t('comments.delete'), polymorphic_path([comment.commentable, comment]), method: :delete, data: { turbo_confirm: t('comments.confirm_delete') }, class: 'btn btn-sm btn-outline-danger' %>
+        <% end %>
+      </div>
+    </div>
+    <p class="comment-body mt-2" data-comment-target="body"><%= comment.body %></p>
 
-    <div data-comment-target="form" class="d-none">
+    <!-- 編集フォーム -->
+    <div data-comment-target="form" class="d-none mt-3">
       <%= form_with(model: [comment.commentable, comment], remote: true, data: { action: 'ajax:success->comment#handleAjaxResponse' }) do |form| %>
-        <div class="field">
-          <%= form.label :body, t('comments.body_label') %>
-          <%= form.text_area :body, value: comment.body, required: true %>
+        <div class="mb-2">
+          <%= form.label :body, t('comments.body_label'), class: 'form-label' %>
+          <%= form.text_area :body, value: comment.body, required: true, class: 'form-control' %>
         </div>
-        <div class="actions">
-          <%= form.submit t('comments.update') %>
-          <%= link_to t('comments.cancel'), '#', data: { action: 'comment#cancel' } %>
+        <div class="d-flex justify-content-end">
+          <%= form.submit t('comments.update'), class: 'btn btn-primary me-2' %>
+          <%= link_to t('comments.cancel'), '#', data: { action: 'comment#cancel' }, class: 'btn btn-secondary' %>
         </div>
       <% end %>
     </div>
