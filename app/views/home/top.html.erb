@@ -33,7 +33,7 @@
     <div class="row justify-content-center">
       <% if @view == 'both' %>
         <!-- レシピと食品 -->
-        <div class="col-md-6">
+        <div class="col-md-6 mx-auto text-center">
           <h1><%= t('recipes.index.title') %></h1>
           <div id="recipes">
             <% if @recipes.present? %>
@@ -46,7 +46,7 @@
             <% end %>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mx-auto text-center">
           <h1><%= t('foodstuffs.index.title') %></h1>
           <div id="foodstuffs">
             <% if @foodstuffs.present? %>
