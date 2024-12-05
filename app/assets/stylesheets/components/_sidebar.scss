@@ -1,0 +1,17 @@
+.sidebar {
+  position: fixed;
+  top: 60px; /* ヘッダーの高さに合わせて調整 */
+  left: 0;
+  width: 250px;
+  background-color: #f8f9fa; /* サイドバーの背景色 */
+  padding: 20px;
+  border-right: 1px solid #dee2e6; /* サイドバーとメインコンテンツの区切り線 */
+  height: calc(100vh - 60px); /* サイドバーの高さを画面全体の高さからヘッダーの高さを引いたものに設定 */
+  overflow-y: auto; /* 内容が多い場合にスクロール可能にする */
+  box-sizing: border-box; /* パディングを含めて幅・高さを計算 */
+}
+
+.sidebar .list-group-item.active {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
