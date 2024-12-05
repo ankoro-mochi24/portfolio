@@ -33,3 +33,12 @@
     border-top: 1px solid #eee; /* 上部に薄い線を追加 */
   }
 }
+
+/* グリッド表示の親要素 */
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* レスポンシブグリッド */
+  gap: 16px; /* カード間の余白 */
+  padding: 0; /* リストのパディングをリセット */
+  list-style: none; /* リストのデフォルトスタイルを削除 */
+}
