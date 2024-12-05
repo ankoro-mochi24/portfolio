@@ -1,3 +1,5 @@
+<% content_for(:title, t('profiles.posts.content')) %>
+
 <body class="<%= user_signed_in? ? 'with-sidebar' : '' %>">
   <%= render 'shared/tabs', tab_paths: {
         both: posts_profile_path(view: 'both'),

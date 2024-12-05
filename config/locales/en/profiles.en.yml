@@ -1,6 +1,7 @@
 en:
   profiles:
     edit:
+      content: "Edit Profile"
       title: "Edit User Information"
       error: "Error"
       prohibited: "Unable to save this user."
@@ -18,6 +19,7 @@ en:
       delete_account_button: "Delete Account"
       confirm_delete: "Are you sure you want to delete your account? This action cannot be undone."
     posts:
+      content: "Posted Recipes/Posted Foodstuffs"
       both: "Both"
       recipes: "Recipes"
       foodstuffs: "Foodstuffs"
@@ -27,6 +29,7 @@ en:
       no_recipes: "No recipes have been posted."
       no_foodstuffs: "No foodstuffs have been posted."
     show:
+      content: "Profile"
       title: "My Page"
       username: "Username"
       email: "Email Address"
