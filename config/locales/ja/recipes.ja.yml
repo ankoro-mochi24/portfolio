@@ -8,6 +8,7 @@ ja:
     edit:
       title: "レシピを編集"
     show:
+      content: "レシピ詳細"
       title: "レシピ名"
       dish_image: "完成写真"
       steps: "調理工程"
