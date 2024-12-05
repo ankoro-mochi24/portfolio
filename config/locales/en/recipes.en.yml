@@ -4,8 +4,10 @@ en:
       title: "Recipe List"
       no_results: "No recipes were found."
     new:
+      content: "New Recipe"
       title: "Post a Recipe"
     edit:
+      content: "Edit Recipe"
       title: "Edit Recipe"
     show:
       content: Recipe Details

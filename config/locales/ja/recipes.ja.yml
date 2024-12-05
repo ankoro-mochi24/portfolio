@@ -4,8 +4,10 @@ ja:
       title: "レシピ一覧"
       no_results: "該当するレシピが見つかりませんでした。"
     new:
+      content: "レシピ投稿"
       title: "レシピを投稿"
     edit:
+      content: "レシピ編集"
       title: "レシピを編集"
     show:
       content: "レシピ詳細"
