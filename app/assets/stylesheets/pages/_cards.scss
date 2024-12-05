@@ -1,0 +1,33 @@
+.card-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 16px;
+  padding: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto 16px;
+    max-width: 100%;
+    border-radius: 4px;
+  }
+
+  .user-actions-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+  }
+}

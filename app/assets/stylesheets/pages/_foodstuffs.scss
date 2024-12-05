@@ -1,45 +1,12 @@
-/* foodstuff-item にカードデザインを適用 */
 .foodstuff-item {
-  background: #fff; /* 背景を白色に */
-  border: 1px solid #ddd; /* ボーダーを追加 */
-  border-radius: 8px; /* 角を丸くする */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽いシャドウを追加 */
-  overflow: hidden; /* 角から内容がはみ出さないように */
-  margin-bottom: 16px; /* カード同士の間隔 */
-  padding: 16px; /* 内側の余白 */
-  transition: transform 0.2s, box-shadow 0.2s; /* ホバーアニメーション */
-
-  &:hover {
-    transform: translateY(-4px); /* カードが浮き上がる */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ホバー時にシャドウを強調 */
-  }
-
-  p {
-    margin-bottom: 8px; /* 段落間の余白 */
-  }
-
-  /* 画像のスタイル */
-  img {
-    display: block; /* ブロック要素に */
-    margin: 0 auto 16px; /* 中央揃えと下に余白 */
-    max-width: 100%; /* 幅をカード内に収める */
-    border-radius: 4px; /* 画像の角を少し丸める */
-  }
-
-  /* アクションボタンエリア */
-  .user-actions-container {
-    display: flex;
-    justify-content: space-between; /* ボタンを均等に配置 */
-    padding-top: 8px; /* 上部に余白を追加 */
-    border-top: 1px solid #eee; /* 上部に薄い線を追加 */
-  }
+  @extend .card-item; /* 共通スタイルを適用 */
 }
 
 /* グリッド表示の親要素 */
 .foodstuff-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* レスポンシブグリッド */
-  gap: 16px; /* カード間の余白 */
-  padding: 0; /* リストのパディングをリセット */
-  list-style: none; /* リストのデフォルトスタイルを削除 */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 0;
+  list-style: none;
 }
