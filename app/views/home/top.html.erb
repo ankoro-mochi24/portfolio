@@ -60,7 +60,8 @@
           </div>
         </div>
       <% elsif @view == 'recipes' %>
-        <div class="col-md-8">
+        <!-- レシピのみ中央に配置 -->
+        <div class="col-md-8 mx-auto text-center">
           <h1><%= t('recipes.index.title') %></h1>
           <div id="recipes">
             <% if @recipes.present? %>
@@ -75,7 +76,7 @@
         </div>
       <% elsif @view == 'foodstuffs' %>
         <!-- 食品のみ中央に配置 -->
-        <div class="col-md-8">
+        <div class="col-md-8 mx-auto text-center">
           <h1><%= t('foodstuffs.index.title') %></h1>
           <div id="foodstuffs">
             <% if @foodstuffs.present? %>
