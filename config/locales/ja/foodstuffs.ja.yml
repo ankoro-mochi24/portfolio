@@ -4,14 +4,17 @@ ja:
       title: "食品一覧"
       no_results: "該当する食品が見つかりませんでした。"
     show:
+      content: "食品詳細"
       name: "名前"
       price: "価格"
       description: "説明"
       link: "リンク"
       post_recipe: "この食品を使ったレシピを投稿"
     new:
+      content: "食品投稿"
       title: "食品を投稿"
     edit:
+      content: "食品編集"
       title: "食品を編集"
     show_foodstuff: "この食品を表示"
     edit_foodstuff: "食品を編集"
