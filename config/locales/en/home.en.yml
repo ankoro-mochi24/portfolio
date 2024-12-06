@@ -1,7 +1,7 @@
 en:
   home:
     top:
-      title: "Home"
+      content: "Home"
       both: "Both"
       recipes: "Recipes"
       foodstuffs: "Foodstuffs"

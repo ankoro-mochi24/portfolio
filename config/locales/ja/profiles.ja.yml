@@ -1,6 +1,7 @@
 ja:
   profiles:
     edit:
+      content: "プロフィール編集"
       title: "ユーザー情報を編集する"
       error: "エラー"
       prohibited: "このユーザーの保存ができませんでした。"
@@ -18,6 +19,7 @@ ja:
       delete_account_button: "アカウントを削除する"
       confirm_delete: "本当にアカウントを削除しますか？この操作は元に戻せません。"
     posts:
+      content: "投稿したレシピ/投稿した食品"
       both: "両方"
       recipes: "レシピ"
       foodstuffs: "食品"
@@ -27,6 +29,7 @@ ja:
       no_recipes: "投稿したレシピはありません。"
       no_foodstuffs: "投稿した食品はありません。"
     show:
+      content: "プロフィール"
       title: "マイページ"
       username: "ユーザー名"
       email: "メールアドレス"

@@ -12,7 +12,7 @@ RSpec.describe "ホームページのリクエスト", type: :request do
     it "トップページにアクセスでき、ステータスコード200が返る" do
       get root_path
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include(I18n.t("home.top.title"))
+      expect(response.body).to include(I18n.t("home.top.content"))
     end
 
     it "トップページにレシピと食品のセクションが表示される" do

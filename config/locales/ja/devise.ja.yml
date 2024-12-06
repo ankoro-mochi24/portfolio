@@ -1,6 +1,7 @@
 ja:
   devise:
     confirmations:
+      content: "メールアドレス確認完了"
       confirmed: "メールアドレスの確認が完了しました。"
       send_instructions: "数分以内にメールアドレスを確認するための指示が記載されたメールが届きます。"
       send_paranoid_instructions: "もしあなたのメールアドレスがデータベースに存在する場合、数分以内にメールアドレスを確認するための指示が記載されたメールが届きます。"
@@ -39,10 +40,12 @@ ja:
       updated: "パスワードが正常に変更されました。現在ログインしています。"
       updated_not_active: "パスワードが正常に変更されました。"
       new:
+        content: "パスワード再設定"
         title: "パスワードをお忘れですか？"
         email_label: "メールアドレス"
         submit: "パスワードリセットメールを送信"
       edit:
+        content: "パスワード変更"
         title: "パスワードを変更する"
         new_password_label: "新しいパスワード"
         password_minimum_length: "文字以上"
@@ -58,6 +61,7 @@ ja:
       updated: "アカウント情報が正常に更新されました。"
       updated_but_not_signed_in: "アカウント情報が正常に更新されましたが、パスワードが変更されたため再度ログインする必要があります。"
       new:
+        content: "新規登録"
         title: "サインアップ"
         name: "ユーザー名"
         email: "メールアドレス"
@@ -66,6 +70,7 @@ ja:
         minimum_password_length: "最低 %{count} 文字"
         submit: "サインアップ"
       edit:
+        content: "アカウント編集"
         title: "%{resource}を編集"
         email: "メールアドレス"
         pending_reconfirmation: "現在確認待ち: %{email}"
@@ -86,6 +91,7 @@ ja:
       signed_out: "ログアウトに成功しました。"
       already_signed_out: "すでにログアウトしています。"
       new:
+        content: "ログイン"
         title: "ログイン"
         email_label: "メールアドレス"
         password_label: "パスワード"

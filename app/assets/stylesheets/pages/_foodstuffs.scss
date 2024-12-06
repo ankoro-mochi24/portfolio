@@ -1,0 +1,12 @@
+.foodstuff-item {
+  @extend .card-item; /* 共通スタイルを適用 */
+}
+
+/* グリッド表示の親要素 */
+.foodstuff-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 0;
+  list-style: none;
+}

@@ -1,6 +1,7 @@
 en:
   devise:
     confirmations:
+      content: "Email Confirmation"
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
@@ -39,10 +40,12 @@ en:
       updated: "Your password has been successfully changed. You are now signed in."
       updated_not_active: "Your password has been successfully changed."
       new:
+        content: "Reset Password"
         title: "Forgot your password?"
         email_label: "Email"
         submit: "Send me reset password instructions"
       edit:
+        content: "Change Password"
         title: "Change your password"
         new_password_label: "New password"
         password_minimum_length: "characters minimum"
@@ -58,6 +61,7 @@ en:
       updated: "Your account has been successfully updated."
       updated_but_not_signed_in: "Your account has been successfully updated, but since your password was changed, you need to sign in again."
       new:
+        content: "Sign Up"
         title: "Sign up"
         name: "Username"
         email: "Email"
@@ -66,6 +70,7 @@ en:
         minimum_password_length: "Minimum %{count} characters"
         submit: "Sign up"
       edit:
+        content: "Edit Account"
         title: "Edit %{resource}"
         email: "Email"
         pending_reconfirmation: "Currently waiting confirmation for: %{email}"
@@ -86,6 +91,7 @@ en:
       signed_out: "Signed out successfully."
       already_signed_out: "Already signed out."
       new:
+        content: "Log In"
         title: "Log in"
         email_label: "Email"
         password_label: "Password"

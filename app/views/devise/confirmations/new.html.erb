@@ -1,3 +1,5 @@
+<% content_for(:title, t('devise.confirmations.content')) %>
+
 <h2>Resend confirmation instructions</h2>
 
 <%= form_with model: resource, url: confirmation_path(resource_name), method: :post, local: true, data: { turbo: false } do |f| %>

@@ -1,0 +1,6 @@
+.user-actions-container {
+  display: flex;
+  justify-content: center; /* 子要素を中央揃え */
+  align-items: center; /* 必要なら垂直方向も中央揃え */
+  gap: 0.5rem; /* ボタン間の間隔を調整 */
+}

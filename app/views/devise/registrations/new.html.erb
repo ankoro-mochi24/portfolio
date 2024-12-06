@@ -1,4 +1,6 @@
 <!-- URL: /users/sign_up -->
+<% content_for(:title, t('devise.registrations.new.content')) %>
+
 <h2><%= t('devise.registrations.new.title') %></h2>
 
 <%= form_with model: @user, url: registration_path(resource_name), local: true, data: { turbo: false } do |f| %>

@@ -1,0 +1,17 @@
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'both' %>" href="<%= tab_paths[:both] %>">
+      <%= tab_labels[:both] %>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'recipes' %>" href="<%= tab_paths[:recipes] %>">
+      <%= tab_labels[:recipes] %>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <%= 'active' if @view == 'foodstuffs' %>" href="<%= tab_paths[:foodstuffs] %>">
+      <%= tab_labels[:foodstuffs] %>
+    </a>
+  </li>
+</ul>

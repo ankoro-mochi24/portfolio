@@ -4,14 +4,17 @@ en:
       title: "Food Items List"
       no_results: "No matching food items were found."
     show:
+      content: "Foodstuff Details"
       name: "Name"
       price: "Price"
       description: "Description"
       link: "Link"
       post_recipe: "Post Recipe"
     new:
+      content: "New Foodstuff"
       title: "Post a Food Item"
     edit:
+      content: "Edit Foodstuff"
       title: "Edit Food Item"
     show_foodstuff: "View This Food Item"
     edit_foodstuff: "Edit Food Item"
