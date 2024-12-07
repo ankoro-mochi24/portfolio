@@ -1,28 +1,53 @@
-<!-- URL: http://localhost:3000/users/password/edit?reset_password_token=【パスワードリセットメールの文面で送信されるトークン】 -->
+<!-- URL: http://localhost:3000/users/password/edit?reset_password_token=【トークン】 -->
 <% content_for(:title, t('devise.passwords.edit.content')) %>
 
-<h2><%= t('devise.passwords.edit.title') %></h2>
+<div class="login-overlay">
+  <div class="login-modal shadow-lg rounded p-4">
+    <div class="text-center">
+      <h2 class="mb-4">
+        <i class="bi bi-key"></i>
+        <%= t('devise.passwords.edit.title') %>
+      </h2>
+    </div>
 
-<%= form_with model: resource, url: password_path(resource_name), method: :put, local: true, data: { turbo: false } do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, t('devise.passwords.edit.new_password_label') %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> <%= t('devise.passwords.edit.password_minimum_length') %>)</em><br />
+    <% if flash[:alert] %>
+      <p class="alert alert-danger text-center"><%= flash[:alert] %></p>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, t('devise.passwords.edit.confirm_new_password_label') %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
-  </div>
+    <% if flash[:notice] %>
+      <p class="alert alert-success text-center"><%= flash[:notice] %></p>
+    <% end %>
 
-  <div class="actions">
-    <%= f.submit t('devise.passwords.edit.submit') %>
-  </div>
-<% end %>
+    <%= form_with model: resource, url: password_path(resource_name), method: :put, local: true, data: { turbo: false }, class: "needs-validation" do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
 
-<%= render "devise/shared/links" %>
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control", placeholder: t('devise.passwords.edit.new_password_label'), oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
+        </div>
+        <% if @minimum_password_length %>
+          <small class="text-muted">
+            (<%= @minimum_password_length %> <%= t('devise.passwords.edit.password_minimum_length') %>)
+          </small>
+        <% end %>
+      </div>
+
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: t('devise.passwords.edit.confirm_new_password_label'), oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <%= f.submit t('devise.passwords.edit.submit'), class: "btn btn-primary btn-block btn-login" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
