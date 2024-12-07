@@ -1,19 +1,38 @@
 <!-- URL: /users/password/new -->
 <% content_for(:title, t('devise.passwords.new.content')) %>
 
-<h2><%= t('devise.passwords.new.title') %></h2>
+<div class="login-overlay">
+  <div class="login-modal shadow-lg rounded p-4">
+    <div class="text-center">
+      <h2 class="mb-4">
+        <i class="bi bi-envelope"></i>
+        <%= t('devise.passwords.new.title') %>
+      </h2>
+    </div>
 
-<%= form_with model: resource, url: password_path(resource_name), method: :post, local: true, data: { turbo: false } do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <% if flash[:alert] %>
+      <p class="alert alert-danger text-center"><%= flash[:alert] %></p>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :email, t('devise.passwords.new.email_label') %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <% if flash[:notice] %>
+      <p class="alert alert-success text-center"><%= flash[:notice] %></p>
+    <% end %>
+
+    <%= form_with model: resource, url: password_path(resource_name), method: :post, local: true, data: { turbo: false }, class: "needs-validation" do |f| %>
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: t('devise.passwords.new.email_label') %>
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <%= f.submit t('devise.passwords.new.submit'), class: "btn btn-primary btn-block btn-login" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit t('devise.passwords.new.submit') %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
