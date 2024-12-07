@@ -64,9 +64,13 @@ en:
         content: "Sign Up"
         title: "Sign up"
         name: "Username"
+        name_placeholder: "Enter your username"
         email: "Email"
+        email_placeholder: "Enter your email address"
         password: "Password"
+        password_placeholder: "Enter your password"
         password_confirmation: "Password confirmation"
+        password_confirmation_placeholder: "Confirm your password"
         minimum_password_length: "Minimum %{count} characters"
         submit: "Sign up"
       edit:
