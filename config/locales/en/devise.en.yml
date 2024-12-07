@@ -132,6 +132,7 @@ en:
               too_short: "Password must be at least %{count} characters"
               too_long: "Password must be no more than %{count} characters"
               blank: "Please enter your password"
+              weak: "Password must include both letters and numbers."
             password_confirmation:
               confirmation: "Password and password confirmation do not match"
             current_password:

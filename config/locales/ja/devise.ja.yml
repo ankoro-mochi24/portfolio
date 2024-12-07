@@ -132,6 +132,7 @@ ja:
               too_short: "パスワードは%{count}文字以上で入力してください"
               too_long: "パスワードは%{count}文字以下で入力してください"
               blank: "パスワードを入力してください"
+              weak: "パスワードは英字と数字の両方を含めてください。"
             password_confirmation:
               confirmation: "パスワードとパスワード（確認）が一致しません"
             current_password:
