@@ -26,6 +26,13 @@
       <div class="recipe-author">
         by <strong><%= @recipe.user.name %></strong>
       </div>
+      <!-- レシピの編集/削除 -->
+      <div class="d-flex align-items-center user-actions-container">
+        <% if @recipe.user == current_user %>
+          <%= link_to t('recipes.edit.title'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+          <%= button_to t('recipes.show.destroy_recipe'), recipe_path(@recipe), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, class: 'btn btn-danger' %>
+        <% end %>
+      </div>
     </div>
 
     <!-- レシピへのアクション -->
@@ -92,14 +99,6 @@
 </div>
 <!-- 編集中！ -->
 <!-- 編集中！ -->
-
-<!-- レシピの編集/削除 -->
-<div class="d-flex align-items-center user-actions-container">
-  <% if @recipe.user == current_user %>
-    <%= link_to t('recipes.edit.title'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
-    <%= button_to t('recipes.show.destroy_recipe'), recipe_path(@recipe), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, class: 'btn btn-danger' %>
-  <% end %>
-</div>
 
 <!-- 投稿されたトッピング -->
 <% if user_signed_in? %>
