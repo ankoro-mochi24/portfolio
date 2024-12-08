@@ -1,37 +1,66 @@
 <!-- URL: /users/sign_up -->
 <% content_for(:title, t('devise.registrations.new.content')) %>
 
-<h2><%= t('devise.registrations.new.title') %></h2>
+<div class="signup-overlay">
+  <div class="signup-modal shadow-lg rounded p-4">
+    <div class="text-center">
+      <h2 class="mb-4">
+        <i class="bi bi-person-plus-fill"></i>
+        <%= t('devise.registrations.new.title') %>
+      </h2>
+    </div>
 
-<%= form_with model: @user, url: registration_path(resource_name), local: true, data: { turbo: false } do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <% if flash[:alert] %>
+      <p class="alert alert-danger text-center"><%= flash[:alert] %></p>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :name, t('devise.registrations.new.name') %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <% if flash[:notice] %>
+      <p class="alert alert-success text-center"><%= flash[:notice] %></p>
+    <% end %>
+
+    <%= form_with model: @user, url: registration_path(resource_name), local: true, data: { turbo: false }, class: "needs-validation" do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: t('devise.registrations.new.name_placeholder') %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: t('devise.registrations.new.email_placeholder') %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <% if @minimum_password_length %>
+          <small class="text-muted">
+            <%= t('devise.registrations.new.minimum_password_length', count: @minimum_password_length) %>
+          </small>
+        <% end %>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: t('devise.registrations.new.password_placeholder'), oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: t('devise.registrations.new.password_confirmation_placeholder'), oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <%= f.submit t('devise.registrations.new.submit'), class: "btn btn-primary btn-block btn-signup" %>
+      </div>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :email, t('devise.registrations.new.email') %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, t('devise.registrations.new.password') %>
-    <% if @minimum_password_length %>
-      <em>(<%= t('devise.registrations.new.minimum_password_length', count: @minimum_password_length) %>)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, t('devise.registrations.new.password_confirmation') %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", oncopy: "return false;", oncut: "return false;", onpaste: "return false;" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t('devise.registrations.new.submit') %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

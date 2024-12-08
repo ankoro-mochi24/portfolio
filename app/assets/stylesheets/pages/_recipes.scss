@@ -10,3 +10,65 @@
   padding: 0;
   list-style: none;
 }
+
+/* レシピ詳細ページ */
+.recipe-show {
+  display: flex;
+  gap: 20px; /* 左右の間隔 */
+  align-items: flex-start;
+
+  /* 左側: レシピ画像 */
+  .recipe-image-container {
+    flex: 1; /* 左右のバランス調整 */
+    max-width: 50%; /* 画面の半分までに制限 */
+    text-align: center;
+
+    .recipe-image {
+      max-width: 100%; /* 親要素の幅に収まる */
+      height: auto; /* アスペクト比を維持 */
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  /* 右側: レシピ情報 */
+  .recipe-info-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .recipe-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .recipe-author {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .user-actions {
+      display: flex;
+      gap: 10px; /* 各ボタン間の間隔 */
+      margin-top: 15px;
+    }
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .recipe-show {
+    flex-direction: column;
+    align-items: center;
+
+    .recipe-image-container {
+      max-width: 80%; /* 小さい画面では親要素の80%まで縮小 */
+    }
+
+    .recipe-info-container {
+      width: 100%; /* 幅を全体に広げる */
+      text-align: center; /* テキストを中央揃え */
+    }
+  }
+}

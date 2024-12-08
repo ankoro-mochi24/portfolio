@@ -64,9 +64,13 @@ ja:
         content: "新規登録"
         title: "サインアップ"
         name: "ユーザー名"
+        name_placeholder: "ユーザー名を入力してください"
         email: "メールアドレス"
+        email_placeholder: "メールアドレスを入力してください"
         password: "パスワード"
+        password_placeholder: "パスワードを入力してください"
         password_confirmation: "パスワード（確認）"
+        password_confirmation_placeholder: "確認用パスワードを入力してください"
         minimum_password_length: "最低 %{count} 文字"
         submit: "サインアップ"
       edit:
@@ -128,6 +132,7 @@ ja:
               too_short: "パスワードは%{count}文字以上で入力してください"
               too_long: "パスワードは%{count}文字以下で入力してください"
               blank: "パスワードを入力してください"
+              weak: "パスワードは英字と数字の両方を含めてください。"
             password_confirmation:
               confirmation: "パスワードとパスワード（確認）が一致しません"
             current_password:
