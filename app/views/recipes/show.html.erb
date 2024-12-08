@@ -41,6 +41,40 @@
       <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'good' } %>
       <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'bad' } %>
     </div>
+    <!-- 投稿されたトッピング -->
+    <% if user_signed_in? %>
+      <div class="recipe-toppings-container mt-4">
+        <h3 class="toppings-title"><%= t('recipes.show.toppings') %></h3>
+        
+        <!-- トッピング追加フォーム -->
+        <div class="toppings-form-container mb-3">
+          <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
+            <div class="form-group d-flex align-items-center gap-2">
+              <%= form.text_field :name, placeholder: t('recipes.show.toppings_placeholder'), class: "form-control me-2" %>
+              <%= form.submit t('recipes.show.add_topping'), class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- トッピングリスト -->
+        <ul id="toppings" class="list-group">
+          <% @recipe.toppings.each do |topping| %>
+            <li id="topping_<%= topping.id %>" class="list-group-item d-flex align-items-center justify-content-between">
+              <div class="topping-name-actions d-flex align-items-center gap-3">
+                <span class="topping-name"><%= topping.name %></span>
+                <div class="topping-actions d-flex gap-2">
+                  <%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %>
+                  <%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %>
+                </div>
+              </div>
+              <% if topping.user == current_user %>
+                <%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-outline-danger btn-sm" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </div>
 
@@ -98,40 +132,6 @@
 
 <!-- 編集中！ -->
 <!-- 編集中！ -->
-<!-- 投稿されたトッピング -->
-<% if user_signed_in? %>
-  <div class="recipe-toppings-container mt-4">
-    <h3 class="toppings-title"><%= t('recipes.show.toppings') %></h3>
-    
-    <!-- トッピング追加フォーム -->
-    <div class="toppings-form-container mb-3">
-      <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
-        <div class="form-group d-flex align-items-center gap-2">
-          <%= form.text_field :name, placeholder: t('recipes.show.toppings_placeholder'), class: "form-control me-2" %>
-          <%= form.submit t('recipes.show.add_topping'), class: "btn btn-primary" %>
-        </div>
-      <% end %>
-    </div>
-
-    <!-- トッピングリスト -->
-    <ul id="toppings" class="list-group">
-      <% @recipe.toppings.each do |topping| %>
-        <li id="topping_<%= topping.id %>" class="list-group-item d-flex align-items-center justify-content-between">
-          <div class="topping-name-actions d-flex align-items-center gap-3">
-            <span class="topping-name"><%= topping.name %></span>
-            <div class="topping-actions d-flex gap-2">
-              <%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %>
-              <%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %>
-            </div>
-          </div>
-          <% if topping.user == current_user %>
-            <%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-outline-danger btn-sm" %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
 <!-- 編集中！ -->
 <!-- 編集中！ -->
 

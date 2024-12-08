@@ -1,10 +1,14 @@
 <%= turbo_stream.append "toppings" do %>
-  <li id="topping_<%= @topping.id %>" class="d-flex align-items-center">
-    <div class="mr-2"><%= @topping.name %></div>
-    <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: @topping, action_type: 'good', parent: @recipe } %></div>
-    <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: @topping, action_type: 'bad', parent: @recipe } %></div>
+  <li id="topping_<%= @topping.id %>" class="list-group-item d-flex align-items-center justify-content-between">
+    <div class="topping-name-actions d-flex align-items-center gap-3">
+      <span class="topping-name"><%= @topping.name %></span>
+      <div class="topping-actions d-flex gap-2">
+        <%= render partial: 'user_actions/user_action', locals: { actionable: @topping, action_type: 'good', parent: @recipe } %>
+        <%= render partial: 'user_actions/user_action', locals: { actionable: @topping, action_type: 'bad', parent: @recipe } %>
+      </div>
+    </div>
     <% if @topping.user == current_user %>
-      <div><%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: @topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-danger" %></div>
+      <%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: @topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-outline-danger btn-sm" %>
     <% end %>
   </li>
 <% end %>
