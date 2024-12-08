@@ -44,8 +44,6 @@
   </div>
 </div>
 
-<!-- 編集中！ -->
-<!-- 編集中！ -->
 <div class="recipe-details-container d-flex">
   <!-- 左側: 材料と調理器具 -->
   <div class="recipe-left">
@@ -97,34 +95,45 @@
     </div>
   </div>
 </div>
-<!-- 編集中！ -->
-<!-- 編集中！ -->
 
+<!-- 編集中！ -->
+<!-- 編集中！ -->
 <!-- 投稿されたトッピング -->
 <% if user_signed_in? %>
-  <h3><%= t('recipes.show.toppings') %></h3>
-  <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
-    <div class="form-group">
-      <%= form.label :name, t('recipes.show.toppings') %>
-      <%= form.text_field :name, class: "form-control" %>
+  <div class="recipe-toppings-container mt-4">
+    <h3 class="toppings-title"><%= t('recipes.show.toppings') %></h3>
+    
+    <!-- トッピング追加フォーム -->
+    <div class="toppings-form-container mb-3">
+      <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
+        <div class="form-group d-flex align-items-center gap-2">
+          <%= form.text_field :name, placeholder: t('recipes.show.toppings_placeholder'), class: "form-control me-2" %>
+          <%= form.submit t('recipes.show.add_topping'), class: "btn btn-primary" %>
+        </div>
+      <% end %>
     </div>
-    <%= form.submit t('recipes.show.add_topping'), class: "btn btn-primary" %>
-  <% end %>
 
-  <!-- トッピングに対するアクション -->
-  <ul id="toppings">
-    <% @recipe.toppings.each do |topping| %>
-      <li id="topping_<%= topping.id %>" class="d-flex align-items-center">
-        <div class="mr-2"><%= topping.name %></div>
-        <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %></div>
-        <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %></div>
-        <% if topping.user == current_user %>
-          <div><%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-danger" %></div>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
+    <!-- トッピングリスト -->
+    <ul id="toppings" class="list-group">
+      <% @recipe.toppings.each do |topping| %>
+        <li id="topping_<%= topping.id %>" class="list-group-item d-flex align-items-center justify-content-between">
+          <div class="topping-name-actions d-flex align-items-center gap-3">
+            <span class="topping-name"><%= topping.name %></span>
+            <div class="topping-actions d-flex gap-2">
+              <%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %>
+              <%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %>
+            </div>
+          </div>
+          <% if topping.user == current_user %>
+            <%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-outline-danger btn-sm" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
+<!-- 編集中！ -->
+<!-- 編集中！ -->
 
 <!-- コメント -->
 <div class="comments-section mt-5">

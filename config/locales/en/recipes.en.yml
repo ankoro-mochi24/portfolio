@@ -17,6 +17,7 @@ en:
       kitchen_tools: "Required Kitchen Tools🔪"
       ingredients: "Ingredients + Seasonings🍚"
       toppings: "Toppings/Flavors"
+      toppings_placeholder: "E.g., soy sauce, mayonnaise, etc."
       add_topping: "Add"
       comment_section_title: "Comments"
       destroy_recipe: "Delete the recipe"

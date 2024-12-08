@@ -175,3 +175,69 @@
     }
   }
 }
+
+/* トッピングセクション */
+.recipe-toppings-container {
+  .toppings-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .toppings-form-container {
+    .form-group {
+      display: flex;
+      gap: 10px;
+
+      .form-control {
+        flex: 1;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .btn {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  #toppings {
+    margin-top: 15px;
+    padding: 0;
+    list-style: none;
+
+    .list-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+
+      .topping-name-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .topping-name {
+          font-size: 16px;
+          color: #333;
+          font-weight: bold;
+        }
+
+        .topping-actions {
+          display: flex;
+          gap: 10px;
+        }
+      }
+
+      .btn-outline-danger {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
+    }
+  }
+}
