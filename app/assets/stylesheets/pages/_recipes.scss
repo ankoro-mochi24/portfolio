@@ -36,18 +36,24 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-
-    .recipe-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
+  
+    .recipe-header {
+      display: flex;
+      align-items: center; /* 縦方向の中央揃え */
+      gap: 15px; /* レシピ名と投稿者名の間隔 */
+  
+      .recipe-title {
+        font-size: 24px;
+        font-weight: bold;
+      }
+  
+      .recipe-author {
+        font-size: 14px;
+        color: #555;
+        white-space: nowrap; /* 折り返しを防ぐ */
+      }
     }
-
-    .recipe-author {
-      font-size: 14px;
-      color: #555;
-    }
-
+  
     .user-actions {
       display: flex;
       gap: 10px; /* 各ボタン間の間隔 */

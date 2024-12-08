@@ -16,18 +16,16 @@
 <div class="recipe-show d-flex">
   <!-- 左側: レシピ画像 -->
   <div class="recipe-image-container">
-    <% if @recipe.dish_image.present? %>
-      <%= image_tag @recipe.dish_image.url, class: "recipe-image img-fluid rounded shadow-sm" %>
-    <% else %>
-      <p>画像がありません</p>
-    <% end %>
+    <%= image_tag @recipe.dish_image.url, class: "recipe-image img-fluid rounded shadow-sm" %>
   </div>
 
   <!-- 右側: レシピ情報 -->
   <div class="recipe-info-container">
-    <h1 class="recipe-title"><%= @recipe.title %></h1>
-    <div class="recipe-author">
-      投稿者: <strong><%= @recipe.user.name %></strong>
+    <div class="recipe-header">
+      <h1 class="recipe-title"><%= @recipe.title %></h1>
+      <div class="recipe-author">
+        by <strong><%= @recipe.user.name %></strong>
+      </div>
     </div>
 
     <!-- レシピへのアクション -->
