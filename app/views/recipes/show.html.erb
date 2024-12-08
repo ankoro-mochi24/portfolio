@@ -39,44 +39,61 @@
   </div>
 </div>
 
-<div class="recipe-section">
-  <!-- 調理工程 -->
-  <h3><%= t('recipes.show.steps') %></h3>
-  <% @recipe.recipe_steps.each do |step| %>
-    <div class="recipe-step">
-      <p>
-        <strong><%= t('recipes.form.step') %>:</strong>
-        <%= step.text %>
-      </p>
-      <% if step.step_image.present? %>
-        <!-- 調理工程の画像 -->
-        <p>
-          <%= image_tag step.step_image.url, size: "100x100" %>
-        </p>
-      <% end %>
+<!-- 編集中！ -->
+<!-- 編集中！ -->
+<div class="recipe-details-container d-flex">
+  <!-- 左側: 材料と調理器具 -->
+  <div class="recipe-left">
+    <!-- 必要な材料 -->
+    <div class="recipe-section">
+      <h3><%= t('recipes.show.ingredients') %></h3>
+      <ul class="ingredients-list">
+        <% @recipe.ingredients.each do |ingredient| %>
+          <li><%= ingredient.name %></li>
+        <% end %>
+      </ul>
     </div>
-  <% end %>
-</div>
 
-<!-- 必要な調理器具 -->
-<div class="recipe-section">
-  <h3><%= t('recipes.show.kitchen_tools') %></h3>
-  <ul>
-    <% @recipe.kitchen_tools.each do |tool| %>
-      <li><%= tool.name %></li>
-    <% end %>
-  </ul>
-</div>
+    <!-- 必要な調理器具 -->
+    <div class="recipe-section">
+      <h3><%= t('recipes.show.kitchen_tools') %></h3>
+      <ul class="kitchen-tools-list">
+        <% @recipe.kitchen_tools.each do |tool| %>
+          <li><%= tool.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 
-<!-- 必要な材料 -->
-<div class="recipe-section">
-  <h3><%= t('recipes.show.ingredients') %></h3>
-  <ul>
-    <% @recipe.ingredients.each do |ingredient| %>
-      <li><%= ingredient.name %></li>
-    <% end %>
-  </ul>
+  <!-- 右側: 調理工程 -->
+  <div class="recipe-right">
+    <div class="recipe-section">
+      <h3><%= t('recipes.show.steps') %></h3>
+      <div class="recipe-steps-container">
+        <% @recipe.recipe_steps.each_with_index do |step, index| %>
+          <div class="recipe-step">
+            <!-- 工程番号 -->
+            <div class="step-number">
+              <span><%= index + 1 %></span>
+            </div>
+            <!-- 工程画像 -->
+            <% if step.step_image.present? %>
+              <div class="step-image">
+                <%= image_tag step.step_image.url, class: "img-fluid rounded shadow-sm" %>
+              </div>
+            <% end %>
+            <!-- 工程説明 -->
+            <div class="step-text">
+              <%= step.text %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- 編集中！ -->
+<!-- 編集中！ -->
 
 <!-- レシピの編集/削除 -->
 <div class="d-flex align-items-center user-actions-container">

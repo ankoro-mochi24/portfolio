@@ -72,3 +72,100 @@
     }
   }
 }
+
+/* 材料・調理器具と調理工程のコンテナ */
+.recipe-details-container {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+
+  /* 左側: 材料と調理器具 */
+  .recipe-left {
+    flex: 1;
+
+    .recipe-section {
+      margin-bottom: 30px;
+
+      h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          font-size: 14px;
+          margin-bottom: 8px;
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 1px dotted #ccc;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  /* 右側: 調理工程 */
+  .recipe-right {
+    flex: 2;
+
+    .recipe-steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .recipe-step {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      .step-number {
+        background: #ff5722;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 10px;
+      }
+
+      .step-image img {
+        max-width: 100%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .step-text {
+        font-size: 14px;
+        color: #333;
+      }
+    }
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .recipe-details-container {
+    flex-direction: column;
+
+    .recipe-left,
+    .recipe-right {
+      flex: none;
+      width: 100%;
+    }
+
+    .recipe-steps-container {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+}
