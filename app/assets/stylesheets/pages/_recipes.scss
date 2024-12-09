@@ -36,18 +36,24 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-
-    .recipe-title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 10px;
+  
+    .recipe-header {
+      display: flex;
+      align-items: center; /* 縦方向の中央揃え */
+      gap: 15px; /* レシピ名と投稿者名の間隔 */
+  
+      .recipe-title {
+        font-size: 24px;
+        font-weight: bold;
+      }
+  
+      .recipe-author {
+        font-size: 14px;
+        color: #555;
+        white-space: nowrap; /* 折り返しを防ぐ */
+      }
     }
-
-    .recipe-author {
-      font-size: 14px;
-      color: #555;
-    }
-
+  
     .user-actions {
       display: flex;
       gap: 10px; /* 各ボタン間の間隔 */
@@ -69,6 +75,169 @@
     .recipe-info-container {
       width: 100%; /* 幅を全体に広げる */
       text-align: center; /* テキストを中央揃え */
+    }
+  }
+}
+
+/* 材料・調理器具と調理工程のコンテナ */
+.recipe-details-container {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+
+  /* 左側: 材料と調理器具 */
+  .recipe-left {
+    flex: 1;
+
+    .recipe-section {
+      margin-bottom: 30px;
+
+      h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          font-size: 14px;
+          margin-bottom: 8px;
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 1px dotted #ccc;
+          padding-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  /* 右側: 調理工程 */
+  .recipe-right {
+    flex: 2;
+
+    .recipe-steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .recipe-step {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      .step-number {
+        background: #ff5722;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 10px;
+      }
+
+      .step-image img {
+        max-width: 100%;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .step-text {
+        font-size: 14px;
+        color: #333;
+      }
+    }
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .recipe-details-container {
+    flex-direction: column;
+
+    .recipe-left,
+    .recipe-right {
+      flex: none;
+      width: 100%;
+    }
+
+    .recipe-steps-container {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+}
+
+/* トッピングセクション */
+.recipe-toppings-container {
+  .toppings-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .toppings-form-container {
+    .form-group {
+      display: flex;
+      gap: 10px;
+
+      .form-control {
+        flex: 1;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .btn {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  #toppings {
+    margin-top: 15px;
+    padding: 0;
+    list-style: none;
+
+    .list-group-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+
+      .topping-name-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+
+        .topping-name {
+          font-size: 16px;
+          color: #333;
+          font-weight: bold;
+        }
+
+        .topping-actions {
+          display: flex;
+          gap: 10px;
+        }
+      }
+
+      .btn-outline-danger {
+        padding: 5px 10px;
+        font-size: 12px;
+      }
     }
   }
 }

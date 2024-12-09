@@ -1,6 +1,7 @@
-<%= form_with(model: recipe, local: true, html: { multipart: true }) do |form| %>
+<%= form_with(model: recipe, local: true, html: { multipart: true, class: "needs-validation" }) do |form| %>
+  <!-- エラーメッセージ -->
   <% if recipe.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(recipe.errors.count, t('recipes.form.error')) %> <%= t('recipes.form.prohibited') %></h2>
       <ul>
         <% recipe.errors.full_messages.each do |message| %>
@@ -10,64 +11,83 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title, t('recipes.form.title') %>
-    <%= form.text_field :title, required: true %>
+  <!-- レシピ名 -->
+  <div class="mb-4">
+    <%= form.label :title, t('recipes.form.title'), class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", required: true %>
   </div>
 
-  <div class="field">
-    <%= form.label :dish_image, t('recipes.form.dish_image') %>
+  <!-- レシピ画像 -->
+  <div class="mb-4">
+    <%= form.label :dish_image, t('recipes.form.dish_image'), class: "form-label" %>
     <% if recipe.dish_image.present? %>
-      <div id="dish_image_preview">
-        <%= image_tag recipe.dish_image.url, alt: t('recipes.form.dish_image_alt'), style: "max-width: 300px; max-height: 300px;" %>
+      <div id="dish_image_preview" class="mb-3">
+        <%= image_tag recipe.dish_image.url, alt: t('recipes.form.dish_image_alt'), class: "img-thumbnail", style: "max-width: 300px;" %>
       </div>
       <%= form.hidden_field :dish_image_cache, value: recipe.dish_image_cache %>
-    <% else %>
-      <div id="dish_image_preview"></div>
     <% end %>
-    <%= form.file_field :dish_image, required: recipe.dish_image.blank? %>
+    <%= form.file_field :dish_image, class: "form-control", required: recipe.dish_image.blank? %>
   </div>
 
-  <h3><%= t('recipes.form.steps_title') %></h3>
-  <div data-controller="recipe-steps">
+  <!-- 調理工程 -->
+  <h3 class="mb-3"><%= t('recipes.form.steps_title') %></h3>
+  <div data-controller="recipe-steps" class="mb-4">
     <div data-recipe-steps-target="container">
       <%= form.fields_for :recipe_steps do |step_form| %>
-        <div class="nested-fields" data-new-record="false">
+        <!-- 工程ごとのカード -->
+        <div class="card mb-3 p-3 shadow-sm nested-fields" data-new-record="false">
           <%= step_form.hidden_field :_destroy %>
-          <%= step_form.label :text, t('recipes.form.step') %>
-          <%= step_form.text_area :text, required: true %>
-          <%= step_form.label :step_image, t('recipes.form.step_image') %>
-          <% if step_form.object.step_image.present? %>
-            <div class="step_image_preview">
-              <%= image_tag step_form.object.step_image.url, alt: t('recipes.form.step_image_alt'), style: "max-width: 300px; max-height: 300px;" %>
-              <%= step_form.hidden_field :step_image_cache, value: step_form.object.step_image_cache %>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><%= t('recipes.form.step') %> <%= step_form.index + 1 %></span>
+            <!-- 削除ボタン（1つ目の工程には非表示） -->
+            <% unless step_form.index == 0 %>
+              <a href="#" data-action="click->recipe-steps#removeField" class="btn btn-outline-danger btn-sm"><%= t('recipes.form.remove') %></a>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <div class="mb-2">
+              <%= step_form.text_area :text, class: "form-control", required: true %>
             </div>
-          <% else %>
-            <div class="step_image_preview"></div>
-          <% end %>
-          <%= step_form.file_field :step_image, required: step_form.object.step_image.blank? %>
-          <%= step_form.hidden_field :remove_step_image, value: false %>
-          <% if step_form.index > 0 %>
-            <a href="#" data-action="click->recipe-steps#removeField"><%= t('recipes.form.remove') %></a>
-          <% end %>
+            <div class="mb-2">
+              <%= step_form.label :step_image, t('recipes.form.step_image'), class: "form-label" %>
+              <% if step_form.object.step_image.present? %>
+                <div class="mb-2">
+                  <%= image_tag step_form.object.step_image.url, alt: t('recipes.form.step_image_alt'), class: "img-thumbnail", style: "max-width: 300px;" %>
+                  <%= step_form.hidden_field :step_image_cache, value: step_form.object.step_image_cache %>
+                </div>
+              <% end %>
+              <%= step_form.file_field :step_image, class: "form-control", required: step_form.object.step_image.blank? %>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>
-    <a href="#" data-action="click->recipe-steps#addField"><%= t('recipes.form.add') %></a>
+
+    <!-- 新規工程追加ボタン -->
+    <a href="#" data-action="click->recipe-steps#addField" class="btn btn-outline-primary btn-sm"><%= t('recipes.form.add') %></a>
     <template data-recipe-steps-target="template">
-      <div class="nested-fields" data-new-record="true">
+      <div class="card mb-3 p-3 shadow-sm nested-fields" data-new-record="true">
         <%= form.fields_for :recipe_steps, RecipeStep.new, child_index: "TEMPLATE_RECORD" do |step_form| %>
           <%= step_form.hidden_field :_destroy %>
-          <%= step_form.label :text, t('recipes.form.step') %>
-          <%= step_form.text_area :text, required: true %>
-          <%= step_form.label :step_image, t('recipes.form.step_image') %>
-          <%= step_form.file_field :step_image, required: true %>
-          <a href="#" data-action="click->recipe-steps#removeField"><%= t('recipes.form.remove') %></a>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><%= t('recipes.form.step') %></span>
+            <a href="#" data-action="click->recipe-steps#removeField" class="btn btn-outline-danger btn-sm"><%= t('recipes.form.remove') %></a>
+          </div>
+          <div class="card-body">
+            <div class="mb-2">
+              <%= step_form.text_area :text, class: "form-control", required: true %>
+            </div>
+            <div class="mb-2">
+              <%= step_form.label :step_image, t('recipes.form.step_image'), class: "form-label" %>
+              <%= step_form.file_field :step_image, class: "form-control", required: true %>
+            </div>
+          </div>
         <% end %>
       </div>
     </template>
   </div>
 
+  <!--必要な調理器具-->
   <h3><%= t('recipes.form.kitchen_tools_title') %></h3>
   <div data-controller="kitchen-tools">
     <div data-kitchen-tools-target="container">
@@ -107,6 +127,7 @@
     </template>
   </div>
 
+  <!--必要な材料-->
   <h3><%= t('recipes.form.ingredients_title') %></h3>
   <div data-controller="recipe-ingredients">
     <div data-recipe-ingredients-target="container">
@@ -140,6 +161,7 @@
     </template>
   </div>
 
+  <!--保存or投稿ボタン-->
   <div class="actions">
     <%= form.submit recipe.new_record? ? t('recipes.form.submit') : t('recipes.form.save') %>
   </div>

@@ -16,18 +16,23 @@
 <div class="recipe-show d-flex">
   <!-- 左側: レシピ画像 -->
   <div class="recipe-image-container">
-    <% if @recipe.dish_image.present? %>
-      <%= image_tag @recipe.dish_image.url, class: "recipe-image img-fluid rounded shadow-sm" %>
-    <% else %>
-      <p>画像がありません</p>
-    <% end %>
+    <%= image_tag @recipe.dish_image.url, class: "recipe-image img-fluid rounded shadow-sm" %>
   </div>
 
   <!-- 右側: レシピ情報 -->
   <div class="recipe-info-container">
-    <h1 class="recipe-title"><%= @recipe.title %></h1>
-    <div class="recipe-author">
-      投稿者: <strong><%= @recipe.user.name %></strong>
+    <div class="recipe-header">
+      <h1 class="recipe-title"><%= @recipe.title %></h1>
+      <div class="recipe-author">
+        by <strong><%= @recipe.user.name %></strong>
+      </div>
+      <!-- レシピの編集/削除 -->
+      <div class="d-flex align-items-center user-actions-container">
+        <% if @recipe.user == current_user %>
+          <%= link_to t('recipes.edit.title'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
+          <%= button_to t('recipes.show.destroy_recipe'), recipe_path(@recipe), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, class: 'btn btn-danger' %>
+        <% end %>
+      </div>
     </div>
 
     <!-- レシピへのアクション -->
@@ -36,81 +41,99 @@
       <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'good' } %>
       <%= render partial: 'user_actions/user_action', locals: { actionable: @recipe, action_type: 'bad' } %>
     </div>
+    <!-- 投稿されたトッピング -->
+    <% if user_signed_in? %>
+      <div class="recipe-toppings-container mt-4">
+        <h3 class="toppings-title"><%= t('recipes.show.toppings') %></h3>
+        
+        <!-- トッピング追加フォーム -->
+        <div class="toppings-form-container mb-3">
+          <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
+            <div class="form-group d-flex align-items-center gap-2">
+              <%= form.text_field :name, placeholder: t('recipes.show.toppings_placeholder'), class: "form-control me-2" %>
+              <%= form.submit t('recipes.show.add_topping'), class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- トッピングリスト -->
+        <ul id="toppings" class="list-group">
+          <% @recipe.toppings.each do |topping| %>
+            <li id="topping_<%= topping.id %>" class="list-group-item d-flex align-items-center justify-content-between">
+              <div class="topping-name-actions d-flex align-items-center gap-3">
+                <span class="topping-name"><%= topping.name %></span>
+                <div class="topping-actions d-flex gap-2">
+                  <%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %>
+                  <%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %>
+                </div>
+              </div>
+              <% if topping.user == current_user %>
+                <%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-outline-danger btn-sm" %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<div class="recipe-section">
-  <!-- 調理工程 -->
-  <h3><%= t('recipes.show.steps') %></h3>
-  <% @recipe.recipe_steps.each do |step| %>
-    <div class="recipe-step">
-      <p>
-        <strong><%= t('recipes.form.step') %>:</strong>
-        <%= step.text %>
-      </p>
-      <% if step.step_image.present? %>
-        <!-- 調理工程の画像 -->
-        <p>
-          <%= image_tag step.step_image.url, size: "100x100" %>
-        </p>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<!-- 必要な調理器具 -->
-<div class="recipe-section">
-  <h3><%= t('recipes.show.kitchen_tools') %></h3>
-  <ul>
-    <% @recipe.kitchen_tools.each do |tool| %>
-      <li><%= tool.name %></li>
-    <% end %>
-  </ul>
-</div>
-
-<!-- 必要な材料 -->
-<div class="recipe-section">
-  <h3><%= t('recipes.show.ingredients') %></h3>
-  <ul>
-    <% @recipe.ingredients.each do |ingredient| %>
-      <li><%= ingredient.name %></li>
-    <% end %>
-  </ul>
-</div>
-
-<!-- レシピの編集/削除 -->
-<div class="d-flex align-items-center user-actions-container">
-  <% if @recipe.user == current_user %>
-    <%= link_to t('recipes.edit.title'), edit_recipe_path(@recipe), class: 'btn btn-primary' %>
-    <%= button_to t('recipes.show.destroy_recipe'), recipe_path(@recipe), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, class: 'btn btn-danger' %>
-  <% end %>
-</div>
-
-<!-- 投稿されたトッピング -->
-<% if user_signed_in? %>
-  <h3><%= t('recipes.show.toppings') %></h3>
-  <%= form_with(model: [@recipe, Topping.new], url: add_topping_recipe_path(@recipe), data: { turbo_frame: "_top" }, local: true) do |form| %>
-    <div class="form-group">
-      <%= form.label :name, t('recipes.show.toppings') %>
-      <%= form.text_field :name, class: "form-control" %>
-    </div>
-    <%= form.submit t('recipes.show.add_topping'), class: "btn btn-primary" %>
-  <% end %>
-
-  <!-- トッピングに対するアクション -->
-  <ul id="toppings">
-    <% @recipe.toppings.each do |topping| %>
-      <li id="topping_<%= topping.id %>" class="d-flex align-items-center">
-        <div class="mr-2"><%= topping.name %></div>
-        <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'good', parent: @recipe } %></div>
-        <div class="mr-2"><%= render partial: 'user_actions/user_action', locals: { actionable: topping, action_type: 'bad', parent: @recipe } %></div>
-        <% if topping.user == current_user %>
-          <div><%= button_to t('recipes.topping.delete'), remove_topping_recipe_path(@recipe, topping_id: topping.id), method: :delete, data: { turbo_confirm: t('recipes.show.confirm_delete') }, remote: true, class: "btn btn-danger" %></div>
+<div class="recipe-details-container d-flex">
+  <!-- 左側: 材料と調理器具 -->
+  <div class="recipe-left">
+    <!-- 必要な材料 -->
+    <div class="recipe-section">
+      <h3><%= t('recipes.show.ingredients') %></h3>
+      <ul class="ingredients-list">
+        <% @recipe.ingredients.each do |ingredient| %>
+          <li><%= ingredient.name %></li>
         <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+      </ul>
+    </div>
+
+    <!-- 必要な調理器具 -->
+    <div class="recipe-section">
+      <h3><%= t('recipes.show.kitchen_tools') %></h3>
+      <ul class="kitchen-tools-list">
+        <% @recipe.kitchen_tools.each do |tool| %>
+          <li><%= tool.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 右側: 調理工程 -->
+  <div class="recipe-right">
+    <div class="recipe-section">
+      <h3><%= t('recipes.show.steps') %></h3>
+      <div class="recipe-steps-container">
+        <% @recipe.recipe_steps.each_with_index do |step, index| %>
+          <div class="recipe-step">
+            <!-- 工程番号 -->
+            <div class="step-number">
+              <span><%= index + 1 %></span>
+            </div>
+            <!-- 工程画像 -->
+            <% if step.step_image.present? %>
+              <div class="step-image">
+                <%= image_tag step.step_image.url, class: "img-fluid rounded shadow-sm" %>
+              </div>
+            <% end %>
+            <!-- 工程説明 -->
+            <div class="step-text">
+              <%= step.text %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 編集中！ -->
+<!-- 編集中！ -->
+<!-- 編集中！ -->
+<!-- 編集中！ -->
 
 <!-- コメント -->
 <div class="comments-section mt-5">
