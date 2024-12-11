@@ -36,45 +36,28 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-  
+
     .recipe-header {
       display: flex;
       align-items: center; /* 縦方向の中央揃え */
       gap: 15px; /* レシピ名と投稿者名の間隔 */
-  
+
       .recipe-title {
         font-size: 24px;
         font-weight: bold;
       }
-  
+
       .recipe-author {
         font-size: 14px;
         color: #555;
         white-space: nowrap; /* 折り返しを防ぐ */
       }
     }
-  
+
     .user-actions {
       display: flex;
       gap: 10px; /* 各ボタン間の間隔 */
       margin-top: 15px;
-    }
-  }
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-  .recipe-show {
-    flex-direction: column;
-    align-items: center;
-
-    .recipe-image-container {
-      max-width: 80%; /* 小さい画面では親要素の80%まで縮小 */
-    }
-
-    .recipe-info-container {
-      width: 100%; /* 幅を全体に広げる */
-      text-align: center; /* テキストを中央揃え */
     }
   }
 }
@@ -120,8 +103,9 @@
 
     .recipe-steps-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, max-content)); /* 最大幅をコンテンツに調整 */
       gap: 20px;
+      justify-content: start; /* 要素が少ないときに左揃え */
     }
 
     .recipe-step {
@@ -130,6 +114,9 @@
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
+      max-width: 300px; /* カードの最大幅を制限 */
+      width: 100%; /* グリッド内で調整 */
+      margin: 0 auto; /* カードを中央揃え */
 
       .step-number {
         background: #ff5722;
