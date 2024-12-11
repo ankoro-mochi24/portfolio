@@ -14,7 +14,7 @@
   <!-- レシピ名 -->
   <div class="mb-4">
     <%= form.label :title, t('recipes.form.title'), class: "form-label" %>
-    <%= form.text_field :title, class: "form-control", required: true %>
+    <%= form.text_field :title, class: "form-control", required: true, placeholder: t('recipes.form.title_placeholder') %>
   </div>
 
   <!-- レシピ画像 -->
@@ -46,7 +46,7 @@
           </div>
           <div class="card-body">
             <div class="mb-2">
-              <%= step_form.text_area :text, class: "form-control", required: true %>
+              <%= step_form.text_area :text, class: "form-control", required: true, placeholder: t('recipes.form.step_placeholder') %>
             </div>
             <div class="mb-2">
               <%= step_form.label :step_image, t('recipes.form.step_image'), class: "form-label" %>
@@ -75,7 +75,7 @@
           </div>
           <div class="card-body">
             <div class="mb-2">
-              <%= step_form.text_area :text, class: "form-control", required: true %>
+              <%= step_form.text_area :text, class: "form-control", required: true, placeholder: t('recipes.form.step_placeholder') %>
             </div>
             <div class="mb-2">
               <%= step_form.label :step_image, t('recipes.form.step_image'), class: "form-label" %>
@@ -87,41 +87,48 @@
     </template>
   </div>
 
-  <!--必要な調理器具-->
-  <h3><%= t('recipes.form.kitchen_tools_title') %></h3>
-  <div data-controller="kitchen-tools">
+  <!-- 必要な調理器具 -->
+  <h3 class="mb-3"><%= t('recipes.form.kitchen_tools_title') %></h3>
+  <div data-controller="kitchen-tools" class="mb-4">
     <div data-kitchen-tools-target="container">
       <%= form.fields_for :recipe_kitchen_tools do |tool_form| %>
-        <div class="nested-fields" data-new-record="false">
+        <!-- 各調理器具をカード形式で表示 -->
+        <div class="card mb-3 p-3 shadow-sm nested-fields" data-new-record="false">
           <%= tool_form.hidden_field :_destroy %>
-          <%= tool_form.hidden_field :kitchen_tool_id %>
-          <%= tool_form.label :kitchen_tool_name, t('recipes.form.kitchen_tool') %>
-          <%= tool_form.text_field :kitchen_tool_name, value: tool_form.object.kitchen_tool_name, required: true %>
-          <% if tool_form.index > 0 %>
-            <a href="#" data-action="click->kitchen-tools#removeField"><%= t('recipes.form.remove') %></a>
-          <% end %>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><%= t('recipes.form.kitchen_tool') %></span>
+            <% if tool_form.index > 0 %>
+              <a href="#" data-action="click->kitchen-tools#removeField" class="btn btn-outline-danger btn-sm"><%= t('recipes.form.remove') %></a>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <%= tool_form.hidden_field :kitchen_tool_id %>
+            <div class="mb-2">
+              <%= tool_form.text_field :kitchen_tool_name, class: "form-control", value: tool_form.object.kitchen_tool_name, required: true, placeholder: t('recipes.form.kitchen_tool_placeholder') %>
+            </div>
+          </div>
         </div>
       <% end %>
-      <% if recipe.recipe_kitchen_tools.empty? %>
-        <%= form.fields_for :recipe_kitchen_tools, RecipeKitchenTool.new do |tool_form| %>
-          <div class="nested-fields" data-new-record="true">
-            <%= tool_form.hidden_field :_destroy %>
-            <%= tool_form.hidden_field :kitchen_tool_id %>
-            <%= tool_form.label :kitchen_tool_name, t('recipes.form.kitchen_tool') %>
-            <%= tool_form.text_field :kitchen_tool_name, required: true %>
-          </div>
-        <% end %>
-      <% end %>
     </div>
-    <a href="#" data-action="click->kitchen-tools#addField"><%= t('recipes.form.add') %></a>
+
+    <!-- 調理器具の追加ボタン -->
+    <a href="#" data-action="click->kitchen-tools#addField" class="btn btn-outline-primary btn-sm"><%= t('recipes.form.add') %></a>
+    
+    <!-- テンプレート -->
     <template data-kitchen-tools-target="template">
-      <div class="nested-fields" data-new-record="true">
+      <div class="card mb-3 p-3 shadow-sm nested-fields" data-new-record="true">
         <%= form.fields_for :recipe_kitchen_tools, RecipeKitchenTool.new, child_index: "TEMPLATE_RECORD" do |tool_form| %>
           <%= tool_form.hidden_field :_destroy %>
-          <%= tool_form.hidden_field :kitchen_tool_id %>
-          <%= tool_form.label :kitchen_tool_name, t('recipes.form.kitchen_tool') %>
-          <%= tool_form.text_field :kitchen_tool_name, required: true %>
-          <a href="#" data-action="click->kitchen-tools#removeField"><%= t('recipes.form.remove') %></a>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><%= t('recipes.form.kitchen_tool') %></span>
+            <a href="#" data-action="click->kitchen-tools#removeField" class="btn btn-outline-danger btn-sm"><%= t('recipes.form.remove') %></a>
+          </div>
+          <div class="card-body">
+            <%= tool_form.hidden_field :kitchen_tool_id %>
+            <div class="mb-2">
+              <%= tool_form.text_field :kitchen_tool_name, class: "form-control", required: true, placeholder: t('recipes.form.kitchen_tool_placeholder') %>
+            </div>
+          </div>
         <% end %>
       </div>
     </template>
