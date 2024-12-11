@@ -62,6 +62,120 @@
   }
 }
 
+/* 必要な材料セクション */
+.recipe-ingredients-container {
+  .ingredients-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 材料同士の間隔 */
+  }
+
+  .ingredient-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px; /* 材料名と削除ボタンの間隔 */
+
+    .ingredient-label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .ingredient-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .form-control {
+        flex: 1;
+      }
+
+      .readonly {
+        background-color: #e9ecef;
+        cursor: not-allowed;
+      }
+    }
+
+    .remove-ingredient {
+      color: #dc3545;
+      font-size: 14px;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .add-ingredient-btn {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+}
+
+/* 必要な調理器具セクション */
+.recipe-kitchen-tools-container {
+  .kitchen-tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .kitchen-tool-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    .tool-label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .tool-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .form-control {
+        flex: 1;
+      }
+
+      .readonly {
+        background-color: #e9ecef;
+        cursor: not-allowed;
+      }
+    }
+
+    .remove-tool {
+      color: #dc3545;
+      font-size: 14px;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .add-tool-btn {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+}
+
 /* 材料・調理器具と調理工程のコンテナ */
 .recipe-details-container {
   display: flex;
@@ -103,9 +217,9 @@
 
     .recipe-steps-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, max-content)); /* 最大幅をコンテンツに調整 */
+      grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
       gap: 20px;
-      justify-content: start; /* 要素が少ないときに左揃え */
+      justify-content: start;
     }
 
     .recipe-step {
@@ -113,10 +227,8 @@
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 300px; /* カードの最大幅を制限 */
-      width: 100%; /* グリッド内で調整 */
-      margin: 0 auto; /* カードを中央揃え */
+      max-width: 300px;
+      width: 100%;
 
       .step-number {
         background: #ff5722;
@@ -146,6 +258,24 @@
   }
 }
 
+/* 保存・キャンセルボタンのスタイル */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+
+  .btn-success {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .btn-secondary {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
   .recipe-details-container {
@@ -159,72 +289,6 @@
 
     .recipe-steps-container {
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-  }
-}
-
-/* トッピングセクション */
-.recipe-toppings-container {
-  .toppings-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #333;
-  }
-
-  .toppings-form-container {
-    .form-group {
-      display: flex;
-      gap: 10px;
-
-      .form-control {
-        flex: 1;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      .btn {
-        white-space: nowrap;
-      }
-    }
-  }
-
-  #toppings {
-    margin-top: 15px;
-    padding: 0;
-    list-style: none;
-
-    .list-group-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      background: #f9f9f9;
-
-      .topping-name-actions {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-
-        .topping-name {
-          font-size: 16px;
-          color: #333;
-          font-weight: bold;
-        }
-
-        .topping-actions {
-          display: flex;
-          gap: 10px;
-        }
-      }
-
-      .btn-outline-danger {
-        padding: 5px 10px;
-        font-size: 12px;
-      }
     }
   }
 }

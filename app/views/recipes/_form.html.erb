@@ -134,42 +134,62 @@
     </template>
   </div>
 
-  <!--必要な材料-->
-  <h3><%= t('recipes.form.ingredients_title') %></h3>
-  <div data-controller="recipe-ingredients">
+  <!-- 必要な材料 -->
+  <h3 class="mb-3"><%= t('recipes.form.ingredients_title') %></h3>
+  <div data-controller="recipe-ingredients" class="mb-4">
     <div data-recipe-ingredients-target="container">
       <%= form.fields_for :recipe_ingredients do |ingredient_form| %>
-        <div class="nested-fields" data-new-record="false">
+        <!-- 材料ごとのカード -->
+        <div class="card mb-3 p-3 shadow-sm nested-fields" data-new-record="false">
           <%= ingredient_form.hidden_field :_destroy %>
-          <%= ingredient_form.hidden_field :ingredient_id %>
-          <%= ingredient_form.label :ingredient_name, t('recipes.form.ingredient') %>
-          <% if ingredient_form.index == 0 %>
-            <!-- 1つ目の材料フォーム（白米） -->
-            <%= ingredient_form.text_field :ingredient_name, readonly: true %>
-          <% else %>
-            <!-- それ以外の材料フォーム -->
-            <%= ingredient_form.text_field :ingredient_name %>
-            <a href="#" data-action="click->recipe-ingredients#removeField"><%= t('recipes.form.remove') %></a>
-          <% end %>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><%= t('recipes.form.ingredient') %></span>
+            <% if ingredient_form.index > 0 %>
+              <a href="#" data-action="click->recipe-ingredients#removeField" class="btn btn-outline-danger btn-sm"><%= t('recipes.form.remove') %></a>
+            <% end %>
+          </div>
+          <div class="card-body">
+            <% if ingredient_form.index.zero? %>
+              <!-- 最初の材料は編集不可 -->
+              <%= ingredient_form.text_field :ingredient_name, readonly: true, class: "form-control readonly", placeholder: t('recipes.form.ingredient_placeholder') %>
+            <% else %>
+              <!-- それ以外は編集可能 -->
+              <%= ingredient_form.text_field :ingredient_name, class: "form-control", placeholder: t('recipes.form.ingredient_placeholder') %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
-    <a href="#" data-action="click->recipe-ingredients#addField"><%= t('recipes.form.add') %></a>
+
+    <!-- 材料の追加ボタン -->
+    <a href="#" data-action="click->recipe-ingredients#addField" class="btn btn-outline-primary btn-sm">
+      <%= t('recipes.form.add') %>
+    </a>
+
+    <!-- 材料のテンプレート -->
     <template data-recipe-ingredients-target="template">
-      <div class="nested-fields" data-new-record="true">
+      <div class="card mb-3 p-3 shadow-sm nested-fields" data-new-record="true">
         <%= form.fields_for :recipe_ingredients, RecipeIngredient.new, child_index: "TEMPLATE_RECORD" do |ingredient_form| %>
           <%= ingredient_form.hidden_field :_destroy %>
-          <%= ingredient_form.hidden_field :ingredient_id %>
-          <%= ingredient_form.label :ingredient_name, t('recipes.form.ingredient') %>
-          <%= ingredient_form.text_field :ingredient_name %>
-          <a href="#" data-action="click->recipe-ingredients#removeField"><%= t('recipes.form.remove') %></a>
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><%= t('recipes.form.ingredient') %></span>
+            <a href="#" data-action="click->recipe-ingredients#removeField" class="btn btn-outline-danger btn-sm"><%= t('recipes.form.remove') %></a>
+          </div>
+          <div class="card-body">
+            <%= ingredient_form.text_field :ingredient_name, class: "form-control", placeholder: t('recipes.form.ingredient_placeholder') %>
+          </div>
         <% end %>
       </div>
     </template>
   </div>
 
-  <!--保存or投稿ボタン-->
-  <div class="actions">
-    <%= form.submit recipe.new_record? ? t('recipes.form.submit') : t('recipes.form.save') %>
+  <!-- 保存 or 投稿 + キャンセルボタン -->
+  <div class="actions mt-4 d-flex gap-2">
+    <!-- 保存 or 投稿ボタン -->
+    <%= form.submit recipe.new_record? ? t('recipes.form.submit') : t('recipes.form.save'), class: "btn btn-success" %>
+
+    <!-- キャンセルボタン -->
+    <% cancel_path = recipe.persisted? ? recipe_path(recipe) : root_path %>
+    <%= link_to t('helpers.cancel'), cancel_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>
