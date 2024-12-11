@@ -46,3 +46,6 @@ ja:
       remove: "削除"
       submit: "投稿"
       save: "保存"
+      kitchen_tool_placeholder: "例: フライパン、包丁"
+      title_placeholder: "例: 絶品！カレーヌードルを使ったカップ麺ライス♪"
+      step_placeholder: "例: お湯を沸かし、カレーヌードルを作ります。"
