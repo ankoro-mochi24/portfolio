@@ -31,3 +31,35 @@
   font-size: 14px;
   padding: 8px 15px;
 }
+
+.foodstuff-show {
+  .foodstuff-title {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  #foodstuff-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    img {
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .text-muted {
+    color: #6c757d;
+  }
+
+  .btn-primary {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .btn-danger {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}

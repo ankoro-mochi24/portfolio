@@ -1,67 +1,78 @@
 <% content_for(:title, t('foodstuffs.show.content')) %>
 
 <!-- フラッシュメッセージ -->
-<p style="color: green"><%= notice %></p>
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
-<div class="foodstuff-header">
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<div class="foodstuff-show card p-4 shadow-sm">
   <!-- 食品名 -->
-  <p>
-    <strong><%= t('foodstuffs.show.name') %>:</strong>
-    <%= @foodstuff.name %>
-  </p>
+  <h1 class="foodstuff-title mb-3"><%= @foodstuff.name %></h1>
 
   <!-- 食品のイメージ画像 -->
-  <p>
+  <div id="foodstuff-images" class="d-flex gap-3 mb-4">
     <% if @foodstuff.image.present? %>
       <% @foodstuff.image.each do |img| %>
-        <%= image_tag img.url, size: "100x100" %>
+        <%= image_tag img.url, class: "img-thumbnail", style: "max-width: 150px;" %>
       <% end %>
+    <% else %>
+      <p class="text-muted"><%= t('foodstuffs.show.no_image') %></p>
     <% end %>
-  </p>
-
-  <!-- 食品へのアクション -->
-  <div class="d-flex align-items-center user-actions-container">
-    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bookmark' } %>
-    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'good' } %>
-    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bad' } %>
   </div>
 
   <!-- 食品説明 -->
   <p>
     <strong><%= t('foodstuffs.show.description') %>:</strong>
-    <%= @foodstuff.description %>
+    <span class="text-muted"><%= @foodstuff.description %></span>
   </p>
 
   <!-- 価格 -->
   <p>
     <strong><%= t('foodstuffs.show.price') %>:</strong>
-    <%= @foodstuff.price %>
+    <span class="text-muted">¥<%= @foodstuff.price %></span>
   </p>
 
   <!-- 食品のリンク -->
   <p>
     <strong><%= t('foodstuffs.show.link') %>:</strong>
-    <%= @foodstuff.link %>
+    <a href="<%= @foodstuff.link %>" target="_blank" class="text-primary"><%= @foodstuff.link %></a>
   </p>
-</div>
 
-<!-- 関連レシピを投稿する -->
-<%= link_to t('foodstuffs.show.post_recipe'), new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
+  <!-- 食品へのアクション -->
+  <div class="d-flex align-items-center gap-2 mt-3">
+    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bookmark' } %>
+    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'good' } %>
+    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bad' } %>
+  </div>
 
-<!-- 食品の編集/削除 -->
-<div class="d-flex align-items-center user-actions-container">
+  <!-- 関連レシピを投稿する -->
+  <div class="mt-4">
+    <%= link_to t('foodstuffs.show.post_recipe'), new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
+  </div>
+
+  <!-- 食品の編集/削除 -->
   <% if current_user == @foodstuff.user %>
-    <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary' %>
-    <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: t('foodstuffs.confirm_delete') }, class: 'btn btn-danger' %>
+    <div class="d-flex gap-2 mt-3">
+      <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary' %>
+      <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: t('foodstuffs.confirm_delete') }, class: 'btn btn-danger' %>
+    </div>
   <% end %>
 </div>
 
 <!-- コメント -->
 <div class="comments-section mt-5">
-  <h2 class="comments-title"><%= t('comments.title') %></h2>
+  <h2 class="comments-title mb-4"><%= t('comments.title') %></h2>
 
   <!-- コメントリスト -->
-  <div id="comments" class="comment-list mt-3">
+  <div id="comments" class="comment-list">
     <%= turbo_frame_tag "comments_list" do %>
       <% @foodstuff.comments.each do |comment| %>
         <%= render "comments/comment", comment: comment %>
@@ -72,12 +83,10 @@
   <!-- 新規コメント投稿フォーム -->
   <div class="new-comment-form mt-4">
     <h5 class="card-title form-title"><%= t('comments.form_title') %></h5>
-    <div class="card p-4 comment-item">
+    <div class="card p-4 shadow-sm">
       <%= turbo_frame_tag "new_comment" do %>
-          <%= render "comments/form", commentable: @foodstuff, comment: Comment.new %>
+        <%= render "comments/form", commentable: @foodstuff, comment: Comment.new %>
       <% end %>
     </div>
   </div>
 </div>
-
-
