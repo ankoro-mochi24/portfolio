@@ -43,11 +43,28 @@
     max-width: 50%; /* 画面の半分までに制限 */
     text-align: center;
 
-    .foodstuff-image {
-      max-width: 100%;
-      height: auto; /* アスペクト比を維持 */
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    .main-image {
+      margin-bottom: 20px;
+
+      .foodstuff-main-image {
+        max-width: 100%;
+        height: auto; /* アスペクト比を維持 */
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .sub-images {
+      .image-label {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .foodstuff-sub-image {
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 

@@ -17,9 +17,18 @@
   <!-- 左側: 食品画像 -->
   <div class="foodstuff-image-container">
     <% if @foodstuff.image.present? %>
-      <% @foodstuff.image.each do |img| %>
-        <%= image_tag img.url, class: "foodstuff-image img-fluid rounded shadow-sm" %>
-      <% end %>
+      <!-- メイン画像 -->
+      <div class="main-image mb-3">
+        <%= image_tag @foodstuff.image.first.url, class: "foodstuff-main-image img-fluid rounded shadow-sm" %>
+      </div>
+      <!-- サブ画像 -->
+      <div class="sub-images">
+        <div class="d-flex flex-wrap gap-2">
+          <% @foodstuff.image.drop(1).each do |img| %>
+            <%= image_tag img.url, class: "foodstuff-sub-image img-thumbnail", style: "max-width: 100px;" %>
+          <% end %>
+        </div>
+      </div>
     <% else %>
       <p class="text-muted"><%= t('foodstuffs.show.no_image') %></p>
     <% end %>
