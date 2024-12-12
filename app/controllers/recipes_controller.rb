@@ -16,6 +16,11 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @recipe.recipe_steps.build
+
+    if params[:foodstuff_name].present?
+      ingredient = Ingredient.find_or_initialize_by(name: params[:foodstuff_name])
+      @recipe.recipe_ingredients.build(ingredient: ingredient, ingredient_name: ingredient.name)
+    end
   end  
 
   def edit
