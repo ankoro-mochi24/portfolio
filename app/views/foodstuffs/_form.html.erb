@@ -32,18 +32,22 @@
     <%= form.text_field :link, class: "form-control", placeholder: t('foodstuffs.form.link_placeholder') %>
   </div>
 
+  <!-- 画像のプレビュー -->
   <div class="mb-3">
     <%= form.label :image, t('activerecord.attributes.foodstuff.image'), class: "form-label" %>
     <div id="foodstuff_image_preview" class="mb-3">
       <% if foodstuff.image.present? %>
         <% foodstuff.image.each do |img| %>
-          <%= image_tag img.url, class: "img-thumbnail", style: "max-width: 300px;" %>
+          <div class="mb-2">
+            <%= image_tag img.url, class: "img-thumbnail", style: "max-width: 150px;" %>
+            <%= hidden_field_tag 'foodstuff[image_cache][]', img %> <!-- キャッシュを配列で保持 -->
+          </div>
         <% end %>
       <% else %>
         <p class="text-muted"><%= t('foodstuffs.form.image_placeholder') %></p>
       <% end %>
     </div>
-    <%= form.file_field :image, multiple: true, class: "form-control", onchange: "previewFoodstuffImages(event)" %>
+    <%= form.file_field :image, multiple: true, class: "form-control" %>
   </div>
 
   <!-- ボタン -->
