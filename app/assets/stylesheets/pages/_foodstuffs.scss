@@ -10,3 +10,24 @@
   padding: 0;
   list-style: none;
 }
+
+/* フォームのスタイル */
+#foodstuff_image_preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+
+  img {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* キャンセルボタン */
+.btn-secondary {
+  font-size: 14px;
+  padding: 8px 15px;
+}
