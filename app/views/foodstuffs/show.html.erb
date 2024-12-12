@@ -13,58 +13,59 @@
   </div>
 <% end %>
 
-<div class="foodstuff-show card p-4 shadow-sm">
-  <!-- 食品名 -->
-  <h1 class="foodstuff-title mb-3"><%= @foodstuff.name %></h1>
-
-  <!-- 食品のイメージ画像 -->
-  <div id="foodstuff-images" class="d-flex gap-3 mb-4">
+<div class="foodstuff-show d-flex">
+  <!-- 左側: 食品画像 -->
+  <div class="foodstuff-image-container">
     <% if @foodstuff.image.present? %>
       <% @foodstuff.image.each do |img| %>
-        <%= image_tag img.url, class: "img-thumbnail", style: "max-width: 150px;" %>
+        <%= image_tag img.url, class: "foodstuff-image img-fluid rounded shadow-sm" %>
       <% end %>
     <% else %>
       <p class="text-muted"><%= t('foodstuffs.show.no_image') %></p>
     <% end %>
   </div>
 
-  <!-- 食品説明 -->
-  <p>
-    <strong><%= t('foodstuffs.show.description') %>:</strong>
-    <span class="text-muted"><%= @foodstuff.description %></span>
-  </p>
-
-  <!-- 価格 -->
-  <p>
-    <strong><%= t('foodstuffs.show.price') %>:</strong>
-    <span class="text-muted">¥<%= @foodstuff.price %></span>
-  </p>
-
-  <!-- 食品のリンク -->
-  <p>
-    <strong><%= t('foodstuffs.show.link') %>:</strong>
-    <a href="<%= @foodstuff.link %>" target="_blank" class="text-primary"><%= @foodstuff.link %></a>
-  </p>
-
-  <!-- 食品へのアクション -->
-  <div class="d-flex align-items-center gap-2 mt-3">
-    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bookmark' } %>
-    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'good' } %>
-    <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bad' } %>
-  </div>
-
-  <!-- 関連レシピを投稿する -->
-  <div class="mt-4">
-    <%= link_to t('foodstuffs.show.post_recipe'), new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
-  </div>
-
-  <!-- 食品の編集/削除 -->
-  <% if current_user == @foodstuff.user %>
-    <div class="d-flex gap-2 mt-3">
-      <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary' %>
-      <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: t('foodstuffs.confirm_delete') }, class: 'btn btn-danger' %>
+  <!-- 右側: 食品情報 -->
+  <div class="foodstuff-info-container">
+    <div class="foodstuff-header">
+      <h1 class="foodstuff-title"><%= @foodstuff.name %></h1>
+      <!-- 食品説明 -->
+      <p>
+        <strong><%= t('foodstuffs.show.description') %>:</strong>
+        <span class="text-muted"><%= @foodstuff.description %></span>
+      </p>
+      <!-- 価格 -->
+      <p>
+        <strong><%= t('foodstuffs.show.price') %>:</strong>
+        <span class="text-muted">¥<%= @foodstuff.price %></span>
+      </p>
+      <!-- 食品のリンク -->
+      <p>
+        <strong><%= t('foodstuffs.show.link') %>:</strong>
+        <a href="<%= @foodstuff.link %>" target="_blank" class="text-primary"><%= @foodstuff.link %></a>
+      </p>
     </div>
-  <% end %>
+
+    <!-- 食品へのアクション -->
+    <div class="user-actions mt-3">
+      <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bookmark' } %>
+      <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'good' } %>
+      <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bad' } %>
+    </div>
+
+    <!-- 関連レシピを投稿する -->
+    <div class="mt-4">
+      <%= link_to t('foodstuffs.show.post_recipe'), new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
+    </div>
+
+    <!-- 食品の編集/削除 -->
+    <% if current_user == @foodstuff.user %>
+      <div class="d-flex gap-2 mt-3">
+        <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary' %>
+        <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: t('foodstuffs.confirm_delete') }, class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <!-- コメント -->

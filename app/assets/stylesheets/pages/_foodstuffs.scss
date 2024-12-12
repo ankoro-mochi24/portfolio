@@ -33,33 +33,61 @@
 }
 
 .foodstuff-show {
-  .foodstuff-title {
-    font-size: 28px;
-    font-weight: bold;
-  }
+  display: flex;
+  gap: 20px; /* 左右の間隔 */
+  align-items: flex-start;
 
-  #foodstuff-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  /* 左側: 食品画像 */
+  .foodstuff-image-container {
+    flex: 1;
+    max-width: 50%; /* 画面の半分までに制限 */
+    text-align: center;
 
-    img {
+    .foodstuff-image {
+      max-width: 100%;
+      height: auto; /* アスペクト比を維持 */
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
   }
 
-  .text-muted {
-    color: #6c757d;
-  }
+  /* 右側: 食品情報 */
+  .foodstuff-info-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
-  .btn-primary {
-    padding: 10px 20px;
-    font-size: 16px;
-  }
+    .foodstuff-header {
+      margin-bottom: 20px;
 
-  .btn-danger {
-    padding: 10px 20px;
-    font-size: 16px;
+      .foodstuff-title {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .text-muted {
+        color: #6c757d;
+      }
+
+      a.text-primary {
+        color: #007bff;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .user-actions {
+      display: flex;
+      gap: 10px; /* 各ボタン間の間隔 */
+      margin-top: 15px;
+    }
+
+    .btn-primary, .btn-danger {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
   }
 }
