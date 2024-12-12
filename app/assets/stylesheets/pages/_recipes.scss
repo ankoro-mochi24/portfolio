@@ -36,24 +36,24 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-  
+
     .recipe-header {
       display: flex;
       align-items: center; /* 縦方向の中央揃え */
       gap: 15px; /* レシピ名と投稿者名の間隔 */
-  
+
       .recipe-title {
         font-size: 24px;
         font-weight: bold;
       }
-  
+
       .recipe-author {
         font-size: 14px;
         color: #555;
         white-space: nowrap; /* 折り返しを防ぐ */
       }
     }
-  
+
     .user-actions {
       display: flex;
       gap: 10px; /* 各ボタン間の間隔 */
@@ -62,20 +62,117 @@
   }
 }
 
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-  .recipe-show {
+/* 必要な材料セクション */
+.recipe-ingredients-container {
+  .ingredients-list {
+    display: flex;
     flex-direction: column;
+    gap: 15px; /* 材料同士の間隔 */
+  }
+
+  .ingredient-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 15px; /* 材料名と削除ボタンの間隔 */
 
-    .recipe-image-container {
-      max-width: 80%; /* 小さい画面では親要素の80%まで縮小 */
+    .ingredient-label {
+      font-weight: bold;
+      margin-right: 10px;
     }
 
-    .recipe-info-container {
-      width: 100%; /* 幅を全体に広げる */
-      text-align: center; /* テキストを中央揃え */
+    .ingredient-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .form-control {
+        flex: 1;
+      }
+
+      .readonly {
+        background-color: #e9ecef;
+        cursor: not-allowed;
+      }
     }
+
+    .remove-ingredient {
+      color: #dc3545;
+      font-size: 14px;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .add-ingredient-btn {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+}
+
+/* 必要な調理器具セクション */
+.recipe-kitchen-tools-container {
+  .kitchen-tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .kitchen-tool-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    .tool-label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .tool-field {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .form-control {
+        flex: 1;
+      }
+
+      .readonly {
+        background-color: #e9ecef;
+        cursor: not-allowed;
+      }
+    }
+
+    .remove-tool {
+      color: #dc3545;
+      font-size: 14px;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .add-tool-btn {
+    margin-top: 10px;
+    font-size: 14px;
+    padding: 8px 15px;
   }
 }
 
@@ -120,8 +217,9 @@
 
     .recipe-steps-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
       gap: 20px;
+      justify-content: start;
     }
 
     .recipe-step {
@@ -129,7 +227,8 @@
       padding: 10px;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      max-width: 300px;
+      width: 100%;
 
       .step-number {
         background: #ff5722;
@@ -159,6 +258,24 @@
   }
 }
 
+/* 保存・キャンセルボタンのスタイル */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+
+  .btn-success {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .btn-secondary {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
   .recipe-details-container {
@@ -172,72 +289,6 @@
 
     .recipe-steps-container {
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-  }
-}
-
-/* トッピングセクション */
-.recipe-toppings-container {
-  .toppings-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #333;
-  }
-
-  .toppings-form-container {
-    .form-group {
-      display: flex;
-      gap: 10px;
-
-      .form-control {
-        flex: 1;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      .btn {
-        white-space: nowrap;
-      }
-    }
-  }
-
-  #toppings {
-    margin-top: 15px;
-    padding: 0;
-    list-style: none;
-
-    .list-group-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 15px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      background: #f9f9f9;
-
-      .topping-name-actions {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-
-        .topping-name {
-          font-size: 16px;
-          color: #333;
-          font-weight: bold;
-        }
-
-        .topping-actions {
-          display: flex;
-          gap: 10px;
-        }
-      }
-
-      .btn-outline-danger {
-        padding: 5px 10px;
-        font-size: 12px;
-      }
     }
   }
 }

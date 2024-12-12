@@ -1,7 +1,9 @@
 <% content_for(:title, t('recipes.edit.content')) %>
 
-<h1><%= t('recipes.edit.title') %></h1>
+<div class="container">
+  <h1 class="mb-4"><%= t('recipes.edit.title') %></h1>
 
-<%= render 'form', recipe: @recipe %>
-
-<%= link_to t('helpers.cancel'), recipe_path(@recipe) %>
+  <div class="card p-4 shadow-sm">
+    <%= render 'form', recipe: @recipe %>
+  </div>
+</div>

@@ -1,13 +1,9 @@
-<% content_for(:title, t('recipes.new.content')) %>
+<% content_for(:title, t('recipes.new.content')) %> 
 
 <div class="container">
   <h1 class="mb-4"><%= t('recipes.new.title') %></h1>
 
   <div class="card p-4 shadow-sm">
     <%= render 'form', recipe: @recipe %>
-  </div>
-
-  <div class="mt-4">
-    <%= link_to t('helpers.cancel'), root_path, class: 'btn btn-secondary' %>
   </div>
 </div>
