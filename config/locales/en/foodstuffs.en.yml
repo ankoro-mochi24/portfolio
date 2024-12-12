@@ -17,11 +17,18 @@ en:
       content: "Edit Foodstuff"
       title: "Edit Food Item"
     form:
+      submit: "Submit"
+      save: "Save"
       name_placeholder: "Enter the name of the foodstuff"
       price_placeholder: "Enter the price (e.g., 500)"
       description_placeholder: "Enter a description of the foodstuff"
       link_placeholder: "Enter a related link"
       image_placeholder: "Select an image of the foodstuff"
+      error: "Error"
+      prohibited: "Please correct the following issues:"
+      remove_image: "Remove this image"
+    helpers:
+      cancel: "Cancel"
     show_foodstuff: "View This Food Item"
     edit_foodstuff: "Edit Food Item"
     destroy_foodstuff: "Delete Food Item"

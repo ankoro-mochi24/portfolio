@@ -36,23 +36,17 @@
 
   <!-- 右側: 食品情報 -->
   <div class="foodstuff-info-container">
-    <div class="foodstuff-header">
+    <div class="foodstuff-header d-flex align-items-center gap-3">
       <h1 class="foodstuff-title"><%= @foodstuff.name %></h1>
-      <!-- 食品説明 -->
-      <p>
-        <strong><%= t('foodstuffs.show.description') %>:</strong>
-        <span class="text-muted"><%= @foodstuff.description %></span>
-      </p>
-      <!-- 価格 -->
-      <p>
-        <strong><%= t('foodstuffs.show.price') %>:</strong>
-        <span class="text-muted">¥<%= @foodstuff.price %></span>
-      </p>
-      <!-- 食品のリンク -->
-      <p>
-        <strong><%= t('foodstuffs.show.link') %>:</strong>
-        <a href="<%= @foodstuff.link %>" target="_blank" class="text-primary"><%= @foodstuff.link %></a>
-      </p>
+
+      <!-- 関連レシピを投稿する -->
+      <%= link_to t('foodstuffs.show.post_recipe'), new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
+
+      <!-- 食品の編集/削除 -->
+      <% if current_user == @foodstuff.user %>
+        <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary btn-sm' %>
+        <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: t('foodstuffs.confirm_delete') }, class: 'btn btn-danger btn-sm' %>
+      <% end %>
     </div>
 
     <!-- 食品へのアクション -->
@@ -61,19 +55,21 @@
       <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'good' } %>
       <%= render partial: 'user_actions/user_action', locals: { actionable: @foodstuff, action_type: 'bad' } %>
     </div>
-
-    <!-- 関連レシピを投稿する -->
-    <div class="mt-4">
-      <%= link_to t('foodstuffs.show.post_recipe'), new_recipe_path(foodstuff_name: @foodstuff.name), class: 'btn btn-primary' %>
-    </div>
-
-    <!-- 食品の編集/削除 -->
-    <% if current_user == @foodstuff.user %>
-      <div class="d-flex gap-2 mt-3">
-        <%= link_to t('foodstuffs.edit_foodstuff'), edit_foodstuff_path(@foodstuff), class: 'btn btn-primary' %>
-        <%= button_to t('foodstuffs.destroy_foodstuff'), @foodstuff, method: :delete, data: { turbo_confirm: t('foodstuffs.confirm_delete') }, class: 'btn btn-danger' %>
-      </div>
-    <% end %>
+    <!-- 食品説明 -->
+    <p>
+      <strong><%= t('foodstuffs.show.description') %>:</strong>
+      <span class="text-muted"><%= @foodstuff.description %></span>
+    </p>
+    <!-- 価格 -->
+    <p>
+      <strong><%= t('foodstuffs.show.price') %>:</strong>
+      <span class="text-muted">¥<%= @foodstuff.price %></span>
+    </p>
+    <!-- 食品のリンク -->
+    <p>
+      <strong><%= t('foodstuffs.show.link') %>:</strong>
+      <a href="<%= @foodstuff.link %>" target="_blank" class="text-primary"><%= @foodstuff.link %></a>
+    </p>
   </div>
 </div>
 

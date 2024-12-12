@@ -50,8 +50,13 @@
     <%= form.file_field :image, multiple: true, class: "form-control" %>
   </div>
 
-  <!-- ボタン -->
-  <div class="actions text-center mt-4">
-    <%= form.submit class: "btn btn-success" %>
+  <!-- 保存 or 投稿 + キャンセルボタン -->
+  <div class="actions mt-4 d-flex gap-2">
+    <!-- 保存 or 投稿ボタン -->
+    <%= form.submit foodstuff.new_record? ? t('foodstuffs.form.submit') : t('foodstuffs.form.save'), class: "btn btn-success" %>
+
+    <!-- キャンセルボタン -->
+    <% cancel_path = foodstuff.persisted? ? foodstuff_path(foodstuff) : root_path %>
+    <%= link_to t('helpers.cancel'), cancel_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>

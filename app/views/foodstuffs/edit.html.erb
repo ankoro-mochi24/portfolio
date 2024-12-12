@@ -2,14 +2,8 @@
 
 <div class="container">
   <h1 class="mb-4"><%= t('foodstuffs.edit.title') %></h1>
+  
   <div class="card p-4 shadow-sm">
     <%= render "form", foodstuff: @foodstuff %>
   <div>
-
-  <br>
-
-  <div class="mt-4 text-center">
-    <%= link_to t('foodstuffs.show_foodstuff'), @foodstuff %> |
-    <%= link_to t('foodstuffs.back_to_list'), root_path %>
-  </div>
 </div>
