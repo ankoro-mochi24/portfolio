@@ -1,12 +1,9 @@
 <% content_for(:title, t('foodstuffs.edit.content')) %>
 
-<h1><%= t('foodstuffs.edit.title') %></h1>
-
-<%= render "form", foodstuff: @foodstuff %>
-
-<br>
-
-<div>
-  <%= link_to t('foodstuffs.show_foodstuff'), @foodstuff %> |
-  <%= link_to t('foodstuffs.back_to_list'), root_path %>
+<div class="container">
+  <h1 class="mb-4"><%= t('foodstuffs.edit.title') %></h1>
+  
+  <div class="card p-4 shadow-sm">
+    <%= render "form", foodstuff: @foodstuff %>
+  <div>
 </div>

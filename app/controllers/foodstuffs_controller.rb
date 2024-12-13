@@ -37,6 +37,12 @@ class FoodstuffsController < ApplicationController
   end
 
   def update
+    # キャッシュから既存の画像を保持
+    if params[:foodstuff][:image_cache].present?
+      params[:foodstuff][:image] ||= []
+      params[:foodstuff][:image] += params[:foodstuff][:image_cache].split(',')
+    end
+  
     respond_to do |format|
       if @foodstuff.update(foodstuff_params)
         format.html { redirect_to @foodstuff, notice: I18n.t("notices.foodstuff_updated") }
@@ -72,6 +78,6 @@ class FoodstuffsController < ApplicationController
 
   # ストロングパラメーター
   def foodstuff_params
-    params.require(:foodstuff).permit(:name, :price, :description, :link, { image: [] })
+    params.require(:foodstuff).permit(:name, :price, :description, :link, { image: [] }, :image_cache)
   end
 end

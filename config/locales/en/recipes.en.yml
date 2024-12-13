@@ -46,3 +46,8 @@ en:
       remove: "Remove"
       submit: "Post"
       save: "Save"
+      title_placeholder: "e.g., Delicious! Cup Noodle Curry Rice"
+      step_placeholder: "e.g., Boil water and prepare the cup noodle curry."
+      kitchen_tool_placeholder: "e.g., Frying pan, knife"
+      ingredient_placeholder: "e.g., Cheese, curry powder"
+      

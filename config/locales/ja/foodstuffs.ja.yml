@@ -16,6 +16,19 @@ ja:
     edit:
       content: "食品編集"
       title: "食品を編集"
+    form:
+      submit: "投稿"
+      save: "保存"
+      name_placeholder: "食品名を入力してください"
+      price_placeholder: "価格を入力してください (例: 500)"
+      description_placeholder: "食品の説明を入力してください"
+      link_placeholder: "関連リンクを入力してください"
+      image_placeholder: "食品の画像を選択してください"
+      error: "エラー"
+      prohibited: "以下の項目を修正してください："
+      remove_image: "この画像を削除する"
+    helpers:
+      cancel: "キャンセル"
     show_foodstuff: "この食品を表示"
     edit_foodstuff: "食品を編集"
     destroy_foodstuff: "食品を削除"

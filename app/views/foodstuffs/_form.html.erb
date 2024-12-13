@@ -1,6 +1,8 @@
-<%= form_with(model: foodstuff, local: true, html: { multipart: true }) do |form| %>
+<%= form_with(model: foodstuff, local: true, html: { multipart: true, class: "needs-validation" }) do |form| %>
+  <!-- エラーメッセージ -->
   <% if foodstuff.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(foodstuff.errors.count, t('foodstuffs.form.error')) %> <%= t('foodstuffs.form.prohibited') %></h2>
       <ul>
         <% foodstuff.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -9,39 +11,52 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name, t('activerecord.attributes.foodstuff.name') %>
-    <%= form.text_field :name %>
+  <!-- フォームフィールド -->
+  <div class="mb-3">
+    <%= form.label :name, t('activerecord.attributes.foodstuff.name'), class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true, placeholder: t('foodstuffs.form.name_placeholder') %>
   </div>
 
-  <div class="field">
-    <%= form.label :price, t('activerecord.attributes.foodstuff.price') %>
-    <%= form.text_field :price %>
+  <div class="mb-3">
+    <%= form.label :price, t('activerecord.attributes.foodstuff.price'), class: "form-label" %>
+    <%= form.text_field :price, class: "form-control", required: true, placeholder: t('foodstuffs.form.price_placeholder') %>
   </div>
 
-  <div class="field">
-    <%= form.label :description, t('activerecord.attributes.foodstuff.description') %>
-    <%= form.text_area :description %>
+  <div class="mb-3">
+    <%= form.label :description, t('activerecord.attributes.foodstuff.description'), class: "form-label" %>
+    <%= form.text_area :description, class: "form-control", rows: 5, placeholder: t('foodstuffs.form.description_placeholder') %>
   </div>
 
-  <div class="field">
-    <%= form.label :link, t('activerecord.attributes.foodstuff.link') %>
-    <%= form.text_field :link %>
+  <div class="mb-3">
+    <%= form.label :link, t('activerecord.attributes.foodstuff.link'), class: "form-label" %>
+    <%= form.text_field :link, class: "form-control", placeholder: t('foodstuffs.form.link_placeholder') %>
   </div>
 
-  <div class="field">
-    <%= form.label :image, t('activerecord.attributes.foodstuff.image') %>
-    <div id="foodstuff_image_preview">
+  <!-- 画像のプレビュー -->
+  <div class="mb-3">
+    <%= form.label :image, t('activerecord.attributes.foodstuff.image'), class: "form-label" %>
+    <div id="foodstuff_image_preview" class="mb-3">
       <% if foodstuff.image.present? %>
         <% foodstuff.image.each do |img| %>
-          <%= image_tag img.url, style: "max-width: 300px; max-height: 300px;" %>
+          <div class="mb-2">
+            <%= image_tag img.url, class: "img-thumbnail", style: "max-width: 150px;" %>
+            <%= hidden_field_tag 'foodstuff[image_cache][]', img %> <!-- キャッシュを配列で保持 -->
+          </div>
         <% end %>
+      <% else %>
+        <p class="text-muted"><%= t('foodstuffs.form.image_placeholder') %></p>
       <% end %>
     </div>
-    <%= form.file_field :image, multiple: true, onchange: "previewFoodstuffImages(event)" %>
+    <%= form.file_field :image, multiple: true, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <!-- 保存 or 投稿 + キャンセルボタン -->
+  <div class="actions mt-4 d-flex gap-2">
+    <!-- 保存 or 投稿ボタン -->
+    <%= form.submit foodstuff.new_record? ? t('foodstuffs.form.submit') : t('foodstuffs.form.save'), class: "btn btn-success" %>
+
+    <!-- キャンセルボタン -->
+    <% cancel_path = foodstuff.persisted? ? foodstuff_path(foodstuff) : root_path %>
+    <%= link_to t('helpers.cancel'), cancel_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>

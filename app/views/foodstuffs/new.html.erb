@@ -1,11 +1,9 @@
 <% content_for(:title, t('foodstuffs.new.content')) %>
 
-<h1><%= t('foodstuffs.new.title') %></h1>
+<div class="container">
+  <h1 class="mb-4"><%= t('foodstuffs.new.title') %></h1>
 
-<%= render "form", foodstuff: @foodstuff %>
-
-<br>
-
-<div>
-  <%= link_to t('helpers.cancel'), root_path %>
+  <div class="card p-4 shadow-sm">
+    <%= render "form", foodstuff: @foodstuff %>
+  </div>
 </div>
