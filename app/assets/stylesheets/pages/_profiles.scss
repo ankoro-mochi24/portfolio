@@ -45,3 +45,60 @@ h1 {
   justify-content: center;
   margin-top: 15px; /* タイトルとボタン間の余白 */
 }
+
+/* フォーム全体のスタイル */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* フォームフィールド */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* エラーメッセージ */
+#error_explanation {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+#error_explanation h2 {
+  margin-bottom: 10px;
+}
+
+/* ボタンスタイル */
+.actions .btn-success {
+  width: 100%;
+}
+
+.btn-outline-primary {
+  font-size: 14px;
+}
+
+.btn-outline-danger {
+  font-size: 14px;
+  padding: 5px 10px;
+}
