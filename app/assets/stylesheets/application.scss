@@ -1,11 +1,11 @@
+@import "components/comments";
 @import "components/navbar";
 @import "components/sidebar";
-@import "components/footer";
-@import "components/comments";
 @import "components/user_actions";
 
-@import "pages/home";
-@import "pages/recipes";
-@import "pages/foodstuffs";
-@import "pages/login";
 @import "pages/cards";
+@import "pages/foodstuffs";
+@import "pages/home";
+@import "pages/login";
+@import "pages/profiles";
+@import "pages/recipes";

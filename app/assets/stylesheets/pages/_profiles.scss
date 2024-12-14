@@ -1,0 +1,47 @@
+.content {
+  margin-top: 20px;
+}
+
+.card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #6c757d;
+}
+
+.list-group-item {
+  font-size: 16px;
+  padding: 10px 15px;
+}
+/* タイトルとボタンの配置 */
+.d-flex {
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* タイトルとボタンを中央揃えにする */
+.d-flex.flex-column.align-items-center {
+  text-align: center;
+}
+
+/* ボタン間のスペースを調整 */
+.d-flex.gap-3 {
+  justify-content: center;
+  margin-top: 15px; /* タイトルとボタン間の余白 */
+}

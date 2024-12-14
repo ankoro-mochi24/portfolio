@@ -36,6 +36,6 @@ ja:
       kitchen_tools: "持っている調理器具"
       no_kitchen_tools: "調理器具はまだ登録されていません。"
       line_notify: "LINE通知"
-      line_notify_unlink: "LINEで通知を解除"
-      line_notify_link: "LINEで通知を受け取る"
+      line_notify_unlink: "LINE通知を解除"
+      line_notify_link: "LINE通知を受け取る"
       edit: "編集"
