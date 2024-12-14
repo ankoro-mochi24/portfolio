@@ -66,7 +66,7 @@ h1 {
   padding: 10px;
   border: 1px solid #dee2e6;
   border-radius: 4px;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(91, 90, 90, 0.1);
 }
 
 .form-control:focus {
@@ -101,4 +101,30 @@ h1 {
 .btn-outline-danger {
   font-size: 14px;
   padding: 5px 10px;
+}
+
+/* 所有している調理器具セクションの調整 */
+.nested-fields {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* フィールド間の余白を調整 */
+  margin-bottom: 15px; /* 各アイテムの間隔 */
+}
+
+/* テキストフィールドのスタイル */
+.nested-fields .form-control {
+  flex: 1; /* 横幅を可変にして均等に伸縮 */
+}
+
+/* 削除ボタンのスタイル */
+.nested-fields .btn-outline-danger {
+  padding: 5px 10px; /* コンパクトなサイズに調整 */
+  font-size: 14px;
+}
+
+/* 追加ボタンのスタイル */
+[data-action="click->kitchen-tools#addField"] {
+  margin-top: 15px;
+  font-size: 14px;
+  display: inline-block;
 }
