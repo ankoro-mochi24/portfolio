@@ -18,9 +18,9 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    # パスワード変更の有無を確認
-    password_params = params[:user].slice(:password, :password_confirmation, :current_password).values
-    if password_params.any?(&:present?)
+    # パスワード変更が必要かどうかを確認
+    password_params = user_params.slice(:password, :password_confirmation, :current_password)
+    if password_params.values.any?(&:present?)
       # パスワード変更を伴う更新
       if @user.update_with_password(user_params)
         process_user_kitchen_tools
@@ -78,10 +78,18 @@ class ProfilesController < ApplicationController
   end
 
   def process_user_kitchen_tools
-    # 新しく追加された調理器具の処理
     @user.user_kitchen_tools.each do |ukt|
-      if ukt.kitchen_tool_name.present? && ukt.kitchen_tool.nil?
-        ukt.set_kitchen_tool
+      # フォームから送信された名前
+      params_tool_name = ukt.kitchen_tool_name
+  
+      # 現在のデータベースに存在する名前
+      current_tool_name = ukt.kitchen_tool&.name
+  
+      # 名前が異なる場合、対応するkitchen_toolを更新または関連付け
+      if params_tool_name.present? && params_tool_name != current_tool_name
+        # 新しいkitchen_toolを探すか作成
+        kitchen_tool = KitchenTool.find_or_create_by(name: params_tool_name)
+        ukt.kitchen_tool = kitchen_tool
         ukt.save
       end
     end
