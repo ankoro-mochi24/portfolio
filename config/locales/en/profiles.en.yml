@@ -12,7 +12,7 @@ en:
       current_password: "Current Password"
       minimum_password_length: "Minimum %{length} characters"
       kitchen_tools: "Owned Kitchen Tools"
-      add: "Add"
+      add: "Add kitchen tool"
       remove: "Remove"
       save: "Save"
       delete_account: "Delete Account"
