@@ -176,6 +176,95 @@
   }
 }
 
+/* 調理工程セクション */
+.recipe-steps-container {
+  margin-top: 20px;
+}
+
+.recipe-steps-container .nested-fields {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 20px;
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 16px;
+
+    .fw-bold {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .btn-outline-danger {
+      font-size: 14px;
+      padding: 5px 10px;
+      color: #dc3545;
+      border: 1px solid #dc3545;
+      border-radius: 4px;
+
+      &:hover {
+        background-color: #dc3545;
+        color: #fff;
+      }
+    }
+  }
+
+  .card-body {
+    .form-control {
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+    }
+
+    .form-control:focus {
+      border-color: #80bdff;
+      box-shadow: 0 0 5px rgba(38, 143, 255, 0.5);
+    }
+
+    .form-label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .img-thumbnail {
+      max-width: 100%;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+/* 追加ボタン */
+.recipe-steps-container .btn-outline-primary {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+}
+
 /* 材料・調理器具と調理工程のコンテナ */
 .recipe-details-container {
   display: flex;
@@ -221,40 +310,6 @@
       gap: 20px;
       justify-content: start;
     }
-
-    .recipe-step {
-      background: #f9f9f9;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      max-width: 300px;
-      width: 100%;
-
-      .step-number {
-        background: #ff5722;
-        color: #fff;
-        font-size: 18px;
-        font-weight: bold;
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto 10px;
-      }
-
-      .step-image img {
-        max-width: 100%;
-        border-radius: 5px;
-        margin-bottom: 10px;
-      }
-
-      .step-text {
-        font-size: 14px;
-        color: #333;
-      }
-    }
   }
 }
 
@@ -290,5 +345,18 @@
     .recipe-steps-container {
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     }
+  }
+
+  .recipe-steps-container .nested-fields {
+    padding: 12px;
+  }
+
+  .recipe-steps-container .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .recipe-steps-container .btn-outline-danger {
+    margin-top: 10px;
   }
 }

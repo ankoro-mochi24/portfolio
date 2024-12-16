@@ -23,6 +23,7 @@
   font-size: 16px;
   padding: 10px 15px;
 }
+
 /* タイトルとボタンの配置 */
 .d-flex {
   justify-content: space-between;
@@ -89,18 +90,41 @@ h1 {
   margin-bottom: 10px;
 }
 
-/* ボタンスタイル */
-.actions .btn-success {
-  width: 100%;
+/* ボタンの基本スタイル */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px; /* ボタン間のスペース */
 }
 
-.btn-outline-primary {
-  font-size: 14px;
+.actions .btn {
+  width: 48%; /* ボタン幅を固定して揃える */
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
 }
 
-.btn-outline-danger {
-  font-size: 14px;
-  padding: 5px 10px;
+.btn-success {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
 }
 
 /* 所有している調理器具セクションの調整 */
@@ -127,4 +151,21 @@ h1 {
   margin-top: 15px;
   font-size: 14px;
   display: inline-block;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+    align-items: stretch; /* 子要素の幅を親に合わせる */
+  }
+
+  .actions .btn {
+    width: 100%; /* モバイルではボタンをフル幅に */
+    margin-bottom: 10px;
+  }
+
+  .actions .btn:last-child {
+    margin-bottom: 0;
+  }
 }
