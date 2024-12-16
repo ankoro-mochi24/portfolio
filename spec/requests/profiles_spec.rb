@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Profiles", type: :request do
   let(:user) { create(:user) }
+  let(:kitchen_tool) { create(:kitchen_tool, name: "炊飯器") }
+  let!(:user_kitchen_tool) { create(:user_kitchen_tool, user:, kitchen_tool:, kitchen_tool_name: "炊飯器") }
 
   before do
     sign_in user
@@ -51,33 +53,84 @@ RSpec.describe "Profiles", type: :request do
     end
   end
 
-  describe "PATCH /profile" do
-    context "有効なパラメータで更新した場合" do
-      let(:valid_params) do
-        { user: { name: "新しい名前", email: "new_email@example.com" } }
+  describe "PATCH /profile (調理器具更新のテスト)" do
+    context "既存の調理器具名を変更した場合" do
+      let(:update_params) do
+        {
+          user: {
+            user_kitchen_tools_attributes: {
+              "0" => {
+                id: user_kitchen_tool.id,
+                kitchen_tool_id: kitchen_tool.id,
+                kitchen_tool_name: "ケトル",
+                _destroy: "false"
+              }
+            }
+          }
+        }
       end
 
-      it "ユーザー情報が更新され、リダイレクトされること" do
-        patch profile_path, params: valid_params
+      it "kitchen_tool_nameが更新されること" do
+        patch profile_path, params: update_params
         expect(response).to redirect_to(profile_path)
         follow_redirect!
         expect(response.body).to include(I18n.t('notices.profile_updated'))
-        user.reload
-        expect(user.name).to eq("新しい名前")
-        expect(user.email).to eq("new_email@example.com")
+        expect(user_kitchen_tool.reload.kitchen_tool.name).to eq("ケトル")
       end
     end
 
-    context "無効なパラメータで更新した場合" do
-      let(:invalid_params) do
-        { user: { name: "", email: "invalid_email" } }
+    context "新しい調理器具を追加した場合" do
+      let(:add_params) do
+        {
+          user: {
+            user_kitchen_tools_attributes: {
+              "0" => {
+                id: user_kitchen_tool.id,
+                kitchen_tool_id: kitchen_tool.id,
+                kitchen_tool_name: "炊飯器",
+                _destroy: "false"
+              },
+              "1" => {
+                kitchen_tool_id: "",
+                kitchen_tool_name: "オーブン",
+                _destroy: "false"
+              }
+            }
+          }
+        }
       end
 
-      it "エラーメッセージと共に編集ページが再表示されること" do
-        patch profile_path, params: invalid_params
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.body).to include(I18n.t('profiles.edit.error'))
-        expect(response.body).to include(I18n.t('errors.messages.blank', attribute: I18n.t('profiles.edit.name')))
+      it "新しい調理器具が追加されること" do
+        patch profile_path, params: add_params
+        expect(response).to redirect_to(profile_path)
+        follow_redirect!
+        expect(response.body).to include(I18n.t('notices.profile_updated'))
+        expect(user.kitchen_tools.pluck(:name)).to include("炊飯器", "オーブン")
+      end
+    end
+
+    context "調理器具を削除した場合" do
+      let(:delete_params) do
+        {
+          user: {
+            user_kitchen_tools_attributes: {
+              "0" => {
+                id: user_kitchen_tool.id,
+                kitchen_tool_id: kitchen_tool.id,
+                kitchen_tool_name: "炊飯器",
+                _destroy: "true"
+              }
+            }
+          }
+        }
+      end
+
+      it "調理器具が削除されること" do
+        patch profile_path, params: delete_params
+        expect(response).to redirect_to(profile_path)
+        follow_redirect!
+        expect(response.body).to include(I18n.t('notices.profile_updated'))
+        expect(user.kitchen_tools).to be_empty
       end
     end
   end

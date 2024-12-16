@@ -12,7 +12,7 @@ ja:
       current_password: "現在のパスワード"
       minimum_password_length: "最小%{length}文字"
       kitchen_tools: "持っている調理器具"
-      add: "追加"
+      add: "調理器具を追加"
       remove: "削除"
       save: "保存"
       delete_account: "アカウント削除"

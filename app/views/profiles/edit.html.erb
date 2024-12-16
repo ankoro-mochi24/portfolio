@@ -86,16 +86,14 @@
       <!-- 保存ボタン -->
       <div class="actions mt-4">
         <%= form.submit t('profiles.edit.save'), class: "btn btn-success" %>
+        <%= link_to t('helpers.cancel'), profile_path, class: "btn btn-secondary" %>
       </div>
     <% end %>
 
-    <!-- キャンセルボタン -->
-    <div class="mt-3">
-      <%= link_to t('helpers.cancel'), profile_path, class: "btn btn-secondary" %>
+    <!-- キャンセルとアカウント削除 -->
+    <div class="text-center mt-4">
+      <h3 class="text-danger"><%= t('profiles.edit.delete_account') %></h3>
+      <%= button_to t('profiles.edit.delete_account_button'), profile_path, method: :delete, data: { turbo_confirm: t('profiles.edit.confirm_delete') }, class: "btn btn-danger" %>
     </div>
-
-    <!-- アカウント削除 -->
-    <h3 class="mt-4 text-danger"><%= t('profiles.edit.delete_account') %></h3>
-    <%= button_to t('profiles.edit.delete_account_button'), profile_path, method: :delete, data: { turbo_confirm: t('profiles.edit.confirm_delete') }, class: "btn btn-danger" %>
   </div>
 <% end %>
