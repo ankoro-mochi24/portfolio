@@ -38,6 +38,7 @@
         <div class="card mb-3 p-3 shadow-sm nested-fields" data-new-record="false">
           <%= step_form.hidden_field :_destroy %>
           <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><%= t('recipes.form.step') %></span>
             <!-- 削除ボタン（1つ目の工程には非表示） -->
             <% unless step_form.index == 0 %>
               <a href="#" data-action="click->recipe-steps#removeField" class="btn btn-outline-danger btn-sm"><%= t('recipes.form.remove') %></a>
@@ -69,6 +70,7 @@
         <%= form.fields_for :recipe_steps, RecipeStep.new, child_index: "TEMPLATE_RECORD" do |step_form| %>
           <%= step_form.hidden_field :_destroy %>
           <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold"><%= t('recipes.form.step') %></span>
             <a href="#" data-action="click->recipe-steps#removeField" class="btn btn-outline-danger btn-sm"><%= t('recipes.form.remove') %></a>
           </div>
           <div class="card-body">
