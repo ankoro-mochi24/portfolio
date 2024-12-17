@@ -55,6 +55,10 @@
   }
 }
 
+.cookrice-description {
+  text-align: center; /* テキストを中央揃え */
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
   .table-of-contents ul {
