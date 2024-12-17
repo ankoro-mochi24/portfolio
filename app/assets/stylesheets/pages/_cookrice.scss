@@ -1,0 +1,91 @@
+/* cookrice.scss */
+
+/* コンテナ全体のスタイル */
+.cookrice-container {
+  background-color: #f8f9fa; /* 背景色を少し薄く */
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+
+  h2, h3 {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.8;
+  }
+
+  /* 目次リスト */
+  .table-of-contents {
+    list-style: none;
+    padding: 0;
+
+    .list-group-item {
+      border: none;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+
+      a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+
+        &:hover {
+          text-decoration: underline;
+          color: #0056b3;
+        }
+      }
+    }
+  }
+
+  /* 各ステップのスタイル */
+  .steps {
+    .list-group-item {
+      border: none;
+      margin-bottom: 15px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+
+      img {
+        display: block;
+        max-width: 100%;
+        margin: 10px auto 0;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .step-number {
+      font-weight: bold;
+      color: #333;
+      margin-right: 10px;
+    }
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .cookrice-container {
+    padding: 15px;
+
+    h2, h3 {
+      font-size: 1.2rem;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    .list-group-item {
+      font-size: 14px;
+    }
+  }
+}

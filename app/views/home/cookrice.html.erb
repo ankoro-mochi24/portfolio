@@ -1,19 +1,26 @@
 <% content_for(:title, t('cookrice.title')) %>
 
-<div class="container my-5">
+<div class="container my-5 cookrice-container">
   <div class="row">
+    <!-- 目次 -->
     <div class="col-12">
       <h2><%= t('cookrice.table_of_contents') %></h2>
-      <ul class="list-group mb-4">
-        <li class="list-group-item"><a href="#rice-cooker"><%= t('cookrice.rice_cooker') %></a></li>
-        <li class="list-group-item"><a href="#microwave"><%= t('cookrice.microwave') %></a></li>
+      <ul class="list-group mb-4 table-of-contents">
+        <li class="list-group-item">
+          <a href="#rice-cooker"><%= t('cookrice.rice_cooker') %></a>
+        </li>
+        <li class="list-group-item">
+          <a href="#microwave"><%= t('cookrice.microwave') %></a>
+        </li>
       </ul>
     </div>
+
+    <!-- 炊飯器でご飯を炊く手順 -->
     <div class="col-12">
       <h2 id="rice-cooker"><%= t('cookrice.rice_cooker') %></h2>
       <p><%= t('cookrice.description_rice_cooker') %></p>
       <h3><%= t('cookrice.steps') %></h3>
-      <ol class="list-group list-group-numbered">
+      <ol class="list-group list-group-numbered steps">
         <li class="list-group-item">
           <%= t('cookrice.step1') %>
           <img src="<%= asset_path('rice-cooker-step1.jpg') %>" alt="<%= t('cookrice.step1_image_alt') %>" class="img-fluid mt-2">
@@ -44,11 +51,13 @@
         </li>
       </ol>
     </div>
+
+    <!-- 電子レンジでご飯を炊く手順 -->
     <div class="col-12 mt-5">
       <h2 id="microwave"><%= t('cookrice.microwave') %></h2>
       <p><%= t('cookrice.description_microwave') %></p>
       <h3><%= t('cookrice.steps') %></h3>
-      <ol class="list-group list-group-numbered">
+      <ol class="list-group list-group-numbered steps">
         <li class="list-group-item">
           <%= t('cookrice.microwave_step1') %>
           <img src="<%= asset_path('microwave-step1.jpg') %>" alt="<%= t('cookrice.microwave_step1_image_alt') %>" class="img-fluid mt-2">
