@@ -1,91 +1,111 @@
-/* cookrice.scss */
+.cookrice-show {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 
-/* コンテナ全体のスタイル */
-.cookrice-container {
-  background-color: #f8f9fa; /* 背景色を少し薄く */
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-
-  h2, h3 {
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-
-  p {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.8;
-  }
-
-  /* 目次リスト */
+  /* 目次セクション */
   .table-of-contents {
-    list-style: none;
-    padding: 0;
+    .contents-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
 
     .list-group-item {
       border: none;
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 10px;
-      transition: all 0.2s ease;
+      padding: 10px 0;
 
       a {
-        text-decoration: none;
         color: #007bff;
-        font-weight: bold;
+        text-decoration: none;
+        font-size: 18px;
 
         &:hover {
           text-decoration: underline;
-          color: #0056b3;
         }
       }
     }
   }
 
-  /* 各ステップのスタイル */
-  .steps {
-    .list-group-item {
-      border: none;
-      margin-bottom: 15px;
-      background-color: #fff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      border-radius: 6px;
+  /* 各セクション（炊飯器・電子レンジ） */
+  .cookrice-section {
+    display: flex;
+    gap: 40px;
 
-      img {
-        display: block;
-        max-width: 100%;
-        margin: 10px auto 0;
-        border-radius: 6px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    &:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .cookrice-info-container {
+      flex: 1;
+
+      .cookrice-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .cookrice-description {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
       }
     }
 
-    .step-number {
-      font-weight: bold;
-      color: #333;
-      margin-right: 10px;
+    .cookrice-steps-container {
+      flex: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+
+      .cookrice-step {
+        background: #fff;
+        border: 1px solid #e6e6e6;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        width: calc(33.333% - 20px); /* 3列表示 */
+
+        .step-number {
+          font-size: 18px;
+          font-weight: bold;
+          background-color: #007bff;
+          color: #fff;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          margin: 0 auto 10px;
+        }
+
+        .step-text {
+          font-size: 14px;
+          color: #333;
+          margin-bottom: 10px;
+        }
+
+        .step-image {
+          max-width: 100%;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+      }
     }
   }
 }
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
-  .cookrice-container {
-    padding: 15px;
+  .cookrice-section {
+    flex-direction: column;
 
-    h2, h3 {
-      font-size: 1.2rem;
-    }
-
-    p {
-      font-size: 14px;
-    }
-
-    .list-group-item {
-      font-size: 14px;
+    .cookrice-steps-container {
+      .cookrice-step {
+        width: 100%; /* モバイルでは1列表示 */
+      }
     }
   }
 }
