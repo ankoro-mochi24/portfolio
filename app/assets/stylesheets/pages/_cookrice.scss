@@ -1,0 +1,77 @@
+.cookrice-container {
+  .table-of-contents {
+    .contents-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    a {
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+
+  /* セクション */
+  .cookrice-section {
+    margin-bottom: 40px;
+
+    .cookrice-title {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .cookrice-description {
+      font-size: 16px;
+      color: #555;
+    }
+
+    /* 手順カード */
+    .card {
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .step-number {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .step-text {
+        font-size: 14px;
+        color: #333;
+      }
+
+      .step-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+.cookrice-description {
+  text-align: center; /* テキストを中央揃え */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .table-of-contents ul {
+    flex-direction: column;
+    gap: 10px;
+
+    a {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .cookrice-section .row .col-md-4 {
+    width: 100%;
+  }
+}

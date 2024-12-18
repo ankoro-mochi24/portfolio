@@ -1,83 +1,56 @@
 <% content_for(:title, t('cookrice.title')) %>
 
-<div class="container my-5">
-  <div class="row">
-    <div class="col-12">
-      <h2><%= t('cookrice.table_of_contents') %></h2>
-      <ul class="list-group mb-4">
-        <li class="list-group-item"><a href="#rice-cooker"><%= t('cookrice.rice_cooker') %></a></li>
-        <li class="list-group-item"><a href="#microwave"><%= t('cookrice.microwave') %></a></li>
-      </ul>
+<div class="container my-5 cookrice-container">
+  <!-- 目次セクション -->
+  <section class="table-of-contents mb-5 text-center">
+    <h2 class="contents-title mb-4"><%= t('cookrice.table_of_contents') %></h2>
+    <ul class="list-inline d-flex justify-content-center gap-3">
+      <li class="list-inline-item">
+        <a href="#rice-cooker" class="btn btn-outline-primary px-4 py-2"><%= t('cookrice.rice_cooker') %></a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#microwave" class="btn btn-outline-success px-4 py-2"><%= t('cookrice.microwave') %></a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 炊飯器セクション -->
+  <section id="rice-cooker" class="cookrice-section mb-5">
+    <h2 class="cookrice-title text-primary mb-3"><%= t('cookrice.rice_cooker') %></h2>
+    <p class="cookrice-description mb-4"><%= t('cookrice.description_rice_cooker') %></p>
+
+    <div class="row g-4">
+      <% 7.times do |i| %>
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100 text-center p-3">
+            <div class="step-number bg-primary text-white rounded-circle d-flex justify-content-center align-items-center mb-3" style="width: 50px; height: 50px; margin: 0 auto;">
+              <%= i + 1 %>
+            </div>
+            <p class="step-text fw-bold mb-2"><%= t("cookrice.step#{i + 1}") %></p>
+            <%= image_tag "rice-cooker-step#{i + 1}.jpg", alt: t("cookrice.step#{i + 1}_image_alt"), class: "step-image img-fluid rounded shadow-sm" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="col-12">
-      <h2 id="rice-cooker"><%= t('cookrice.rice_cooker') %></h2>
-      <p><%= t('cookrice.description_rice_cooker') %></p>
-      <h3><%= t('cookrice.steps') %></h3>
-      <ol class="list-group list-group-numbered">
-        <li class="list-group-item">
-          <%= t('cookrice.step1') %>
-          <img src="<%= asset_path('rice-cooker-step1.jpg') %>" alt="<%= t('cookrice.step1_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.step2') %>
-          <img src="<%= asset_path('rice-cooker-step2.jpg') %>" alt="<%= t('cookrice.step2_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.step3') %>
-          <img src="<%= asset_path('rice-cooker-step3.jpg') %>" alt="<%= t('cookrice.step3_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.step4') %>
-          <img src="<%= asset_path('rice-cooker-step4.jpg') %>" alt="<%= t('cookrice.step4_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.step5') %>
-          <img src="<%= asset_path('rice-cooker-step5.jpg') %>" alt="<%= t('cookrice.step5_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.step6') %>
-          <img src="<%= asset_path('rice-cooker-step6.jpg') %>" alt="<%= t('cookrice.step6_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.step7') %>
-          <img src="<%= asset_path('rice-cooker-step7.jpg') %>" alt="<%= t('cookrice.step7_image_alt') %>" class="img-fluid mt-2">
-        </li>
-      </ol>
+  </section>
+
+  <!-- 電子レンジセクション -->
+  <section id="microwave" class="cookrice-section">
+    <h2 class="cookrice-title text-success mb-3"><%= t('cookrice.microwave') %></h2>
+    <p class="cookrice-description mb-4"><%= t('cookrice.description_microwave') %></p>
+
+    <div class="row g-4">
+      <% 6.times do |i| %>
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100 text-center p-3">
+            <div class="step-number bg-success text-white rounded-circle d-flex justify-content-center align-items-center mb-3" style="width: 50px; height: 50px; margin: 0 auto;">
+              <%= i + 1 %>
+            </div>
+            <p class="step-text fw-bold mb-2"><%= t("cookrice.microwave_step#{i + 1}") %></p>
+            <%= image_tag "microwave-step#{i + 1}.jpg", alt: t("cookrice.microwave_step#{i + 1}_image_alt"), class: "step-image img-fluid rounded shadow-sm" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    <div class="col-12 mt-5">
-      <h2 id="microwave"><%= t('cookrice.microwave') %></h2>
-      <p><%= t('cookrice.description_microwave') %></p>
-      <h3><%= t('cookrice.steps') %></h3>
-      <ol class="list-group list-group-numbered">
-        <li class="list-group-item">
-          <%= t('cookrice.microwave_step1') %>
-          <img src="<%= asset_path('microwave-step1.jpg') %>" alt="<%= t('cookrice.microwave_step1_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.microwave_step2') %>
-          <img src="<%= asset_path('microwave-step2.jpg') %>" alt="<%= t('cookrice.microwave_step2_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.microwave_step3') %>
-          <img src="<%= asset_path('microwave-step3.jpg') %>" alt="<%= t('cookrice.microwave_step3_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.microwave_step4') %>
-          <img src="<%= asset_path('microwave-step4.jpg') %>" alt="<%= t('cookrice.microwave_step4_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.microwave_step5') %>
-          <img src="<%= asset_path('microwave-step5.jpg') %>" alt="<%= t('cookrice.microwave_step5_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.microwave_step6') %>
-          <img src="<%= asset_path('microwave-step6.jpg') %>" alt="<%= t('cookrice.microwave_step6_image_alt') %>" class="img-fluid mt-2">
-        </li>
-        <li class="list-group-item">
-          <%= t('cookrice.microwave_step7') %>
-          <img src="<%= asset_path('microwave-step7.jpg') %>" alt="<%= t('cookrice.microwave_step7_image_alt') %>" class="img-fluid mt-2">
-        </li>
-      </ol>
-    </div>
-  </div>
+  </section>
 </div>

@@ -6,6 +6,19 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- OGP メタタグ設定 -->
+    <%= tag("meta", property: "og:title", content: "お米日和 - お米のレシピ＆食品投稿サイト") %>
+    <%= tag("meta", property: "og:description", content: "お米を使った美味しいレシピや、お米に合う食品を投稿・共有するアプリです。ご飯の炊き方や調理手順も紹介！") %>
+    <%= tag("meta", property: "og:image", content: image_url("ogp-image.jpg")) %>
+    <%= tag("meta", property: "og:url", content: request.original_url) %>
+    <%= tag("meta", property: "og:type", content: "website") %>
+    <%= tag("meta", property: "og:site_name", content: "お米日和") %>
+    <!-- Twitterカード用メタタグ -->
+    <%= tag("meta", name: "twitter:card", content: "summary_large_image") %>
+    <%= tag("meta", name: "twitter:title", content: "お米日和 - お米のレシピ＆食品投稿サイト") %>
+    <%= tag("meta", name: "twitter:description", content: "お米のレシピや、お米に合う食品を投稿・共有！炊き方や調理工程も丁寧に解説しています。") %>
+    <%= tag("meta", name: "twitter:image", content: image_url("ogp-image.jpg")) %>
+
     <!-- CSS のプリロード -->
     <link rel="preload" href="<%= asset_path('application.css') %>" as="style">
     <!-- JS のプリロード -->
