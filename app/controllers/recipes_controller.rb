@@ -36,19 +36,29 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user = current_user
-
+  
+    # デバッグ用ログ
+    Rails.logger.info "Received recipe_params: #{recipe_params.inspect}"
+    Rails.logger.info "Recipe Ingredients from params: #{params[:recipe][:recipe_ingredients_attributes].inspect}" if params[:recipe][:recipe_ingredients_attributes]
+    Rails.logger.info "Recipe Kitchen Tools from params: #{params[:recipe][:recipe_kitchen_tools_attributes].inspect}" if params[:recipe][:recipe_kitchen_tools_attributes]
+  
     respond_to do |format|
       if save_ingredients_and_kitchen_tools(@recipe) && @recipe.save
         format.html { redirect_to @recipe, notice: I18n.t('notices.recipe_created') }
         format.json { render :show, status: :created, location: @recipe }
       else
+        # デバッグ: バリデーションエラーの内容を出力
+        Rails.logger.info "Recipe save failed. Errors: #{@recipe.errors.full_messages}"
+        Rails.logger.info "Recipe Ingredients after processing: #{@recipe.recipe_ingredients.inspect}"
+        Rails.logger.info "Recipe Kitchen Tools after processing: #{@recipe.recipe_kitchen_tools.inspect}"
+  
         @recipe.recipe_kitchen_tools.build if @recipe.recipe_kitchen_tools.empty?
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
   end
-
+  
   def update
     @recipe.assign_attributes(recipe_params)
 
@@ -143,18 +153,18 @@ class RecipesController < ApplicationController
 
   def save_ingredients(recipe)
     recipe.recipe_ingredients = recipe.recipe_ingredients.reject { |ri| ri.ingredient_name.blank? }
-    
+  
     recipe.recipe_ingredients.each do |ri|
       if ri.ingredient_name.present?
         ingredient = Ingredient.find_or_create_by(name: ri.ingredient_name)
-        unless recipe.recipe_ingredients.any? { |existing_ri| existing_ri.ingredient_id == ingredient.id }
-          ri.ingredient = ingredient
-        end
+        Rails.logger.info "Found or created ingredient: #{ingredient.inspect}"
+        ri.ingredient = ingredient
       end
     end
   
-    # ここで再度重複するものを除外する
+    # 重複する `ingredient_id` を除外
     recipe.recipe_ingredients = recipe.recipe_ingredients.uniq { |ri| ri.ingredient_id }
+    Rails.logger.info "Final RecipeIngredients: #{recipe.recipe_ingredients.inspect}"
   end
 
   def save_kitchen_tools(recipe)

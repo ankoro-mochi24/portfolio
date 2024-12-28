@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_16_025457) do
+ActiveRecord::Schema[7.0].define(version: 2024_12_28_012805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.text "body", null: false
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
@@ -30,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_16_025457) do
     t.decimal "price", precision: 10, null: false
     t.text "description"
     t.string "link", null: false
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image", null: false
@@ -81,7 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_16_025457) do
   create_table "recipes", force: :cascade do |t|
     t.string "title", null: false
     t.string "dish_image", null: false
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_recipes_on_user_id"
@@ -89,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_16_025457) do
 
   create_table "toppings", force: :cascade do |t|
     t.bigint "recipe_id", null: false
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.text "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,7 +100,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_16_025457) do
   end
 
   create_table "user_actions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.string "action_type", null: false
     t.string "actionable_type", null: false
     t.bigint "actionable_id", null: false
@@ -109,7 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_16_025457) do
   end
 
   create_table "user_kitchen_tools", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.uuid "user_id", null: false
     t.bigint "kitchen_tool_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -117,7 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_16_025457) do
     t.index ["user_id", "kitchen_tool_id"], name: "index_user_kitchen_tools_on_user_id_and_kitchen_tool_id", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
